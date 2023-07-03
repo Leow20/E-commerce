@@ -1,9 +1,11 @@
+import Router from "./Routes/routes";
 function App() {
-  return (
-    <>
-      <h1>Ola</h1>
-    </>
-  );
+	return (
+		<>
+			<Router />
+			<h1>Ola</h1>
+		</>
+	);
 }
 
 export default App;
