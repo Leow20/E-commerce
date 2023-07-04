@@ -7,7 +7,7 @@ function Footer() {
     <div className='container-footer'>
       <div className='coluna'>
         <h4>Shop by Category</h4>
-        <a href="#">Skincare</a>
+        <Link to="/skincare">Skincare</Link>
         <a href="#">Personal Care</a>
         <a href="#">Handbags</a>
         <a href="#">Appareis</a>

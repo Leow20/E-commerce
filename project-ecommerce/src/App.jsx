@@ -1,11 +1,13 @@
 import Footer from "./components/footer";
+import Router from "./Routes/routes";
+
 function App() {
-  return (
-    <>
-      <h1>Ola</h1>
-      <Footer />
-    </>
-  );
+	return (
+		<>
+			<Router />
+			<Footer />
+		</>
+	);
 }
 
 export default App;
