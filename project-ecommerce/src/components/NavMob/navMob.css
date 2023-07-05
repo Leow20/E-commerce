@@ -18,7 +18,7 @@
   transform: translateY(3px);
 }
 
-.category-selected-nav {
+.category-selected-nav a {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -29,11 +29,17 @@
   width: 24px;
 }
 
-.category-selected-nav span {
+.category-selected-nav a span {
   font-size: 12px;
   font-weight: 500;
   line-height: 12px;
   text-align: center;
   color: #1b4b66;
   transition: all ease-in-out 0.2s;
+}
+
+@media screen and (min-width: 620px) {
+  .container-nav {
+    display: none;
+  }
 }
