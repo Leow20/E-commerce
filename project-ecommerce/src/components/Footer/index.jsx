@@ -31,18 +31,18 @@ function Footer() {
         <h4>Shop by Category</h4>
         <Link to="/skincare">Skincare</Link>
         <Link href="/">Personal Care</Link>
-        <Link href="/">Handbags</Link>
-        <Link href="/">Appareis</Link>
+        <Link href="/handbags">Handbags</Link>
+        <Link href="/watches">Appareis</Link>
         <Link href="/">Watches</Link>
         <Link href="/">Eye Wear</Link>
-        <Link href="/">Jewellery</Link>
+        <Link href="/jewellery">Jewellery</Link>
       </div>
 
       {tamanhoTela < 1077 ? (
         <div className='coluna-footer about-footer'>
           <h4>About</h4>
           <div className='mob-policy'>
-            <p> <Link to="/">Contact Us</Link> | <Link to="/">About Us</Link> | <Link to="/">Careers</Link> | <Link to="/">Press</Link> </p>
+            <p> <Link to="/">Contact Us</Link> | <Link to="/about">About Us</Link> | <Link to="/">Careers</Link> | <Link to="/">Press</Link> </p>
           </div>
         </div>
       ) : (
