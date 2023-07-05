@@ -1,0 +1,270 @@
+.main-about {
+  display: flex;
+  justify-content: center;
+}
+
+.page-wrapper-about {
+  width: 100%;
+  max-width: 1280px;
+  height: 100vh;
+  display: table;
+  background-color: #fff;
+  position: relative;
+  padding-bottom: 60px;
+  margin: 0 auto;
+}
+
+.hero-about {
+  width: 100%;
+}
+
+.hero-about img {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.hero-about h1 {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 10px;
+  padding: 55px 15px 0px 15px;
+  letter-spacing: 4.55px;
+  color: #171520;
+}
+
+.hero-about p {
+  max-width: 453px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 20px;
+  padding: 15px;
+  color: #626262;
+}
+
+.subtitle-about {
+  width: 100%;
+}
+
+.subtitle-about h5,
+.text-about h5 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 26px;
+  text-align: center;
+  padding: 15px 15px 0px 15px;
+  color: #171520;
+}
+
+.subtitle-about p,
+.text-about p,
+.subtitle-about span {
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 20px;
+  text-align: center;
+  padding: 0 15px;
+  color: #626262;
+}
+
+.subtitle-about span {
+  display: none;
+}
+
+.subtitle-about img {
+  width: 100%;
+  padding: 65px 15px 5px;
+}
+
+@media screen and (min-width: 620px) {
+  .hero-about {
+    width: auto;
+    max-width: 1280px;
+    height: 30vh;
+    background-image: url(/src/assets/Img/hero.jpg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    max-height: 400px;
+    padding-top: 10%;
+  }
+
+  .hero-about img {
+    display: none;
+  }
+
+  .hero-about h1 {
+    padding-top: 10px;
+  }
+
+  #p-about {
+    display: none;
+  }
+
+  .text-about h5 {
+    text-align: center;
+    padding-top: 28px;
+    margin-top: -7vh;
+  }
+
+  .subtitle-about h5 {
+    padding-top: 34px;
+    text-align: left;
+    margin-bottom: 10px;
+  }
+
+  #title-about {
+    margin-left: 357px;
+    padding-left: 45px;
+  }
+
+  .subtitle-about p,
+  .subtitle-about span {
+    text-align: left;
+    width: 41%;
+    max-width: 430px;
+    display: inline-block;
+  }
+
+  .subtitle-about span {
+    padding-left: 5%;
+  }
+
+  .text-about {
+    max-width: 524px;
+    margin: 0 auto;
+  }
+
+  .text-hero-about {
+    float: right;
+    width: 45%;
+    margin: 0px 11px;
+  }
+
+  .subtitle-about img {
+    width: 360px;
+    float: right;
+    padding-top: 50px;
+  }
+
+  #img-left-about {
+    float: left;
+  }
+}
+
+@media screen and (min-width: 700px) {
+  .text-wrapper-about {
+    margin: 0 3%;
+  }
+}
+
+@media screen and (min-width: 820px) {
+  .hero-about {
+    height: 38vh;
+    padding-top: 11%;
+  }
+
+  .text-hero-about {
+    margin: 0px 25px;
+  }
+
+  .text-about p {
+    margin-bottom: 30px;
+  }
+
+  .subtitle-about img {
+    width: 450px;
+    padding: 27px 15px 4px;
+  }
+
+  .subtitle-about h5 {
+    padding-top: 52px;
+  }
+
+  #title-about {
+    margin-left: 449px;
+  }
+}
+
+@media screen and (min-width: 899px) {
+  .subtitle-about p,
+  .subtitle-about span {
+    margin-bottom: 24px;
+  }
+}
+
+@media screen and (min-width: 1040px) {
+  .text-wrapper-about {
+    margin: 0 5px;
+  }
+
+  .hero-about {
+    height: 100vh;
+    padding-top: 12%;
+  }
+
+  .text-hero-about {
+    margin: 0px 0px;
+  }
+
+  .hero-about h1 {
+    font-size: 50px;
+  }
+
+  .hero-about p {
+    font-size: 16px;
+    max-width: 466px;
+    padding-top: 33px;
+  }
+
+  .text-about h5 {
+    padding-top: 33px;
+    margin-top: -6%;
+  }
+
+  .text-about {
+    padding-top: 47px;
+    max-width: 710px;
+  }
+
+  .subtitle-about img {
+    width: 58%;
+    max-width: 710px;
+  }
+
+  .subtitle-about p,
+  .subtitle-about span {
+    max-width: 510px;
+  }
+
+  .subtitle-about p,
+  .subtitle-about span {
+    padding-left: 25px;
+  }
+
+  .subtitle-about h5 {
+    padding-top: 85px;
+    margin-left: 9px;
+    margin-bottom: 10px;
+  }
+
+  .subtitle-about p,
+  .text-about p,
+  .subtitle-about span {
+    font-size: 16px;
+  }
+
+  #title-about {
+    margin: 5.9% 0 10px 54%;
+    padding-top: 5%;
+    padding-left: 63px;
+  }
+
+  #vision-about {
+    padding-top: 11%;
+  }
+}
+
+@media screen and (min-width: 1240px) {
+  #title-about {
+    padding-left: 4%;
+  }
+}
