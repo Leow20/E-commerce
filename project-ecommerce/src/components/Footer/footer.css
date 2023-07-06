@@ -1,0 +1,164 @@
+.container-footer {
+    position: absolute;
+    bottom: 0;
+    background-color: rgb(27, 75, 102);
+    height: 342px;
+    width: 100%;
+}
+
+.coluna-footer {
+    width: 8.625rem;
+    height: 14.75rem;
+    flex-shrink: 0;
+
+    margin-left: 60px;
+    margin-right: 68px;
+    max-width: 140px;
+
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.coluna-footer:first-child {
+    padding-top: 32px;
+}
+
+.coluna-footer h4 {
+    color: white;
+    font-size: 16px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.coluna-footer a {
+    color: #B6B6B6;
+
+    font-size: 16px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+}
+
+.Logos-footer {
+    position: absolute;
+    right: 45px;
+    top: 49px;
+}
+
+.Logos-footer img {
+    padding-right: 17px;
+}
+
+.Logos-footer img:hover {
+    transform: scale(1.2);
+}
+
+.location-footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    position: absolute;
+    right: 60px;
+    top: 113px;
+
+    height: 1.5rem;
+    flex-shrink: 0;
+}
+
+.location-footer p {
+    color: white;
+
+    font-size: 14px;
+    font-family: Inter;
+    font-weight: 500;
+    line-height: 18px;
+
+    margin-left: 8px;
+}
+
+.RightsReserved {
+    color: #B6B6B6;
+    font-size: 14px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+
+    position: absolute;
+    right: 60px;
+    top: 154px;
+}
+
+@media(max-width:1077px) {
+
+    .container-footer {
+        position: absolute;
+        bottom: 0;
+        background-color: rgb(27, 75, 102);
+        height: 626px;
+        flex-shrink: 0;
+    }
+
+    .mob-footer {
+        margin: 0;
+        position: absolute;
+        left: 16px;
+    }
+
+    .policy-footer {
+        margin: 0;
+        position: absolute;
+        left: 16px;
+        top: 265px;
+        min-width: 300px;
+    }
+
+    .mob-policy {
+        flex-wrap: nowrap;
+        width: 329px;
+        line-height: 18px;
+        font-size: 14px;
+        color: #B6B6B6;
+    }
+
+    .mob-policy a {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .about-footer {
+        margin: 0;
+        position: absolute;
+        left: 16px;
+        top: 375px;
+    }
+
+    .linha-footer {
+        position: absolute;
+        top: 439px;
+        width: 100%;
+    }
+
+    .Logos-footer {
+        position: absolute;
+        left: 16px;
+        top: 460px;
+    }
+
+    .location-footer {
+        position: absolute;
+        left: 16px;
+        top: 516px;
+    }
+
+    .RightsReserved {
+        position: absolute;
+        left: 16px;
+        top: 553px;
+    }
+
+}

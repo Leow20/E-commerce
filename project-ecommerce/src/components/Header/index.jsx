@@ -7,21 +7,22 @@ import logo from "../../assets/logo.png"
 import notificacao from "../../assets/notification.svg"
 import menu from "../../assets/leadingIcon.svg"
 import addHome from "../../assets/addHomes.svg"
+import { Link } from "react-router-dom";
 
 
 function Header() {
     return (
         <header className="Header">
             <div className="logo-header">
-                <img src={logo} alt="logo" />
+                <Link to="/"><img src={logo} alt="logo" /></Link>
             </div>
             <nav className="nav-category-header">
                 <ul>
-                    <li><a href="#">Handbags</a></li>
-                    <li><a href="#">Watches</a></li>
-                    <li><a href="#">Skincare</a></li>
-                    <li><a href="#">Jewellery</a></li>
-                    <li><a href="#">Apparels</a></li>
+                    <li><Link to="/handbags">Handbags</Link></li>
+                    <li><Link to="/watches">Watches</Link></li>
+                    <li><Link to="/skincare">Skincare</Link></li>
+                    <li><Link to="/jewellery">Jewellery</Link></li>
+                    <li><Link to="/apparels">Apparels</Link></li>
                 </ul>
             </nav>
             <div className="search-bar-header">
