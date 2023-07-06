@@ -1,11 +1,11 @@
-import About from "./Pages/About";
+import Router from "./Routes/routes";
 
 function App() {
-  return (
-    <>
-      <About />
-    </>
-  );
+	return (
+		<>
+			<Router />
+		</>
+	);
 }
 
 export default App;
