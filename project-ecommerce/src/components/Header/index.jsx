@@ -7,7 +7,8 @@ import logo from "../../assets/logo.png"
 import notificacao from "../../assets/notification.svg"
 import menu from "../../assets/leadingIcon.svg"
 import addHome from "../../assets/addHomes.svg"
-import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"
+import search2 from "../../assets/search2"
 
 
 function Header() {
@@ -42,7 +43,7 @@ function Header() {
                 </div>
                 <div className="icons-responsivo">
                     <img src={addHome} alt="addHome" />
-                    <img src={search} alt="lupa" />
+                    <img src={search2} alt="lupa2" />
                     <img src={notificacao} alt="notificacao" />
                 </div>
             </div>
