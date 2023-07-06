@@ -82,7 +82,7 @@
     height: 30vh;
     background-image: url(/src/assets/Img/hero.jpg);
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     max-height: 400px;
     padding-top: 10%;
   }
@@ -102,7 +102,6 @@
   .text-about h5 {
     text-align: center;
     padding-top: 28px;
-    margin-top: -7vh;
   }
 
   .subtitle-about h5 {
@@ -136,7 +135,7 @@
   .text-hero-about {
     float: right;
     width: 45%;
-    margin: 0px 11px;
+    margin: -24px 11px 0;
   }
 
   .subtitle-about img {
@@ -163,7 +162,7 @@
   }
 
   .text-hero-about {
-    margin: 0px 25px;
+    margin: -15px 25px 0;
   }
 
   .text-about p {
