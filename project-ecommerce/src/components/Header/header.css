@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     background-color: #ffff;
-    width: 1280px;
+    width: 100%;
     height: 80px;
     flex-direction: row;
     padding: 0 20px;
@@ -75,34 +75,62 @@
 
 }
 
+.container-header-responsivo {
+    display: none;
+}
 
-
-/* @media (max-width: 768px) {
+@media (max-width: 450px) {
 
     .logo-header,
-    .nav-category-header {
-        display: none;
-    }
-
-    .icons {
-        margin-left: auto;
-    }
-
+    .nav-category-header ul,
+    .search-bar-header input[type="text"],
+    .icons,
+    #lupa-id,
     .search-bar-header {
-        margin-right: 0;
-        flex-grow: 1;
-    }
-
-    .search-bar-header input[type="text"] {
-        width: 100%;
-        max-width: 362px;
-    }
-  
-    .icons .icon:first-child {
         display: none;
     }
 
-    .icons .icon:last-child {
-        margin-left: 0;
+    .logo-menu {
+        display: flex;
+        flex-direction: row-reverse;
+        gap: 20px;
+
     }
-} */
+
+    .logo-menu h1 {
+        color: #1B4B66;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 26px;
+    }
+
+    #menu {
+        width: 24px;
+        height: 24px;
+
+    }
+
+
+    .container-header-responsivo {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+
+
+    }
+
+    .icons-responsivo {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+
+    }
+
+    .icons-responsivo span {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 18px;
+    }
+}
