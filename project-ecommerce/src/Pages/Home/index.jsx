@@ -1,16 +1,19 @@
+import NavMob from "../../components/NavMob";
 import Footer from "../../components/footer";
 
 const Home = () => {
-	return (
-		<div>
+  return (
+    <div>
 
-			<h1>Home</h1>
+      <NavMob />
 
-			<Footer />
+      <h1>Home</h1>
 
-		</div>
+      <Footer />
 
-	)
+    </div>
+
+  )
 
 };
 

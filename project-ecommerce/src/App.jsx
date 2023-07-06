@@ -3,11 +3,11 @@ import Router from "./Routes/routes";
 
 
 function App() {
-	return (
-		<>
-			<Router />
-		</>
-	);
+  return (
+    <>
+      <Router />
+    </>
+  );
 }
 
 export default App;
