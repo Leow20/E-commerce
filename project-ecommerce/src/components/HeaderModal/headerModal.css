@@ -1,10 +1,13 @@
-@media(max-width:361px) {
+@media(max-width:620px) {
   .header-modal {
     width: 100%;
     height: 100vh;
-    max-height: 776px;
-    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
     background: rgba(0, 0, 0, 0.20);
+    z-index: 700;
+    animation: opacity 0.5s forwards;
   }
 
   .content-header-modal {
@@ -113,5 +116,11 @@
     padding: 16px 0;
     justify-content: space-between;
 
+  }
+}
+
+@media(min-width:621px) {
+  .header-modal {
+    display: none;
   }
 }

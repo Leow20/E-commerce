@@ -80,6 +80,7 @@
 }
 
 @media (max-width: 620px) {
+
   .logo-header,
   .nav-category-header ul,
   .search-bar-header input[type="text"],
@@ -100,6 +101,11 @@
     font-size: 20px;
     font-weight: 600;
     line-height: 26px;
+  }
+
+  .logo-menu button {
+    border: none;
+    background-color: transparent;
   }
 
   #menu {

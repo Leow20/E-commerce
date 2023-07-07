@@ -1,14 +1,22 @@
-import React from "react";
 import "./headerModal.css";
 import { Link } from "react-router-dom";
 import arrowBlack from "../../assets/HeaderModal/arrow-right-black.svg";
 import arrowGray from "../../assets/HeaderModal/arrow-right-gray.svg";
 import userNotPicture from "../../assets/HeaderModal/user-sem-foto.png";
 
-const HeaderModal = ({ isOpen }) => {
+const HeaderModal = ({ isOpen, setIsOpen, id = "headerModalId" }) => {
+	const handleBackClick = (e) => {
+		if (e) e.preventDefault();
+		if (e.target.id !== id) {
+			return;
+		} else {
+			addEventListener("scroll", () => setIsOpen(false));
+			setIsOpen(false);
+		}
+	};
 	if (isOpen) {
 		return (
-			<div className="header-modal">
+			<div id={id} className="header-modal" onClick={handleBackClick}>
 				<div className="content-header-modal">
 					<div className="profile-header-modal">
 						<button>
