@@ -9,8 +9,12 @@ import visionImg from "../../assets/Img/Rectangle 533.jpg";
 //Styles
 import "./about.css";
 
+//Components
+import Header from "../../components/Header";
+
 const About = () => {
 	return (
+		<Header/>
 		<main className="main-about">
 			<div className="page-wrapper-about">
 				<div className="hero-about">

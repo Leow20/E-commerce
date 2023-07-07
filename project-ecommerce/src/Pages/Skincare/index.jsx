@@ -1,5 +1,7 @@
+import Header from "../../components/Header";
+
 const Skincare = () => {
-	return <div>Skincare</div>;
+	return <div><Header /></div>;
 };
 
 export default Skincare;
