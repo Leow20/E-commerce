@@ -54,7 +54,7 @@ function Footer() {
       ) : null}
 
       {tamanhoTela < 1077 && open === true ? (
-        <>
+        <footer className="footer">
           <div className="container-footer container-footer-mobal">
             <div className="coluna-footer mob-footer">
               <h4>Shop by Category</h4>
@@ -132,84 +132,86 @@ function Footer() {
               © 2021 | Cora Leviene All Rights Reserved
             </p>
           </div>
-        </>
+        </footer>
       ) : tamanhoTela < 1077 && open === false ? null : (
-        <div className="container-footer container-footer-mobal">
-          <div className="coluna-footer mob-footer">
-            <h4>Shop by Category</h4>
-            <Link to="/skincare">Skincare</Link>
-            <Link to="/">Personal Care</Link>
-            <Link to="/handbags">Handbags</Link>
-            <Link to="/">Appareis</Link>
-            <Link to="/watches">Watches</Link>
-            <Link to="/">Eye Wear</Link>
-            <Link to="/jewellery">Jewellery</Link>
-          </div>
+        <footer className="footer">
+          <div className="container-footer container-footer-mobal">
+            <div className="coluna-footer mob-footer">
+              <h4>Shop by Category</h4>
+              <Link to="/skincare">Skincare</Link>
+              <Link to="/">Personal Care</Link>
+              <Link to="/handbags">Handbags</Link>
+              <Link to="/">Appareis</Link>
+              <Link to="/watches">Watches</Link>
+              <Link to="/">Eye Wear</Link>
+              <Link to="/jewellery">Jewellery</Link>
+            </div>
 
-          {tamanhoTela < 1077 && open === true ? (
-            <div className="coluna-footer about-footer">
-              <h4>About</h4>
-              <div className="mob-policy">
-                <p>
-                  {" "}
-                  <Link to="/">Contact Us</Link> |{" "}
-                  <Link to="/about">About Us</Link> |{" "}
-                  <Link to="/">Careers</Link> | <Link to="/">Press</Link>{" "}
-                </p>
+            {tamanhoTela < 1077 && open === true ? (
+              <div className="coluna-footer about-footer">
+                <h4>About</h4>
+                <div className="mob-policy">
+                  <p>
+                    {" "}
+                    <Link to="/">Contact Us</Link> |{" "}
+                    <Link to="/about">About Us</Link> |{" "}
+                    <Link to="/">Careers</Link> | <Link to="/">Press</Link>{" "}
+                  </p>
+                </div>
               </div>
-            </div>
-          ) : tamanhoTela < 1077 && open === false ? null : (
-            <div className="coluna-footer about-footer">
-              <h4>About</h4>
-              <Link to="/">Contact Us</Link>
-              <Link to="/about">About Us</Link>
-              <Link to="/">Careers</Link>
-              <Link to="/">Press</Link>
-            </div>
-          )}
-
-          {tamanhoTela < 1077 ? <hr className="linha-footer" /> : null}
-
-          {tamanhoTela < 1077 ? (
-            <div className="coluna-footer policy-footer">
-              <h4>Policy</h4>
-              <div className="mob-policy">
-                <p>
-                  {" "}
-                  <Link to="">Return</Link> | <Link to="">Terms of use</Link> |{" "}
-                  <Link to="">Sitemap</Link> | <Link to="">Security</Link> |{" "}
-                  <Link to="">Privacy</Link> | <Link to="">EPR Compliance</Link>
-                </p>
+            ) : tamanhoTela < 1077 && open === false ? null : (
+              <div className="coluna-footer about-footer">
+                <h4>About</h4>
+                <Link to="/">Contact Us</Link>
+                <Link to="/about">About Us</Link>
+                <Link to="/">Careers</Link>
+                <Link to="/">Press</Link>
               </div>
+            )}
+
+            {tamanhoTela < 1077 ? <hr className="linha-footer" /> : null}
+
+            {tamanhoTela < 1077 ? (
+              <div className="coluna-footer policy-footer">
+                <h4>Policy</h4>
+                <div className="mob-policy">
+                  <p>
+                    <Link to="">Return</Link> | <Link to="">Terms of use</Link>{" "}
+                    |<Link to="">Sitemap</Link> | <Link to="">Security</Link> |
+                    <Link to="">Privacy</Link> |{" "}
+                    <Link to="">EPR Compliance</Link>
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div className="coluna-footer">
+                <h4>Policy</h4>
+                <Link to="/">Return Policy</Link>
+                <Link to="/">Terms of Use</Link>
+                <Link to="/">Sitemap</Link>
+                <Link to="/">Security</Link>
+                <Link to="/">Security</Link>
+                <Link to="/">EPR Compliance</Link>
+              </div>
+            )}
+
+            <div className="Logos-footer">
+              <img src={FB} alt="" />
+              <img src={Insta} alt="" />
+              <img src={Twitter} alt="" />
+              <img src={Youtube} alt="" />
             </div>
-          ) : (
-            <div className="coluna-footer">
-              <h4>Policy</h4>
-              <Link to="/">Return Policy</Link>
-              <Link to="/">Terms of Use</Link>
-              <Link to="/">Sitemap</Link>
-              <Link to="/">Security</Link>
-              <Link to="/">Security</Link>
-              <Link to="/">EPR Compliance</Link>
+
+            <div className="location-footer">
+              <img src={Point} alt="" />
+              <p className="">United States</p>
             </div>
-          )}
 
-          <div className="Logos-footer">
-            <img src={FB} alt="" />
-            <img src={Insta} alt="" />
-            <img src={Twitter} alt="" />
-            <img src={Youtube} alt="" />
+            <p className="RightsReserved">
+              © 2021 | Cora Leviene All Rights Reserved
+            </p>
           </div>
-
-          <div className="location-footer">
-            <img src={Point} alt="" />
-            <p className="">United States</p>
-          </div>
-
-          <p className="RightsReserved">
-            © 2021 | Cora Leviene All Rights Reserved
-          </p>
-        </div>
+        </footer>
       )}
     </>
   );
