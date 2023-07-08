@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "../../components/Header";
 
 //Images
 import heroImg from "../../assets/Img/hero.jpg";
