@@ -39,7 +39,7 @@
   transition: all ease-in-out 0.2s;
 }
 
-@media screen and (min-width: 620px) {
+@media screen and (min-width: 820px) {
   .container-nav {
     display: none;
   }

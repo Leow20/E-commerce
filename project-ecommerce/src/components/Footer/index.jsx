@@ -26,7 +26,6 @@ function Footer() {
     } else {
       box.classList.add("button-active");
     }
-    console.log(open);
   }
 
   useEffect(() => {
@@ -48,7 +47,11 @@ function Footer() {
           <h3 className="coral-footer">More about CORA’L</h3>
           <button onClick={handleButtonFooter} className="icon-button-footer">
             {" "}
-            <img src={open === true ? ArrowUp : ArrowDown} alt="" />{" "}
+            <img
+              src={ArrowDown}
+              style={{ transform: `rotate(${open ? "180deg" : "0deg"})` }}
+              alt=""
+            />{" "}
           </button>
         </div>
       ) : null}
