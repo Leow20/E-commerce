@@ -1,0 +1,145 @@
+.page-wrapper-header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.Header {
+  display: flex;
+  align-items: center;
+  background-color: #ffff;
+  width: 100%;
+  max-width: 1280px;
+  height: 80px;
+  flex-direction: row;
+  padding: 0 20px;
+}
+
+.logo-header {
+  width: 108px;
+  height: 22px;
+  margin-right: 32px;
+}
+
+.nav-category-header ul {
+  list-style-type: none;
+  display: flex;
+  width: 391px;
+  height: 18px;
+  gap: 20px;
+}
+
+.nav-category-header a {
+  text-decoration: none;
+  color: #171520;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.search-bar-header {
+  display: flex;
+  align-items: center;
+  margin-right: 20px;
+  width: 362px;
+  height: 44px;
+  margin-left: 211px;
+
+  position: relative;
+}
+
+.search-bar-header input[type="text"] {
+  padding: 13px 20px 13px 40px;
+  border: none;
+  width: 100%;
+  min-width: 258px;
+  height: 44px;
+  border-radius: 4px;
+  color: #626262;
+  background-color: #f1f1f1;
+}
+
+#lupa-id {
+  position: absolute;
+  left: 8px;
+  top: 10px;
+}
+
+.icons {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 114px;
+  height: 24px;
+}
+
+.container-header-responsivo {
+  display: none;
+}
+
+@media (max-width: 820px) {
+  .logo-header,
+  .nav-category-header ul,
+  .search-bar-header input[type="text"],
+  .icons,
+  #lupa-id,
+  .search-bar-header {
+    display: none;
+  }
+
+  .logo-menu {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 20px;
+  }
+
+  .logo-menu h1 {
+    color: #1b4b66;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 26px;
+  }
+
+  #menu {
+    width: 24px;
+    height: 24px;
+  }
+
+  .container-header-responsivo {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .icons-responsivo {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .icons-responsivo span {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px;
+  }
+}
+
+@media (max-width: 1150px) {
+  .search-bar-header {
+    margin-left: 100px;
+  }
+}
+
+@media (max-width: 1050px) {
+  .search-bar-header {
+    margin-left: 50px;
+  }
+
+  .search-bar-header input[type="text"] {
+    min-width: 100px;
+  }
+}

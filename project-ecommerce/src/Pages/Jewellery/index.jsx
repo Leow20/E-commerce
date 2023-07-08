@@ -1,5 +1,7 @@
+import Header from "../../components/Header";
+
 const Jewellery = () => {
-	return <div>Jewellery</div>;
+	return <div><Header /></div>;
 };
 
 export default Jewellery;
