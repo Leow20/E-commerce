@@ -1,4 +1,7 @@
+//Router-dom
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+//Pages
 import About from "../Pages/About";
 import Home from "../Pages/Home";
 import Handbags from "../Pages/Handbags";
@@ -9,6 +12,8 @@ import Apparels from "../Pages/Apparels";
 import Categories from "../Pages/Categories";
 import Profile from "../Pages/Profile";
 import MyBag from "../Pages/MyBag";
+import Notification from "../Pages/Notification";
+import Wishlist from "../Pages/Wishlist";
 
 const Router = () => {
 	return (
@@ -24,6 +29,8 @@ const Router = () => {
 				<Route path="/skincare" element={<Skincare />} />
 				<Route path="/jewellery" element={<Jewellery />} />
 				<Route path="/apparels" element={<Apparels />} />
+				<Route path="/notification" element={<Notification />} />
+				<Route path="/wishlist" element={<Wishlist />} />
 			</Routes>
 		</BrowserRouter>
 	);
