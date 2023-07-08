@@ -10,6 +10,9 @@ import visionImg from "../../assets/Img/Rectangle 533.jpg";
 //Styles
 import "./about.css";
 
+//Components
+import Header from "../../components/Header";
+
 const About = () => {
   return (
     <>
