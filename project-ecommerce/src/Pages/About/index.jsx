@@ -15,7 +15,7 @@ import Header from "../../components/Header";
 const About = () => {
   return (
     <>
-      <Header />;
+      <Header />
       <main className="main-about">
         <div className="page-wrapper-about">
           <div className="hero-about">
