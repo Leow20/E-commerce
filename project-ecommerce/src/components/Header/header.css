@@ -75,6 +75,12 @@
   height: 24px;
 }
 
+.icons button,
+.icons-responsivo button {
+  background-color: transparent;
+  border: none;
+}
+
 .container-header-responsivo {
   display: none;
 }
