@@ -1,4 +1,4 @@
-@media(max-width:620px) {
+@media(max-width:840px) {
   .header-modal {
     width: 100%;
     height: 100vh;
@@ -119,7 +119,7 @@
   }
 }
 
-@media(min-width:621px) {
+@media(min-width:841px) {
   .header-modal {
     display: none;
   }

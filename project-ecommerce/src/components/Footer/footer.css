@@ -43,7 +43,7 @@
 }
 
 .coluna-footer a:hover {
-  color: #dedede;
+  color: #a0a0a0;
 }
 
 .Logos-footer {
@@ -95,10 +95,10 @@
   top: 154px;
 }
 
-@media (max-width: 1077px) {
+@media (max-width: 840px) {
   .footer {
     height: 626px;
-    margin-bottom: 56px;
+    /* margin-bottom: 56px; */
   }
 
   .box-button-footer {

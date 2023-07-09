@@ -51,10 +51,11 @@ function Header({ Page }) {
 					</nav>
 					<div className="search-bar-header">
 						<input
-							type="text"
+							type="search"
+							name="searchInput"
+							id="searchId"
 							placeholder="Search for products or brands....."
 						/>
-						<img src={search} alt="lupa" id="lupa-id" />
 					</div>
 					<div className="icons">
 						<Link to="/wishlist">
@@ -73,7 +74,9 @@ function Header({ Page }) {
 					<div className="container-header-responsivo">
 						<div className="logo-menu">
 							<h1>{Page}</h1>
-							<img src={menu} alt="menu" id="menu" />
+							<button onClick={() => setModal(true)}>
+								<img src={menu} alt="menu" id="menu" />
+							</button>
 						</div>
 						<div className="icons-responsivo">
 							<Link to="/">

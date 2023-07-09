@@ -21,6 +21,16 @@
   margin-right: 32px;
 }
 
+.logo-header img {
+  transition: all ease-in-out 0.2s;
+
+}
+
+.logo-header img:hover {
+  transform: scale(1.1);
+
+}
+
 .nav-category-header ul {
   list-style-type: none;
   display: flex;
@@ -30,13 +40,35 @@
 }
 
 .nav-category-header a {
+  display: block;
   text-decoration: none;
+  padding: 0 5px;
+  position: relative;
   color: #171520;
   text-align: center;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
   line-height: 18px;
+}
+
+.nav-category-header a:hover {
+  color: #1b4b66;
+}
+
+.nav-category-header a::after {
+  content: "";
+  position: absolute;
+  background-color: #1b4b66;
+  width: 0;
+  height: 3px;
+  left: 0;
+  bottom: -6px;
+  transition: 0.3s;
+}
+
+.nav-category-header a:hover::after {
+  width: 100%;
 }
 
 .search-bar-header {
@@ -46,11 +78,12 @@
   width: 362px;
   height: 44px;
   margin-left: 211px;
-
   position: relative;
 }
 
-.search-bar-header input[type="text"] {
+.search-bar-header input[type="search"] {
+  background: url("../../assets/imgHeader/search.svg") no-repeat;
+  background-position: 8px;
   padding: 13px 20px 13px 40px;
   border: none;
   width: 100%;
@@ -59,7 +92,15 @@
   border-radius: 4px;
   color: #626262;
   background-color: #f1f1f1;
+  transition: 0.2s;
 }
+
+.search-bar-header input[type="search"]:hover,
+.search-bar-header input[type="search"]:focus {
+  background-color: #dfdfdf;
+}
+
+
 
 #lupa-id {
   position: absolute;
@@ -79,6 +120,20 @@
 .icons-responsivo button {
   background-color: transparent;
   border: none;
+  transition: all ease-in-out 0.2s;
+}
+
+.icons a,
+.icons-responsivo a {
+  transition: all ease-in-out 0.2s;
+
+}
+
+.icons button:hover,
+.icons-responsivo button:hover,
+.icons a:hover,
+.icons-responsivo a:hover {
+  transform: scale(1.1);
 }
 
 .container-header-responsivo {
@@ -89,7 +144,7 @@
 
   .logo-header,
   .nav-category-header ul,
-  .search-bar-header input[type="text"],
+  .search-bar-header input[type="search"],
   .icons,
   #lupa-id,
   .search-bar-header {
@@ -112,6 +167,11 @@
   .logo-menu button {
     border: none;
     background-color: transparent;
+    transition: all ease-in-out 0.2s;
+  }
+
+  .logo-menu button:hover {
+    transform: scale(1.1);
   }
 
   #menu {
@@ -151,7 +211,7 @@
     margin-left: 50px;
   }
 
-  .search-bar-header input[type="text"] {
+  .search-bar-header input[type="search"] {
     min-width: 100px;
   }
 }
