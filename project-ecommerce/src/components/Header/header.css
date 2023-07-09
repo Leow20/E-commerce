@@ -75,11 +75,18 @@
   height: 24px;
 }
 
+.icons button,
+.icons-responsivo button {
+  background-color: transparent;
+  border: none;
+}
+
 .container-header-responsivo {
   display: none;
 }
 
-@media (max-width: 820px) {
+@media (max-width: 840px) {
+
   .logo-header,
   .nav-category-header ul,
   .search-bar-header input[type="text"],

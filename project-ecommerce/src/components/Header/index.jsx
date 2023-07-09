@@ -1,21 +1,28 @@
+//Style
 import "./header.css";
-import search from "../../assets/search(1).svg";
-import wishlist from "../../assets/wishlist.svg";
-import perfil from "../../assets/profile.svg";
-import sacola from "../../assets/bag.svg";
-import logo from "../../assets/logo.png";
-import notificacao from "../../assets/notification.svg";
-import menu from "../../assets/leadingIcon.svg";
-import addHome from "../../assets/addHomes.svg";
+
+//Router-dom
 import { Link } from "react-router-dom";
 import HeaderModal from "../HeaderModal";
 import { useState } from "react";
 
-function Header() {
+//Images
+import search from "../../assets/imgHeader/search(1).svg";
+import wishlist from "../../assets/imgHeader/wishlist.svg";
+import perfil from "../../assets/imgHeader/profile.svg";
+import sacola from "../../assets/imgHeader/bag.svg";
+import logo from "../../assets/imgHeader/logo.png";
+import notificacao from "../../assets/imgHeader/notification.svg";
+import menu from "../../assets/imgHeader/leadingIcon.svg";
+import addHome from "../../assets/imgHeader/addHomes.svg";
+
+function Header({ Page }) {
 	const [modal, setModal] = useState(false);
+
 	return (
 		<>
 			<HeaderModal isOpen={modal} setIsOpen={setModal} />
+
 			<div className="page-wrapper-header">
 				<header className="Header">
 					<div className="logo-header">
@@ -50,22 +57,36 @@ function Header() {
 						<img src={search} alt="lupa" id="lupa-id" />
 					</div>
 					<div className="icons">
-						<img src={wishlist} alt="coracao" />
-						<img src={perfil} alt="perfil" />
-						<img src={sacola} alt="sacola" />
+						<Link to="/wishlist">
+							<img src={wishlist} alt="coracao" />
+						</Link>
+
+						<Link to="/profile">
+							<img src={perfil} alt="perfil" />
+						</Link>
+
+						<button>
+							<img src={sacola} alt="sacola" />
+						</button>
 					</div>
 
 					<div className="container-header-responsivo">
 						<div className="logo-menu">
-							<h1>Home</h1>
-							<button onClick={() => setModal(true)}>
-								<img src={menu} alt="menu" id="menu" />
-							</button>
+							<h1>{Page}</h1>
+							<img src={menu} alt="menu" id="menu" />
 						</div>
 						<div className="icons-responsivo">
-							<img src={addHome} alt="addHome" />
-							<img src={search} alt="lupa" />
-							<img src={notificacao} alt="notificacao" />
+							<Link to="/">
+								<img src={addHome} alt="addHome" />
+							</Link>
+
+							<button>
+								<img src={search} alt="lupa" />
+							</button>
+
+							<Link to="/notification">
+								<img src={notificacao} alt="notificacao" />
+							</Link>
 						</div>
 					</div>
 				</header>
