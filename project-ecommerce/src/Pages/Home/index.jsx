@@ -1,6 +1,5 @@
 import NavMob from "../../components/NavMob";
 import Header from "../../components/Header";
-import NavMob from "../../components/NavMob";
 import Footer from "../../components/footer";
 
 const Home = () => {
