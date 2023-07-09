@@ -1,16 +1,18 @@
-import Header from "../../components/Header";
 import NavMob from "../../components/NavMob";
-import Footer from "../../components/footer";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 const Home = () => {
-	return (
-		<div>
-			<Header />
-			<h1>Home</h1>
-			<Footer />
-			<NavMob />
-		</div>
-	);
+  return (
+    <div>
+      <Header />
+
+      <h1>Home</h1>
+
+      <NavMob />
+      <Footer />
+    </div>
+  );
 };
 
 export default Home;
