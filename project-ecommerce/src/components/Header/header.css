@@ -102,6 +102,11 @@
     line-height: 26px;
   }
 
+  .logo-menu button {
+    border: none;
+    background-color: transparent;
+  }
+
   #menu {
     width: 24px;
     height: 24px;
