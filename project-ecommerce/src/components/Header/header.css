@@ -23,12 +23,10 @@
 
 .logo-header img {
   transition: all ease-in-out 0.2s;
-
 }
 
 .logo-header img:hover {
-  transform: scale(1.1);
-
+  transform: scale(1.05);
 }
 
 .nav-category-header ul {
@@ -64,7 +62,7 @@
   height: 3px;
   left: 0;
   bottom: -6px;
-  transition: 0.3s;
+  transition: all 0.3s ease-in-out;
 }
 
 .nav-category-header a:hover::after {
@@ -92,15 +90,13 @@
   border-radius: 4px;
   color: #626262;
   background-color: #f1f1f1;
-  transition: 0.2s;
+  transition: all ease-in-out 0.2s;
 }
 
 .search-bar-header input[type="search"]:hover,
 .search-bar-header input[type="search"]:focus {
   background-color: #dfdfdf;
 }
-
-
 
 #lupa-id {
   position: absolute;
@@ -126,7 +122,6 @@
 .icons a,
 .icons-responsivo a {
   transition: all ease-in-out 0.2s;
-
 }
 
 .icons button:hover,
@@ -141,7 +136,6 @@
 }
 
 @media (max-width: 840px) {
-
   .logo-header,
   .nav-category-header ul,
   .search-bar-header input[type="search"],

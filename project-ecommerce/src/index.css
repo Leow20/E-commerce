@@ -18,6 +18,22 @@
   }
 }
 
+@keyframes open {
+  from {
+    transform: translateX(-300px);
+  }
+
+  to {
+    transform: translateX(10px);
+  }
+}
+
+@keyframes close {
+  to {
+    transform: translateX(-300px);
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
