@@ -41,7 +41,7 @@ const Home = () => {
 
 	return (
 		<div>
-			<Header />
+			<Header Page="Home" />
 
 			<main className="main-home">
 				<div className="page-wrapper-home">

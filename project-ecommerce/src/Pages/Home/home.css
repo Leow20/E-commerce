@@ -31,7 +31,7 @@
   padding: 6px;
 }
 
-.hero-mobile-home > div {
+.hero-mobile-home>div {
   flex-grow: 1;
 }
 
@@ -550,6 +550,7 @@
     font-weight: 600;
     line-height: 32px;
   }
+
   .content-brand-home {
     width: 168px;
     height: 168px;
