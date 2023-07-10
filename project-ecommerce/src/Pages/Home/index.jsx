@@ -18,6 +18,8 @@ import skinCare from "../../assets/icons/icon-fill.svg";
 import arrowOrange from "../../assets/icons/arrowOrange.svg";
 import arrowBlue from "../../assets/icons/arroBlue.svg";
 import arrowPink from "../../assets/icons/arrowPink.svg";
+import arrowView from "../../assets/icons/viewAll.svg";
+import shortcutIcon from "../../assets/icons/shortcutIcon.svg";
 
 //Styles
 import "./home.css";
@@ -136,7 +138,9 @@ const Home = () => {
               <div className="arrival-title-home">
                 <span>New Arrivals</span>
                 <span>
-                  <a>View All</a>
+                  <a>
+                    View All <img src={arrowView} alt="icone seta" />
+                  </a>
                 </span>
               </div>
 
@@ -269,7 +273,9 @@ const Home = () => {
               <div className="title-brand-home">
                 <span>Shop by Brands</span>
                 <span>
-                  <a>View All</a>
+                  <a>
+                    View All <img src={arrowView} alt="icone seta" />
+                  </a>
                 </span>{" "}
               </div>
               <div className="container-brand-home">
@@ -300,7 +306,9 @@ const Home = () => {
               <span>
                 Discover your favrouite products faster with CORA’L web app.
               </span>
-              <span>Add Shortcut</span>
+              <span>
+                Add Shortcut <img src={shortcutIcon} alt="icone seta" />
+              </span>
             </div>
           </div>
           <section className="fourth-section-home">

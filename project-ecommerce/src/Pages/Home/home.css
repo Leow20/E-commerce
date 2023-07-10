@@ -135,6 +135,13 @@
   margin-right: 25px;
 }
 
+.arrival-title-home span a,
+.title-brand-home span a {
+  color: #1b4b66;
+  font-size: 12px;
+  font-weight: 500;
+}
+
 .arrival-content-home {
   display: flex;
   flex-direction: row;
@@ -273,6 +280,12 @@
   font-weight: 500;
   line-height: 18px;
   color: #fff;
+  display: flex;
+  align-items: center;
+}
+
+.text-shortcut-home span img {
+  margin-left: 8px;
 }
 
 .text-shortcut-home span:last-child {
