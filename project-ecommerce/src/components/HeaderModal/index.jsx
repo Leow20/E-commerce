@@ -22,7 +22,6 @@ const HeaderModal = ({ isOpen, setIsOpen, id = "headerModalId" }) => {
       return;
     } else {
       addEventListener("scroll", () => setIsOpen(false));
-      setAnimation("content-header-modal animation-close-header-modal");
       setIsOpen(false);
     }
   };
@@ -30,7 +29,7 @@ const HeaderModal = ({ isOpen, setIsOpen, id = "headerModalId" }) => {
   if (isOpen) {
     return (
       <div id={id} className="header-modal" onClick={handleBackClick}>
-        <div className="content-header-modal animation-header-modal">
+        <div className={animation}>
           <div className="profile-header-modal">
             <button>
               <div>

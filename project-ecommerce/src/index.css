@@ -24,11 +24,15 @@
   }
 
   to {
-    transform: translateX(10px);
+    transform: translateX(0px);
   }
 }
 
 @keyframes close {
+  from {
+    transform: translateX(0px);
+  }
+
   to {
     transform: translateX(-300px);
   }
