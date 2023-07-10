@@ -1,0 +1,630 @@
+.main-home {
+  display: flex;
+  justify-content: center;
+}
+
+.first-section-home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.page-wrapper-home {
+  width: 100%;
+  max-width: 1280px;
+
+  display: table;
+  background-color: #fff;
+  position: relative;
+  padding-bottom: 20px;
+  margin: 0 auto;
+}
+
+.hero-mobile-home {
+  max-width: 1240px;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  overflow: auto;
+  padding: 6px;
+}
+
+.hero-mobile-home > div {
+  flex-grow: 1;
+}
+
+.hero-mobile-home img {
+  width: 100%;
+  min-width: 335px;
+  max-width: 1240px;
+  padding: 0 3px;
+}
+
+.warning-home,
+.hero-web-home {
+  display: none;
+}
+
+.categories-home {
+  width: 100%;
+  padding: 10px;
+}
+
+.categories-home span {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  padding-left: 10px;
+}
+
+.categories-select-home::-webkit-scrollbar,
+.hero-mobile-home::-webkit-scrollbar,
+.button-hero-home,
+.container-arrival-home::-webkit-scrollbar {
+  display: none;
+}
+
+.categories-select-home {
+  overflow: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding: 10px;
+}
+
+.content-categorie-home {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  background-color: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-categories-home {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 7px;
+}
+
+.container-categories-home span {
+  color: #171520;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  padding: 0;
+}
+
+.container-arrival-title-home {
+  width: 100%;
+}
+
+.container-arrival-home {
+  padding: 10px 17px 17px;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  overflow: auto;
+  max-width: 1280px !important;
+}
+
+.arrival-title-home,
+.title-brand-home {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px;
+  margin-top: 15px;
+}
+
+.title-brand-home {
+  width: 100%;
+}
+
+.arrival-title-home span,
+.title-brand-home span,
+.title-makeup-home,
+.trending-title-home {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  padding-left: 10px;
+  margin-right: 25px;
+}
+
+.arrival-content-home {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  width: 130px;
+  margin-top: 5px;
+  padding-left: 12px;
+}
+
+.text-product-home {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.arrival-content-home span:nth-child(1) {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+  color: #171520;
+  padding-bottom: 2px;
+}
+
+.arrival-content-home span:nth-child(2) {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #626262;
+  padding-bottom: 2px;
+}
+
+.arrival-content-home span:nth-child(3) {
+  color: #171520;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  padding-bottom: 2px;
+}
+
+.container-arrival-home img:first-child {
+  padding: 5px;
+}
+
+.second-section {
+  width: 100%;
+  max-width: 1280px;
+  display: table;
+  background-color: #1b4b66;
+}
+
+.second-section p {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 16px;
+  color: #fff;
+  padding: 29px 20px 0;
+}
+
+.container-grid-home {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: space-evenly;
+}
+
+.content-grid-home {
+  position: relative;
+  transition: all ease-in-out 0.2s;
+}
+
+.content-grid-home:hover {
+  transform: translateY(3px);
+}
+
+.content-grid-home img {
+  border-radius: 8px;
+  max-width: 156px;
+  max-height: 156px;
+  margin: 5px;
+  margin-bottom: 8px;
+}
+
+.content-grid-home span {
+  position: absolute;
+  left: 13px;
+  bottom: 14px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #171520;
+}
+
+.container-brand-home {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.content-brand-home {
+  width: 99px;
+  height: 100px;
+  border-radius: 8px;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 17px;
+}
+
+.container-shortcut-home {
+  position: relative;
+  margin: 30px 0 0 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.text-shortcut-home {
+  width: 195px;
+  position: absolute;
+  left: 0px;
+  top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 40%;
+}
+
+.text-shortcut-home span {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #fff;
+}
+
+.text-shortcut-home span:last-child {
+  font-weight: 700;
+  line-height: 20px;
+  margin-top: 24px;
+}
+
+.container-makeup-home {
+  background-image: url("../../assets/Img/makeup.jpg");
+  background-repeat: no-repeat;
+  width: 328px;
+  height: 132px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 18px 0;
+}
+
+.container-makeup-home span:nth-child(1) {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #97451f;
+}
+
+.container-makeup-home span:nth-child(2) {
+  font-size: 16px;
+  width: 167px;
+  font-weight: 800;
+  line-height: 20px;
+  color: #97451f;
+}
+
+.button-makeup-home {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: #97451f24;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  transition: all ease-in-out 0.2s;
+}
+
+.button-makeup-home:hover {
+  transform: translateY(3px);
+}
+
+.fourth-section-home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.title-makeup-home {
+  width: 100%;
+  padding: 35px 0 8px 33px;
+}
+
+.grid-images-home {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 16px;
+}
+
+.container-skincare-home,
+.container-face-home {
+  background-image: url("../../assets/Img/skincare.jpg");
+  background-repeat: no-repeat;
+  width: 156px;
+  height: 100px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  padding: 12px 12px 0;
+}
+
+.container-skincare-home span,
+.container-face-home span {
+  color: #a53f64;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 16px;
+  text-align: right;
+}
+
+.container-face-home span {
+  color: #1b4b66;
+  width: 80px;
+}
+
+.container-face-home {
+  background-image: url("../../assets/Img/facepacks.jpg");
+}
+
+.fifth-section-home {
+  margin-top: 20px;
+}
+
+.trending-title-home {
+  padding: 20px;
+}
+
+.container-trending-home {
+  padding: 5px 0 0 10px;
+}
+
+@media screen and (min-width: 520px) {
+  .text-shortcut-home {
+    margin-left: 45%;
+  }
+}
+
+@media screen and (min-width: 820px) {
+  .warning-home {
+    width: 100%;
+    height: 50px;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .warning-home p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+    text-align: center;
+    color: #171520;
+  }
+
+  .warning-home a {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 18px;
+    text-align: center;
+    color: #1b4b66;
+    text-decoration: underline;
+  }
+
+  #additional-images-home,
+  .hero-mobile-home {
+    display: none;
+  }
+
+  .hero-web-home {
+    width: 100%;
+    max-width: 1240px;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    position: relative;
+  }
+
+  .hero-web-home img {
+    width: 100%;
+    height: auto;
+    max-width: 1240px;
+    padding: 0 3px;
+  }
+
+  .button-hero-home {
+    width: 16%;
+    max-width: 180px;
+    height: 10%;
+    background-color: #1b4b66;
+    position: absolute;
+    bottom: 25%;
+    left: 48%;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    transition: all ease-in-out 0.2s;
+  }
+
+  .button-hero-home:hover {
+    background-color: #113143;
+    transform: translateY(3 px);
+  }
+
+  .button-hero-home img {
+    width: 24px;
+    height: 24px;
+  }
+
+  .button-hero-home span {
+    width: 80px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #fff;
+    text-align: center;
+  }
+
+  .categories-home {
+    display: none;
+  }
+
+  .container-arrival-home img:first-child {
+    width: 286px;
+    height: 286px;
+  }
+
+  .arrival-content-home span:nth-child(1) {
+    font-size: 16px;
+  }
+
+  .arrival-content-home span:nth-child(2) {
+    font-size: 14px;
+    width: 236px;
+  }
+
+  .arrival-content-home span:nth-child(3) {
+    font-size: 16px;
+  }
+
+  .container-arrival-home img:last-child {
+    width: 19px;
+    height: 19px;
+  }
+
+  .text-product-home span {
+    padding-top: 5px;
+  }
+
+  .second-section p {
+    font-size: 34px;
+    font-weight: 500;
+    line-height: 44px;
+  }
+
+  .container-grid-home {
+    width: 100%;
+    margin: 26px 0;
+  }
+
+  .content-grid-home img {
+    max-width: 280px;
+    max-height: 280px;
+  }
+
+  .content-grid-home:hover {
+    transform: translateY(5px);
+  }
+
+  .content-grid-home span {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32px;
+  }
+  .content-brand-home {
+    width: 168px;
+    height: 168px;
+  }
+
+  .content-brand-home img {
+    transform: scale(1.5);
+  }
+
+  .title-brand-home span {
+    font-size: 34px;
+    line-height: 44px;
+    margin-top: 30px;
+  }
+
+  .title-brand-home span a {
+    display: none;
+  }
+
+  .container-shortcut-home,
+  .title-makeup-home {
+    display: none;
+  }
+
+  .container-makeup-home {
+    width: 100%;
+    max-width: 1240px;
+    height: 400px;
+    border-radius: 20px;
+    background-size: cover;
+    background-image: url("../../assets/Img/makeupWeb.jpg");
+    margin-top: 55px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .container-makeup-home span:nth-child(1) {
+    font-size: 30px;
+    margin-left: 35px;
+  }
+
+  .container-makeup-home span:nth-child(2) {
+    font-size: 52px;
+    width: 618px;
+    line-height: 52px;
+    margin-left: 35px;
+    margin-bottom: 37px;
+  }
+
+  .container-makeup-home .button-makeup-home {
+    display: none;
+  }
+
+  .container-skincare-home,
+  .container-face-home {
+    background-image: url("../../assets/Img/skincareWeb.jpg");
+    background-size: cover;
+    width: 50%;
+    max-width: 604px;
+    height: 228px;
+    border-radius: 20px;
+  }
+
+  .container-face-home {
+    background-image: url("../../assets/Img/facepacksWeb.jpg");
+  }
+
+  .container-skincare-home span,
+  .container-face-home span {
+    font-size: 40px;
+    line-height: 40px;
+    width: 250px;
+    padding: 21px 21px 0 0;
+  }
+
+  .button-makeup-home {
+    width: 51px;
+    height: 51px;
+    margin: 30px 28px 0 0;
+  }
+
+  .button-makeup-home img {
+    width: 31px;
+    height: 22px;
+  }
+
+  .trending-title-home {
+    display: none;
+  }
+}

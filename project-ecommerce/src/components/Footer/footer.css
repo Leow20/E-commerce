@@ -1,186 +1,194 @@
 .footer {
-    width: 100%;
-    height: 342px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  width: 100%;
+  height: 342px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container-footer {
-    max-width: 1280px;
-    position: absolute;
-    display: flex;
-    background-color: rgb(27, 75, 102);
-    height: 342px;
-    width: 100%;
-    padding: 32px 62px 0 60px;
+  max-width: 1280px;
+  position: absolute;
+  display: flex;
+  background-color: rgb(27, 75, 102);
+  height: 342px;
+  width: 100%;
+  padding: 32px 62px 0 60px;
 }
 
 .coluna-footer {
-    width: auto;
-    height: auto;
-    margin-right: 68px;
-    max-width: 140px;
-    display: inline-flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+  width: auto;
+  height: auto;
+  margin-right: 68px;
+  max-width: 140px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
 }
 
 .coluna-footer h4 {
-    color: white;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
+  color: white;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
 }
 
 .coluna-footer a {
-    color: #B6B6B6;
+  color: #b6b6b6;
 
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.coluna-footer a:hover {
+  color: #dedede;
 }
 
 .Logos-footer {
-    position: absolute;
-    right: 45px;
-    top: 49px;
+  position: absolute;
+  right: 45px;
+  top: 49px;
 }
 
 .Logos-footer img {
-    padding-right: 17px;
+  padding-right: 17px;
+  transition: all ease-in-out 0.2s;
+  cursor: pointer;
 }
 
 .Logos-footer img:hover {
-    transform: scale(1.2);
+  transform: scale(1.1);
 }
 
 .location-footer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-    position: absolute;
-    right: 60px;
-    top: 113px;
+  position: absolute;
+  right: 60px;
+  top: 113px;
 
-    height: 1.5rem;
+  height: 1.5rem;
 }
 
 .location-footer p {
-    color: white;
+  color: white;
 
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 18px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
 
-    margin-left: 8px;
+  margin-left: 8px;
 }
 
 .RightsReserved {
-    color: #B6B6B6;
+  color: #b6b6b6;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+
+  position: absolute;
+  right: 60px;
+  top: 154px;
+}
+
+@media (max-width: 1077px) {
+  .footer {
+    height: 626px;
+    margin-bottom: 56px;
+  }
+
+  .box-button-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: white;
+    width: 100%;
+    height: 48px;
+  }
+
+  .coral-footer {
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
+    line-height: 18px;
+    padding: 15px 16px;
+  }
 
+  .icon-button-footer {
+    background-color: transparent;
+    border: none;
+    margin: 12px 16px;
+  }
+
+  .icon-button-footer img {
+    transition: all cubic-bezier(0.9, -0.67, 0.13, 1.37) 0.5s;
+  }
+
+  .icon-button-footer img:hover {
+    transform: scale(1.2);
+  }
+
+  .container-footer-mobal {
+    display: block;
+    background-color: rgb(27, 75, 102);
+    height: 626px;
+  }
+
+  .mob-footer {
+    margin: 0;
     position: absolute;
-    right: 60px;
-    top: 154px;
-}
+    left: 16px;
+  }
 
-@media(max-width:1077px) {
-    .footer {
-        height: 626px;
-        margin-bottom: 56px;
-    }
+  .policy-footer {
+    margin: 0;
+    position: absolute;
+    left: 16px;
+    top: 290px;
+    min-width: 300px;
+  }
 
-    .box-button-footer {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        background-color: white;
-        width: 100%;
-        height: 48px;
+  .mob-policy {
+    flex-wrap: nowrap;
+    width: 329px;
+    line-height: 18px;
+    font-size: 14px;
+    color: #b6b6b6;
+  }
 
-    }
+  .about-footer {
+    margin: 0;
+    position: absolute;
+    left: 16px;
+    top: 375px;
+  }
 
-    .coral-footer {
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 18px;
-        padding: 15px 16px;
-    }
+  .linha-footer {
+    position: absolute;
+    top: 439px;
+    left: 0px;
+    width: 100%;
+  }
 
-    .icon-button-footer {
-        background-color: transparent;
-        border: none;
-        margin: 12px 16px;
-    }
+  .Logos-footer {
+    position: absolute;
+    left: 16px;
+    top: 460px;
+  }
 
-    .icon-button-footer img:hover {
-        transform: scale(1.2);
-    }
+  .location-footer {
+    position: absolute;
+    left: 16px;
+    top: 516px;
+  }
 
-    .container-footer-mobal {
-        display: block;
-        background-color: rgb(27, 75, 102);
-        height: 626px;
-    }
-
-    .mob-footer {
-        margin: 0;
-        position: absolute;
-        left: 16px;
-    }
-
-    .policy-footer {
-        margin: 0;
-        position: absolute;
-        left: 16px;
-        top: 290px;
-        min-width: 300px;
-    }
-
-    .mob-policy {
-        flex-wrap: nowrap;
-        width: 329px;
-        line-height: 18px;
-        font-size: 14px;
-        color: #B6B6B6;
-    }
-
-    .about-footer {
-        margin: 0;
-        position: absolute;
-        left: 16px;
-        top: 375px;
-    }
-
-    .linha-footer {
-        position: absolute;
-        top: 439px;
-        left: 0px;
-        width: 100%;
-    }
-
-    .Logos-footer {
-        position: absolute;
-        left: 16px;
-        top: 460px;
-    }
-
-    .location-footer {
-        position: absolute;
-        left: 16px;
-        top: 516px;
-    }
-
-    .RightsReserved {
-        position: absolute;
-        left: 16px;
-        top: 553px;
-    }
-
+  .RightsReserved {
+    position: absolute;
+    left: 16px;
+    top: 553px;
+  }
 }
