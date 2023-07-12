@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./signup.css";
-
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../firebaseConnection";
 
 
 const SignUp = () => {
@@ -12,7 +13,23 @@ const SignUp = () => {
 	const [password, setPassword] = useState("")
 	const [confirmPassword, setConfirmPassword] = useState("")
 
+	async function cadastro() {
+		await createUserWithEmailAndPassword(auth, email, password)
+			.then(() => {
+				console.log("Cadastro realizado com sucesso!");
 
+				setEmail('')
+				setPassword('')
+			})
+			.catch((error) => {
+				if (error.code === 'auth/wake-password') {
+					alert("Senha muito fraca.")
+
+				} else if (error.code === 'auth/email-already-in-use') {
+					alert("Email já existente.")
+				}
+			})
+	}
 
 
 
@@ -92,7 +109,7 @@ const SignUp = () => {
 					required
 				/>
 			</div>
-			<button type="submit">Save</button>
+			<button onClick={cadastro}>Cadastre-se</button>
 		</form>
 
 
