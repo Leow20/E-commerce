@@ -41,7 +41,13 @@ function Footer() {
   return (
     <>
       {tamanhoTela < 841 ? (
-        <div id="boxFunction" className="box-button-footer">
+        <div
+          id="boxFunction"
+          className="box-button-footer"
+          style={
+            open ? { marginBottom: 0 + "px" } : { marginBottom: 80 + "px" }
+          }
+        >
           <h3 className="coral-footer">More about CORA’L</h3>
           <button onClick={handleButtonFooter} className="icon-button-footer">
             {" "}
@@ -55,7 +61,10 @@ function Footer() {
       ) : null}
 
       {tamanhoTela < 841 && open === true ? (
-        <footer className="footer">
+        <footer
+          className="footer"
+          style={open ? { marginBottom: 20 + "px" } : ""}
+        >
           <div className="container-footer container-footer-mobal">
             <div className="coluna-footer mob-footer">
               <h4>Shop by Category</h4>
