@@ -9,213 +9,222 @@ import Point from "../../assets/imgFooter/location.svg";
 import ArrowDown from "../../assets/imgFooter/ArrowDown.svg";
 
 function Footer() {
-	const [tamanhoTela, setTamanhoTela] = useState(window.innerWidth);
-	const [open, setOpen] = useState(false);
+  const [tamanhoTela, setTamanhoTela] = useState(window.innerWidth);
+  const [open, setOpen] = useState(false);
 
-	function handleButtonFooter(e) {
-		e.preventDefault();
+  function handleButtonFooter(e) {
+    e.preventDefault();
 
-		setOpen(!open);
+    setOpen(!open);
 
-		var box = document.getElementById("boxFunction");
+    var box = document.getElementById("boxFunction");
 
-		if (open) {
-			box.classList.remove("button-active");
-		} else {
-			box.classList.add("button-active");
-		}
-	}
+    if (open) {
+      box.classList.remove("button-active");
+    } else {
+      box.classList.add("button-active");
+    }
+  }
 
-	useEffect(() => {
-		const atualizarTamanhoTela = () => {
-			setTamanhoTela(window.innerWidth);
-		};
+  useEffect(() => {
+    const atualizarTamanhoTela = () => {
+      setTamanhoTela(window.innerWidth);
+    };
 
-		window.addEventListener("resize", atualizarTamanhoTela);
+    window.addEventListener("resize", atualizarTamanhoTela);
 
-		return () => {
-			window.removeEventListener("resize", atualizarTamanhoTela);
-		};
-	}, []);
+    return () => {
+      window.removeEventListener("resize", atualizarTamanhoTela);
+    };
+  }, []);
 
-	return (
-		<>
-			{tamanhoTela < 841 ? (
-				<div id="boxFunction" className="box-button-footer">
-					<h3 className="coral-footer">More about CORA’L</h3>
-					<button onClick={handleButtonFooter} className="icon-button-footer">
-						{" "}
-						<img
-							src={ArrowDown}
-							style={{ transform: `rotate(${open ? "180deg" : "0deg"})` }}
-							alt=""
-						/>{" "}
-					</button>
-				</div>
-			) : null}
+  return (
+    <>
+      {tamanhoTela < 841 ? (
+        <div
+          id="boxFunction"
+          className="box-button-footer"
+          style={
+            open ? { marginBottom: 0 + "px" } : { marginBottom: 80 + "px" }
+          }
+        >
+          <h3 className="coral-footer">More about CORA’L</h3>
+          <button onClick={handleButtonFooter} className="icon-button-footer">
+            {" "}
+            <img
+              src={ArrowDown}
+              style={{ transform: `rotate(${open ? "180deg" : "0deg"})` }}
+              alt=""
+            />{" "}
+          </button>
+        </div>
+      ) : null}
 
-			{tamanhoTela < 841 && open === true ? (
-				<footer className="footer">
-					<div className="container-footer container-footer-mobal">
-						<div className="coluna-footer mob-footer">
-							<h4>Shop by Category</h4>
-							<Link to="/skincare">Skincare</Link>
-							<Link to="/">Personal Care</Link>
-							<Link to="/handbags">Handbags</Link>
-							<Link to="/">Appareis</Link>
-							<Link to="/watches">Watches</Link>
-							<Link to="/">Eye Wear</Link>
-							<Link to="/jewellery">Jewellery</Link>
-						</div>
+      {tamanhoTela < 841 && open === true ? (
+        <footer
+          className="footer"
+          style={open ? { marginBottom: 20 + "px" } : ""}
+        >
+          <div className="container-footer container-footer-mobal">
+            <div className="coluna-footer mob-footer">
+              <h4>Shop by Category</h4>
+              <Link to="/skincare">Skincare</Link>
+              <Link to="/">Personal Care</Link>
+              <Link to="/handbags">Handbags</Link>
+              <Link to="/">Appareis</Link>
+              <Link to="/watches">Watches</Link>
+              <Link to="/">Eye Wear</Link>
+              <Link to="/jewellery">Jewellery</Link>
+            </div>
 
-						{tamanhoTela < 841 && open === true ? (
-							<div className="coluna-footer about-footer">
-								<h4>About</h4>
-								<div className="mob-policy">
-									<p>
-										{" "}
-										<Link to="/">Contact Us</Link> |{" "}
-										<Link to="/about">About Us</Link> |{" "}
-										<Link to="/">Careers</Link> | <Link to="/">Press</Link>{" "}
-									</p>
-								</div>
-							</div>
-						) : tamanhoTela < 841 && open === false ? null : (
-							<div className="coluna-footer about-footer">
-								<h4>About</h4>
-								<Link to="/">Contact Us</Link>
-								<Link to="/about">About Us</Link>
-								<Link to="/">Careers</Link>
-								<Link to="/">Press</Link>
-							</div>
-						)}
+            {tamanhoTela < 841 && open === true ? (
+              <div className="coluna-footer about-footer">
+                <h4>About</h4>
+                <div className="mob-policy">
+                  <p>
+                    {" "}
+                    <Link to="/">Contact Us</Link> |{" "}
+                    <Link to="/about">About Us</Link> |{" "}
+                    <Link to="/">Careers</Link> | <Link to="/">Press</Link>{" "}
+                  </p>
+                </div>
+              </div>
+            ) : tamanhoTela < 841 && open === false ? null : (
+              <div className="coluna-footer about-footer">
+                <h4>About</h4>
+                <Link to="/">Contact Us</Link>
+                <Link to="/about">About Us</Link>
+                <Link to="/">Careers</Link>
+                <Link to="/">Press</Link>
+              </div>
+            )}
 
-						{tamanhoTela < 841 ? <hr className="linha-footer" /> : null}
+            {tamanhoTela < 841 ? <hr className="linha-footer" /> : null}
 
-						{tamanhoTela < 841 ? (
-							<div className="coluna-footer policy-footer">
-								<h4>Policy</h4>
-								<div className="mob-policy">
-									<p>
-										{" "}
-										<Link to="">Return</Link> | <Link to="">Terms of use</Link>{" "}
-										| <Link to="">Sitemap</Link> | <Link to="">Security</Link> |{" "}
-										<Link to="">Privacy</Link> |{" "}
-										<Link to="">EPR Compliance</Link>
-									</p>
-								</div>
-							</div>
-						) : (
-							<div className="coluna-footer">
-								<h4>Policy</h4>
-								<Link to="/">Return Policy</Link>
-								<Link to="/">Terms of Use</Link>
-								<Link to="/">Sitemap</Link>
-								<Link to="/">Security</Link>
-								<Link to="/">Security</Link>
-								<Link to="/">EPR Compliance</Link>
-							</div>
-						)}
+            {tamanhoTela < 841 ? (
+              <div className="coluna-footer policy-footer">
+                <h4>Policy</h4>
+                <div className="mob-policy">
+                  <p>
+                    {" "}
+                    <Link to="">Return</Link> | <Link to="">Terms of use</Link>{" "}
+                    | <Link to="">Sitemap</Link> | <Link to="">Security</Link> |{" "}
+                    <Link to="">Privacy</Link> |{" "}
+                    <Link to="">EPR Compliance</Link>
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div className="coluna-footer">
+                <h4>Policy</h4>
+                <Link to="/">Return Policy</Link>
+                <Link to="/">Terms of Use</Link>
+                <Link to="/">Sitemap</Link>
+                <Link to="/">Security</Link>
+                <Link to="/">Security</Link>
+                <Link to="/">EPR Compliance</Link>
+              </div>
+            )}
 
-						<div className="Logos-footer">
-							<img src={FB} alt="" />
-							<img src={Insta} alt="" />
-							<img src={Twitter} alt="" />
-							<img src={Youtube} alt="" />
-						</div>
+            <div className="Logos-footer">
+              <img src={FB} alt="" />
+              <img src={Insta} alt="" />
+              <img src={Twitter} alt="" />
+              <img src={Youtube} alt="" />
+            </div>
 
-						<div className="location-footer">
-							<img src={Point} alt="" />
-							<p className="">United States</p>
-						</div>
+            <div className="location-footer">
+              <img src={Point} alt="" />
+              <p className="">United States</p>
+            </div>
 
-						<p className="RightsReserved">
-							© 2021 | Cora Leviene All Rights Reserved
-						</p>
-					</div>
-				</footer>
-			) : tamanhoTela < 841 && open === false ? null : (
-				<footer className="footer">
-					<div className="container-footer container-footer-mobal">
-						<div className="coluna-footer mob-footer">
-							<h4>Shop by Category</h4>
-							<Link to="/skincare">Skincare</Link>
-							<Link to="/">Personal Care</Link>
-							<Link to="/handbags">Handbags</Link>
-							<Link to="/">Appareis</Link>
-							<Link to="/watches">Watches</Link>
-							<Link to="/">Eye Wear</Link>
-							<Link to="/jewellery">Jewellery</Link>
-						</div>
+            <p className="RightsReserved">
+              © 2021 | Cora Leviene All Rights Reserved
+            </p>
+          </div>
+        </footer>
+      ) : tamanhoTela < 841 && open === false ? null : (
+        <footer className="footer">
+          <div className="container-footer container-footer-mobal">
+            <div className="coluna-footer mob-footer">
+              <h4>Shop by Category</h4>
+              <Link to="/skincare">Skincare</Link>
+              <Link to="/">Personal Care</Link>
+              <Link to="/handbags">Handbags</Link>
+              <Link to="/">Appareis</Link>
+              <Link to="/watches">Watches</Link>
+              <Link to="/">Eye Wear</Link>
+              <Link to="/jewellery">Jewellery</Link>
+            </div>
 
-						{tamanhoTela < 841 && open === true ? (
-							<div className="coluna-footer about-footer">
-								<h4>About</h4>
-								<div className="mob-policy">
-									<p>
-										{" "}
-										<Link to="/">Contact Us</Link> |{" "}
-										<Link to="/about">About Us</Link> |{" "}
-										<Link to="/">Careers</Link> | <Link to="/">Press</Link>{" "}
-									</p>
-								</div>
-							</div>
-						) : tamanhoTela < 841 && open === false ? null : (
-							<div className="coluna-footer about-footer">
-								<h4>About</h4>
-								<Link to="/">Contact Us</Link>
-								<Link to="/about">About Us</Link>
-								<Link to="/">Careers</Link>
-								<Link to="/">Press</Link>
-							</div>
-						)}
+            {tamanhoTela < 841 && open === true ? (
+              <div className="coluna-footer about-footer">
+                <h4>About</h4>
+                <div className="mob-policy">
+                  <p>
+                    {" "}
+                    <Link to="/">Contact Us</Link> |{" "}
+                    <Link to="/about">About Us</Link> |{" "}
+                    <Link to="/">Careers</Link> | <Link to="/">Press</Link>{" "}
+                  </p>
+                </div>
+              </div>
+            ) : tamanhoTela < 841 && open === false ? null : (
+              <div className="coluna-footer about-footer">
+                <h4>About</h4>
+                <Link to="/">Contact Us</Link>
+                <Link to="/about">About Us</Link>
+                <Link to="/">Careers</Link>
+                <Link to="/">Press</Link>
+              </div>
+            )}
 
-						{tamanhoTela < 841 ? <hr className="linha-footer" /> : null}
+            {tamanhoTela < 841 ? <hr className="linha-footer" /> : null}
 
-						{tamanhoTela < 841 ? (
-							<div className="coluna-footer policy-footer">
-								<h4>Policy</h4>
-								<div className="mob-policy">
-									<p>
-										<Link to="">Return</Link> | <Link to="">Terms of use</Link>{" "}
-										|<Link to="">Sitemap</Link> | <Link to="">Security</Link> |
-										<Link to="">Privacy</Link> |{" "}
-										<Link to="">EPR Compliance</Link>
-									</p>
-								</div>
-							</div>
-						) : (
-							<div className="coluna-footer">
-								<h4>Policy</h4>
-								<Link to="/">Return Policy</Link>
-								<Link to="/">Terms of Use</Link>
-								<Link to="/">Sitemap</Link>
-								<Link to="/">Security</Link>
-								<Link to="/">Security</Link>
-								<Link to="/">EPR Compliance</Link>
-							</div>
-						)}
+            {tamanhoTela < 841 ? (
+              <div className="coluna-footer policy-footer">
+                <h4>Policy</h4>
+                <div className="mob-policy">
+                  <p>
+                    <Link to="">Return</Link> | <Link to="">Terms of use</Link>{" "}
+                    |<Link to="">Sitemap</Link> | <Link to="">Security</Link> |
+                    <Link to="">Privacy</Link> |{" "}
+                    <Link to="">EPR Compliance</Link>
+                  </p>
+                </div>
+              </div>
+            ) : (
+              <div className="coluna-footer">
+                <h4>Policy</h4>
+                <Link to="/">Return Policy</Link>
+                <Link to="/">Terms of Use</Link>
+                <Link to="/">Sitemap</Link>
+                <Link to="/">Security</Link>
+                <Link to="/">Security</Link>
+                <Link to="/">EPR Compliance</Link>
+              </div>
+            )}
 
-						<div className="Logos-footer">
-							<img src={FB} alt="" />
-							<img src={Insta} alt="" />
-							<img src={Twitter} alt="" />
-							<img src={Youtube} alt="" />
-						</div>
+            <div className="Logos-footer">
+              <img src={FB} alt="" />
+              <img src={Insta} alt="" />
+              <img src={Twitter} alt="" />
+              <img src={Youtube} alt="" />
+            </div>
 
-						<div className="location-footer">
-							<img src={Point} alt="" />
-							<p className="">United States</p>
-						</div>
+            <div className="location-footer">
+              <img src={Point} alt="" />
+              <p className="">United States</p>
+            </div>
 
-						<p className="RightsReserved">
-							© 2021 | Cora Leviene All Rights Reserved
-						</p>
-					</div>
-				</footer>
-			)}
-		</>
-	);
+            <p className="RightsReserved">
+              © 2021 | Cora Leviene All Rights Reserved
+            </p>
+          </div>
+        </footer>
+      )}
+    </>
+  );
 }
 
 export default Footer;
