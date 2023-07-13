@@ -51,6 +51,7 @@ a,
 button {
   text-decoration: none;
   cursor: pointer;
+  border: none;
 }
 
 li {

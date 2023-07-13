@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useMediaQuery } from "react-responsive";
 
 //Styles
 import "./profile.css";
@@ -22,6 +23,7 @@ import ProfileInfo from "../../components/ProfileInfo";
 const Profile = () => {
   const [selectedTab, setSelectedTab] = useState("Personal Information");
   const [tranlate, setTranlate] = useState("");
+  const isMobile = useMediaQuery({ minWidth: 820 });
 
   function handleTabChange(tab) {
     setSelectedTab(tab);
@@ -89,10 +91,12 @@ const Profile = () => {
               <img src={arrowGray} alt="icone seta" />
             </div>
             <nav className="categories-page-profile">
-              <div
-                className="tag-profile"
-                style={{ transform: tranlate }}
-              ></div>
+              {isMobile && (
+                <div
+                  className="tag-profile"
+                  style={{ transform: tranlate }}
+                ></div>
+              )}
               <ul>
                 <li>
                   <button
@@ -100,7 +104,7 @@ const Profile = () => {
                   >
                     <label
                       style={
-                        selectedTab == "Personal Information"
+                        selectedTab == "Personal Information" && isMobile
                           ? { color: "#1B4B66" }
                           : { color: "#13101E" }
                       }
@@ -109,7 +113,7 @@ const Profile = () => {
                     </label>
                     <img
                       src={
-                        selectedTab == "Personal Information"
+                        selectedTab == "Personal Information" && isMobile
                           ? greenArrow
                           : arrowProfile
                       }
@@ -121,7 +125,7 @@ const Profile = () => {
                   <button onClick={() => handleTabChange("Refer and Earn")}>
                     <label
                       style={
-                        selectedTab == "Refer and Earn"
+                        selectedTab == "Refer and Earn" && isMobile
                           ? { color: "#1B4B66" }
                           : { color: "#13101E" }
                       }
@@ -130,7 +134,7 @@ const Profile = () => {
                     </label>
                     <img
                       src={
-                        selectedTab == "Refer and Earn"
+                        selectedTab == "Refer and Earn" && isMobile
                           ? greenArrow
                           : arrowProfile
                       }
@@ -142,7 +146,7 @@ const Profile = () => {
                   <button onClick={() => handleTabChange("My Orders")}>
                     <label
                       style={
-                        selectedTab == "My Orders"
+                        selectedTab == "My Orders" && isMobile
                           ? { color: "#1B4B66" }
                           : { color: "#13101E" }
                       }
@@ -151,7 +155,9 @@ const Profile = () => {
                     </label>
                     <img
                       src={
-                        selectedTab == "My Orders" ? greenArrow : arrowProfile
+                        selectedTab == "My Orders" && isMobile
+                          ? greenArrow
+                          : arrowProfile
                       }
                       alt="arrow-icon"
                     />
@@ -161,7 +167,7 @@ const Profile = () => {
                   <button onClick={() => handleTabChange("My Wishlist")}>
                     <label
                       style={
-                        selectedTab == "My Wishlist"
+                        selectedTab == "My Wishlist" && isMobile
                           ? { color: "#1B4B66" }
                           : { color: "#13101E" }
                       }
@@ -170,7 +176,9 @@ const Profile = () => {
                     </label>
                     <img
                       src={
-                        selectedTab == "My Wishlist" ? greenArrow : arrowProfile
+                        selectedTab == "My Wishlist" && isMobile
+                          ? greenArrow
+                          : arrowProfile
                       }
                       alt="arrow-icon"
                     />
@@ -180,7 +188,7 @@ const Profile = () => {
                   <button onClick={() => handleTabChange("My Reviews")}>
                     <label
                       style={
-                        selectedTab == "My Reviews"
+                        selectedTab == "My Reviews" && isMobile
                           ? { color: "#1B4B66" }
                           : { color: "#13101E" }
                       }
@@ -189,7 +197,9 @@ const Profile = () => {
                     </label>
                     <img
                       src={
-                        selectedTab == "My Reviews" ? greenArrow : arrowProfile
+                        selectedTab == "My Reviews" && isMobile
+                          ? greenArrow
+                          : arrowProfile
                       }
                       alt="arrow-icon"
                     />
@@ -199,7 +209,7 @@ const Profile = () => {
                   <button onClick={() => handleTabChange("My Addres Book")}>
                     <label
                       style={
-                        selectedTab == "My Addres Book"
+                        selectedTab == "My Addres Book" && isMobile
                           ? { color: "#1B4B66" }
                           : { color: "#13101E" }
                       }
@@ -208,7 +218,7 @@ const Profile = () => {
                     </label>
                     <img
                       src={
-                        selectedTab == "My Addres Book"
+                        selectedTab == "My Addres Book" && isMobile
                           ? greenArrow
                           : arrowProfile
                       }
@@ -220,7 +230,7 @@ const Profile = () => {
                   <button onClick={() => handleTabChange("My Saved Cards")}>
                     <label
                       style={
-                        selectedTab == "My Saved Cards"
+                        selectedTab == "My Saved Cards" && isMobile
                           ? { color: "#1B4B66" }
                           : { color: "#13101E" }
                       }
@@ -229,7 +239,7 @@ const Profile = () => {
                     </label>
                     <img
                       src={
-                        selectedTab == "My Saved Cards"
+                        selectedTab == "My Saved Cards" && isMobile
                           ? greenArrow
                           : arrowProfile
                       }
