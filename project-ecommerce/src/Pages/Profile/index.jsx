@@ -1,25 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 
 //Styles
 import "./profile.css";
 
 //Images
 import userNotPicture from "../../assets/HeaderModal/user-sem-foto.png";
-import arrowBlack from "../../assets/HeaderModal/arrow-right-black.svg";
-import arrowGray from "../../assets/HeaderModal/arrow-right-gray.svg";
 
 //Icons
 import logoutIcon from "../../assets/icons/logout.svg";
 import blackArrow from "../../assets/icons/blackArrow.svg";
-
-import { Link } from "react-router-dom";
+import arrowProfile from "../../assets/icons/arrowProfile.svg";
+import greenArrow from "../../assets/icons/greenArrow.svg";
+import arrowGray from "../../assets/HeaderModal/arrow-right-gray.svg";
 
 //components
 import NavMob from "../../components/NavMob";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import ProfileInfo from "../../components/ProfileInfo";
 
 const Profile = () => {
+  const [selectedTab, setSelectedTab] = useState("Personal Information");
+  const [tranlate, setTranlate] = useState("");
+
+  function handleTabChange(tab) {
+    setSelectedTab(tab);
+
+    switch (tab) {
+      case "Personal Information":
+        setTranlate("translateY(0px)");
+        break;
+      case "Refer and Earn":
+        setTranlate("translateY(60px)");
+        break;
+      case "My Orders":
+        setTranlate("translateY(120px)");
+        break;
+      case "My Wishlist":
+        setTranlate("translateY(180px)");
+        break;
+      case "My Reviews":
+        setTranlate("translateY(240px)");
+        break;
+      case "My Addres Book":
+        setTranlate("translateY(300px)");
+        break;
+      case "My Saved Cards":
+        setTranlate("translateY(360px)");
+        break;
+      default:
+        setTranlate("translateY(0px)");
+        break;
+    }
+  }
+
   return (
     <>
       <Header />
@@ -29,90 +63,200 @@ const Profile = () => {
           <img src={blackArrow} alt="icone seta" />
           <span>User Profile</span>
         </div>
-        <main className="main-profile">
-          <h1>Profile</h1>
-          <div className="title-profile">
-            <span>Selected tab</span>
-            <div>
-              <button
-                className="button-logout-profile "
-                id="button-logout-desktop-profile"
-              >
-                {" "}
-                <img src={logoutIcon} alt="icone de logout" />
-                Logout
-              </button>
-            </div>
-          </div>
-
-          <div className="container-info-profile">
-            <img src={userNotPicture} alt="usuario sem foto" />
-            <div>
-              <p>Tina Vargayee</p>
-              <p>tinavar@vinho.com</p>
-              <p>+85-5478564</p>
-            </div>
-            <img src={arrowGray} alt="icone seta" />
-          </div>
-          <nav className="categories-page-profile">
-            <ul>
-              <li>
-                <Link to="/skincare">
-                  <label>Skincare</label>
-                  <img src={arrowGray} alt="arrow-icon" />
-                </Link>
-              </li>
-              <li>
-                <Link to="/apparels">
-                  <label>Apparels</label>
-                  <img src={arrowGray} alt="arrow-icon" />
-                </Link>
-              </li>
-              <li>
-                <Link to="/jewellery">
-                  <label>Jewellery</label>
-                  <img src={arrowGray} alt="arrow-icon" />
-                </Link>
-              </li>
-              <li>
-                <Link to="/handbags">
-                  <label>Handbags</label>
-                  <img src={arrowGray} alt="arrow-icon" />
-                </Link>
-              </li>
-              <li>
-                <Link to="">
-                  <label>Eyeware</label>
-                  <img src={arrowGray} alt="arrow-icon" />
-                </Link>
-              </li>
-              <li>
-                <Link to="">
-                  <label>Fragrance</label>
-                  <img src={arrowGray} alt="arrow-icon" />
-                </Link>
-              </li>
-              <li>
-                <Link to="">
-                  <label>My saved Cards</label>
-                  <img src={arrowGray} alt="arrow-icon" />
-                </Link>
-              </li>
-            </ul>
-          </nav>
+        <h1>Profile</h1>
+        <div className="title-profile">
+          <span>{selectedTab}</span>
           <div>
             <button
-              className="button-logout-profile"
-              id="button-logout-mob-profile"
+              className="button-logout-profile "
+              id="button-logout-desktop-profile"
             >
               {" "}
               <img src={logoutIcon} alt="icone de logout" />
               Logout
             </button>
           </div>
-          <NavMob />
-        </main>
+        </div>
+        <div className="container-profile">
+          <main className="main-profile">
+            <div className="container-info-profile">
+              <img src={userNotPicture} alt="usuario sem foto" />
+              <div>
+                <p>Tina Vargayee</p>
+                <p>tinavar@vinho.com</p>
+                <p>+85-5478564</p>
+              </div>
+              <img src={arrowGray} alt="icone seta" />
+            </div>
+            <nav className="categories-page-profile">
+              <div
+                className="tag-profile"
+                style={{ transform: tranlate }}
+              ></div>
+              <ul>
+                <li>
+                  <button
+                    onClick={() => handleTabChange("Personal Information")}
+                  >
+                    <label
+                      style={
+                        selectedTab == "Personal Information"
+                          ? { color: "#1B4B66" }
+                          : { color: "#13101E" }
+                      }
+                    >
+                      Personal Information
+                    </label>
+                    <img
+                      src={
+                        selectedTab == "Personal Information"
+                          ? greenArrow
+                          : arrowProfile
+                      }
+                      alt="arrow-icon"
+                    />
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => handleTabChange("Refer and Earn")}>
+                    <label
+                      style={
+                        selectedTab == "Refer and Earn"
+                          ? { color: "#1B4B66" }
+                          : { color: "#13101E" }
+                      }
+                    >
+                      Refer and Earn{" "}
+                    </label>
+                    <img
+                      src={
+                        selectedTab == "Refer and Earn"
+                          ? greenArrow
+                          : arrowProfile
+                      }
+                      alt="arrow-icon"
+                    />
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => handleTabChange("My Orders")}>
+                    <label
+                      style={
+                        selectedTab == "My Orders"
+                          ? { color: "#1B4B66" }
+                          : { color: "#13101E" }
+                      }
+                    >
+                      My Orders
+                    </label>
+                    <img
+                      src={
+                        selectedTab == "My Orders" ? greenArrow : arrowProfile
+                      }
+                      alt="arrow-icon"
+                    />
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => handleTabChange("My Wishlist")}>
+                    <label
+                      style={
+                        selectedTab == "My Wishlist"
+                          ? { color: "#1B4B66" }
+                          : { color: "#13101E" }
+                      }
+                    >
+                      My Wishlist
+                    </label>
+                    <img
+                      src={
+                        selectedTab == "My Wishlist" ? greenArrow : arrowProfile
+                      }
+                      alt="arrow-icon"
+                    />
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => handleTabChange("My Reviews")}>
+                    <label
+                      style={
+                        selectedTab == "My Reviews"
+                          ? { color: "#1B4B66" }
+                          : { color: "#13101E" }
+                      }
+                    >
+                      My Reviews
+                    </label>
+                    <img
+                      src={
+                        selectedTab == "My Reviews" ? greenArrow : arrowProfile
+                      }
+                      alt="arrow-icon"
+                    />
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => handleTabChange("My Addres Book")}>
+                    <label
+                      style={
+                        selectedTab == "My Addres Book"
+                          ? { color: "#1B4B66" }
+                          : { color: "#13101E" }
+                      }
+                    >
+                      My Addres Book
+                    </label>
+                    <img
+                      src={
+                        selectedTab == "My Addres Book"
+                          ? greenArrow
+                          : arrowProfile
+                      }
+                      alt="arrow-icon"
+                    />
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => handleTabChange("My Saved Cards")}>
+                    <label
+                      style={
+                        selectedTab == "My Saved Cards"
+                          ? { color: "#1B4B66" }
+                          : { color: "#13101E" }
+                      }
+                    >
+                      My Saved Cards
+                    </label>
+                    <img
+                      src={
+                        selectedTab == "My Saved Cards"
+                          ? greenArrow
+                          : arrowProfile
+                      }
+                      alt="arrow-icon"
+                    />
+                  </button>
+                </li>
+              </ul>
+            </nav>
+            <div>
+              <button
+                className="button-logout-profile"
+                id="button-logout-mob-profile"
+              >
+                {" "}
+                <img src={logoutIcon} alt="icone de logout" />
+                Logout
+              </button>
+            </div>
+            <div></div>
+          </main>
+          <div className="content-profile">
+            {selectedTab == "Personal Information" && <ProfileInfo />}
+          </div>
+        </div>
       </div>
+      <NavMob />
       <Footer />
     </>
   );

@@ -1,0 +1,25 @@
+.page-wrapper-info {
+  margin-left: 36px;
+  width: 93%;
+}
+
+.page-wrapper-info p {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 26px;
+  color: #13101e;
+  padding-top: 20px;
+}
+
+.page-wrapper-info hr {
+  background-color: #0000001f;
+  margin-top: 10px;
+  width: 88%;
+}
+
+.user-picture-info img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-top: 36px;
+}
