@@ -1,0 +1,42 @@
+.title {
+    margin: 15px 16px;
+}
+
+.container-category {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sub-category {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 328px;
+    height: 120px;
+    margin-top: 16px;
+    z-index: 900;
+}
+
+.sub-category h2 {
+    position: absolute;
+    top: 54%;
+    left: 83%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 26px;
+}
+
+.sub-category img {
+    border-radius: 8px;
+}
+
+.color-title {
+    color: white;
+}
+
+.color-title-pink {
+    color: #CF118A;
+}
