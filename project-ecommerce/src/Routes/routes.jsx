@@ -13,7 +13,6 @@ import Categories from "../Pages/Categories";
 import Profile from "../Pages/Profile";
 import MyBag from "../Pages/MyBag";
 import Notification from "../Pages/Notification";
-import Wishlist from "../Pages/Wishlist";
 import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
 
@@ -32,7 +31,6 @@ const Router = () => {
 				<Route path="/jewellery" element={<Jewellery />} />
 				<Route path="/apparels" element={<Apparels />} />
 				<Route path="/notification" element={<Notification />} />
-				<Route path="/wishlist" element={<Wishlist />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/signup" element={<SignUp />} />
 			</Routes>

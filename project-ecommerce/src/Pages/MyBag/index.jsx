@@ -1,13 +1,13 @@
-import React from "react";
-import NavMob from "../../components/NavMob";
+import React, { useState } from "react";
+import Wishlist from "../../components/Wishlist";
 
 const MyBag = () => {
-  return (
-    <div>
-      <h1>Mybag</h1>
-      <NavMob />
-    </div>
-  );
+	const [isOpen, setIsOpen] = useState(true);
+	return (
+		<div>
+			<Wishlist isOpen={isOpen} setClose={setIsOpen} />
+		</div>
+	);
 };
 
 export default MyBag;
