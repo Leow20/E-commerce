@@ -1,4 +1,9 @@
 .title {
+    color: #1B4B66;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 26px;
     margin: 15px 16px;
 }
 
@@ -6,6 +11,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 56px;
+}
+
+.sub-category:nth-child(1) {
+    margin-top: 8px;
 }
 
 .sub-category {
