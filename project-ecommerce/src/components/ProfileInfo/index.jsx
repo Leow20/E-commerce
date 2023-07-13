@@ -1,5 +1,4 @@
 import React from "react";
-import { useMediaQuery } from "react-responsive";
 
 //Style
 import "./ProfileInfo.css";
@@ -11,8 +10,6 @@ import userPicture from "../../assets/HeaderModal/user-sem-foto.png";
 import trashIcon from "../../assets/icons/trashIcon.svg";
 
 const ProfileInfo = () => {
-  const isMobile = useMediaQuery({ maxWidth: 820 });
-
   return (
     <div className="page-wrapper-info">
       <p>Personal Information</p>
@@ -30,11 +27,11 @@ const ProfileInfo = () => {
       </div>
       <form className="form-info">
         <div className="content-name-info">
-          <div className="container-input-info">
+          <div className="container-input-info name-info">
             <label>First Name</label>
             <input type="text" />
           </div>
-          <div className="container-input-info">
+          <div className="container-input-info name-info">
             <label>Last Name</label>
             <input type="text" />
           </div>
@@ -69,6 +66,22 @@ const ProfileInfo = () => {
           </div>
         </div>
         <h3>Change Password</h3>
+        <hr />
+        <div className="container-input-info">
+          <label>Current Password</label>
+          <input type="password" />
+        </div>
+        <div className="container-input-info">
+          <label>New Password</label>
+          <input type="password" />
+        </div>
+        <div className="container-input-info">
+          <label>Confirm Password</label>
+          <input type="password" />
+        </div>
+        <div className="button-save-info">
+          <button>Save Changes</button>
+        </div>
       </form>
     </div>
   );

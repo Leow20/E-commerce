@@ -167,6 +167,46 @@
   display: flex;
 }
 
+.page-wrapper-modal-info {
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #fff;
+  width: 100%;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  animation: forwards 0.4s ease-in-out open-modal;
+}
+
+.animate-modal-info {
+  animation: forwards 0.4s ease-in-out close-modal;
+}
+
+.page-wrapper-modal-info header {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  padding: 30px 30px 0 30px;
+  gap: 15px;
+}
+
+.page-wrapper-modal-info header img {
+  width: 15px;
+  height: 15px;
+  transform: rotate(180deg);
+}
+
+.page-wrapper-modal-info header h1 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 26px;
+  color: #1b4b66;
+}
+
 @media screen and (min-width: 820px) {
   .main-profile {
     align-items: unset;
