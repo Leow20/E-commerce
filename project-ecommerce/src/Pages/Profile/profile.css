@@ -1,7 +1,6 @@
 .page-wrapper-profile {
   width: 100%;
   max-width: 1280px;
-  height: 100vh;
   background-color: #fff;
   position: relative;
   padding-bottom: 60px;
@@ -134,6 +133,12 @@
   max-height: 24px;
 }
 
+.container-button-profile {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .button-logout-profile {
   width: 328px;
   height: 44px;
@@ -205,6 +210,12 @@
   font-weight: 600;
   line-height: 26px;
   color: #1b4b66;
+}
+
+@media screen and (max-width: 320px) {
+  .container-info-profile {
+    display: none;
+  }
 }
 
 @media screen and (min-width: 820px) {

@@ -90,7 +90,7 @@ const Profile = () => {
       )}
 
       <>
-        <Header Page="Profile" />
+        {!isMobile && <Header Page="Profile" />}
         <div className="page-wrapper-profile">
           <div className="container-addres-profile">
             <span>Home</span>
@@ -284,7 +284,7 @@ const Profile = () => {
                   </li>
                 </ul>
               </nav>
-              <div>
+              <div className="container-button-profile">
                 <button
                   className="button-logout-profile"
                   id="button-logout-mob-profile"
@@ -301,7 +301,7 @@ const Profile = () => {
             </div>
           </div>
         </div>
-
+        <Footer />
         <NavMob />
       </>
     </>
