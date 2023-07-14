@@ -1,16 +1,21 @@
 import React from "react";
 import NavMob from "../../components/NavMob";
-import "./categories.css"
-import Skin from "../../assets/imgCategories/skincare.jpg"
-import Frag from "../../assets/imgCategories/fragrance.jpg"
-import Bags from "../../assets/imgCategories/handbags.jpg"
-import Eye from "../../assets/imgCategories/eyewear.jpg"
-import Apparels from "../../assets/imgCategories/apparels.jpg"
+import "./categories.css";
+import Skin from "../../assets/imgCategories/skincare.jpg";
+import Frag from "../../assets/imgCategories/fragrance.jpg";
+import Bags from "../../assets/imgCategories/handbags.jpg";
+import Eye from "../../assets/imgCategories/eyewear.jpg";
+import Apparels from "../../assets/imgCategories/apparels.jpg";
 import { Link } from "react-router-dom";
+import { useMediaQuery } from "react-responsive";
+import Header from "../../components/Header";
 
 const Categories = () => {
+  const isMobile = useMediaQuery({ maxWidth: 820 });
+
   return (
     <>
+      {!isMobile && <Header Page={"Categories"} />}
       <h1 className="title">Categories</h1>
       <div className="container-category">
         <Link to="/skincare">

@@ -126,8 +126,8 @@ const SignUp = () => {
   }
 
   return (
-    <div>
-      <div className="cadastro-container">
+    <div className="cadastro-container">
+      <div>
         <h2>Faça o seu cadastro</h2>
       </div>
       <form onSubmit={handleSignUp}>
