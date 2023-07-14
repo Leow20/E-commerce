@@ -2,7 +2,6 @@
   width: 100%;
   max-width: 1280px;
   height: 100vh;
-  display: table;
   background-color: #fff;
   position: relative;
   padding-bottom: 60px;
@@ -198,6 +197,7 @@
   width: 15px;
   height: 15px;
   transform: rotate(180deg);
+  cursor: pointer;
 }
 
 .page-wrapper-modal-info header h1 {

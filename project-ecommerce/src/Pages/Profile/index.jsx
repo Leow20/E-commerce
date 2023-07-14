@@ -90,7 +90,7 @@ const Profile = () => {
       )}
 
       <>
-        <Header />
+        <Header Page="Profile" />
         <div className="page-wrapper-profile">
           <div className="container-addres-profile">
             <span>Home</span>
@@ -113,7 +113,10 @@ const Profile = () => {
           </div>
           <div className="container-profile">
             <main className="main-profile">
-              <div className="container-info-profile">
+              <div
+                className="container-info-profile"
+                onClick={() => handleTabChange("Personal Information")}
+              >
                 <img src={userNotPicture} alt="usuario sem foto" />
                 <div>
                   <p>Tina Vargayee</p>
@@ -300,7 +303,6 @@ const Profile = () => {
         </div>
 
         <NavMob />
-        <Footer />
       </>
     </>
   );
