@@ -19,6 +19,7 @@ import NavMob from "../../components/NavMob";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import ProfileInfo from "../../components/ProfileInfo";
+import Wishlist from "../../components/Wishlist";
 
 const Profile = () => {
   const [selectedTab, setSelectedTab] = useState("Personal Information");
@@ -86,6 +87,7 @@ const Profile = () => {
             <h1>{selectedTab}</h1>
           </header>
           {selectedTab == "Personal Information" && <ProfileInfo />}
+          {selectedTab == "My Wishlist" && <Wishlist />}
         </div>
       )}
 
@@ -298,6 +300,7 @@ const Profile = () => {
             </main>
             <div className="content-profile">
               {selectedTab == "Personal Information" && <ProfileInfo />}
+              {selectedTab == "My Wishlist" && <Wishlist />}
             </div>
           </div>
         </div>
