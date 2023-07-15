@@ -12,8 +12,6 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../../firebaseConnection";
 import { collection, getDocs, query, where } from "@firebase/firestore";
 
-import { toast } from "react-toastify";
-
 const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
@@ -63,27 +61,32 @@ const Login = () => {
 					<form onSubmit={handleLogin}>
 						<div>
 							<input
-								type="text"
+								className="input-login"
+								type="email"
 								name="emailInput"
 								id="emailId"
 								style={
 									passwordError == "User not found" ||
-									passwordError ==
-										"Wow, invalid username or password. Please, try again!" ||
-									passwordError == "Fill in all fields"
+									(passwordError ==
+										"Wow, invalid username or password. Please, try again!" &&
+										email != "") ||
+									(passwordError == "Fill in all fields" && email == "")
 										? { border: "1px solid red" }
 										: {}
 								}
+								placeholder="Email"
 								value={email}
-								onChange={(e) => setEmail(e.target.value)}
-								required
+								onChange={(e) => {
+									setEmail(e.target.value);
+									setPasswordError("");
+								}}
 							/>
 							<span
 								style={
 									passwordError == "User not found" ||
-									passwordError ==
-										"Wow, invalid username or password. Please, try again!" ||
-									passwordError == "Fill in all fields"
+									(passwordError ==
+										"Wow, invalid username or password. Please, try again!" &&
+										email != "")
 										? {
 												borderLeft: "1px solid red",
 												borderRight: "1px solid red",
@@ -96,25 +99,30 @@ const Login = () => {
 						</div>
 						<div>
 							<input
+								className="input-login"
 								type="password"
 								name="passwordInput"
 								id="passwordId"
 								style={
-									passwordError ==
-										"Wow, invalid username or password. Please, try again!" ||
-									passwordError == "Fill in all fields"
+									(passwordError ==
+										"Wow, invalid username or password. Please, try again!" &&
+										password != "") ||
+									(passwordError == "Fill in all fields" && password == "")
 										? { border: "1px solid red" }
 										: {}
 								}
 								value={password}
-								onChange={(e) => setPassword(e.target.value)}
-								required
+								placeholder="Password"
+								onChange={(e) => {
+									setPassword(e.target.value);
+									setPasswordError("");
+								}}
 							/>
 							<span
 								style={
 									passwordError ==
-										"Wow, invalid username or password. Please, try again!" ||
-									passwordError == "Fill in all fields"
+										"Wow, invalid username or password. Please, try again!" &&
+									password != ""
 										? {
 												borderLeft: "1px solid red",
 												borderRight: "1px solid red",
