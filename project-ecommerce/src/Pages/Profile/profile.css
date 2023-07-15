@@ -233,6 +233,12 @@
     width: 100%;
   }
 
+  .content-profile hr {
+    background-color: #0000001f;
+    margin-top: 10px;
+    width: 88%;
+  }
+
   .container-addres-profile {
     display: flex;
     justify-content: start;
