@@ -115,13 +115,6 @@
     border-right: 1px solid #626262;
   }
 
-  .box-login div:nth-child(2) input:valid~span,
-  .box-login div:nth-child(2) input:focus~span {
-    background-color: #1b4b66;
-    color: white;
-    border-radius: 3px;
-  }
-
   .box-login input:valid,
   .box-login input:focus {
     border: 1px solid #1b4b66;
@@ -139,10 +132,23 @@
     transition: 0.5s;
   }
 
+  .box-login button:hover {
+    background-color: #297099;
+  }
+
   .box-login label {
     color: #171520;
     font-size: 12px;
     text-align: center;
+  }
+
+  .error-login {
+    color: red;
+    font-size: 12px;
+  }
+
+  .error-input-login {
+    border: 1px solid red;
   }
 }
 
@@ -201,7 +207,7 @@
   .box-login input:focus~span {
 
     transform: translateX(10px) translateY(-11px);
-    padding: 0 20px;
+    padding: 0 9px;
     background-color: white;
     border-left: 1px solid #626262;
     border-right: 1px solid #626262;
@@ -218,6 +224,10 @@
     padding: 8% 10% 8% 10%;
   }
 
+  .error-login {
+    color: red;
+    font-size: 20px;
+  }
 
 }
 
@@ -225,12 +235,4 @@
   .login-page {
     padding: 5% 10% 5% 10%;
   }
-
-  /* .container-login {
-    align-items: start;
-    background-image: url("../../assets/imgLogin/cards-bg.png");
-    background-repeat: no-repeat;
-    background-position: 80% 10%;
-    background-size: 200px;
-  } */
 }
