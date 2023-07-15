@@ -301,8 +301,20 @@ const Profile = () => {
             </div>
           </div>
         </div>
-        <Footer />
-        <NavMob />
+        {selectedTab == "" && (
+          <>
+            {" "}
+            <Footer />
+            <NavMob />
+          </>
+        )}
+        {!isMobile && (
+          <>
+            {" "}
+            <Footer />
+            <NavMob />
+          </>
+        )}
       </>
     </>
   );
