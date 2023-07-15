@@ -74,7 +74,9 @@ const Login = () => {
 										? { border: "1px solid red" }
 										: {}
 								}
+								value={email}
 								onChange={(e) => setEmail(e.target.value)}
+								required
 							/>
 							<span
 								style={
@@ -104,7 +106,9 @@ const Login = () => {
 										? { border: "1px solid red" }
 										: {}
 								}
+								value={password}
 								onChange={(e) => setPassword(e.target.value)}
+								required
 							/>
 							<span
 								style={
