@@ -19,9 +19,9 @@ const AddProduct = () => {
 
     await getDocs(q).then((value) => {
       value.forEach((doc) => {
-        const userData = doc.data().name;
+        const userData = doc.data();
         myArray.push(userData);
-        localStorage.setItem("teste", JSON.stringify(myArray));
+        localStorage.setItem("products", JSON.stringify(myArray));
       });
     });
   }
