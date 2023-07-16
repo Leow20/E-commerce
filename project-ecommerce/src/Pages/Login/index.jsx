@@ -12,10 +12,14 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../../firebaseConnection";
 import { collection, getDocs, query, where } from "@firebase/firestore";
 
+//React Icons
+import { BsEye, BsEyeSlash } from "react-icons/bs";
+
 const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [passwordError, setPasswordError] = useState("");
+	const [showPassword, setShowPassword] = useState(false);
 	const navigate = useNavigate("");
 
 	async function handleLogin(e) {
@@ -100,7 +104,7 @@ const Login = () => {
 						<div>
 							<input
 								className="input-login"
-								type="password"
+								type={showPassword ? "text" : "password"}
 								name="passwordInput"
 								id="passwordId"
 								style={
@@ -132,6 +136,12 @@ const Login = () => {
 							>
 								Password
 							</span>
+							<div
+								className="showPassword"
+								onClick={() => setShowPassword(!showPassword)}
+							>
+								{showPassword ? <BsEyeSlash /> : <BsEye />}
+							</div>
 						</div>
 						{passwordError != "" && (
 							<p className={passwordError ? "error-login" : ""}>

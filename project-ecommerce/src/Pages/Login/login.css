@@ -93,6 +93,7 @@
     font-size: 12px;
     color: #1b4b66;
     transition: 0.5s;
+    position: relative;
   }
 
   .box-login form div span {
@@ -107,6 +108,7 @@
 
   input[type='email']:focus~span,
   input[type='password']:focus~span,
+  input[type='text']:focus~span,
   .input-login:not(:placeholder-shown).input-login:not(:focus)~span {
     color: #1b4b66;
     transform: translateX(10px) translateY(-7px);
@@ -116,7 +118,6 @@
     border-right: 1px solid #626262;
   }
 
-  .box-login input:valid,
   .box-login input:focus {
     border: 1px solid #1b4b66;
   }
@@ -146,6 +147,19 @@
   .error-login {
     color: red;
     font-size: 12px;
+  }
+
+  .showPassword {
+    display: flex;
+    position: absolute !important;
+    width: 10% !important;
+    height: 100%;
+    right: 0;
+    top: 0;
+    align-items: center;
+    justify-content: center;
+    color: #1b4b66;
+    font-size: 15px;
   }
 
   .error-input-login {
@@ -206,6 +220,7 @@
 
   input[type='email']:focus~span,
   input[type='password']:focus~span,
+  input[type='text']:focus~span,
   .input-login:not(:placeholder-shown).input-login:not(:focus)~span {
     transform: translateX(10px) translateY(-11px);
     padding: 0 9px;
@@ -214,8 +229,9 @@
     border-right: 1px solid #626262;
   }
 
-  /* .box-login input:valid~span,
-  .box-login input:focus~span {} */
+  .showPassword {
+    font-size: 25px;
+  }
 
   .box-login label {
     font-size: 20px;
