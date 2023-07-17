@@ -32,11 +32,6 @@ const Wishlist = () => {
       value.forEach((doc) => {
         let product = {
           name: doc.data().name,
-          description: doc.data().description,
-          price: doc.data().price,
-          qty: doc.data().qty,
-          starts: doc.data().stars,
-          discount: doc.data().discount,
         };
         handleUploadImage(product.name);
         productsArray.push(product);
