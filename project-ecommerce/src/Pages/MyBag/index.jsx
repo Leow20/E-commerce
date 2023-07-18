@@ -1,13 +1,7 @@
-import React, { useState } from "react";
-import Wishlist from "../../components/Wishlist";
+import React from "react";
 
 const MyBag = () => {
-	const [isOpen, setIsOpen] = useState(true);
-	return (
-		<div>
-			<Wishlist isOpen={isOpen} setClose={setIsOpen} />
-		</div>
-	);
+	return <div>MyBag</div>;
 };
 
 export default MyBag;
