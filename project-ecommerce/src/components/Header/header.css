@@ -135,6 +135,196 @@
   display: none;
 }
 
+.modal-mybag-header {
+  z-index: 998;
+  position: absolute;
+  top: 80px;
+  right: 10px;
+  width: 394px;
+  height: 700px;
+  background-color: white;
+}
+
+.mybag-btnh2-header {
+  display: flex;
+  flex-direction: row;
+  margin-top: 28px;
+}
+
+.mybag-btnh2-header img {
+  transform: rotate(180deg);
+}
+
+.mybag-btnh2-header button {
+  margin-left: 27.5px;
+  border: none;
+  background-color: transparent;
+}
+
+.mybag-btnh2-header h2 {
+  margin-left: 20px;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.max-product-header {
+  overflow: auto;
+  max-height: 310px !important;
+}
+
+.mybag-container-product-header {
+  display: flex;
+  flex-direction: row;
+  margin-top: 24px;
+  justify-content: space-evenly;
+}
+
+.img-product-mybag-header img {
+  border-radius: 8px;
+  width: 75px;
+  height: 80px;
+}
+
+.desc-product-mybag-header p {
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-style: normal;
+}
+
+.box-counter-product-header {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid var(--primary, #1b4b66);
+  border-radius: 4px;
+  width: 73px;
+  justify-content: center;
+  align-items: center;
+}
+
+.box-counter-product-header button {
+  border: none;
+  background-color: transparent;
+  width: 24px;
+  height: 24px;
+}
+
+.box-counter-product-header p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.price-product-header {
+  max-width: 48px;
+  max-width: 80px;
+}
+
+.price-product-header button {
+  border: none;
+  background-color: transparent;
+  margin-left: 33px;
+}
+
+.price-product-header p {
+  margin-top: 37px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.line-product-header {
+  margin-top: 45px;
+  width: 372px;
+  margin-left: 10px;
+}
+
+.total-price-header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.total-price-header p {
+  margin-bottom: 12px;
+}
+
+.total-price-header p:last-child {
+  margin-bottom: 0px;
+}
+
+.txt-price-header {
+  margin-left: 19px;
+}
+
+.sub-tax-header {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.final-price-header {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.prices-header {
+  text-align: end;
+  margin-right: 13px;
+}
+
+.container-btns-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container-btns-header p {
+  margin-top: 34px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  text-decoration: underline;
+  color: #1b4b66;
+}
+
+.coupon-header {
+  width: 360px;
+  height: 56px;
+  background-color: #f1f1f1;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+  border-radius: 3px;
+}
+
+.coupon-header input {
+  width: 90%;
+  border: none;
+  background: transparent;
+  padding-left: 16px;
+}
+
+.coupon-header button {
+  margin-right: 12px;
+}
+
+.order-btn-header {
+  display: flex;
+  width: 360px;
+  padding: 10px 120px;
+  justify-content: center;
+  align-items: center;
+  background-color: #1b4b66;
+  color: white;
+  border-radius: 8px;
+  margin-top: 24px;
+}
+
 @media (max-width: 840px) {
   .logo-header,
   .nav-category-header ul,
