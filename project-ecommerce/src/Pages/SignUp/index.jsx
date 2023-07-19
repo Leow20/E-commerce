@@ -1,13 +1,21 @@
 //React
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 //Style
 import "./signup.css";
 
 //Firebase
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../../../firebaseConnection";
+import { auth, db, storage } from "../../../firebaseConnection";
 import { addDoc, collection } from "firebase/firestore";
+import { ref, uploadBytesResumable } from "firebase/storage";
+
+//Router-dom
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+
+//React Icons
+import { BsEye, BsEyeSlash } from "react-icons/bs";
 
 const SignUp = () => {
 	const [firstName, setFirstName] = useState("");
@@ -18,8 +26,26 @@ const SignUp = () => {
 	const [dateOfBirth, setDateOfBirth] = useState("");
 	const [password, setPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
-
 	const [showError, setShowError] = useState("");
+	const [showPassword, setShowPassword] = useState(false);
+	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+	const inputRef = useRef(null);
+	const [image, setImage] = useState("");
+
+	if (
+		firstName != "" &&
+		lastName != "" &&
+		dateOfBirth != "" &&
+		mobileNumber != "" &&
+		dddNumber != "" &&
+		password != "" &&
+		confirmPassword != "" &&
+		email != "" &&
+		showError == "Fill in all fields"
+	) {
+		setShowError("");
+	}
 
 	function validateFields() {
 		if (
@@ -35,7 +61,6 @@ const SignUp = () => {
 			return false;
 		}
 
-		// Verificar se o email é válido utilizando uma expressão regular
 		const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
 		if (!emailRegex.test(email)) {
 			setShowError("Enter a valid email address");
@@ -47,7 +72,6 @@ const SignUp = () => {
 			return false;
 		}
 
-		//Verificando a senha tem os campos para senha forte
 		const passwordRegex =
 			/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
 		if (!passwordRegex.test(password)) {
@@ -78,7 +102,6 @@ const SignUp = () => {
 
 	const handleSignUp = async (e) => {
 		e.preventDefault();
-		// Validação dos campos antes de prosseguir
 		if (!validateFields()) {
 			return;
 		} else {
@@ -93,6 +116,7 @@ const SignUp = () => {
 					setLastName("");
 					setMobileNumber("");
 					setdddNumber("");
+					toast.success("Successfully registered user");
 				})
 				.catch((error) => {
 					if (error.code === "auth/email-already-in-use") {
@@ -113,199 +137,237 @@ const SignUp = () => {
 			password: password,
 			uid: id,
 		})
-			.then(() => {
-				console.log("cadastrou");
-			})
+			.then(() => {})
 			.catch((error) => {
 				console.log(error);
 			});
+		const storageRef = ref(storage, `images/users/${id}`);
+		const uploadTask = uploadBytesResumable(storageRef, image);
 	}
-
 	return (
-		<div className="cadastro-container">
-			<div>
-				<h2>Faça o seu cadastro</h2>
-			</div>
-			<form onSubmit={handleSignUp}>
-				<div className="form-group">
-					<label htmlFor="firstName">First Name:</label>
-					<input
-						type="text"
-						id="firstName"
-						name="firstName"
-						value={firstName}
-						onChange={(e) => {
-							setShowError("");
-							setFirstName(e.target.value);
-						}}
-						style={
-							firstName == "" && showError == "Fill in all fields"
-								? { border: "1px solid red" }
-								: {}
-						}
-					/>
+		<main className="signup-page">
+			<div className="container-signup">
+				<div className="box-text-signup">
+					<img src="./logo.png" alt="CORA'L" />
+					<p>Please enter your credentials to create your account.</p>
 				</div>
-				<div className="form-group">
-					<label htmlFor="lastName">Last Name:</label>
-					<input
-						type="text"
-						id="lastName"
-						name="lastName"
-						value={lastName}
-						onChange={(e) => {
-							setShowError("");
-							setLastName(e.target.value);
-						}}
-						style={
-							lastName == "" && showError == "Fill in all fields"
-								? { border: "1px solid red" }
-								: {}
-						}
-					/>
-				</div>
-				<div className="form-group">
-					<label htmlFor="email">Email:</label>
-					<input
-						type="email"
-						id="email"
-						name="email"
-						value={email}
-						onChange={(e) => {
-							setShowError("");
-							setEmail(e.target.value);
-						}}
-						style={
-							(email == "" && showError == "Fill in all fields") ||
-							(email != "" && showError == "Enter a valid email address") ||
-							(email != "" && showError == "Email already exists")
-								? { border: "1px solid red" }
-								: {}
-						}
-					/>
-					<p>
-						{(email != "" && showError == "Enter a valid email address") ||
-						(email != "" && showError == "Email already exists")
-							? showError
-							: ""}
-					</p>
-				</div>
-				<div className="form-group">
-					<label htmlFor="mobileNumber">DDD:</label>
-					<input
-						type="ddd"
-						id="mobileNumberDDD"
-						name="mobileNumberDDD"
-						pattern="[0-9]{2}"
-						maxLength="2"
-						value={dddNumber}
-						onChange={(e) => {
-							setShowError("");
-							setdddNumber(e.target.value);
-						}}
-						style={
-							dddNumber == "" && showError == "Fill in all fields"
-								? { border: "1px solid red" }
-								: {}
-						}
-					/>
-				</div>
-				<div className="form-group">
-					<label htmlFor="mobileNumber">Mobile Number:</label>
-					<input
-						type="tel"
-						id="mobileNumber"
-						name="mobileNumber"
-						value={mobileNumber}
-						onChange={(e) => {
-							setShowError("");
-							setMobileNumber(e.target.value);
-						}}
-						style={
-							mobileNumber == "" && showError == "Fill in all fields"
-								? { border: "1px solid red" }
-								: {}
-						}
-					/>
-				</div>
-				<div className="form-group">
-					<label htmlFor="dateOfBirth">Date of Birth:</label>
-					<input
-						type="date"
-						id="dateOfBirth"
-						name="dateOfBirth"
-						value={dateOfBirth}
-						onChange={(e) => {
-							setShowError("");
-							setDateOfBirth(e.target.value);
-						}}
-						style={
-							(dateOfBirth == "" && showError == "Fill in all fields") ||
-							(dateOfBirth != "" &&
-								showError == "User must be over 18 years old")
-								? { border: "1px solid red" }
-								: {}
-						}
-					/>
-					<p>
-						{dateOfBirth != "" &&
-							showError == "User must be over 18 years old" &&
-							showError}
-					</p>
-				</div>
-				<div className="form-group">
-					<label htmlFor="password">Password:</label>
-					<input
-						type="password"
-						id="password"
-						name="password"
-						value={password}
-						onChange={(e) => {
-							setShowError("");
-							setPassword(e.target.value);
-						}}
-						style={
-							(password == "" && showError == "Fill in all fields") ||
-							(password != "" &&
+				<form onSubmit={handleSignUp}>
+					<div className="box-one-signup">
+						<div className="container-img-upload">
+							<div
+								className="img-input"
+								onClick={() => inputRef.current.click()}
+							>
+								{image ? (
+									<img src={URL.createObjectURL(image)} alt="" />
+								) : (
+									<img src="./user-sem-foto.png" alt="" />
+								)}
+								<input
+									type="file"
+									name="inputFileFoto"
+									id="perfilID"
+									ref={inputRef}
+									onChange={(e) => setImage(e.target.files[0])}
+								/>
+							</div>
+							<div className="btns-box-signup">
+								<button onClick={() => inputRef.current.click()}>Upload</button>
+								<button onClick={() => setImage("")}>Delete</button>
+							</div>
+						</div>
+						<div className="form-group">
+							<label htmlFor="firstName">First Name:</label>
+							<input
+								type="text"
+								id="firstName"
+								name="firstName"
+								value={firstName}
+								onChange={(e) => {
+									setFirstName(e.target.value);
+								}}
+								style={
+									firstName == "" && showError == "Fill in all fields"
+										? { border: "1px solid red" }
+										: {}
+								}
+							/>
+						</div>
+						<div className="form-group">
+							<label htmlFor="lastName">Last Name:</label>
+							<input
+								type="text"
+								id="lastName"
+								name="lastName"
+								value={lastName}
+								onChange={(e) => {
+									setLastName(e.target.value);
+								}}
+								style={
+									lastName == "" && showError == "Fill in all fields"
+										? { border: "1px solid red" }
+										: {}
+								}
+							/>
+						</div>
+						<div className="form-group">
+							<label htmlFor="email">Email:</label>
+							<input
+								type="email"
+								id="email"
+								name="email"
+								value={email}
+								onChange={(e) => {
+									if (
+										(email != "" &&
+											showError == "Enter a valid email address") ||
+										(email != "" && showError == "Email already exists")
+									)
+										setShowError("");
+									setEmail(e.target.value);
+								}}
+								style={
+									(email == "" && showError == "Fill in all fields") ||
+									(email != "" && showError == "Enter a valid email address") ||
+									(email != "" && showError == "Email already exists")
+										? { border: "1px solid red" }
+										: {}
+								}
+							/>
+							{(email != "" && showError == "Enter a valid email address") ||
+							(email != "" && showError == "Email already exists") ? (
+								<p>{showError}</p>
+							) : null}
+						</div>
+					</div>
+					<div className="box-two-signup">
+						<div className="form-group">
+							<label htmlFor="mobileNumber">Mobile Number</label>
+							<div>
+								<input
+									type="ddd"
+									id="mobileNumberDDD"
+									name="mobileNumberDDD"
+									pattern="[0-9]{2}"
+									maxLength="2"
+									value={dddNumber}
+									onChange={(e) => {
+										setdddNumber(e.target.value);
+									}}
+									style={
+										dddNumber == "" && showError == "Fill in all fields"
+											? { border: "1px solid red" }
+											: {}
+									}
+								/>
+								<input
+									type="tel"
+									id="mobileNumber"
+									name="mobileNumber"
+									value={mobileNumber}
+									onChange={(e) => {
+										setMobileNumber(e.target.value);
+									}}
+									style={
+										mobileNumber == "" && showError == "Fill in all fields"
+											? { border: "1px solid red" }
+											: {}
+									}
+								/>
+							</div>
+						</div>
+						<div className="form-group">
+							<label htmlFor="dateOfBirth">Date of Birth:</label>
+							<input
+								type="date"
+								id="dateOfBirth"
+								name="dateOfBirth"
+								value={dateOfBirth}
+								onChange={(e) => {
+									if (
+										dateOfBirth != "" &&
+										showError == "User must be over 18 years old"
+									)
+										setShowError("");
+									setDateOfBirth(e.target.value);
+								}}
+								style={
+									(dateOfBirth == "" && showError == "Fill in all fields") ||
+									(dateOfBirth != "" &&
+										showError == "User must be over 18 years old")
+										? { border: "1px solid red" }
+										: {}
+								}
+							/>
+							{dateOfBirth != "" &&
+								showError == "User must be over 18 years old" && (
+									<p>{showError}</p>
+								)}
+						</div>
+						<div className="form-group">
+							<label htmlFor="password">Password:</label>
+							<input
+								type={showPassword ? "text" : "password"}
+								id="password"
+								name="password"
+								value={password}
+								onChange={(e) => {
+									setPassword(e.target.value);
+								}}
+								style={
+									(password == "" && showError == "Fill in all fields") ||
+									(password != "" &&
+										showError ==
+											"Password must contain one capital letter, one special character and 6 numbers") ||
+									(password != "" && showError == "Passwords do not match")
+										? { border: "1px solid red" }
+										: {}
+								}
+							/>
+							<div
+								className="showPassword-signup"
+								onClick={() => setShowPassword(!showPassword)}
+							>
+								{showPassword ? <BsEyeSlash /> : <BsEye />}
+							</div>
+							{password != "" &&
 								showError ==
-									"Password must contain one capital letter, one special character and 6 numbers") ||
-							(password != "" && showError == "Passwords do not match")
-								? { border: "1px solid red" }
-								: {}
-						}
-					/>
-					<p>
-						{password != "" &&
-							showError ==
-								"Password must contain one capital letter, one special character and 6 numbers" &&
-							showError}
-					</p>
-				</div>
-				<div className="form-group">
-					<label htmlFor="confirmPassword">Confirm Password:</label>
-					<input
-						type="password"
-						id="confirmPassword"
-						name="confirmPassword"
-						value={confirmPassword}
-						onChange={(e) => {
-							setShowError("");
-							setConfirmPassword(e.target.value);
-						}}
-						style={
-							(confirmPassword == "" && showError == "Fill in all fields") ||
-							(confirmPassword != "" && showError == "Passwords do not match")
-								? { border: "1px solid red" }
-								: {}
-						}
-					/>
-					<p>
-						{confirmPassword != "" &&
-							password != "" &&
-							showError == "Passwords do not match" &&
-							showError}
-					</p>
-				</div>
-				<p>
+									"Password must contain one capital letter, one special character and 6 numbers" && (
+									<p>{showError}</p>
+								)}
+						</div>
+						<div className="form-group">
+							<label htmlFor="confirmPassword">Confirm Password:</label>
+							<input
+								type={showConfirmPassword ? "text" : "password"}
+								id="confirmPassword"
+								name="confirmPassword"
+								value={confirmPassword}
+								onChange={(e) => {
+									setConfirmPassword(e.target.value);
+								}}
+								style={
+									(confirmPassword == "" &&
+										showError == "Fill in all fields") ||
+									(confirmPassword != "" &&
+										showError == "Passwords do not match")
+										? { border: "1px solid red" }
+										: {}
+								}
+							/>
+							<div
+								className="showPassword-signup"
+								onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+							>
+								{showConfirmPassword ? <BsEyeSlash /> : <BsEye />}
+							</div>
+
+							{confirmPassword != "" &&
+								password != "" &&
+								showError == "Passwords do not match" && <p>{showError}</p>}
+						</div>
+					</div>
+
 					{(firstName == "" ||
 						lastName == "" ||
 						dateOfBirth == "" ||
@@ -314,12 +376,19 @@ const SignUp = () => {
 						password == "" ||
 						confirmPassword == "" ||
 						email == "") &&
-						showError == "Fill in all fields" &&
-						showError}
-				</p>
-				<button type="submit">Cadastre-se</button>
-			</form>
-		</div>
+						showError == "Fill in all fields" && <p>{showError} </p>}
+
+					<div className="btn-and-link-signup">
+						<span>
+							Already have an account? <Link to="/login">Login now</Link>
+						</span>
+						<button type="submit" id="submitSignupId">
+							Cadastre-se
+						</button>
+					</div>
+				</form>
+			</div>
+		</main>
 	);
 };
 
