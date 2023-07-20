@@ -31,7 +31,7 @@ const SignUp = () => {
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
 	const inputRef = useRef(null);
-	const [image, setImage] = useState("");
+	const [image, setImage] = useState(null);
 
 	if (
 		firstName != "" &&
@@ -141,8 +141,10 @@ const SignUp = () => {
 			.catch((error) => {
 				console.log(error);
 			});
-		const storageRef = ref(storage, `images/users/${id}`);
-		const uploadTask = uploadBytesResumable(storageRef, image);
+		if (image) {
+			const storageRef = ref(storage, `images/users/${id}`);
+			const uploadTask = uploadBytesResumable(storageRef, image);
+		}
 	}
 	return (
 		<main className="signup-page">
@@ -173,7 +175,7 @@ const SignUp = () => {
 							</div>
 							<div className="btns-box-signup">
 								<button onClick={() => inputRef.current.click()}>Upload</button>
-								<button onClick={() => setImage("")}>Delete</button>
+								<button onClick={() => setImage(null)}>Delete</button>
 							</div>
 						</div>
 						<div className="form-group">
