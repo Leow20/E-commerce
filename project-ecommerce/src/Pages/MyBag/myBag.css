@@ -1,6 +1,6 @@
-.window-mybag{
-    height: 100%;
-    width: 100%;
+.window-mybag {
+  height: 100%;
+  width: 100%;
 }
 
 .container-title-mybag {
@@ -25,17 +25,17 @@
   margin-top: 81px;
 }
 
-.empty-mybag h2{
-    margin-top: 30px;
+.empty-mybag h2 {
+  margin-top: 30px;
 }
 
-.empty-mybag p{
-    text-align: center;
-    margin-top: 16px;
+.empty-mybag p {
+  text-align: center;
+  margin-top: 16px;
 }
 
-.button-mybag{
-    position: absolute;
-    bottom: 11px;
-    left: 16px;
+.button-mybag {
+  display: flex;
+  justify-content: center;
+  margin-top: 237px;
 }

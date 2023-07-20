@@ -6,6 +6,7 @@ import arrow from "../../assets/icons/arrowProfile.svg";
 import empty from "../../assets/Img/emptyBag.png";
 
 const MyBag = () => {
+	
   return (
     <div className="window-mybag">
       <div className="container-title-mybag">
