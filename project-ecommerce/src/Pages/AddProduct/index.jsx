@@ -237,8 +237,6 @@ const AddProduct = () => {
 					Cadastre
 				</button>
 			</form>
-
-			<img src={image} alt="" />
 		</div>
 	);
 };
