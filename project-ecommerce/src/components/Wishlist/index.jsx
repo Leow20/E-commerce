@@ -56,9 +56,12 @@ const Wishlist = () => {
 
     const downloadURL = await getDownloadURL(imagemRef);
 
-    // Armazenar a URL da imagem no estado
     setUrl(downloadURL);
   };
+
+  useEffect(() => {
+    console.log(url);
+  }, [url]);
 
   if (!products) {
     return (
