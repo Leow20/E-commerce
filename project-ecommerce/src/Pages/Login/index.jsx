@@ -9,19 +9,27 @@ import { useNavigate } from "react-router-dom";
 
 //Firebase
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../../../firebaseConnection";
+import { auth, db, storage } from "../../../firebaseConnection";
 import { collection, getDocs, query, where } from "@firebase/firestore";
+import { getDownloadURL, ref } from "firebase/storage";
+
+//React Icons
+import { BsEye, BsEyeSlash } from "react-icons/bs";
 
 const Login = () => {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
-	const [passwordError, setPasswordError] = useState("");
+	const [error, setError] = useState("");
+	const [showPassword, setShowPassword] = useState(false);
 	const navigate = useNavigate("");
+	const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 	async function handleLogin(e) {
 		e.preventDefault();
 		if (email === "" || password == "") {
-			setPasswordError("Fill in all fields");
+			setError("Fill in all fields");
+		} else if (!regexEmail.test(email)) {
+			setError("Invalid email address");
 		} else {
 			await signInWithEmailAndPassword(auth, email, password)
 				.then(async (user) => {
@@ -29,29 +37,52 @@ const Login = () => {
 					const q = query(collection(db, "users"), where("uid", "==", userUid));
 
 					await getDocs(q).then((value) => {
-						value.forEach((doc) => {
+						value.forEach(async (doc) => {
 							const userData = doc.data();
-							localStorage.setItem("userLogado", JSON.stringify(userData));
+							let user = {
+								dateOfBirth: userData.dateOfBirth,
+								ddd: userData.ddd,
+								email: userData.email,
+								firstName: userData.firstName,
+								lastName: userData.lastName,
+								mobileNumber: userData.mobileNumber,
+								uid: userData.uid,
+								URLfoto: await handleUploadImage(userData.uid),
+							};
+
+							localStorage.setItem("userLogado", JSON.stringify(user));
 						});
 					});
-					setPasswordError("");
+					setError("");
 					navigate("/");
 				})
 				.catch((error) => {
 					if (error.code === "auth/wrong-password") {
-						setPasswordError(
-							"Wow, invalid username or password. Please, try again!"
-						);
+						setError("Wow, invalid email or password. Please, try again!");
 					} else if (error.code === "auth/user-not-found") {
-						setPasswordError("User not found");
+						setError("User not found");
 					}
 				});
 		}
 	}
+	const handleUploadImage = async (id) => {
+		const storageRef = storage;
+		const imagemRef = ref(storageRef, `images/users/${id}`);
+
+		const returnURL = await getDownloadURL(imagemRef)
+			.then((url) => {
+				return url;
+			})
+			.catch((error) => {
+				if (error.code === "storage/object-not-found") {
+					return "";
+				}
+			});
+		return returnURL;
+	};
 
 	return (
 		<main className="login-page">
-			<div className="gradient-top-login"></div>
 			<div className="container-login">
 				<div className="box-login">
 					<div className="box-text-login">
@@ -62,15 +93,16 @@ const Login = () => {
 						<div>
 							<input
 								className="input-login"
-								type="email"
+								type="text"
 								name="emailInput"
 								id="emailId"
 								style={
-									passwordError == "User not found" ||
-									(passwordError ==
-										"Wow, invalid username or password. Please, try again!" &&
+									error == "User not found" ||
+									(error ==
+										"Wow, invalid email or password. Please, try again!" &&
 										email != "") ||
-									(passwordError == "Fill in all fields" && email == "")
+									(error == "Fill in all fields" && email == "") ||
+									(email != "" && error == "Invalid email address")
 										? { border: "1px solid red" }
 										: {}
 								}
@@ -78,14 +110,15 @@ const Login = () => {
 								value={email}
 								onChange={(e) => {
 									setEmail(e.target.value);
-									setPasswordError("");
+									if (error != "Fill in all fields" && email != "")
+										setError("");
 								}}
 							/>
 							<span
 								style={
-									passwordError == "User not found" ||
-									(passwordError ==
-										"Wow, invalid username or password. Please, try again!" &&
+									error == "User not found" ||
+									(error ==
+										"Wow, invalid email or password. Please, try again!" &&
 										email != "")
 										? {
 												borderLeft: "1px solid red",
@@ -100,14 +133,14 @@ const Login = () => {
 						<div>
 							<input
 								className="input-login"
-								type="password"
+								type={showPassword ? "text" : "password"}
 								name="passwordInput"
 								id="passwordId"
 								style={
-									(passwordError ==
-										"Wow, invalid username or password. Please, try again!" &&
+									(error ==
+										"Wow, invalid email or password. Please, try again!" &&
 										password != "") ||
-									(passwordError == "Fill in all fields" && password == "")
+									(error == "Fill in all fields" && password == "")
 										? { border: "1px solid red" }
 										: {}
 								}
@@ -115,13 +148,18 @@ const Login = () => {
 								placeholder="Password"
 								onChange={(e) => {
 									setPassword(e.target.value);
-									setPasswordError("");
+									if (
+										error ==
+											"Wow, invalid email or password. Please, try again!" &&
+										password != ""
+									)
+										setError("");
 								}}
 							/>
 							<span
 								style={
-									passwordError ==
-										"Wow, invalid username or password. Please, try again!" &&
+									error ==
+										"Wow, invalid email or password. Please, try again!" &&
 									password != ""
 										? {
 												borderLeft: "1px solid red",
@@ -132,11 +170,15 @@ const Login = () => {
 							>
 								Password
 							</span>
+							<div
+								className="showPassword"
+								onClick={() => setShowPassword(!showPassword)}
+							>
+								{showPassword ? <BsEyeSlash /> : <BsEye />}
+							</div>
 						</div>
-						{passwordError != "" && (
-							<p className={passwordError ? "error-login" : ""}>
-								{passwordError}
-							</p>
+						{error != "" && (
+							<p className={error ? "error-login" : ""}>{error}</p>
 						)}
 						<button type="submit">Login</button>
 						<label className="have-acount-login">
@@ -145,7 +187,6 @@ const Login = () => {
 					</form>
 				</div>
 			</div>
-			<div className="gradient-bottom-login"></div>
 		</main>
 	);
 };

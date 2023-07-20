@@ -10,6 +10,9 @@ import userPicture from "../../assets/HeaderModal/user-sem-foto.png";
 import trashIcon from "../../assets/icons/trashIcon.svg";
 
 const ProfileInfo = () => {
+  const userData = localStorage.getItem("userLogado");
+  const user = JSON.parse(userData);
+
   return (
     <div className="page-wrapper-info">
       <p>Personal Information</p>
@@ -29,16 +32,16 @@ const ProfileInfo = () => {
         <div className="content-name-info">
           <div className="container-input-info name-info">
             <label>First Name</label>
-            <input type="text" />
+            <input value={user ? user.firstName : ""} type="text" />
           </div>
           <div className="container-input-info name-info">
             <label>Last Name</label>
-            <input type="text" />
+            <input type="text" value={user ? user.lastName : ""} />
           </div>
         </div>
         <div className="container-input-info">
           <label>Email</label>
-          <input type="email" />
+          <input type="email" value={user ? user.email : ""} disabled />
         </div>
         <div>
           <div className="container-input-info container-number-info">
@@ -49,20 +52,22 @@ const ProfileInfo = () => {
                 id="ddd"
                 name="ddd"
                 pattern="[0-9]{2}"
-                maxlength="2"
+                maxLength="2"
+                value={user ? user.mobileNumber : ""}
               />
               <input
                 type="tel"
                 id="numero"
                 name="numero"
                 pattern="[0-9]{8,9}"
-                maxlength="9"
+                maxLength="9"
+                value={user ? user.mobileNumber : ""}
               />
             </div>
           </div>
           <div className="container-input-info">
             <label>Date of Birth</label>
-            <input type="date" />
+            <input type="date" value={user ? user.dateOfBirth : ""} />
           </div>
         </div>
         <h3>Change Password</h3>

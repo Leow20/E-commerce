@@ -27,6 +27,9 @@ const Profile = () => {
   const isMobile = useMediaQuery({ maxWidth: 820 });
   const [show, setShow] = useState("page-wrapper-modal-info");
 
+  const userData = localStorage.getItem("userLogado");
+  const user = JSON.parse(userData);
+
   function handleTabChange(tab) {
     setSelectedTab(tab);
 
@@ -121,9 +124,20 @@ const Profile = () => {
               >
                 <img src={userNotPicture} alt="usuario sem foto" />
                 <div>
-                  <p>Tina Vargayee</p>
-                  <p>tinavar@vinho.com</p>
-                  <p>+85-5478564</p>
+                  {!user && (
+                    <>
+                      <p>Tina Vargayee</p>
+                      <p>tinavar@vinho.com</p>
+                      <p>+85-5478564</p>
+                    </>
+                  )}
+                  {user && (
+                    <>
+                      <p>{user.firstName}</p>
+                      <p>{user.email}</p>
+                      <p>{user.mobileNumber}</p>
+                    </>
+                  )}
                 </div>
                 <img src={arrowGray} alt="icone seta" />
               </div>
@@ -287,14 +301,16 @@ const Profile = () => {
                 </ul>
               </nav>
               <div className="container-button-profile">
-                <button
-                  className="button-logout-profile"
-                  id="button-logout-mob-profile"
-                >
-                  {" "}
-                  <img src={logoutIcon} alt="icone de logout" />
-                  Logout
-                </button>
+                {selectedTab == "" && (
+                  <button
+                    className="button-logout-profile"
+                    id="button-logout-mob-profile"
+                  >
+                    {" "}
+                    <img src={logoutIcon} alt="icone de logout" />
+                    Logout
+                  </button>
+                )}
               </div>
               <div></div>
             </main>

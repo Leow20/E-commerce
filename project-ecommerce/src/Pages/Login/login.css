@@ -3,28 +3,7 @@
     width: 100vw;
     height: 100vh;
     display: block;
-    background: url("../../assets/imgLogin/cards-bg.png") no-repeat;
-    background-size: cover;
-    position: relative;
-    padding: 25% 10% 25% 10%;
-  }
-
-  .gradient-top-login {
-    width: 100vw;
-    height: 20vh;
-    background: linear-gradient(0, rgba(255, 255, 255, 0.00) 0%, rgba(255, 244, 229, 0.96) 100%);
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  .gradient-bottom-login {
-    width: 100vw;
-    height: 50vh;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, rgba(255, 244, 229, 0.96) 100%);
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    padding: 10%;
   }
 
   .container-login {
@@ -37,9 +16,6 @@
     flex-direction: column;
     background-color: white;
     border-radius: 20px;
-    position: relative;
-    z-index: 500;
-    box-shadow: 0px 0px 15px 6px rgba(0, 0, 0, 0.3);
     padding: 5%;
     gap: 30px;
   }
@@ -93,6 +69,7 @@
     font-size: 12px;
     color: #1b4b66;
     transition: 0.5s;
+    position: relative;
   }
 
   .box-login form div span {
@@ -107,6 +84,7 @@
 
   input[type='email']:focus~span,
   input[type='password']:focus~span,
+  input[type='text']:focus~span,
   .input-login:not(:placeholder-shown).input-login:not(:focus)~span {
     color: #1b4b66;
     transform: translateX(10px) translateY(-7px);
@@ -116,7 +94,6 @@
     border-right: 1px solid #626262;
   }
 
-  .box-login input:valid,
   .box-login input:focus {
     border: 1px solid #1b4b66;
   }
@@ -144,8 +121,23 @@
   }
 
   .error-login {
+    max-width: 450px;
+    text-align: center;
     color: red;
     font-size: 12px;
+  }
+
+  .showPassword {
+    display: flex;
+    position: absolute !important;
+    width: 10% !important;
+    height: 100%;
+    right: 0;
+    top: 0;
+    align-items: center;
+    justify-content: center;
+    color: #1b4b66;
+    font-size: 15px;
   }
 
   .error-input-login {
@@ -154,10 +146,8 @@
 }
 
 @media (min-width:480px) {
-
-  .gradient-top-login,
-  .gradient-bottom-login {
-    display: none;
+  .container-login {
+    box-shadow: 0px 0px 15px 6px rgba(0, 0, 0, 0.3);
   }
 
   .container-login {
@@ -206,6 +196,7 @@
 
   input[type='email']:focus~span,
   input[type='password']:focus~span,
+  input[type='text']:focus~span,
   .input-login:not(:placeholder-shown).input-login:not(:focus)~span {
     transform: translateX(10px) translateY(-11px);
     padding: 0 9px;
@@ -214,8 +205,9 @@
     border-right: 1px solid #626262;
   }
 
-  /* .box-login input:valid~span,
-  .box-login input:focus~span {} */
+  .showPassword {
+    font-size: 25px;
+  }
 
   .box-login label {
     font-size: 20px;
@@ -227,6 +219,8 @@
   .login-page {
     padding: 8% 10% 8% 10%;
   }
+
+
 
   .error-login {
     color: red;

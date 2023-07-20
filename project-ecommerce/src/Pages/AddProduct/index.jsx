@@ -1,6 +1,8 @@
-import { useState } from "react";
-import { db } from "../../../firebaseConnection";
-import { addDoc, collection } from "firebase/firestore";
+import { useEffect, useState } from "react";
+import { db, storage } from "../../../firebaseConnection";
+import { addDoc, collection, getDocs, query } from "firebase/firestore";
+
+import { ref, uploadBytesResumable, getDownloadURL } from "@firebase/storage";
 
 const AddProduct = () => {
   const [name, setName] = useState("");
@@ -10,9 +12,47 @@ const AddProduct = () => {
   const [discount, setDescount] = useState("");
   const [stars, setStars] = useState("");
   const [image, setImage] = useState("");
+  var myArray = [];
+
+  async function handleProcuts() {
+    const q = query(collection(db, "products"));
+
+    await getDocs(q).then((value) => {
+      value.forEach((doc) => {
+        const userData = doc.data();
+        myArray.push(userData);
+        localStorage.setItem("products", JSON.stringify(myArray));
+      });
+    });
+  }
+
+  useEffect(() => {
+    handleProcuts();
+  }, [myArray]);
+
+  function handleImage(e) {
+    const file = e.target.files[0];
+    console.log(file);
+    if (!file) {
+      alert("aq");
+      return;
+    }
+
+    const storageRef = ref(storage, `images/${file.name}`);
+    console.log("a");
+    const uploadTask = uploadBytesResumable(storageRef, file);
+    console.log("b");
+
+    getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+      setImage(url);
+      console.log(url);
+      alert(image);
+    });
+  }
 
   async function addProduct(e) {
     e.preventDefault();
+
     await addDoc(collection(db, "products"), {
       name: name,
       description: description,
@@ -114,8 +154,7 @@ const AddProduct = () => {
             type="file"
             id="image"
             name="image"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
+            onChange={handleImage}
             required
           />
         </div>
@@ -123,6 +162,8 @@ const AddProduct = () => {
           Cadastre
         </button>
       </form>
+
+      <img src={image} alt="" />
     </div>
   );
 };
