@@ -3,28 +3,7 @@
     width: 100vw;
     height: 100vh;
     display: block;
-    background: url("../../assets/imgLogin/cards-bg.png") no-repeat;
-    background-size: cover;
-    position: relative;
-    padding: 25% 10% 25% 10%;
-  }
-
-  .gradient-top-login {
-    width: 100vw;
-    height: 20vh;
-    background: linear-gradient(0, rgba(255, 255, 255, 0.00) 0%, rgba(255, 244, 229, 0.96) 100%);
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-
-  .gradient-bottom-login {
-    width: 100vw;
-    height: 50vh;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.00) 0%, rgba(255, 244, 229, 0.96) 100%);
-    position: absolute;
-    bottom: 0;
-    left: 0;
+    padding: 10%;
   }
 
   .container-login {
@@ -37,9 +16,6 @@
     flex-direction: column;
     background-color: white;
     border-radius: 20px;
-    position: relative;
-    z-index: 500;
-    box-shadow: 0px 0px 15px 6px rgba(0, 0, 0, 0.3);
     padding: 5%;
     gap: 30px;
   }
@@ -145,6 +121,8 @@
   }
 
   .error-login {
+    max-width: 450px;
+    text-align: center;
     color: red;
     font-size: 12px;
   }
@@ -168,10 +146,8 @@
 }
 
 @media (min-width:480px) {
-
-  .gradient-top-login,
-  .gradient-bottom-login {
-    display: none;
+  .container-login {
+    box-shadow: 0px 0px 15px 6px rgba(0, 0, 0, 0.3);
   }
 
   .container-login {
@@ -243,6 +219,8 @@
   .login-page {
     padding: 8% 10% 8% 10%;
   }
+
+
 
   .error-login {
     color: red;
