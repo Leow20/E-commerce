@@ -13,12 +13,6 @@ export default function Private({ children }) {
         async function checkLogin() {
             const unsub = onAuthStateChanged(auth, (user) => {
                 if (user) {
-                    const userData = {
-                        uid: user.uid,
-                        email: user.email,
-                    }
-
-                    localStorage.setItem("@detailUser", JSON.stringify(userData));
 
                     setLoading(false);
                     setSigned(true);
