@@ -1,0 +1,22 @@
+.productIn {
+  background-color: #f4f4f4;
+}
+
+.container-title-mybag {
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.container-title-mybag img {
+  margin: 16px;
+}
+
+.container-title-mybag h3 {
+  margin-left: 4px;
+}
+
+.showProduct {
+    max-height: 332px;
+}

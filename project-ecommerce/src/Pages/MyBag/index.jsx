@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "./myBag.css";
+
+import ContainerWP from "./StyleWithProducts";
 
 import ButtonBigMob from "../../components/ButtonBigMobile";
 import arrow from "../../assets/icons/arrowProfile.svg";
 import empty from "../../assets/Img/emptyBag.png";
 
 const MyBag = () => {
-	
   return (
     <div className="window-mybag">
-      <div className="container-title-mybag">
+      <ContainerWP />
+	  
+      {/* <div className="container-title-mybag">
         <img src={arrow} />
         <h3>My Bag</h3>
       </div>
@@ -24,7 +27,7 @@ const MyBag = () => {
 
       <div className="button-mybag">
         <ButtonBigMob>Continue Shopping</ButtonBigMob>
-      </div>
+      </div> */}
     </div>
   );
 };
