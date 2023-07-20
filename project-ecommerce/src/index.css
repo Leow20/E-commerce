@@ -38,6 +38,26 @@
   }
 }
 
+@keyframes open-modal {
+  from {
+    transform: translateX(-600px);
+  }
+
+  to {
+    transform: translateX(0px);
+  }
+}
+
+@keyframes close-modal {
+  from {
+    transform: translateX(0px);
+  }
+
+  to {
+    transform: translateX(-750px);
+  }
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -51,4 +71,9 @@ a,
 button {
   text-decoration: none;
   cursor: pointer;
+  border: none;
+}
+
+li {
+  list-style: none;
 }

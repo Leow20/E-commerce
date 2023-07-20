@@ -1,0 +1,35 @@
+@media (max-width: 840px) {
+  .cadastro-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
+
+  .cadastro-container h2 {
+    text-align: center;
+    padding-bottom: 35px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+
+  .cadastro-container label {
+    font-weight: bold;
+  }
+
+  .cadastro-container input {
+    padding: 5px;
+    font-size: 16px;
+  }
+
+  .cadastro-container button {
+    align-items: center;
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+}
