@@ -9,6 +9,18 @@ import userPicture from "../../assets/HeaderModal/user-sem-foto.png";
 //Icons
 import trashIcon from "../../assets/icons/trashIcon.svg";
 
+//Firebase
+import "firebase/auth";
+import { auth, storage, db } from "../../../firebaseConnection";
+import {
+	collection,
+	getDocs,
+	query,
+	setDoc,
+	where,
+	doc,
+} from "firebase/firestore";
+
 const ProfileInfo = () => {
 	const userData = localStorage.getItem("userLogado");
 	const user = JSON.parse(userData);
@@ -24,6 +36,48 @@ const ProfileInfo = () => {
 	const [currentPassword, setCurrentPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
+
+	const handleChange = async (e) => {
+		e.preventDefault();
+		const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+
+		await getDocs(q).then((value) => {
+			value.forEach(async (valueInfo) => {
+				const userData = valueInfo.data();
+				if (userData.uid == user.uid && user.email == userData.email) {
+					let userInfo = {
+						dateOfBirth: dateOfBirth ? dateOfBirth : userData.dateOfBirth,
+						ddd: ddd ? ddd : userData.ddd,
+						firstName: firstName ? firstName : userData.firstName,
+						lastName: lastName ? lastName : userData.lastName,
+						mobileNumber: mobileNumber ? mobileNumber : userData.mobileNumber,
+						password: newPassword ? newPassword : userData.password,
+						email: userData.email,
+						uid: userData.uid,
+					};
+					let userInfoNotPassword = {
+						dateOfBirth: dateOfBirth ? dateOfBirth : userData.dateOfBirth,
+						ddd: ddd ? ddd : userData.ddd,
+						firstName: firstName ? firstName : userData.firstName,
+						lastName: lastName ? lastName : userData.lastName,
+						mobileNumber: mobileNumber ? mobileNumber : userData.mobileNumber,
+						email: userData.email,
+						uid: userData.uid,
+					};
+					await setDoc(doc(db, "users", valueInfo.id), userInfo)
+						.then(() => {
+							localStorage.setItem(
+								"userLogado",
+								JSON.stringify(userInfoNotPassword)
+							);
+						})
+						.catch((error) => {
+							console.log(error);
+						});
+				}
+			});
+		});
+	};
 
 	return (
 		<div className="page-wrapper-info">
@@ -43,7 +97,7 @@ const ProfileInfo = () => {
 					</button>
 				</div>
 			</div>
-			<form className="form-info">
+			<form className="form-info" onSubmit={handleChange}>
 				<div className="content-name-info">
 					<div className="container-input-info name-info">
 						<label>First Name</label>
@@ -131,7 +185,7 @@ const ProfileInfo = () => {
 					/>
 				</div>
 				<div className="button-save-info">
-					<button>Save Changes</button>
+					<button type="submit">Save Changes</button>
 				</div>
 			</form>
 		</div>
