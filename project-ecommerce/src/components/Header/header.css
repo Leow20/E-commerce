@@ -41,7 +41,7 @@
   display: block;
   text-decoration: none;
   padding: 0 5px;
-  position: relative;
+  /* position: relative; */
   color: #171520;
   text-align: center;
   font-size: 14px;
@@ -76,7 +76,7 @@
   width: 362px;
   height: 44px;
   margin-left: 211px;
-  position: relative;
+  /* position: relative; */
 }
 
 .search-bar-header input[type="search"] {
@@ -104,42 +104,247 @@
   top: 10px;
 }
 
-.icons {
+.icons-header {
   display: flex;
   flex-direction: row;
   gap: 20px;
   width: 114px;
   height: 24px;
+  align-items: center;
+  position: relative;
 }
 
-.icons button,
+.icons-header button,
 .icons-responsivo button {
   background-color: transparent;
   border: none;
   transition: all ease-in-out 0.2s;
 }
 
-.icons a,
+.icons-header a,
 .icons-responsivo a {
   transition: all ease-in-out 0.2s;
 }
 
-.icons button:hover,
-.icons-responsivo button:hover,
-.icons a:hover,
-.icons-responsivo a:hover {
-  transform: scale(1.1);
+.icons-header a:nth-child(3) {
+  z-index: 998;
+}
+
+.container-bag-icon {
+  z-index: 998;
+  width: 10px;
+  height: 10px;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 21px;
+  border-radius: 50%;
+  position: absolute;
+  top: -11px;
+  right: -7px;
 }
 
 .container-header-responsivo {
   display: none;
 }
 
+.modal-mybag-header {
+  z-index: 998;
+  position: absolute;
+  top: 80px;
+  right: 10px;
+  width: 394px;
+  height: 700px;
+  background-color: white;
+}
+
+.mybag-btnh2-header {
+  display: flex;
+  flex-direction: row;
+  margin-top: 28px;
+}
+
+.mybag-btnh2-header img {
+  transform: rotate(180deg);
+}
+
+.mybag-btnh2-header button {
+  margin-left: 27.5px;
+  border: none;
+  background-color: transparent;
+}
+
+.mybag-btnh2-header h2 {
+  margin-left: 20px;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.max-product-header {
+  overflow: auto;
+  max-height: 310px !important;
+}
+
+.mybag-container-product-header {
+  display: flex;
+  flex-direction: row;
+  margin-top: 24px;
+  justify-content: space-evenly;
+}
+
+.img-product-mybag-header img {
+  border-radius: 8px;
+  width: 75px;
+  height: 80px;
+}
+
+.desc-product-mybag-header p {
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-style: normal;
+}
+
+.box-counter-product-header {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid var(--primary, #1b4b66);
+  border-radius: 4px;
+  width: 73px;
+  justify-content: center;
+  align-items: center;
+}
+
+.box-counter-product-header button {
+  border: none;
+  background-color: transparent;
+  width: 24px;
+  height: 24px;
+}
+
+.box-counter-product-header p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.price-product-header {
+  max-width: 48px;
+  max-width: 80px;
+}
+
+.price-product-header button {
+  border: none;
+  background-color: transparent;
+  margin-left: 33px;
+}
+
+.price-product-header p {
+  margin-top: 37px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.line-product-header {
+  margin-top: 45px;
+  width: 359px;
+  margin-left: 10px;
+}
+
+.total-price-header {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+.total-price-header p {
+  margin-bottom: 12px;
+}
+
+.total-price-header p:last-child {
+  margin-bottom: 0px;
+}
+
+.txt-price-header {
+  margin-left: 19px;
+}
+
+.sub-tax-header {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+}
+
+.final-price-header {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.prices-header {
+  text-align: end;
+  margin-right: 13px;
+}
+
+.container-btns-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container-btns-header p {
+  margin-top: 34px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  text-decoration: underline;
+  color: #1b4b66;
+}
+
+.coupon-header {
+  width: 360px;
+  height: 56px;
+  background-color: #f1f1f1;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+  border-radius: 3px;
+}
+
+.coupon-header input {
+  width: 90%;
+  border: none;
+  background: transparent;
+  padding-left: 16px;
+}
+
+.coupon-header button {
+  margin-right: 12px;
+}
+
+.order-btn-header {
+  display: flex;
+  width: 360px;
+  padding: 10px 120px;
+  justify-content: center;
+  align-items: center;
+  background-color: #1b4b66;
+  color: white;
+  border-radius: 8px;
+  margin-top: 24px;
+}
+
 @media (max-width: 820px) {
+
   .logo-header,
   .nav-category-header ul,
   .search-bar-header input[type="search"],
-  .icons,
+  .icons-header,
   #lupa-id,
   .search-bar-header {
     display: none;
@@ -202,10 +407,26 @@
 
 @media (max-width: 1050px) {
   .search-bar-header {
-    margin-left: 50px;
+    margin-left: 5px;
+  }
+
+  .nav-category-header ul {
+    gap: 5px;
   }
 
   .search-bar-header input[type="search"] {
     min-width: 100px;
   }
+}
+
+.modal-brackground {
+  background-color: #0000004d;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  height: 100vh;
+  min-height: 1000px;
 }
