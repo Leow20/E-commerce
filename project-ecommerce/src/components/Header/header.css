@@ -41,7 +41,7 @@
   display: block;
   text-decoration: none;
   padding: 0 5px;
-  /* position: relative; */
+  position: relative;
   color: #171520;
   text-align: center;
   font-size: 14px;
@@ -76,7 +76,7 @@
   width: 362px;
   height: 44px;
   margin-left: 211px;
-  /* position: relative; */
+  position: relative;
 }
 
 .search-bar-header input[type="search"] {
