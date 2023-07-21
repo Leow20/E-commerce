@@ -15,5 +15,6 @@ module.exports = {
 		"no-unused-vars": "off",
 		"react/no-unescaped-entities": "off",
 		"no-mixed-spaces-and-tabs": "off",
+		"react/prop-types": "off",
 	},
 };
