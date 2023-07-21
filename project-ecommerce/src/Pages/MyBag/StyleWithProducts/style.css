@@ -1,5 +1,5 @@
-.productIn{
-  background-color: antiquewhite;
+.productIn {
+  background-color: #f4f4f4;
 }
 
 .container-title-mybag {
@@ -51,11 +51,41 @@
   margin-left: 16px;
 }
 
-.img-circles{
+.img-circles {
   position: absolute;
   top: 420px;
   height: 16px;
   width: 100%;
-  background-image: url('../../../assets/Img/Ellipse 23.svg');
-  background-repeat: repeat-x;;
+  background-image: url("../../../assets/Img/Ellipse 23.svg");
+  background-repeat: repeat-x;
+  margin-left: 6px;
+}
+
+.order-details {
+  margin-top: 40px;
+  margin-left: 16px;
+  font-size: 14px;
+}
+
+.order-details p {
+  margin-top: 8px;
+}
+
+.price-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.confirm-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 60px;
+}
+
+.confirm-details button {
+  background-color: #1b4b66;
+  color: white;
+  padding: 0px 60px;
+  border-radius: 8px;
 }
