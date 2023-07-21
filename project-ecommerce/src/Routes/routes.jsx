@@ -15,27 +15,29 @@ import MyBag from "../Pages/MyBag";
 import Notification from "../Pages/Notification";
 import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
+import AddProduct from "../Pages/AddProduct";
 
 const Router = () => {
-	return (
-		<BrowserRouter>
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/about" element={<About />} />
-				<Route path="/categories" element={<Categories />} />
-				<Route path="/profile" element={<Profile />} />
-				<Route path="/mybag" element={<MyBag />} />
-				<Route path="/handbags" element={<Handbags />} />
-				<Route path="/watches" element={<Watches />} />
-				<Route path="/skincare" element={<Skincare />} />
-				<Route path="/jewellery" element={<Jewellery />} />
-				<Route path="/apparels" element={<Apparels />} />
-				<Route path="/notification" element={<Notification />} />
-				<Route path="/login" element={<Login />} />
-				<Route path="/signup" element={<SignUp />} />
-			</Routes>
-		</BrowserRouter>
-	);
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/mybag" element={<MyBag />} />
+        <Route path="/handbags" element={<Handbags />} />
+        <Route path="/watches" element={<Watches />} />
+        <Route path="/skincare" element={<Skincare />} />
+        <Route path="/jewellery" element={<Jewellery />} />
+        <Route path="/apparels" element={<Apparels />} />
+        <Route path="/notification" element={<Notification />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/addproduct" element={<AddProduct />} />
+      </Routes>
+    </BrowserRouter>
+  );
 };
 
 export default Router;

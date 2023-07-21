@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 //Style
 import "./wishlist.css";
@@ -14,10 +14,54 @@ import BagIcon from "../../assets/imgHeader/bag.svg";
 
 import { Navigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
+import { db, storage } from "../../../firebaseConnection";
+import { ref, getDownloadURL } from "firebase/storage";
+import { collection, getDocs, query } from "@firebase/firestore";
 
 const Wishlist = () => {
   const isMobile = useMediaQuery({ maxWidth: 820 });
   const products = true;
+  var productsArray = [];
+
+  const [url, setUrl] = useState(null);
+
+  async function handleProcuts() {
+    const q = query(collection(db, "products"));
+
+    await getDocs(q).then((value) => {
+      value.forEach((doc) => {
+        let product = {
+          name: doc.data().name,
+          description: doc.data().description,
+          price: doc.data().price,
+          qty: doc.data().qty,
+          starts: doc.data().stars,
+          discount: doc.data().discount,
+          id: doc.data().id,
+        };
+        handleUploadImage(product.id);
+        productsArray.push(product);
+      });
+    });
+  }
+
+  useEffect(() => {
+    handleProcuts();
+    console.log(productsArray);
+  }, []);
+
+  const handleUploadImage = async (id) => {
+    const storageRef = storage;
+    const imagemRef = ref(storageRef, `images/${id}`);
+
+    const downloadURL = await getDownloadURL(imagemRef);
+
+    setUrl(downloadURL);
+  };
+
+  useEffect(() => {
+    console.log(url);
+  }, [url]);
 
   if (!products) {
     return (
@@ -61,35 +105,7 @@ const Wishlist = () => {
         )}
         <div className="wishlist-container-products">
           <div className="card-wishlist">
-            <img src={bag} alt="bolsa" width={150} height={157} />
-            <div className="arrival-content-wishlist">
-              <div className="text-product-wishlist">
-                <span>Grande</span>
-                <span>Blossom Pouch</span>
-                <span>$39.49</span>
-              </div>
-              <img src={heart} alt="icone coração" width={16} height={16} />
-            </div>
-            <button>
-              <img src={BagIcon} alt="Icone de sacola" /> Add to bag
-            </button>
-          </div>
-          <div className="card-wishlist">
-            <img src={bag} alt="bolsa" width={150} height={157} />
-            <div className="arrival-content-wishlist">
-              <div className="text-product-wishlist">
-                <span>Grande</span>
-                <span>Blossom Pouch</span>
-                <span>$39.49</span>
-              </div>
-              <img src={heart} alt="icone coração" width={16} height={16} />
-            </div>
-            <button>
-              <img src={BagIcon} alt="Icone de sacola" /> Add to bag
-            </button>
-          </div>
-          <div className="card-wishlist">
-            <img src={bag} alt="bolsa" width={150} height={157} />
+            {url && <img src={url} alt="bolsa" width={150} height={157} />}
             <div className="arrival-content-wishlist">
               <div className="text-product-wishlist">
                 <span>Grande</span>

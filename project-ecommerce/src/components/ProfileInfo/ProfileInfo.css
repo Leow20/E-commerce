@@ -124,6 +124,7 @@
 .form-info input[type="email"] {
   width: 100%;
   max-width: 604px;
+  cursor: not-allowed;
 }
 
 .content-name-info {

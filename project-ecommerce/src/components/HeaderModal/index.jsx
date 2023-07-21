@@ -1,40 +1,63 @@
+//React
+import { useState } from "react";
+
 //Style
 import "./headerModal.css";
 
 //Router-dom
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 //Images
 import arrowBlack from "../../assets/HeaderModal/arrow-right-black.svg";
 import arrowGray from "../../assets/HeaderModal/arrow-right-gray.svg";
 import userNotPicture from "../../assets/HeaderModal/user-sem-foto.png";
-import { useState } from "react";
-import { useEffect } from "react";
 
 const HeaderModal = ({ isOpen, setIsOpen, id = "headerModalId" }) => {
   const [animation, setAnimation] = useState(
     "content-header-modal animation-header-modal"
   );
 
+  const user = JSON.parse(localStorage.getItem("userLogado"));
+  const navigate = useNavigate("");
+
   const handleBackClick = (e) => {
-    if (e) e.preventDefault();
+    e.preventDefault();
+
     if (e.target.id !== id) {
       return;
     } else {
-      addEventListener("scroll", () => setIsOpen(false));
-      setIsOpen(false);
+      handleModalState();
     }
   };
+  addEventListener("scroll", () => handleModalState());
+
+  function handleModalState() {
+    setAnimation("content-header-modal animate-modal-info");
+
+    setTimeout(() => {
+      setIsOpen(false);
+      setAnimation("content-header-modal animation-header-modal");
+    }, 300);
+  }
 
   if (isOpen) {
     return (
       <div id={id} className="header-modal" onClick={handleBackClick}>
         <div className={animation}>
           <div className="profile-header-modal">
-            <button>
+            <button onClick={() => navigate("/profile")}>
               <div>
-                <img src={userNotPicture} alt="User" id="imgUserId" />
-                <h1>Hello </h1>
+                <img
+                  src={user && user.URLfoto ? user.URLfoto : userNotPicture}
+                  alt="User"
+                  id="imgUserId"
+                />
+                <h1>
+                  Hello
+                  {user && user.firstName && user.lastName
+                    ? ", " + user.firstName + " " + user.lastName
+                    : ""}
+                </h1>
               </div>
               <img src={arrowBlack} alt="arrow-icon" />
             </button>
