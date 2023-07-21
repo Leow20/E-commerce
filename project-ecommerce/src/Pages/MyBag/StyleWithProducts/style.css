@@ -1,5 +1,6 @@
 .productIn {
-  background-color: #f4f4f4;
+  background-color: rgb(255, 220, 173);
+  /* background-color: #f4f4f4; */
 }
 
 .container-title-mybag {
@@ -18,5 +19,31 @@
 }
 
 .showProduct {
-    max-height: 332px;
+  height: 369px;
+}
+
+.coupon-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 328px;
+  height: 46px;
+  border-radius: 4px;
+  background-color: white;
+  margin-top: 24px;
+  margin-left: 16px;
+}
+
+.coupon-input button {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  margin-right: 12px;
+}
+
+.coupon-input input {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  margin-left: 16px;
 }

@@ -16,9 +16,13 @@ function ContainerWP() {
           Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam ipsam
           vitae fuga atque veniam, exercitationem accusantium! quos
         </h1>
-        
-      </div>
 
+        <div className="coupon-input">
+          <input type="text" placeholder="Apply Coupon Code" />
+          <button>CHECK</button>
+        </div>
+
+      </div>
     </div>
   );
 }
