@@ -26,10 +26,10 @@ import "./home.css";
 import { useState, useEffect } from "react";
 
 const Home = () => {
-  const [tamanhoTela, setTamanhoTela] = useState(window.innerWidth - 15);
+  const [tamanhoTela, setTamanhoTela] = useState(window.innerWidth - 37);
   useEffect(() => {
     const atualizarTamanhoTela = () => {
-      setTamanhoTela(window.innerWidth - 15);
+      setTamanhoTela(window.innerWidth - 37);
     };
 
     window.addEventListener("resize", atualizarTamanhoTela);
