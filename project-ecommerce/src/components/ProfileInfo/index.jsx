@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 //Style
 import "./ProfileInfo.css";
@@ -20,10 +20,23 @@ import {
 	where,
 	doc,
 } from "firebase/firestore";
+import { ref, uploadBytesResumable, deleteObject } from "firebase/storage";
+import {
+	AuthCredential,
+	EmailAuthProvider,
+	OAuthCredential,
+	reauthenticateWithCredential,
+	updatePassword,
+} from "firebase/auth";
 
 const ProfileInfo = () => {
 	const userData = localStorage.getItem("userLogado");
 	const user = JSON.parse(userData);
+	const inputRef = useRef(null);
+	const storageRef = ref(storage, `images/users/${user?.uid}`);
+	const [image, setImage] = useState(
+		user && user.URLfoto ? user.URLfoto : userPicture
+	);
 
 	const [firstName, setFirstName] = useState(user ? user.firstName : "");
 	const [lastName, setLastName] = useState(user ? user.lastName : "");
@@ -36,62 +49,157 @@ const ProfileInfo = () => {
 	const [currentPassword, setCurrentPassword] = useState("");
 	const [newPassword, setNewPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
+	const [error, setShowError] = useState("");
 
 	const handleChange = async (e) => {
 		e.preventDefault();
-		const q = query(collection(db, "users"), where("uid", "==", user?.uid));
 
-		await getDocs(q).then((value) => {
-			value.forEach(async (valueInfo) => {
-				const userData = valueInfo.data();
-				if (userData.uid == user.uid && user.email == userData.email) {
-					let userInfo = {
-						dateOfBirth: dateOfBirth ? dateOfBirth : userData.dateOfBirth,
-						ddd: ddd ? ddd : userData.ddd,
-						firstName: firstName ? firstName : userData.firstName,
-						lastName: lastName ? lastName : userData.lastName,
-						mobileNumber: mobileNumber ? mobileNumber : userData.mobileNumber,
-						password: newPassword ? newPassword : userData.password,
-						email: userData.email,
-						uid: userData.uid,
-					};
-					let userInfoNotPassword = {
-						dateOfBirth: dateOfBirth ? dateOfBirth : userData.dateOfBirth,
-						ddd: ddd ? ddd : userData.ddd,
-						firstName: firstName ? firstName : userData.firstName,
-						lastName: lastName ? lastName : userData.lastName,
-						mobileNumber: mobileNumber ? mobileNumber : userData.mobileNumber,
-						email: userData.email,
-						uid: userData.uid,
-					};
-					await setDoc(doc(db, "users", valueInfo.id), userInfo)
-						.then(() => {
-							localStorage.setItem(
-								"userLogado",
-								JSON.stringify(userInfoNotPassword)
-							);
-						})
-						.catch((error) => {
-							console.log(error);
-						});
-				}
+		if (validations) {
+			//ALTERAÇÃO DE SENHA
+			if (newPassword != "" && confirmPassword != "" && currentPassword != "") {
+				const userAuth = auth.currentUser;
+
+				console.log(userAuth);
+
+				const credential = EmailAuthProvider.credential(
+					userAuth.email,
+					currentPassword
+				);
+
+				reauthenticateWithCredential(userAuth, credential)
+					.then(async () => {
+						updatePassword(userAuth, newPassword)
+							.then(() => {
+								console.log("Sua senha foi alterada com sucesso!");
+								setConfirmPassword("");
+								setCurrentPassword("");
+								setNewPassword("");
+							})
+							.catch((error) => {
+								console.log("Ocorreu um erro ao atualizar a senha.");
+								console.error("Erro ao atualizar a senha:", error);
+							});
+					})
+					.catch((error) => {
+						setShowError(
+							"Reauthentication error. Make sure the current password is correct"
+						);
+						console.error("Erro na reautenticação:", error);
+					});
+			}
+
+			//ALTERAÇÃO DOS DADOS
+			const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+			await getDocs(q).then((value) => {
+				value.forEach(async (valueInfo) => {
+					const userData = valueInfo.data();
+					if (userData.uid == user.uid && user.email == userData.email) {
+						let userInfo = {
+							dateOfBirth: dateOfBirth ? dateOfBirth : userData.dateOfBirth,
+							ddd: ddd ? ddd : userData.ddd,
+							firstName: firstName ? firstName : userData.firstName,
+							lastName: lastName ? lastName : userData.lastName,
+							mobileNumber: mobileNumber ? mobileNumber : userData.mobileNumber,
+							password: newPassword ? newPassword : userData.password,
+							email: userData.email,
+							uid: userData.uid,
+						};
+						await setDoc(doc(db, "users", valueInfo.id), userInfo)
+							.then(() => {})
+							.catch((error) => {
+								console.log(error);
+							});
+					}
+				});
 			});
-		});
-	};
 
+			//ALTERAÇÃO DA IMAGEM
+			if (typeof image == "object") {
+				const uploadTask = uploadBytesResumable(storageRef, image);
+			} else {
+				const deletion = deleteObject(storageRef);
+			}
+		}
+	};
+	const validations = () => {
+		if (
+			firstName === "" ||
+			dateOfBirth === "" ||
+			lastName === "" ||
+			email === "" ||
+			mobileNumber === ""
+		) {
+			setShowError("Fill in all fields");
+			return false;
+		}
+		if (!checkBiggerAge(dateOfBirth)) {
+			setShowError("User must be over 18 years old");
+			return false;
+		}
+		const passwordRegex =
+			/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%^&*()_+])[A-Za-z\d@#$!%^&*()_+]{6,}$/;
+		if (!passwordRegex.test(newPassword)) {
+			setShowError(
+				"Password must have at least 6 characters, 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character."
+			);
+			return false;
+		}
+		if (newPassword != confirmPassword) {
+			setShowError("Passwords do not match");
+			return false;
+		}
+	};
+	function checkBiggerAge(data) {
+		const dataAtual = new Date();
+		const dataNascimento = new Date(data);
+		const idadeEmMilissegundos = dataAtual - dataNascimento;
+		const idadeEmAnos = idadeEmMilissegundos / (1000 * 60 * 60 * 24 * 365.25);
+
+		if (idadeEmAnos < 18) {
+			return false;
+		}
+		return true;
+	}
+	console.log(error);
 	return (
 		<div className="page-wrapper-info">
 			<p>Personal Information</p>
 			<hr />
 
 			<div className="user-picture-info">
-				<img
-					src={user && user.URLfoto ? user.URLfoto : userPicture}
-					alt="usuario sem foto"
-				/>
-				<div>
-					<button className="upload-button-info">Upload</button>
-					<button className="delete-button-info">
+				<div className="input-picture" onClick={() => inputRef.current.click()}>
+					{image ? (
+						<img
+							src={
+								typeof image === "object" ? URL.createObjectURL(image) : image
+							}
+						/>
+					) : (
+						<img src={userPicture} />
+					)}
+					<input
+						type="file"
+						name="picture"
+						id="pictureID"
+						style={{ display: "none" }}
+						ref={inputRef}
+						onChange={(e) => setImage(e.target.files[0])}
+					/>
+				</div>
+				<div className="btns-picture-info">
+					<button
+						className="upload-button-info"
+						onClick={() => inputRef.current.click()}
+					>
+						Upload
+					</button>
+					<button
+						className="delete-button-info"
+						onClick={() => {
+							setImage("");
+							document.getElementById("pictureID").value = "";
+						}}
+					>
 						<img src={trashIcon} alt="icone de lixeira" />
 						Delete
 					</button>
