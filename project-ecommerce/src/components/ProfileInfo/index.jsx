@@ -20,7 +20,12 @@ import {
 	where,
 	doc,
 } from "firebase/firestore";
-import { ref, uploadBytesResumable, deleteObject } from "firebase/storage";
+import {
+	ref,
+	uploadBytesResumable,
+	deleteObject,
+	getDownloadURL,
+} from "firebase/storage";
 import {
 	AuthCredential,
 	EmailAuthProvider,
@@ -120,6 +125,7 @@ const ProfileInfo = () => {
 				const deletion = deleteObject(storageRef);
 			}
 		}
+		saveInLocalStorage();
 	};
 	const validations = () => {
 		if (
@@ -148,6 +154,42 @@ const ProfileInfo = () => {
 			setShowError("Passwords do not match");
 			return false;
 		}
+	};
+	async function saveInLocalStorage() {
+		const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+
+		await getDocs(q).then((value) => {
+			value.forEach(async (doc) => {
+				const userData = doc.data();
+				let user = {
+					dateOfBirth: userData.dateOfBirth,
+					ddd: userData.ddd,
+					email: userData.email,
+					firstName: userData.firstName,
+					lastName: userData.lastName,
+					mobileNumber: userData.mobileNumber,
+					uid: userData.uid,
+					URLfoto: await handleUploadImage(userData.uid),
+				};
+
+				localStorage.setItem("userLogado", JSON.stringify(user));
+			});
+		});
+	}
+	const handleUploadImage = async (id) => {
+		const storageRef = storage;
+		const imagemRef = ref(storageRef, `images/users/${id}`);
+
+		const returnURL = await getDownloadURL(imagemRef)
+			.then((url) => {
+				return url;
+			})
+			.catch((error) => {
+				if (error.code === "storage/object-not-found") {
+					return "";
+				}
+			});
+		return returnURL;
 	};
 	function checkBiggerAge(data) {
 		const dataAtual = new Date();
