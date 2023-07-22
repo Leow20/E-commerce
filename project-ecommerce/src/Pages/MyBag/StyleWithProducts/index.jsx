@@ -1,6 +1,8 @@
 import React from "react";
 import "./style.css";
 
+import ProductBag from "../ProductsInBag/index";
+
 import close from "../../../assets/icons/cross.svg";
 
 function ContainerWP() {
@@ -14,8 +16,9 @@ function ContainerWP() {
 
         <div className="showProduct">
           <h1>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam
-            ipsam vitae fuga atque veniam, exercitationem accusantium! quos
+            <ProductBag />
+            <ProductBag />
+            <ProductBag />
           </h1>
 
           <div className="coupon-input">
@@ -23,31 +26,33 @@ function ContainerWP() {
             <button>CHECK</button>
           </div>
         </div>
-      </div>
-      <div className="img-circles"></div>
 
-      <div className="order-details">
-        <h3>Order Details</h3>
-        <div className="price-details">
-          <div>
-            <p>Sub Total</p>
-            <p>Discount</p>
-            <p>Delivery Fee</p>
-            <p>Grand Total</p>
+        <div className="space-order">
+        <div className="img-circles"></div>
+          <div className="order-details">
+            <h3>Order Details</h3>
+            <div className="price-details">
+              <div>
+                <p>Sub Total</p>
+                <p>Discount</p>
+                <p>Delivery Fee</p>
+                <p>Grand Total</p>
+              </div>
+              <div className="price">
+                <p>$119.69</p>
+                <p>-$13.40</p>
+                <p>-$0.00</p>
+                <p>$106.29</p>
+              </div>
+            </div>
+            <div className="confirm-details">
+              <div>
+                <p>Total Bag Amount</p>
+                <p>$106.29</p>
+              </div>
+              <button>Place Order</button>
+            </div>
           </div>
-          <div>
-            <p>$119.69</p>
-            <p>-$13.40</p>
-            <p>-$0.00</p>
-            <p>$106.29</p>
-          </div>
-        </div>
-        <div className="confirm-details">
-          <div>
-            <p>Total Bag Amount</p>
-            <p>$106.29</p>
-          </div>
-          <button>Place Order</button>
         </div>
       </div>
     </>
