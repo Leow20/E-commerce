@@ -1,0 +1,41 @@
+.window-mybag {
+  height: 100%;
+  width: 100%;
+}
+
+.container-title-mybag {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.container-title-mybag img {
+  transform: rotate(180deg);
+  margin: 16px;
+}
+
+.container-title-mybag h3 {
+  margin-left: 4px;
+}
+
+.empty-mybag {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 81px;
+}
+
+.empty-mybag h2 {
+  margin-top: 30px;
+}
+
+.empty-mybag p {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.button-mybag {
+  display: flex;
+  justify-content: center;
+  margin-top: 237px;
+}

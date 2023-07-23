@@ -1,0 +1,104 @@
+.productIn {
+  background-color: #f4f4f4;
+}
+
+.container-title-mybag {
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.container-title-mybag img {
+  margin: 16px;
+}
+
+.container-title-mybag h3 {
+  margin-left: 4px;
+}
+
+.showProduct {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: center;
+  max-height: 369px !important;
+  overflow: auto;
+}
+
+.coupon-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 24px;
+  margin-bottom: 31px;
+  padding: 14px 12px 14px 16px;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.coupon-input button {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  margin-right: 12px;
+}
+
+.coupon-input input {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  margin-left: 16px;
+}
+
+.img-circles {
+  position: relative;
+  bottom: 5px;
+  height: 16px;
+  width: 100%;
+  background-image: url("../../../assets/Img/Ellipse 23.svg");
+  background-repeat: repeat-x;
+}
+
+.space-order {
+  background-color: white;
+}
+
+.order-details {
+  font-size: 14px;
+}
+
+.order-details h3 {
+  padding-top: 20px;
+  margin-left: 16px;
+}
+
+.order-details p {
+  margin-top: 8px;
+  margin-left: 16px;
+}
+
+.price-details {
+  display: flex;
+  justify-content: space-between;
+}
+
+.price {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+  margin-right: 16px;
+}
+
+.confirm-details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 63px;
+}
+
+.confirm-details button {
+  background-color: #1b4b66;
+  color: white;
+  border-radius: 8px;
+}
