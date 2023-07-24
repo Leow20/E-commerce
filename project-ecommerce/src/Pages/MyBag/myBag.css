@@ -46,7 +46,6 @@
 }
 
 .showProduct {
-  background-color: grey;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -123,13 +122,15 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 63px;
+  margin-top: 53px;
 }
 
 .confirm-details button {
   background-color: #1b4b66;
   color: white;
   border-radius: 8px;
+  width: 200px;
+  height: 50px;
 }
 
 .box-product {
