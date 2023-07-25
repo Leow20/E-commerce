@@ -16,6 +16,7 @@ import Notification from "../Pages/Notification";
 import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
 import AddProduct from "../Pages/AddProduct";
+import ReferAndEarn from "../Pages/ReferAndEarn";
 
 //Routes private
 import Private from "./private";
@@ -39,6 +40,7 @@ const Router = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/addproduct" element={<Private> <AddProduct /> </Private>} />
+        <Route path="/referandearn" element={<ReferAndEarn />} />
       </Routes>
     </BrowserRouter>
   );
