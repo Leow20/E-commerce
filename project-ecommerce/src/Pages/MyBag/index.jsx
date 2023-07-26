@@ -6,12 +6,26 @@ import empty from "../../assets/Img/emptyBag.png";
 import close from "../../assets/icons/cross.svg";
 import bolsa from "../../assets/Img/image.jpg";
 
+import { useMediaQuery } from "react-responsive";
+
 const MyBag = () => {
   const products = true;
 
+  const isMobile = useMediaQuery({ minWidth: 820 });
+
   return (
     <>
-      {products === false ? (
+      {isMobile === true && products === true ? (
+        <div>
+          <h1>olá</h1>
+          <h2>Com produto</h2>
+        </div>
+      ) : isMobile === true && products === false ? (
+        <div>
+          <h1>olá</h1>
+          <h2>Sem produto</h2>
+        </div>
+      ) : products === false ? (
         <>
           <div className="container-title-mybag">
             <img src={arrow} />
