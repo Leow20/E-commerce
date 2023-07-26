@@ -20,6 +20,9 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import ProfileInfo from "../../components/ProfileInfo";
 import Wishlist from "../../components/Wishlist";
+import { signOut } from "firebase/auth";
+import { auth } from "../../../firebaseConnection";
+import { toast } from "react-toastify";
 
 const Profile = () => {
 	const [selectedTab, setSelectedTab] = useState("Personal Information");
@@ -27,8 +30,9 @@ const Profile = () => {
 	const isMobile = useMediaQuery({ maxWidth: 820 });
 	const [show, setShow] = useState("page-wrapper-modal-info");
 
-	const userData = localStorage.getItem("userLogado");
-	const user = JSON.parse(userData);
+	const [user, setUser] = useState(
+		JSON.parse(localStorage.getItem("userLogado"))
+	);
 
 	function handleTabChange(tab) {
 		setSelectedTab(tab);
@@ -78,6 +82,14 @@ const Profile = () => {
 			setShow("page-wrapper-modal-info");
 		}, 400);
 	}
+
+	const handleLogout = async () => {
+		await signOut(auth).then(() => {
+			localStorage.removeItem("userLogado");
+			setUser("");
+			toast.success("User logged out successfully");
+		});
+	};
 
 	return (
 		<>
@@ -301,6 +313,7 @@ const Profile = () => {
 							<div className="container-button-profile">
 								{selectedTab == "" && (
 									<button
+										onClick={handleLogout}
 										className="button-logout-profile"
 										id="button-logout-mob-profile"
 									>
