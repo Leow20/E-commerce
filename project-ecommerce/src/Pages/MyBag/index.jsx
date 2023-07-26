@@ -7,7 +7,7 @@ import close from "../../assets/icons/cross.svg";
 import bolsa from "../../assets/Img/image.jpg";
 
 const MyBag = () => {
-  const products = false;
+  const products = true;
 
   return (
     <>
