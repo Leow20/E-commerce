@@ -52,7 +52,100 @@ const ProductData = () => {
 	console.log(product);
 	console.log(image);
 
-	return <div>ProductData</div>;
+	if (isMobile && product) {
+		return (
+			<>
+				<header className="product-data-header">
+					<Link>
+						<img
+							src={Arrow}
+							alt="Arrow-Back"
+							style={{ transform: "rotate(180deg)" }}
+						/>
+					</Link>
+				</header>
+				<section className="product-data-section">
+					<div className="container-product-data">
+						<div className="box-img-data">
+							<div className="img-data">
+								<img src={image} alt="" />
+								<button></button>
+							</div>
+							<div className="img-data">
+								<img src={image} alt="" />
+								<button></button>
+							</div>
+							<div className="img-data">
+								<img src={image} alt="" />
+								<button></button>
+							</div>
+							<div className="img-data">
+								<img src={image} alt="" />
+								<button></button>
+							</div>
+						</div>
+					</div>
+					<div className="box-text-data">
+						<h1>{product.name}</h1>
+						<p>{product.description}</p>
+						<div>
+							<h3>{product.price}</h3>
+							<h4>
+								<hr /> {product.price}
+							</h4>
+
+							{product.discount != 0 && <h5>{product.discount + "%OFF"}</h5>}
+						</div>
+					</div>
+					<div className="box-stars-data">
+						<div className="content-stars-data">
+							<span className="span-stars-data">
+								{product.stars}
+								<img src={product.stars == 0 ? Star : StarFill} alt="Stars" />
+							</span>
+							<div>
+								<h2>Average Rating</h2>
+								<p>43 Ratings & 23 Reviews</p>
+							</div>
+						</div>
+					</div>
+					<div className="box-cards-data">
+						<div className="card-data">
+							<div className="text-card-data">
+								<span>Get upto 30% Off on order value above $100</span>
+								<Link>Terms & Conditions</Link>
+							</div>
+							<div className="coupon-card-data">
+								<span>Use Code</span>
+								<span>ORDER100</span>
+							</div>
+						</div>
+						<div className="delivery-details-data">
+							<span>Delivery Details</span>
+							<span>Check estimated delivery date/pickup option.</span>
+						</div>
+					</div>
+					<div className="btns-data">
+						<button className="add-fav">
+							<img src={Hearth} alt="" />
+						</button>
+						<button className="add-bag">
+							<img src={Bag} alt="Bag" />
+							<span>Add to Bag</span>
+						</button>
+					</div>
+				</section>
+			</>
+		);
+	} else if (!isMobile && product) {
+		return (
+			<>
+				<Header />
+				<section></section>
+				<Footer />
+			</>
+		);
+	}
 };
 
 export default ProductData;
