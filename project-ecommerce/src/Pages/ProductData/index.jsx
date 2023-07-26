@@ -23,9 +23,10 @@ import StarFill from "../../assets/icons/star-fill.svg";
 import Star from "../../assets/icons/star.svg";
 import Bag from "../../assets/icons/bag.svg";
 import Hearth from "../../assets/icons/icon-wishlist.svg";
+import Similar from "../../assets/icons/view-smilar.svg";
 
 const ProductData = () => {
-	const isMobile = useMediaQuery({ maxWidth: 820 });
+	const isMobile = useMediaQuery({ maxWidth: 640 });
 	const productId = "dHNcftyqtcPFuSKXMVDEVe4gmNe7NaEa";
 	const q = query(collection(db, "products"), where("id", "==", productId));
 	const [product, setProduct] = useState([]);
@@ -68,71 +69,92 @@ const ProductData = () => {
 					<div className="container-product-data">
 						<div className="box-img-data">
 							<div className="img-data">
-								<img src={image} alt="" />
-								<button></button>
+								<img src={image} alt="Product Image" id="productImageID" />
+								<button>
+									<img src={Similar} alt="View Similar" />
+								</button>
 							</div>
 							<div className="img-data">
-								<img src={image} alt="" />
-								<button></button>
+								<img src={image} alt="Product Image" id="productImageID" />
+								<button>
+									<img src={Similar} alt="View Similar" />
+								</button>
 							</div>
 							<div className="img-data">
-								<img src={image} alt="" />
-								<button></button>
+								<img src={image} alt="Product Image" id="productImageID" />
+								<button>
+									<img src={Similar} alt="View Similar" />
+								</button>
 							</div>
 							<div className="img-data">
-								<img src={image} alt="" />
-								<button></button>
+								<img src={image} alt="Product Image" id="productImageID" />
+								<button>
+									<img src={Similar} alt="View Similar" />
+								</button>
 							</div>
 						</div>
-					</div>
-					<div className="box-text-data">
-						<h1>{product.name}</h1>
-						<p>{product.description}</p>
-						<div>
-							<h3>{product.price}</h3>
-							<h4>
-								<hr /> {product.price}
-							</h4>
 
-							{product.discount != 0 && <h5>{product.discount + "%OFF"}</h5>}
-						</div>
-					</div>
-					<div className="box-stars-data">
-						<div className="content-stars-data">
-							<span className="span-stars-data">
-								{product.stars}
-								<img src={product.stars == 0 ? Star : StarFill} alt="Stars" />
-							</span>
+						<div className="box-text-data">
+							<h1>{product.name}</h1>
+							<p>{product.description}</p>
 							<div>
+								<h3>{product.price}</h3>
+								<h4>{product.price}</h4>
+
+								{product.discount != 0 && <h5>{product.discount + "%OFF"}</h5>}
+							</div>
+						</div>
+
+						<div className="box-stars-data">
+							<div className="content-stars-data">
+								<span className="span-stars-data">{product.stars}</span>
+								<img src={product.stars == 0 ? Star : StarFill} alt="Stars" />
+							</div>
+
+							<div className="content-text-stars-data">
 								<h2>Average Rating</h2>
 								<p>43 Ratings & 23 Reviews</p>
 							</div>
 						</div>
-					</div>
-					<div className="box-cards-data">
-						<div className="card-data">
-							<div className="text-card-data">
-								<span>Get upto 30% Off on order value above $100</span>
-								<Link>Terms & Conditions</Link>
+
+						<div className="box-cards-data">
+							<div className="card-data">
+								<div className="text-card-data">
+									<span>Get upto 30% Off on order value above $100</span>
+									<Link>Terms & Conditions</Link>
+								</div>
+								<div className="coupon-card-data">
+									<span>Use Code</span>
+									<span>ORDER100</span>
+								</div>
 							</div>
-							<div className="coupon-card-data">
-								<span>Use Code</span>
-								<span>ORDER100</span>
+
+							<div className="card-data">
+								<div className="text-card-data">
+									<span>Get upto 30% Off on order value above $100</span>
+									<Link>Terms & Conditions</Link>
+								</div>
+								<div className="coupon-card-data">
+									<span>Use Code</span>
+									<span>ORDER100</span>
+								</div>
 							</div>
 						</div>
+
 						<div className="delivery-details-data">
 							<span>Delivery Details</span>
 							<span>Check estimated delivery date/pickup option.</span>
 						</div>
-					</div>
-					<div className="btns-data">
-						<button className="add-fav">
-							<img src={Hearth} alt="" />
-						</button>
-						<button className="add-bag">
-							<img src={Bag} alt="Bag" />
-							<span>Add to Bag</span>
-						</button>
+
+						<div className="box-btns-data">
+							<button className="add-fav">
+								<img src={Hearth} alt="" />
+							</button>
+							<button className="add-bag">
+								<img src={Bag} alt="Bag" />
+								<span>Add to Bag</span>
+							</button>
+						</div>
 					</div>
 				</section>
 			</>
