@@ -20,7 +20,7 @@ const AddProduct = () => {
   const [file, setFile] = useState("");
   var myArray = [];
 
-  async function handleProcuts() {
+  async function handleProducts() {
     const q = query(collection(db, "products"));
 
     await getDocs(q).then((value) => {
@@ -33,7 +33,7 @@ const AddProduct = () => {
   }
 
   useEffect(() => {
-    handleProcuts();
+    handleProducts();
     if (ID == "") {
       generateRandomID();
     }
