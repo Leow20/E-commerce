@@ -120,10 +120,10 @@ const Profile = () => {
             <span>{selectedTab}</span>
             <div>
               <button
+                onClick={handleLogout}
                 className="button-logout-profile "
                 id="button-logout-desktop-profile"
               >
-                {" "}
                 <img src={logoutIcon} alt="icone de logout" />
                 Logout
               </button>

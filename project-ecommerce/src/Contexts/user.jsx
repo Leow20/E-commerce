@@ -1,14 +1,7 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
-import { auth, db } from "../../firebaseConnection"; // Substitua pelo caminho correto
-import {
-  collection,
-  doc,
-  getDoc,
-  getDocs,
-  query,
-  where,
-} from "@firebase/firestore";
+import { auth, db } from "../../firebaseConnection";
+import { collection, getDocs, query, where } from "@firebase/firestore";
 
 export const UserContext = createContext({});
 
@@ -24,20 +17,21 @@ function UserProvider({ children }) {
           const userData = valueInfo.data();
           setUser(userData);
         });
-        console.log("teste");
       });
     } catch (error) {
       console.error("Erro ao obter dados do Firestore:", error);
     }
   };
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      fetchUserInfoAndUpdateState(user.uid);
-    } else {
-      console.log("Não Autorizado");
-    }
-  });
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        fetchUserInfoAndUpdateState(user.uid);
+      } else {
+        console.log("Não Autorizado");
+      }
+    });
+  }, []);
 
   return (
     <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
