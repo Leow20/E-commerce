@@ -20,6 +20,7 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import ProfileInfo from "../../components/ProfileInfo";
 import Wishlist from "../../components/Wishlist";
+import ReferAndEarn from "../../components/ReferAndEarn";
 
 const Profile = () => {
   const [selectedTab, setSelectedTab] = useState("Personal Information");
@@ -91,6 +92,7 @@ const Profile = () => {
           </header>
           {selectedTab == "Personal Information" && <ProfileInfo />}
           {selectedTab == "My Wishlist" && <Wishlist />}
+          {selectedTab == "Refer and Earn" && <ReferAndEarn />}
         </div>
       )}
 
@@ -317,6 +319,7 @@ const Profile = () => {
             <div className="content-profile">
               {selectedTab == "Personal Information" && <ProfileInfo />}
               {selectedTab == "My Wishlist" && <Wishlist />}
+              {selectedTab == "Refer and Earn" && <ReferAndEarn />}
             </div>
           </div>
         </div>
