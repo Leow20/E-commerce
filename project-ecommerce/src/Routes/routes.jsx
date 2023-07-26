@@ -14,6 +14,7 @@ import AddProduct from "../Pages/AddProduct";
 
 //Routes private
 import Private from "./private";
+import ProductData from "../Pages/ProductData";
 
 const Router = () => {
 	return (
@@ -42,6 +43,7 @@ const Router = () => {
 						</Private>
 					}
 				/>
+				<Route path="/product" element={<ProductData />} />
 			</Routes>
 		</BrowserRouter>
 	);
