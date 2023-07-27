@@ -4,7 +4,6 @@ import bag from "../../assets/Img/image.jpg";
 import { useState, useEffect } from "react";
 
 const ProductContainer = ({ product }) => {
-  // Função para diminuir a descrição para no máximo 5 palavras e adicionar reticências
   const truncateDescription = (description, maxWords) => {
     const words = description.split(" ");
     if (words.length > maxWords) {

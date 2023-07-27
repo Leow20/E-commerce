@@ -32,7 +32,7 @@ function ProductProvider({ children }) {
       const imageRef = ref(storageRef, `images/products/${doc.id}`);
       try {
         const downloadURL = await getDownloadURL(imageRef);
-        doc.url = downloadURL; // Adicione o URL da imagem ao objeto 'doc'.
+        doc.url = downloadURL;
       } catch (error) {
         console.error("Erro ao obter o URL da imagem:", error);
       }
