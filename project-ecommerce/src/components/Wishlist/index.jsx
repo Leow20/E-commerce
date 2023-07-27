@@ -15,7 +15,7 @@ import BagIcon from "../../assets/imgHeader/bag.svg";
 import { Navigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { db, storage } from "../../../firebaseConnection";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { ref, getDownloadURL } from "firebase/storage";
 import { collection, getDocs, query } from "@firebase/firestore";
 
 const Wishlist = () => {
@@ -25,7 +25,7 @@ const Wishlist = () => {
 
   const [url, setUrl] = useState(null);
 
-  async function handleProcuts() {
+  async function handleProducts() {
     const q = query(collection(db, "products"));
 
     await getDocs(q).then((value) => {
@@ -37,27 +37,31 @@ const Wishlist = () => {
           qty: doc.data().qty,
           starts: doc.data().stars,
           discount: doc.data().discount,
+          id: doc.data().id,
         };
-        handleUploadImage(product.name);
+        handleUploadImage(product.id);
         productsArray.push(product);
       });
     });
   }
 
   useEffect(() => {
-    handleProcuts();
+    handleProducts();
     console.log(productsArray);
   }, []);
 
-  const handleUploadImage = async (name) => {
+  const handleUploadImage = async (id) => {
     const storageRef = storage;
-    const imagemRef = ref(storageRef, `images/${name}.jpg`);
+    const imagemRef = ref(storageRef, `images/${id}`);
 
     const downloadURL = await getDownloadURL(imagemRef);
 
-    // Armazenar a URL da imagem no estado
     setUrl(downloadURL);
   };
+
+  useEffect(() => {
+    console.log(url);
+  }, [url]);
 
   if (!products) {
     return (

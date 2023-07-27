@@ -20,8 +20,16 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import ProfileInfo from "../../components/ProfileInfo";
 import Wishlist from "../../components/Wishlist";
+import { signOut } from "firebase/auth";
+import { auth } from "../../../firebaseConnection";
+import { toast } from "react-toastify";
+
+//Context
+import { useContext } from "react";
+import { UserContext } from "../../Contexts/user";
 
 const Profile = () => {
+  const { user } = useContext(UserContext);
   const [selectedTab, setSelectedTab] = useState("Personal Information");
   const [tranlate, setTranlate] = useState("");
   const isMobile = useMediaQuery({ maxWidth: 820 });
@@ -76,6 +84,14 @@ const Profile = () => {
     }, 400);
   }
 
+  const handleLogout = async () => {
+    await signOut(auth).then(() => {
+      localStorage.removeItem("userLogado");
+      setUser("");
+      toast.success("User logged out successfully");
+    });
+  };
+
   return (
     <>
       {selectedTab !== "" && isMobile && (
@@ -104,10 +120,10 @@ const Profile = () => {
             <span>{selectedTab}</span>
             <div>
               <button
+                onClick={handleLogout}
                 className="button-logout-profile "
                 id="button-logout-desktop-profile"
               >
-                {" "}
                 <img src={logoutIcon} alt="icone de logout" />
                 Logout
               </button>
@@ -119,11 +135,20 @@ const Profile = () => {
                 className="container-info-profile"
                 onClick={() => handleTabChange("Personal Information")}
               >
-                <img src={userNotPicture} alt="usuario sem foto" />
+                <img
+                  src={user && user.URLfoto ? user.URLfoto : userNotPicture}
+                  alt="usuario sem foto"
+                />
                 <div>
-                  <p>Tina Vargayee</p>
-                  <p>tinavar@vinho.com</p>
-                  <p>+85-5478564</p>
+                  {user ? (
+                    <>
+                      <p>{user.firstName}</p>
+                      <p>{user.email}</p>
+                      <p>{"+" + user.ddd + "-" + user.mobileNumber}</p>
+                    </>
+                  ) : (
+                    <h1>Hello</h1>
+                  )}
                 </div>
                 <img src={arrowGray} alt="icone seta" />
               </div>
@@ -287,14 +312,17 @@ const Profile = () => {
                 </ul>
               </nav>
               <div className="container-button-profile">
-                <button
-                  className="button-logout-profile"
-                  id="button-logout-mob-profile"
-                >
-                  {" "}
-                  <img src={logoutIcon} alt="icone de logout" />
-                  Logout
-                </button>
+                {selectedTab == "" && (
+                  <button
+                    onClick={handleLogout}
+                    className="button-logout-profile"
+                    id="button-logout-mob-profile"
+                  >
+                    {" "}
+                    <img src={logoutIcon} alt="icone de logout" />
+                    Logout
+                  </button>
+                )}
               </div>
               <div></div>
             </main>
