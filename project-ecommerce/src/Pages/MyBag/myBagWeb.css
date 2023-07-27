@@ -1,6 +1,8 @@
 .windonw-web-mybag {
-  max-width: 1280px;
   width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
 }
 
 .path-to-cart-mybag {
@@ -18,8 +20,7 @@
 
 .web-container-mybag {
   display: flex;
-  margin-top: 3%;
-  /* justify-content: space-between; */
+  justify-content: space-between;
 }
 
 .products-info-mybag {
@@ -144,8 +145,7 @@
 }
 
 .summary-mybag {
-  position: relative;
-  left: 138px;
+  margin-left: 5%;
   width: 411px;
 }
 
@@ -184,4 +184,18 @@
 .space-divs-mybag {
   display: flex;
   justify-content: space-between;
+}
+
+@media (max-width: 1220px) {
+  .web-container-mybag {
+    flex-direction: column; 
+  }
+
+  .summary-mybag {
+    order: 1; 
+  }
+
+  .box-functional {
+    order: 2; 
+  }
 }

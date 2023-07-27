@@ -261,28 +261,6 @@ const MyBag = () => {
                     <button>Remove</button>
                   </div>
                 </div>
-
-                <div className="box-product">
-                  <div className="box-aling">
-                    <img src={bolsa} />
-                    <div className="info">
-                      <p>Coach</p>
-                      <p>Leather Coach Bag</p>
-                      <p>01</p>
-
-                      <div className="prices">
-                        <p className="big-text">$54.69</p>
-                        <p className="small-text">$69.99</p>
-                        <p className="red-text">20% OFF</p>
-                      </div>
-                    </div>
-                  </div>
-                  <hr className="line" />
-                  <div className="buttons">
-                    <button>Move to Wishlist</button>
-                    <button>Remove</button>
-                  </div>
-                </div>
               </div>
 
               <div className="coupon-input">

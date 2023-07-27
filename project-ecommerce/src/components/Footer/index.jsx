@@ -48,7 +48,7 @@ function Footer() {
             open ? { marginBottom: 0 + "px" } : { marginBottom: 80 + "px" }
           }
         >
-          <h3 className="coral-footer">outra coisa</h3>
+          <h3 className="coral-footer">More about CORA’L</h3>
           <button onClick={handleButtonFooter} className="icon-button-footer">
             {" "}
             <img
