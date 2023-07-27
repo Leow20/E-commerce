@@ -31,7 +31,7 @@
   padding: 6px;
 }
 
-.hero-mobile-home>div {
+.hero-mobile-home > div {
   flex-grow: 1;
 }
 
@@ -401,6 +401,11 @@
   padding: 5px 0 0 10px;
 }
 
+.img-product-home img:first-child {
+  width: 136px;
+  height: 138px;
+}
+
 @media screen and (min-width: 520px) {
   .text-shortcut-home {
     margin-left: 45%;
@@ -498,7 +503,7 @@
     display: none;
   }
 
-  .container-arrival-home img:first-child {
+  .container-arrival-home img {
     width: 286px;
     height: 286px;
   }

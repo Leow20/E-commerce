@@ -25,7 +25,22 @@ import shortcutIcon from "../../assets/icons/shortcutIcon.svg";
 import "./home.css";
 import { useState, useEffect } from "react";
 
+//Context
+import { useContext } from "react";
+import { ProductContext } from "../../Contexts/products";
+
 const Home = () => {
+  const { products } = useContext(ProductContext);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!products) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, [products]);
+
   const [tamanhoTela, setTamanhoTela] = useState(window.innerWidth - 37);
   useEffect(() => {
     const atualizarTamanhoTela = () => {
@@ -147,102 +162,26 @@ const Home = () => {
                 className="container-arrival-home"
                 style={{ width: tamanhoTela }}
               >
-                <div>
-                  <img src={bag} alt="bolsa" />
-                  <div className="arrival-content-home">
-                    <div className="text-product-home">
-                      <span>Grande</span>
-                      <span>Blossom Pouch</span>
-                      <span>$39.49</span>
+                {!loading ? (
+                  <div className="img-product-home">
+                    <img src={products[0].url} alt="bolsa" />
+                    <div className="arrival-content-home">
+                      <div className="text-product-home">
+                        <span>{products[0].name}</span>
+                        <span>Blossom Pouch</span>
+                        <span>$39.49</span>
+                      </div>
+                      <img
+                        src={heart}
+                        alt="icone coração"
+                        width={16}
+                        height={16}
+                      />
                     </div>
-                    <img
-                      src={heart}
-                      alt="icone coração"
-                      width={16}
-                      height={16}
-                    />
                   </div>
-                </div>
-                <div>
-                  <img src={bag} alt="bolsa" />
-                  <div className="arrival-content-home">
-                    <div className="text-product-home">
-                      <span>Grande</span>
-                      <span>Blossom Pouch</span>
-                      <span>$39.49</span>
-                    </div>
-                    <img
-                      src={heart}
-                      alt="icone coração"
-                      width={16}
-                      height={16}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <img src={bag} alt="bolsa" />
-                  <div className="arrival-content-home">
-                    <div className="text-product-home">
-                      <span>Grande</span>
-                      <span>Blossom Pouch</span>
-                      <span>$39.49</span>
-                    </div>
-                    <img
-                      src={heart}
-                      alt="icone coração"
-                      width={16}
-                      height={16}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <img src={bag} alt="bolsa" />
-                  <div className="arrival-content-home">
-                    <div className="text-product-home">
-                      <span>Grande</span>
-                      <span>Blossom Pouch</span>
-                      <span>$39.49</span>
-                    </div>
-                    <img
-                      src={heart}
-                      alt="icone coração"
-                      width={16}
-                      height={16}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <img src={bag} alt="bolsa" />
-                  <div className="arrival-content-home">
-                    <div className="text-product-home">
-                      <span>Grande</span>
-                      <span>Blossom Pouch</span>
-                      <span>$39.49</span>
-                    </div>
-                    <img
-                      src={heart}
-                      alt="icone coração"
-                      width={16}
-                      height={16}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <img src={bag} alt="bolsa" />
-                  <div className="arrival-content-home">
-                    <div className="text-product-home">
-                      <span>Grande</span>
-                      <span>Blossom Pouch</span>
-                      <span>$39.49</span>
-                    </div>
-                    <img
-                      src={heart}
-                      alt="icone coração"
-                      width={16}
-                      height={16}
-                    />
-                  </div>
-                </div>
+                ) : (
+                  <div>Loading...</div>
+                )}
               </div>
             </div>
           </section>
