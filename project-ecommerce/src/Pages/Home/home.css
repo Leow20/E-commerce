@@ -401,6 +401,10 @@
   padding: 5px 0 0 10px;
 }
 
+.img-product-home {
+  margin: 0 10px;
+}
+
 .img-product-home img:first-child {
   width: 136px;
   height: 138px;
