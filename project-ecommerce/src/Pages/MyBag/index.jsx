@@ -1,30 +1,193 @@
-import "./myBag.css";
+import { useState } from "react";
 
+import "./myBagMob.css";
+import "./myBagWeb.css";
+
+// components
 import ButtonBigMob from "../../components/ButtonBigMobile";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+
+// icons e imagens
 import arrow from "../../assets/icons/arrowProfile.svg";
 import empty from "../../assets/Img/emptyBag.png";
 import close from "../../assets/icons/cross.svg";
 import bolsa from "../../assets/Img/image.jpg";
+import ArrowDown from "../../assets/imgFooter/ArrowDown.svg";
 
 import { useMediaQuery } from "react-responsive";
 
 const MyBag = () => {
   const products = true;
+  const [open, setOpen] = useState(false);
 
-  const isMobile = useMediaQuery({ minWidth: 820 });
+  const isWeb = useMediaQuery({ minWidth: 820 });
+
+  function handleButtonFooter(e) {
+    e.preventDefault();
+
+    setOpen(!open);
+
+    var box = document.getElementById("boxFunction");
+
+    if (open) {
+      box.classList.remove("button-active");
+    } else {
+      box.classList.add("button-active");
+    }
+  }
 
   return (
     <>
-      {isMobile === true && products === true ? (
-        <div>
-          <h1>olá</h1>
-          <h2>Com produto</h2>
-        </div>
-      ) : isMobile === true && products === false ? (
-        <div>
-          <h1>olá</h1>
-          <h2>Sem produto</h2>
-        </div>
+      {isWeb === true && products === true ? (
+        <>
+          <Header />
+          <div className="windonw-web-mybag">
+            <div className="path-to-cart-mybag">
+              <p>Home</p>
+              <img src={arrow} />
+              <p>My Cart</p>
+            </div>
+
+            <h1 className="cart-mybag">My Cart</h1>
+
+            <div className="web-container-mybag">
+              <div className="products-info-mybag">
+                <div className="line-info-mybag">
+                  <p className="product-name-mybag">Product Name</p>
+                  <p className="price-mybag">Price</p>
+                  <p className="qty-mybag">Qty</p>
+                  <p>Subtotal</p>
+                </div>
+
+                <hr />
+
+                <div className="product-pic-mybag">
+                  <img src={bolsa} />
+                  <div className="text-mybag">
+                    <p>Coach</p>
+                    <p>Leather Coach Bag</p>
+                    <p>Qty- 1</p>
+                  </div>
+
+                  <div className="price-and-buttons-mybag">
+                    <div className="price-qty-mybag">
+                      <p className="price-mybag">$54.69</p>
+                      <p className="qty-mybag">1</p>
+                      <p>$54.69</p>
+                    </div>
+                    <div className="btns-mybag">
+                      <button>Move to Wishlist</button>
+                      <button>Remove</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="product-pic-mybag">
+                  <img src={bolsa} />
+                  <div className="text-mybag">
+                    <p>Coach</p>
+                    <p>Leather Coach Bag</p>
+                    <p>Qty- 1</p>
+                  </div>
+
+                  <div className="price-and-buttons-mybag">
+                    <div className="price-qty-mybag">
+                      <p className="price-mybag">$54.69</p>
+                      <p className="qty-mybag">1</p>
+                      <p>$54.69</p>
+                    </div>
+                    <div className="btns-mybag">
+                      <button>Move to Wishlist</button>
+                      <button>Remove</button>
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  id="boxFunction"
+                  className="box-button-footer"
+                  style={
+                    open
+                      ? { marginBottom: 0 + "px" }
+                      : { marginBottom: 0 + "px" }
+                  }
+                >
+                  <h3 className="coral-footer">Apply Coupon Code</h3>
+                  <button
+                    onClick={handleButtonFooter}
+                    className="icon-button-footer"
+                  >
+                    {" "}
+                    <img
+                      src={ArrowDown}
+                      style={{
+                        transform: `rotate(${open ? "180deg" : "0deg"})`,
+                      }}
+                      alt=""
+                    />{" "}
+                  </button>
+                </div>
+                {open === false ? (
+                  <>
+                    <hr />
+                    <div className="coupon-input-mybag">
+                      <input type="text" placeholder="Apply Coupon Code" />
+                      <button>CHECK</button>
+                    </div>
+                  </>
+                ) : null}
+              </div>
+
+              <div className="summary-mybag">
+                <h4>Order Summary</h4>
+                <hr />
+                <div className="space-divs-mybag">
+                  <div>
+                    <p>Sub Total</p>
+                    <p>Discount</p>
+                    <p>Delivery Fee</p>
+                    <p>Grand Total</p>
+                  </div>
+                  <div>
+                    <p>$119.69</p>
+                    <p>-$13.40</p>
+                    <p>-$0.00</p>
+                    <p>$106.29</p>
+                  </div>
+                </div>
+                <div className="summary-btns-mybag">
+                  <button>Place Order</button>
+                  <button>Continue Shopping</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <Footer />
+        </>
+      ) : isWeb === true && products === false ? (
+        <>
+          <Header />
+          <div className="windonw-web-mybag">
+            <div className="path-to-cart-mybag">
+              <p>Home</p>
+              <img src={arrow} />
+              <p>My Cart</p>
+            </div>
+
+            <h1 className="cart-mybag">My Cart</h1>
+
+            <div className="empty-mybag">
+              <img src={empty} />
+              <h2>Uh Oh....!</h2>
+              <p>
+                You haven’t added any any items. Start shopping to make your bag
+                bloom
+              </p>
+            </div>
+          </div>
+          <Footer />
+        </>
       ) : products === false ? (
         <>
           <div className="container-title-mybag">
@@ -61,18 +224,7 @@ const MyBag = () => {
                     <div className="info">
                       <p>Coach</p>
                       <p>Leather Coach Bag</p>
-                      <select>
-                        <option value="01">01</option>
-                        <option value="02">02</option>
-                        <option value="03">03</option>
-                        <option value="04">04</option>
-                        <option value="05">05</option>
-                        <option value="06">06</option>
-                        <option value="07">07</option>
-                        <option value="08">08</option>
-                        <option value="09">09</option>
-                        <option value="10">10</option>
-                      </select>
+                      <p>01</p>
 
                       <div className="prices">
                         <p className="big-text">$54.69</p>
@@ -94,18 +246,7 @@ const MyBag = () => {
                     <div className="info">
                       <p>Coach</p>
                       <p>Leather Coach Bag</p>
-                      <select>
-                        <option value="01">01</option>
-                        <option value="02">02</option>
-                        <option value="03">03</option>
-                        <option value="04">04</option>
-                        <option value="05">05</option>
-                        <option value="06">06</option>
-                        <option value="07">07</option>
-                        <option value="08">08</option>
-                        <option value="09">09</option>
-                        <option value="10">10</option>
-                      </select>
+                      <p>01</p>
 
                       <div className="prices">
                         <p className="big-text">$54.69</p>
@@ -127,18 +268,7 @@ const MyBag = () => {
                     <div className="info">
                       <p>Coach</p>
                       <p>Leather Coach Bag</p>
-                      <select>
-                        <option value="01">01</option>
-                        <option value="02">02</option>
-                        <option value="03">03</option>
-                        <option value="04">04</option>
-                        <option value="05">05</option>
-                        <option value="06">06</option>
-                        <option value="07">07</option>
-                        <option value="08">08</option>
-                        <option value="09">09</option>
-                        <option value="10">10</option>
-                      </select>
+                      <p>01</p>
 
                       <div className="prices">
                         <p className="big-text">$54.69</p>
