@@ -74,3 +74,13 @@
     font-weight: 600;
 
 }
+
+.refer-h1 {
+    font-size: 20px;
+    font-weight: 600;
+    padding: 0 47px !important;
+    line-height: 26px;
+    color: #1b4b66;
+    display: block !important;
+
+}
