@@ -20,7 +20,6 @@ import AddProduct from "../Pages/AddProduct";
 //Routes private
 import Private from "./private";
 
-
 const Router = () => {
   return (
     <BrowserRouter>
@@ -28,7 +27,14 @@ const Router = () => {
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/categories" element={<Categories />} />
-        <Route path="/profile" element={<Private> <Profile /> </Private>} />
+        <Route
+          path="/profile"
+          element={
+            <Private>
+              <Profile />
+            </Private>
+          }
+        />
         <Route path="/mybag" element={<MyBag />} />
         <Route path="/handbags" element={<Handbags />} />
         <Route path="/watches" element={<Watches />} />
@@ -38,7 +44,14 @@ const Router = () => {
         <Route path="/notification" element={<Notification />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/addproduct" element={<Private> <AddProduct /> </Private>} />
+        <Route
+          path="/addproduct"
+          element={
+            <Private>
+              <AddProduct />
+            </Private>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );

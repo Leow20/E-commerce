@@ -1,0 +1,201 @@
+.windonw-web-mybag {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.path-to-cart-mybag {
+  display: flex;
+  align-items: center;
+}
+
+.path-to-cart-mybag img {
+  margin: 0px 1%;
+}
+
+.cart-mybag {
+  margin-top: 3%;
+}
+
+.web-container-mybag {
+  display: flex;
+  justify-content: space-between;
+}
+
+.products-info-mybag {
+  width: 710px;
+}
+
+.line-info-mybag {
+  display: flex;
+}
+
+.product-name-mybag {
+  margin-right: 314px;
+  margin-bottom: 8px;
+}
+
+.price-mybag {
+  margin-right: 67px;
+}
+
+.qty-mybag {
+  margin-right: 78px;
+}
+
+.product-pic-mybag {
+  display: flex;
+  height: 97px;
+  margin-top: 26px;
+}
+
+.product-pic-mybag img {
+  width: 75px;
+  height: 80px;
+  margin-right: 16px;
+}
+
+.text-mybag p {
+  margin-bottom: 8px;
+  width: 220px;
+}
+
+.price-and-buttons-mybag {
+  position: relative;
+  left: 110px;
+}
+
+.price-qty-mybag {
+  display: flex;
+}
+
+.btns-mybag {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 35px;
+}
+
+.btns-mybag button:first-child {
+  color: black;
+}
+
+.btns-mybag button {
+  color: #b00020;
+  text-decoration-line: underline;
+  border: none;
+  background: none;
+}
+
+.box-button-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: white;
+  width: 100%;
+  height: 48px;
+}
+
+.coral-footer {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+  padding: 15px 16px;
+}
+
+.icon-button-footer {
+  background-color: transparent;
+  border: none;
+  margin: 12px 16px;
+}
+
+.icon-button-footer img {
+  transition: all cubic-bezier(0.9, -0.67, 0.13, 1.37) 0.5s;
+}
+
+.icon-button-footer img:hover {
+  transform: scale(1.2);
+}
+
+.coupon-input-mybag {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+  margin-bottom: 36px;
+  width: 332px;
+  padding: 14px 12px 14px 16px;
+  border-radius: 4px;
+  background-color: #f4f4f4;
+}
+
+.coupon-input-mybag button {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  margin-right: 12px;
+}
+
+.coupon-input-mybag input {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  margin-left: 16px;
+}
+
+.summary-mybag {
+  margin-left: 5%;
+  width: 411px;
+}
+
+.summary-mybag h4 {
+  padding: 16px 0px;
+}
+
+.summary-mybag p {
+  margin-top: 12px;
+}
+
+.summary-btns-mybag {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  top: 40px;
+  justify-content: space-between;
+}
+
+.summary-btns-mybag button:first-child {
+  background-color: #1b4b66;
+  color: white;
+}
+
+.summary-btns-mybag button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 180px;
+  height: 40px;
+  border: 2px solid #1b4b66;
+  border-radius: 8px;
+  background-color: transparent;
+}
+
+.space-divs-mybag {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (max-width: 1220px) {
+  .web-container-mybag {
+    flex-direction: column; 
+  }
+
+  .summary-mybag {
+    order: 1; 
+  }
+
+  .box-functional {
+    order: 2; 
+  }
+}

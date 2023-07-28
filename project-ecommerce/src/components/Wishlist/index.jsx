@@ -25,7 +25,7 @@ const Wishlist = () => {
 
   const [url, setUrl] = useState(null);
 
-  async function handleProcuts() {
+  async function handleProducts() {
     const q = query(collection(db, "products"));
 
     await getDocs(q).then((value) => {
@@ -46,7 +46,7 @@ const Wishlist = () => {
   }
 
   useEffect(() => {
-    handleProcuts();
+    handleProducts();
     console.log(productsArray);
   }, []);
 
