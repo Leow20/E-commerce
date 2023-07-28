@@ -9,7 +9,8 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 
 // icons e imagens
-import arrow from "../../assets/icons/arrowProfile.svg";
+
+import arrow from "../../assets/icons/blackArrow.svg";
 import empty from "../../assets/Img/emptyBag.png";
 import close from "../../assets/icons/cross.svg";
 import bolsa from "../../assets/Img/image.jpg";
@@ -149,7 +150,7 @@ const MyBag = () => {
                     <p>Delivery Fee</p>
                     <p>Grand Total</p>
                   </div>
-                  <div>
+                  <div className="space-numbers-mybag">
                     <p>$119.69</p>
                     <p>-$13.40</p>
                     <p>-$0.00</p>
