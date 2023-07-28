@@ -8,23 +8,27 @@
 .image-Refer {
     width: 239px;
     height: 239px;
-    margin-top: 89px;
+    margin-top: 65px;
 }
 
-.text-one {
+.text-one p {
     width: 228px;
     height: auto;
-    margin-top: 20px;
+    margin-top: 17px;
     color: #171520;
     font-size: 14px;
     font-weight: 500;
     line-height: 1.4;
+    text-align: center;
+
 }
+
+
 
 #code-text {
     width: 240px;
     height: 40px;
-    border: 1px dotted #1B4B66;
+    border: 2px dashed #1B4B66;
     margin-top: 20px;
     border-radius: 8px;
     background: #F9F9F9;
@@ -39,7 +43,11 @@
     display: flex;
     justify-content: center;
     font-size: 13px;
+    text-align: center;
+
 }
+
+
 
 .text-three {
     width: 335px;
@@ -52,33 +60,38 @@
 
 .box-text {
     width: 324px;
-    height: 18px;
     color: #626262;
     font-weight: 500;
-    margin-top: 14px;
+    margin-top: 8px;
     font-size: 14px;
+    display: block;
+
 
 }
 
 .box-text li {
-    margin-bottom: 8px;
+    margin-top: 10px;
+    margin-left: 15px;
+    list-style: disc;
+
 }
 
 .button-invite {
-    margin-top: 130px;
+    margin-top: 50px;
     width: 328px;
     height: 44px;
     background-color: #1B4B66;
     border-radius: 8px;
     color: #FFFFFF;
     font-weight: 600;
+    margin-bottom: 11px;
 
 }
 
 .refer-h1 {
     font-size: 20px;
     font-weight: 600;
-    padding: 0 47px !important;
+    padding: 20px 0 0 36px !important;
     line-height: 26px;
     color: #1b4b66;
     display: block !important;
