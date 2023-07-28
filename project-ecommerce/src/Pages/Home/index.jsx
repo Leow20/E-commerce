@@ -26,6 +26,7 @@ import "./home.css";
 import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../../Contexts/products";
 import ProductContainer from "../../components/ProductContainer";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const { products } = useContext(ProductContext);
@@ -46,12 +47,12 @@ const Home = () => {
 
   useEffect(() => {
     console.log(products);
-    if (!products) {
-      setLoading(true);
-    } else {
+    if (products) {
       setLoading(false);
+    } else {
+      setLoading(true);
     }
-  }, [products]);
+  }, [ProductContext]);
 
   return (
     <div>
@@ -161,8 +162,10 @@ const Home = () => {
                   className="container-arrival-home"
                   style={{ width: tamanhoTela }}
                 >
-                  {products.map((product) => (
-                    <ProductContainer key={product.id} product={product} />
+                  {products.slice(0, 8).map((product) => (
+                    <Link to={`/product/${product.id}`} key={product.id}>
+                      <ProductContainer product={product} />
+                    </Link>
                   ))}
                 </div>
               ) : (

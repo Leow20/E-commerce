@@ -6,9 +6,9 @@ import UserProvider from "./Contexts/user.jsx";
 import ProductProvider from "./Contexts/products.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <UserProvider>
-    <ProductProvider>
+  <ProductProvider>
+    <UserProvider>
       <App />
-    </ProductProvider>
-  </UserProvider>
+    </UserProvider>
+  </ProductProvider>
 );
