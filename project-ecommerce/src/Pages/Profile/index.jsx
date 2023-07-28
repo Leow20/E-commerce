@@ -121,6 +121,7 @@ const Profile = () => {
 							<button
 								className="button-logout-profile "
 								id="button-logout-desktop-profile"
+								onClick={handleLogout}
 							>
 								{" "}
 								<img src={logoutIcon} alt="icone de logout" />
