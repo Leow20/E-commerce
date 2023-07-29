@@ -43,7 +43,7 @@ const Router = () => {
             </Private>
           }
         />
-        <Route path="/product/:id" element={<Product />} />
+        <Route path="/product/:id" element={<ProductData />} />
       </Routes>
     </BrowserRouter>
   );

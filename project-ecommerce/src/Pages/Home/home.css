@@ -507,6 +507,10 @@
     display: none;
   }
 
+  .container-arrival-home {
+    height: 420px;
+  }
+
   .container-arrival-home img {
     width: 286px;
     height: 286px;
