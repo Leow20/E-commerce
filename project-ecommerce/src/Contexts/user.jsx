@@ -6,36 +6,38 @@ import { collection, getDocs, query, where } from "@firebase/firestore";
 export const UserContext = createContext({});
 
 function UserProvider({ children }) {
-  const [user, setUser] = useState("");
+	const [user, setUser] = useState("");
 
-  const fetchUserInfoAndUpdateState = async (uid) => {
-    try {
-      const q = query(collection(db, "users"), where("uid", "==", uid));
+	const fetchUserInfoAndUpdateState = async (uid) => {
+		try {
+			const q = query(collection(db, "users"), where("uid", "==", uid));
 
-      await getDocs(q).then((value) => {
-        value.forEach(async (valueInfo) => {
-          const userData = valueInfo.data();
-          setUser(userData);
-        });
-      });
-    } catch (error) {
-      console.error("Erro ao obter dados do Firestore:", error);
-    }
-  };
+			await getDocs(q).then((value) => {
+				value.forEach(async (valueInfo) => {
+					const userData = valueInfo.data();
+					setUser(userData);
+				});
+			});
+		} catch (error) {
+			console.error("Erro ao obter dados do Firestore:", error);
+		}
+	};
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        fetchUserInfoAndUpdateState(user.uid);
-      } else {
-        console.log("Não Autorizado");
-      }
-    });
-  }, []);
+	useEffect(() => {
+		onAuthStateChanged(auth, (user) => {
+			if (user) {
+				fetchUserInfoAndUpdateState(user.uid);
+			} else {
+				console.log("Não Autorizado");
+			}
+		});
+	}, []);
 
-  return (
-    <UserContext.Provider value={{ user }}>{children}</UserContext.Provider>
-  );
+	return (
+		<UserContext.Provider value={{ user, fetchUserInfoAndUpdateState }}>
+			{children}
+		</UserContext.Provider>
+	);
 }
 
 export default UserProvider;
