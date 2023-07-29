@@ -21,9 +21,12 @@ function Header({ Page }) {
   const [modal, setModal] = useState(false);
   const [isHovered, setIsHovered] = useState();
 
+  const urlCompleta = window.location.href;
+  const dominio = window.location.origin;
+  const page = urlCompleta.replace(dominio, "");
+
   const handleHover = () => {
     setIsHovered(!isHovered);
-    console.log("passo" + isHovered);
   };
 
   return (
@@ -73,13 +76,25 @@ function Header({ Page }) {
               <img src={perfil} alt="perfil" />
             </Link>
 
-            <Link to="/mybag">
-              <img src={sacola} alt="sacola" />
-              <div className="container-bag-icon" onMouseEnter={handleHover}>
-                {" "}
+            {page != "/mybag" && (
+              <Link to="/mybag">
                 <img src={sacola} alt="sacola" />
-              </div>
-            </Link>
+                <div className="container-bag-icon" onMouseEnter={handleHover}>
+                  {" "}
+                  <img src={sacola} alt="sacola" />
+                </div>
+              </Link>
+            )}
+
+            {page == "/mybag" && (
+              <Link to="/mybag">
+                <img src={sacola} alt="sacola" />
+                <div className="container-bag-icon">
+                  {" "}
+                  <img src={sacola} alt="sacola" />
+                </div>
+              </Link>
+            )}
           </div>
 
           <MyBagModal hover={isHovered} />

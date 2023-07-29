@@ -31,6 +31,18 @@ const MyBagModal = ({ hover }) => {
     setIsHovered(false);
   }, [isMobile]);
 
+  const [quantity, setQuantity] = useState(1);
+
+  const handleDecrease = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  const handleIncrease = () => {
+    setQuantity(quantity + 1);
+  };
+
   return (
     <div>
       {isHovered && (
@@ -55,11 +67,9 @@ const MyBagModal = ({ hover }) => {
                 <p>Coach</p>
                 <p>Leather Coach Bag</p>
                 <div className="box-counter-product-header">
-                  <button>-</button>
-                  <p>1</p>
-                  <button>
-                    <AiOutlinePlus />
-                  </button>
+                  <button onClick={handleDecrease}>-</button>
+                  <p>{quantity}</p>
+                  <button onClick={handleIncrease}>+</button>
                 </div>
               </div>
 
@@ -81,9 +91,9 @@ const MyBagModal = ({ hover }) => {
                 <p>Coach</p>
                 <p>Leather Coach Bag</p>
                 <div className="box-counter-product-header">
-                  <button>-</button>
-                  <p>1</p>
-                  <button>+</button>
+                  <button onClick={handleDecrease}>-</button>
+                  <p>{quantity}</p>
+                  <button onClick={handleIncrease}>+</button>
                 </div>
               </div>
 
