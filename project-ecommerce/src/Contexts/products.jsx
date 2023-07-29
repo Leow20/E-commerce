@@ -24,6 +24,7 @@ function ProductProvider({ children }) {
           starts: doc.data().stars,
           discount: doc.data().discount,
           id: doc.data().id,
+          category: doc.data().category,
         };
         productsArray.push(product);
       });

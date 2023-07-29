@@ -1,5 +1,5 @@
 //React
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 //Router Dom
 import { Link } from "react-router-dom";
@@ -26,9 +26,13 @@ import Star from "../../assets/icons/star.svg";
 import Bag from "../../assets/icons/bag.svg";
 import Hearth from "../../assets/icons/icon-wishlist.svg";
 import Similar from "../../assets/icons/view-smilar.svg";
+
 import { useParams } from "react-router-dom";
 
+import { ProductContext } from "../../Contexts/products";
+
 const ProductData = () => {
+  const { products } = useContext(ProductContext);
   const { id } = useParams();
   const isMobile = useMediaQuery({ maxWidth: 619 });
   const productId = id;
@@ -39,24 +43,14 @@ const ProductData = () => {
   const [container, setContainer] = useState("Product Description");
   const [classImg, setClassImg] = useState(1);
 
-  if (!product || !image) {
-    getDocs(q).then((value) => {
-      value.forEach((doc) => {
-        const data = doc.data();
-        setProduct(data);
-      });
+  useEffect(() => {
+    products.forEach((doc) => {
+      if (doc.id == productId) {
+        setProduct(doc);
+        setImage(doc.url);
+      }
     });
-    const storageRef = storage;
-    const imagemRef = ref(storageRef, `images/products/${productId}`);
-
-    getDownloadURL(imagemRef)
-      .then((url) => {
-        setImage(url);
-      })
-      .catch((error) => {
-        //if (error.code === "storage/object-not-found")
-      });
-  }
+  }, []);
 
   if (isMobile && product) {
     return (
@@ -171,7 +165,10 @@ const ProductData = () => {
         <Header Page={product.name} />
         <section className="product-data-section">
           <div className="box-title-data">
-            <span>Home</span>
+            <Link to="/">
+              {" "}
+              <span>Home</span>
+            </Link>
             <img src={Arrow} alt="Arrow" />
             <span>
               {category
