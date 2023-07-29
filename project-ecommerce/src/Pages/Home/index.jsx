@@ -5,7 +5,7 @@ import Footer from "../../components/Footer";
 //Images
 import funkMob from "../../assets/Img/funk.jpg";
 import funkDesk from "../../assets/Img/heroFunk.jpg";
-import bag from "../../assets/Img/image.jpg";
+
 import perfume from "../../assets/Img/perfume.jpg";
 import zara from "../../assets/Img/Zara_Logo 1.png";
 import shortcut from "../../assets/Img/PWA-CTA.jpg";
@@ -13,7 +13,6 @@ import spring from "../../assets/Img/spring.jpg";
 
 //Icons
 import arrow from "../../assets/icons/Vector 1.svg";
-import heart from "../../assets/icons/Vector.svg";
 import skinCare from "../../assets/icons/icon-fill.svg";
 import arrowOrange from "../../assets/icons/arrowOrange.svg";
 import arrowBlue from "../../assets/icons/arroBlue.svg";
@@ -23,10 +22,17 @@ import shortcutIcon from "../../assets/icons/shortcutIcon.svg";
 
 //Styles
 import "./home.css";
-import { useState, useEffect } from "react";
+
+import { useContext, useEffect, useState } from "react";
+import { ProductContext } from "../../Contexts/products";
+import ProductContainer from "../../components/ProductContainer";
+import { Link } from "react-router-dom";
 
 const Home = () => {
+  const { products } = useContext(ProductContext);
   const [tamanhoTela, setTamanhoTela] = useState(window.innerWidth - 37);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     const atualizarTamanhoTela = () => {
       setTamanhoTela(window.innerWidth - 37);
@@ -38,6 +44,15 @@ const Home = () => {
       window.removeEventListener("resize", atualizarTamanhoTela);
     };
   }, []);
+
+  useEffect(() => {
+    console.log(products);
+    if (products) {
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
+  }, [ProductContext]);
 
   return (
     <div>
@@ -132,7 +147,6 @@ const Home = () => {
                 </div>
               </div>
             </div>
-
             <div className="container-arrival-title-home">
               <div className="arrival-title-home">
                 <span>New Arrivals</span>
@@ -143,107 +157,20 @@ const Home = () => {
                 </span>
               </div>
 
-              <div
-                className="container-arrival-home"
-                style={{ width: tamanhoTela }}
-              >
-                <div>
-                  <img src={bag} alt="bolsa" />
-                  <div className="arrival-content-home">
-                    <div className="text-product-home">
-                      <span>Grande</span>
-                      <span>Blossom Pouch</span>
-                      <span>$39.49</span>
-                    </div>
-                    <img
-                      src={heart}
-                      alt="icone coração"
-                      width={16}
-                      height={16}
-                    />
-                  </div>
+              {!loading && products.length > 0 ? (
+                <div
+                  className="container-arrival-home"
+                  style={{ width: tamanhoTela }}
+                >
+                  {products.slice(0, 8).map((product) => (
+                    <Link to={`/product/${product.id}`} key={product.id}>
+                      <ProductContainer product={product} />
+                    </Link>
+                  ))}
                 </div>
-                <div>
-                  <img src={bag} alt="bolsa" />
-                  <div className="arrival-content-home">
-                    <div className="text-product-home">
-                      <span>Grande</span>
-                      <span>Blossom Pouch</span>
-                      <span>$39.49</span>
-                    </div>
-                    <img
-                      src={heart}
-                      alt="icone coração"
-                      width={16}
-                      height={16}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <img src={bag} alt="bolsa" />
-                  <div className="arrival-content-home">
-                    <div className="text-product-home">
-                      <span>Grande</span>
-                      <span>Blossom Pouch</span>
-                      <span>$39.49</span>
-                    </div>
-                    <img
-                      src={heart}
-                      alt="icone coração"
-                      width={16}
-                      height={16}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <img src={bag} alt="bolsa" />
-                  <div className="arrival-content-home">
-                    <div className="text-product-home">
-                      <span>Grande</span>
-                      <span>Blossom Pouch</span>
-                      <span>$39.49</span>
-                    </div>
-                    <img
-                      src={heart}
-                      alt="icone coração"
-                      width={16}
-                      height={16}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <img src={bag} alt="bolsa" />
-                  <div className="arrival-content-home">
-                    <div className="text-product-home">
-                      <span>Grande</span>
-                      <span>Blossom Pouch</span>
-                      <span>$39.49</span>
-                    </div>
-                    <img
-                      src={heart}
-                      alt="icone coração"
-                      width={16}
-                      height={16}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <img src={bag} alt="bolsa" />
-                  <div className="arrival-content-home">
-                    <div className="text-product-home">
-                      <span>Grande</span>
-                      <span>Blossom Pouch</span>
-                      <span>$39.49</span>
-                    </div>
-                    <img
-                      src={heart}
-                      alt="icone coração"
-                      width={16}
-                      height={16}
-                    />
-                  </div>
-                </div>
-              </div>
+              ) : (
+                <div>Loading</div>
+              )}
             </div>
           </section>
           <section className="second-section">

@@ -1,0 +1,20 @@
+.img-product-home {
+  margin: 0 10px;
+  height: 202px;
+}
+
+@media screen and (min-width: 820px) {
+  .img-product-home {
+    min-width: 284px;
+    height: 400px;
+  }
+
+  .img-product-home img:first-child {
+    width: 286px;
+    height: 286px;
+  }
+
+  .text-product-home {
+    gap: 6px;
+  }
+}

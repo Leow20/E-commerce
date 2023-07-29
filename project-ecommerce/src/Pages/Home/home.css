@@ -31,7 +31,7 @@
   padding: 6px;
 }
 
-.hero-mobile-home>div {
+.hero-mobile-home > div {
   flex-grow: 1;
 }
 
@@ -104,7 +104,8 @@
 }
 
 .container-arrival-home {
-  padding: 10px 17px 17px;
+  height: 244px;
+  padding: 10px 0px 17px;
   display: flex;
   flex-wrap: nowrap;
   flex-direction: row;
@@ -401,6 +402,15 @@
   padding: 5px 0 0 10px;
 }
 
+.img-product-home {
+  margin: 0 10px;
+}
+
+.img-product-home img:first-child {
+  width: 136px;
+  height: 138px;
+}
+
 @media screen and (min-width: 520px) {
   .text-shortcut-home {
     margin-left: 45%;
@@ -442,7 +452,6 @@
   .hero-web-home {
     width: 100%;
     max-width: 1240px;
-    padding: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -498,7 +507,7 @@
     display: none;
   }
 
-  .container-arrival-home img:first-child {
+  .container-arrival-home img {
     width: 286px;
     height: 286px;
   }
@@ -535,6 +544,27 @@
     width: 100%;
     margin: 26px 0;
   }
+  .arrival-title-home {
+    margin-top: 65px;
+  }
+
+  .arrival-title-home span {
+    font-size: 34px;
+    font-weight: 600;
+    line-height: 44px;
+  }
+
+  .arrival-title-home span a {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 24px;
+  }
+
+  .arrival-title-home span a img {
+    width: 7.5px;
+    height: 15px;
+    margin-left: 5px;
+  }
 
   .content-grid-home img {
     max-width: 280px;
@@ -564,10 +594,14 @@
     font-size: 34px;
     line-height: 44px;
     margin-top: 30px;
+    font-weight: 600;
   }
 
   .title-brand-home span a {
     display: none;
+  }
+  .title-brand-home {
+    margin-top: 35px;
   }
 
   .container-shortcut-home,
