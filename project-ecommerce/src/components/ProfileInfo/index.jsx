@@ -79,7 +79,6 @@ const ProfileInfo = () => {
 	};
 	if (typeof image == "undefined") {
 		handleUploadImage();
-		console.log("aqui");
 	}
 
 	async function handlePassword() {
@@ -97,24 +96,17 @@ const ProfileInfo = () => {
 				.catch((error) => {
 					if (error.code == "auth/wrong-password") {
 						setError("Incorrect current password");
-						toast.warning("Incorrect current password");
 					}
 				});
 
 			await updatePassword(userAuth, newPassword)
 				.then(async () => {
 					await handleEdit();
-					toast.success("Sua senha foi alterada com sucesso!");
 					setConfirmPassword("");
 					setCurrentPassword("");
 					setNewPassword("");
 				})
-				.catch((error) => {
-					console.error(error);
-					if (error.code == "auth/weak-password") {
-						toast.warning("Senha muito fraca");
-					}
-				});
+				.catch((error) => {});
 		}
 	}
 
@@ -358,11 +350,19 @@ const ProfileInfo = () => {
 							onChange={(e) => setDateOfBirth(e.target.value)}
 							onFocus={(e) => setError("")}
 							style={
-								dateOfBirth === "" && error == "Fill in all fields"
+								(dateOfBirth === "" && error == "Fill in all fields") ||
+								(dateOfBirth !== "" &&
+									error == "User must be over 18 years old")
 									? { border: "1px solid red" }
 									: {}
 							}
 						/>
+						<p className="error-p">
+							{error === "User must be over 18 years old" ||
+							error === "Fill in all fields"
+								? error
+								: ""}
+						</p>
 					</div>
 				</div>
 				<h3>Change Password</h3>
@@ -375,11 +375,18 @@ const ProfileInfo = () => {
 						onFocus={(e) => setError("")}
 						onChange={(e) => setCurrentPassword(e.target.value)}
 						style={
-							currentPassword != "" && error == "Fill in all fields"
+							(currentPassword === "" &&
+								error == "Fill in all password fields") ||
+							(currentPassword != "" && error === "Incorrect current password")
 								? { border: "1px solid red" }
 								: {}
 						}
 					/>
+					<p className="error-p">
+						{currentPassword != "" && error === "Incorrect current password"
+							? error
+							: ""}
+					</p>
 				</div>
 				<div className="container-input-info">
 					<label>New Password</label>
@@ -388,7 +395,22 @@ const ProfileInfo = () => {
 						value={newPassword}
 						onFocus={(e) => setError("")}
 						onChange={(e) => setNewPassword(e.target.value)}
+						style={
+							(newPassword === "" && error == "Fill in all password fields") ||
+							(newPassword != "" &&
+								error ===
+									"Password must have at least 6 characters, 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character.") ||
+							(newPassword != "" && error === "Passwords do not match")
+								? { border: "1px solid red" }
+								: {}
+						}
 					/>
+					<p className="error-p">
+						{error ===
+						"Password must have at least 6 characters, 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character."
+							? error
+							: ""}
+					</p>
 				</div>
 				<div className="container-input-info">
 					<label>Confirm Password</label>
@@ -397,12 +419,25 @@ const ProfileInfo = () => {
 						value={confirmPassword}
 						onFocus={(e) => setError("")}
 						onChange={(e) => setConfirmPassword(e.target.value)}
+						style={
+							(confirmPassword === "" &&
+								error == "Fill in all password fields") ||
+							(confirmPassword != "" && error === "Passwords do not match")
+								? { border: "1px solid red" }
+								: {}
+						}
 					/>
+					<p className="error-p">
+						{error === "Fill in all password fields" ||
+						error === "Passwords do not match"
+							? error
+							: ""}
+					</p>
 				</div>
+
 				<div className="button-save-info">
 					<button type="submit">Save Changes</button>
 				</div>
-				<p>{error}</p>
 			</form>
 		</div>
 	);
