@@ -9,8 +9,7 @@ import { getDownloadURL, ref } from "firebase/storage";
 import "./productContainer.css";
 
 const ProductContainer = ({ product }) => {
-  const [url, setUrl] = useState("");
-  const [loading, setLoading] = useState(true);
+  //  const [loading, setLoading] = useState(true);
   const truncateDescription = (description, maxWords) => {
     const words = description.split(" ");
     if (words.length > maxWords) {
@@ -19,23 +18,9 @@ const ProductContainer = ({ product }) => {
     return description;
   };
 
-  async function handleImg() {
-    setLoading(true);
-    const storageRef = storage;
-    const imageRef = ref(storageRef, `images/products/${product.id}`);
-
-    const downloadURL = await getDownloadURL(imageRef);
-    setUrl(downloadURL);
-    setLoading(false);
-  }
-
-  useEffect(() => {
-    handleImg();
-  }, [product]);
-
   return (
     <div key={product.id} className="img-product-home">
-      <img src={url} alt="Imagem Produto" />
+      <img src={product.url} alt="Imagem Produto" />
       <div className="arrival-content-home">
         <div className="text-product-home">
           <span>{truncateDescription(product.name, 2)}</span>
