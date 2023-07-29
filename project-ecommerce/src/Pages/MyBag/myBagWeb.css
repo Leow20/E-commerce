@@ -185,11 +185,12 @@
   transform: scale(1.2);
 }
 
-.coupon-input-mybag {
+.coupon-input-mybag,
+.coupon-input-mybag-mob {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 16px;
+  margin-top: 32px;
   margin-bottom: 36px;
   width: 332px;
   padding: 14px 12px 14px 16px;
@@ -197,7 +198,8 @@
   background-color: #f4f4f4;
 }
 
-.coupon-input-mybag button {
+.coupon-input-mybag button,
+.coupon-input-mybag-mob button {
   background-color: transparent;
   border: none;
   box-shadow: none;
@@ -209,7 +211,8 @@
   line-height: 16px;
 }
 
-.coupon-input-mybag input {
+.coupon-input-mybag input,
+.coupon-input-mybag-mob input {
   background-color: transparent;
   border: none;
   box-shadow: none;
@@ -248,6 +251,12 @@
   font-style: normal;
   font-weight: 500;
   line-height: 20px;
+}
+
+.web-container-mybag hr {
+  border: none;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.12);
 }
 
 .summary-btns-mybag button:first-child {

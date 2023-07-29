@@ -17,6 +17,7 @@ import bolsa from "../../assets/Img/image.jpg";
 import ArrowDown from "../../assets/imgFooter/ArrowDown.svg";
 
 import { useMediaQuery } from "react-responsive";
+import { Link } from "react-router-dom";
 
 const MyBag = () => {
   const products = true;
@@ -38,6 +39,11 @@ const MyBag = () => {
     }
   }
 
+  const [selectedValue, setSelectedValue] = useState("1");
+
+  const handleChange = (e) => {
+    setSelectedValue(e.target.value);
+  };
   return (
     <>
       {isWeb === true && products === true ? (
@@ -213,7 +219,9 @@ const MyBag = () => {
         <div className="window-mybag">
           <div className="productIn">
             <div className="container-title-mybag">
-              <img src={close} />
+              <Link to="/">
+                <img src={close} />
+              </Link>
               <h3>My Bag</h3>
             </div>
 
@@ -222,21 +230,36 @@ const MyBag = () => {
                 <div className="box-product">
                   <div className="box-aling">
                     <img src={bolsa} />
-                    <div className="info">
+                    <div className="info-mybag">
                       <p>Coach</p>
                       <p>Leather Coach Bag</p>
-                      <p>01</p>
+                      <span>Qty:</span>
+                      <select
+                        value={selectedValue}
+                        onChange={handleChange}
+                        className="number-select-mybag"
+                      >
+                        {Array.from(
+                          { length: 20 },
+                          (_, index) => index + 1
+                        ).map((number) => (
+                          <option key={number} value={number}>
+                            {number}
+                          </option>
+                        ))}
+                      </select>
 
-                      <div className="prices">
+                      <div className="prices-mybag">
                         <p className="big-text">$54.69</p>
                         <p className="small-text">$69.99</p>
                         <p className="red-text">20% OFF</p>
                       </div>
                     </div>
                   </div>
-                  <hr className="line" />
-                  <div className="buttons">
+                  <hr className="line-mybag" />
+                  <div className="buttons-mybag">
                     <button>Move to Wishlist</button>
+                    <div class="vertical-line-mybag"></div>
                     <button>Remove</button>
                   </div>
                 </div>
@@ -244,27 +267,42 @@ const MyBag = () => {
                 <div className="box-product">
                   <div className="box-aling">
                     <img src={bolsa} />
-                    <div className="info">
+                    <div className="info-mybag">
                       <p>Coach</p>
                       <p>Leather Coach Bag</p>
-                      <p>01</p>
+                      <span>Qty:</span>
+                      <select
+                        value={selectedValue}
+                        onChange={handleChange}
+                        className="number-select-mybag"
+                      >
+                        {Array.from(
+                          { length: 20 },
+                          (_, index) => index + 1
+                        ).map((number) => (
+                          <option key={number} value={number}>
+                            {number}
+                          </option>
+                        ))}
+                      </select>
 
-                      <div className="prices">
+                      <div className="prices-mybag">
                         <p className="big-text">$54.69</p>
                         <p className="small-text">$69.99</p>
                         <p className="red-text">20% OFF</p>
                       </div>
                     </div>
                   </div>
-                  <hr className="line" />
-                  <div className="buttons">
+                  <hr className="line-mybag" />
+                  <div className="buttons-mybag">
                     <button>Move to Wishlist</button>
+                    <div class="vertical-line-mybag"></div>
                     <button>Remove</button>
                   </div>
                 </div>
               </div>
 
-              <div className="coupon-input">
+              <div className="coupon-input-mybag-mob">
                 <input type="text" placeholder="Apply Coupon Code" />
                 <button>CHECK</button>
               </div>
@@ -274,14 +312,14 @@ const MyBag = () => {
               <div className="img-circles"></div>
               <div className="order-details">
                 <h3>Order Details</h3>
-                <div className="price-details">
+                <div className="space-divs-mybag">
                   <div>
                     <p>Sub Total</p>
                     <p>Discount</p>
                     <p>Delivery Fee</p>
                     <p>Grand Total</p>
                   </div>
-                  <div className="price">
+                  <div className="space-numbers-mybag">
                     <p>$119.69</p>
                     <p>-$13.40</p>
                     <p>-$0.00</p>
