@@ -5,6 +5,7 @@
 }
 
 .Header {
+  position: relative;
   display: flex;
   align-items: center;
   background-color: #ffff;
