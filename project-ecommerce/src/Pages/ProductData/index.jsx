@@ -166,7 +166,6 @@ const ProductData = () => {
         <section className="product-data-section">
           <div className="box-title-data">
             <Link to="/">
-              {" "}
               <span>Home</span>
             </Link>
             <img src={Arrow} alt="Arrow" />
