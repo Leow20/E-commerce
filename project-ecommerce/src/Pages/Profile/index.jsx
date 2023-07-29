@@ -106,7 +106,6 @@ const Profile = () => {
           {selectedTab == "My Wishlist" && <Wishlist />}
         </div>
       )}
-
       <>
         {!isMobile && <Header Page="Profile" />}
         <div className="page-wrapper-profile">
