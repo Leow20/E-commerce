@@ -12,6 +12,7 @@ import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
 import AddProduct from "../Pages/AddProduct";
 
+
 //Routes private
 import Private from "./private";
 import ProductData from "../Pages/ProductData";
