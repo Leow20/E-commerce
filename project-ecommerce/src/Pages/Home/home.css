@@ -31,7 +31,7 @@
   padding: 6px;
 }
 
-.hero-mobile-home > div {
+.hero-mobile-home>div {
   flex-grow: 1;
 }
 
@@ -104,7 +104,6 @@
 }
 
 .container-arrival-home {
-  height: 244px;
   padding: 10px 0px 17px;
   display: flex;
   flex-wrap: nowrap;
@@ -409,6 +408,7 @@
 .img-product-home img:first-child {
   width: 136px;
   height: 138px;
+  border-radius: 20px;
 }
 
 @media screen and (min-width: 520px) {
@@ -544,6 +544,7 @@
     width: 100%;
     margin: 26px 0;
   }
+
   .arrival-title-home {
     margin-top: 65px;
   }
@@ -600,6 +601,7 @@
   .title-brand-home span a {
     display: none;
   }
+
   .title-brand-home {
     margin-top: 35px;
   }
