@@ -40,7 +40,6 @@ import { UserContext } from "../../Contexts/user";
 
 const ProfileInfo = () => {
   const { user } = useContext(UserContext);
-  console.log(user);
   const { fetchUserInfoAndUpdateState } = useContext(UserContext);
   const inputRef = useRef(null);
   const storageRef = ref(storage, `images/users/${user?.uid}`);
@@ -119,7 +118,9 @@ const ProfileInfo = () => {
           setCurrentPassword("");
           setNewPassword("");
         })
-        .catch((error) => {});
+        .catch((error) => {
+          console.log(error);
+        });
     }
   }
 
