@@ -22,335 +22,353 @@ import ProfileInfo from "../../components/ProfileInfo";
 import Wishlist from "../../components/Wishlist";
 import ReferAndEarn from "../../components/ReferAndEarn";
 import { signOut } from "firebase/auth";
-import { auth } from "../../../firebaseConnection";
+import { auth, storage } from "../../../firebaseConnection";
 import { toast } from "react-toastify";
 
 //Context
 import { useContext } from "react";
 import { UserContext } from "../../Contexts/user";
+import { getDownloadURL, ref } from "firebase/storage";
 
 const Profile = () => {
-  const { user } = useContext(UserContext);
-  const [selectedTab, setSelectedTab] = useState("Personal Information");
-  const [tranlate, setTranlate] = useState("");
-  const isMobile = useMediaQuery({ maxWidth: 820 });
-  const [show, setShow] = useState("page-wrapper-modal-info");
+	const { user } = useContext(UserContext);
+	const [selectedTab, setSelectedTab] = useState("Personal Information");
+	const [translate, setTranslate] = useState("");
+	const isMobile = useMediaQuery({ maxWidth: 820 });
+	const [show, setShow] = useState("page-wrapper-modal-info");
+	const [image, setImage] = useState("");
 
-  function handleTabChange(tab) {
-    setSelectedTab(tab);
+	function handleTabChange(tab) {
+		setSelectedTab(tab);
 
-    switch (tab) {
-      case "Personal Information":
-        setTranlate("translateY(0px)");
-        break;
-      case "Refer and Earn":
-        setTranlate("translateY(60px)");
-        break;
-      case "My Orders":
-        setTranlate("translateY(120px)");
-        break;
-      case "My Wishlist":
-        setTranlate("translateY(180px)");
-        break;
-      case "My Reviews":
-        setTranlate("translateY(240px)");
-        break;
-      case "My Addres Book":
-        setTranlate("translateY(300px)");
-        break;
-      case "My Saved Cards":
-        setTranlate("translateY(360px)");
-        break;
-      default:
-        setTranlate("translateY(0px)");
-        break;
-    }
-  }
+		switch (tab) {
+			case "Personal Information":
+				setTranslate("translateY(0px)");
+				break;
+			case "Refer and Earn":
+				setTranslate("translateY(60px)");
+				break;
+			case "My Orders":
+				setTranslate("translateY(120px)");
+				break;
+			case "My Wishlist":
+				setTranslate("translateY(180px)");
+				break;
+			case "My Reviews":
+				setTranslate("translateY(240px)");
+				break;
+			case "My Addres Book":
+				setTranslate("translateY(300px)");
+				break;
+			case "My Saved Cards":
+				setTranslate("translateY(360px)");
+				break;
+			default:
+				setTranslate("translateY(0px)");
+				break;
+		}
+	}
+	const handleUploadImage = async (id) => {
+		const storageRef = storage;
+		const imagemRef = ref(storageRef, `images/users/${id}`);
 
-  useEffect(() => {
-    if (isMobile) {
-      setSelectedTab("");
-    } else {
-      setSelectedTab("Personal Information");
-      setTranlate("translateY(0px)");
-    }
-  }, [isMobile]);
+		await getDownloadURL(imagemRef)
+			.then((url) => {
+				setImage(url);
+			})
+			.catch((error) => {
+				if (error.code === "storage/object-not-found") {
+					setImage("");
+				}
+			});
+	};
+	if (user) {
+		handleUploadImage(user.uid);
+	}
 
-  function handleModalState() {
-    setShow("page-wrapper-modal-info animate-modal-info");
+	useEffect(() => {
+		if (isMobile) {
+			setSelectedTab("");
+		} else {
+			setSelectedTab("Personal Information");
+			setTranslate("translateY(0px)");
+		}
+	}, [isMobile]);
 
-    setTimeout(() => {
-      setSelectedTab("");
-      setShow("page-wrapper-modal-info");
-    }, 400);
-  }
+	function handleModalState() {
+		setShow("page-wrapper-modal-info animate-modal-info");
 
-  const handleLogout = async () => {
-    await signOut(auth).then(() => {
-      localStorage.removeItem("userLogado");
-      setUser("");
-      toast.success("User logged out successfully");
-    });
-  };
+		setTimeout(() => {
+			setSelectedTab("");
+			setShow("page-wrapper-modal-info");
+		}, 400);
+	}
 
-  return (
-    <>
-      {selectedTab !== "" && isMobile && (
-        <div className={show}>
-          <header>
-            <div onClick={() => handleModalState()}>
-              <img src={arrowProfile} alt="icone seta" />
-            </div>
-            <h1>{selectedTab}</h1>
-          </header>
-          {selectedTab == "Personal Information" && <ProfileInfo />}
-          {selectedTab == "My Wishlist" && <Wishlist />}
-          {selectedTab == "Refer and Earn" && <ReferAndEarn />}
-        </div>
-      )}
-      <>
-        {!isMobile && <Header Page="Profile" />}
-        <div className="page-wrapper-profile">
-          <div className="container-addres-profile">
-            <span>Home</span>
-            <img src={blackArrow} alt="icone seta" />
-            <span>User Profile</span>
-          </div>
-          <h1>Profile</h1>
-          <div className="title-profile">
-            <span>{selectedTab}</span>
-            <div>
-              <button
-                onClick={handleLogout}
-                className="button-logout-profile "
-                id="button-logout-desktop-profile"
-              >
-                <img src={logoutIcon} alt="icone de logout" />
-                Logout
-              </button>
-            </div>
-          </div>
-          <div className="container-profile">
-            <main className="main-profile">
-              <div
-                className="container-info-profile"
-                onClick={() => handleTabChange("Personal Information")}
-              >
-                <img
-                  src={user && user.URLfoto ? user.URLfoto : userNotPicture}
-                  alt="usuario sem foto"
-                />
-                <div>
-                  {user ? (
-                    <>
-                      <p>{user.firstName}</p>
-                      <p>{user.email}</p>
-                      <p>{"+" + user.ddd + "-" + user.mobileNumber}</p>
-                    </>
-                  ) : (
-                    <h1>Hello</h1>
-                  )}
-                </div>
-                <img src={arrowGray} alt="icone seta" />
-              </div>
-              <nav className="categories-page-profile">
-                {!isMobile && (
-                  <div
-                    className="tag-profile"
-                    style={{ transform: tranlate }}
-                  ></div>
-                )}
-                <ul>
-                  <li>
-                    <button
-                      onClick={() => handleTabChange("Personal Information")}
-                    >
-                      <label
-                        style={
-                          selectedTab == "Personal Information" && !isMobile
-                            ? { color: "#1B4B66" }
-                            : { color: "#13101E" }
-                        }
-                      >
-                        Personal Information
-                      </label>
-                      <img
-                        src={
-                          selectedTab == "Personal Information" && !isMobile
-                            ? greenArrow
-                            : arrowProfile
-                        }
-                        alt="arrow-icon"
-                      />
-                    </button>
-                  </li>
-                  <li>
-                    <button onClick={() => handleTabChange("Refer and Earn")}>
-                      <label
-                        style={
-                          selectedTab == "Refer and Earn" && !isMobile
-                            ? { color: "#1B4B66" }
-                            : { color: "#13101E" }
-                        }
-                      >
-                        Refer and Earn{" "}
-                      </label>
-                      <img
-                        src={
-                          selectedTab == "Refer and Earn" && !isMobile
-                            ? greenArrow
-                            : arrowProfile
-                        }
-                        alt="arrow-icon"
-                      />
-                    </button>
-                  </li>
-                  <li>
-                    <button onClick={() => handleTabChange("My Orders")}>
-                      <label
-                        style={
-                          selectedTab == "My Orders" && !isMobile
-                            ? { color: "#1B4B66" }
-                            : { color: "#13101E" }
-                        }
-                      >
-                        My Orders
-                      </label>
-                      <img
-                        src={
-                          selectedTab == "My Orders" && !isMobile
-                            ? greenArrow
-                            : arrowProfile
-                        }
-                        alt="arrow-icon"
-                      />
-                    </button>
-                  </li>
-                  <li>
-                    <button onClick={() => handleTabChange("My Wishlist")}>
-                      <label
-                        style={
-                          selectedTab == "My Wishlist" && !isMobile
-                            ? { color: "#1B4B66" }
-                            : { color: "#13101E" }
-                        }
-                      >
-                        My Wishlist
-                      </label>
-                      <img
-                        src={
-                          selectedTab == "My Wishlist" && !isMobile
-                            ? greenArrow
-                            : arrowProfile
-                        }
-                        alt="arrow-icon"
-                      />
-                    </button>
-                  </li>
-                  <li>
-                    <button onClick={() => handleTabChange("My Reviews")}>
-                      <label
-                        style={
-                          selectedTab == "My Reviews" && !isMobile
-                            ? { color: "#1B4B66" }
-                            : { color: "#13101E" }
-                        }
-                      >
-                        My Reviews
-                      </label>
-                      <img
-                        src={
-                          selectedTab == "My Reviews" && !isMobile
-                            ? greenArrow
-                            : arrowProfile
-                        }
-                        alt="arrow-icon"
-                      />
-                    </button>
-                  </li>
-                  <li>
-                    <button onClick={() => handleTabChange("My Addres Book")}>
-                      <label
-                        style={
-                          selectedTab == "My Addres Book" && !isMobile
-                            ? { color: "#1B4B66" }
-                            : { color: "#13101E" }
-                        }
-                      >
-                        My Addres Book
-                      </label>
-                      <img
-                        src={
-                          selectedTab == "My Addres Book" && !isMobile
-                            ? greenArrow
-                            : arrowProfile
-                        }
-                        alt="arrow-icon"
-                      />
-                    </button>
-                  </li>
-                  <li>
-                    <button onClick={() => handleTabChange("My Saved Cards")}>
-                      <label
-                        style={
-                          selectedTab == "My Saved Cards" && !isMobile
-                            ? { color: "#1B4B66" }
-                            : { color: "#13101E" }
-                        }
-                      >
-                        My Saved Cards
-                      </label>
-                      <img
-                        src={
-                          selectedTab == "My Saved Cards" && !isMobile
-                            ? greenArrow
-                            : arrowProfile
-                        }
-                        alt="arrow-icon"
-                      />
-                    </button>
-                  </li>
-                </ul>
-              </nav>
-              <div className="container-button-profile">
-                {selectedTab == "" && (
-                  <button
-                    onClick={handleLogout}
-                    className="button-logout-profile"
-                    id="button-logout-mob-profile"
-                  >
-                    {" "}
-                    <img src={logoutIcon} alt="icone de logout" />
-                    Logout
-                  </button>
-                )}
-              </div>
-              <div></div>
-            </main>
-            <div className="content-profile">
-              {selectedTab == "Personal Information" && <ProfileInfo />}
-              {selectedTab == "My Wishlist" && <Wishlist />}
-              {selectedTab == "Refer and Earn" && <ReferAndEarn />}
-            </div>
-          </div>
-        </div>
-        {selectedTab == "" && (
-          <>
-            {" "}
-            <Footer />
-            <NavMob />
-          </>
-        )}
-        {!isMobile && (
-          <>
-            {" "}
-            <Footer />
-            <NavMob />
-          </>
-        )}
-      </>
-    </>
-  );
+	const handleLogout = async () => {
+		await signOut(auth).then(() => {
+			localStorage.removeItem("userLogado");
+			toast.success("User logged out successfully");
+		});
+	};
+
+	return (
+		<>
+			{selectedTab !== "" && isMobile && (
+				<div className={show}>
+					<header>
+						<div onClick={() => handleModalState()}>
+							<img src={arrowProfile} alt="icone seta" />
+						</div>
+						<h1>{selectedTab}</h1>
+					</header>
+					{selectedTab == "Personal Information" && <ProfileInfo />}
+					{selectedTab == "My Wishlist" && <Wishlist />}
+					{selectedTab == "Refer and Earn" && <ReferAndEarn />}
+				</div>
+			)}
+			<>
+				{!isMobile && <Header Page="Profile" />}
+				<div className="page-wrapper-profile">
+					<div className="container-addres-profile">
+						<span>Home</span>
+						<img src={blackArrow} alt="icone seta" />
+						<span>User Profile</span>
+					</div>
+					<h1>Profile</h1>
+					<div className="title-profile">
+						<span>{selectedTab}</span>
+						<div>
+							<button
+								onClick={handleLogout}
+								className="button-logout-profile "
+								id="button-logout-desktop-profile"
+							>
+								<img src={logoutIcon} alt="icone de logout" />
+								Logout
+							</button>
+						</div>
+					</div>
+					<div className="container-profile">
+						<main className="main-profile">
+							<div
+								className="container-info-profile"
+								onClick={() => handleTabChange("Personal Information")}
+							>
+								<img
+									src={image != "" ? image : userNotPicture}
+									alt="User Picture"
+								/>
+								<div>
+									{user ? (
+										<>
+											<p>{user.firstName}</p>
+											<p>{user.email}</p>
+											<p>{"+" + user.ddd + "-" + user.mobileNumber}</p>
+										</>
+									) : (
+										<h1>Hello</h1>
+									)}
+								</div>
+								<img src={arrowGray} alt="icone seta" />
+							</div>
+							<nav className="categories-page-profile">
+								{!isMobile && (
+									<div
+										className="tag-profile"
+										style={{ transform: translate }}
+									></div>
+								)}
+								<ul>
+									<li>
+										<button
+											onClick={() => handleTabChange("Personal Information")}
+										>
+											<label
+												style={
+													selectedTab == "Personal Information" && !isMobile
+														? { color: "#1B4B66" }
+														: { color: "#13101E" }
+												}
+											>
+												Personal Information
+											</label>
+											<img
+												src={
+													selectedTab == "Personal Information" && !isMobile
+														? greenArrow
+														: arrowProfile
+												}
+												alt="arrow-icon"
+											/>
+										</button>
+									</li>
+									<li>
+										<button onClick={() => handleTabChange("Refer and Earn")}>
+											<label
+												style={
+													selectedTab == "Refer and Earn" && !isMobile
+														? { color: "#1B4B66" }
+														: { color: "#13101E" }
+												}
+											>
+												Refer and Earn{" "}
+											</label>
+											<img
+												src={
+													selectedTab == "Refer and Earn" && !isMobile
+														? greenArrow
+														: arrowProfile
+												}
+												alt="arrow-icon"
+											/>
+										</button>
+									</li>
+									<li>
+										<button onClick={() => handleTabChange("My Orders")}>
+											<label
+												style={
+													selectedTab == "My Orders" && !isMobile
+														? { color: "#1B4B66" }
+														: { color: "#13101E" }
+												}
+											>
+												My Orders
+											</label>
+											<img
+												src={
+													selectedTab == "My Orders" && !isMobile
+														? greenArrow
+														: arrowProfile
+												}
+												alt="arrow-icon"
+											/>
+										</button>
+									</li>
+									<li>
+										<button onClick={() => handleTabChange("My Wishlist")}>
+											<label
+												style={
+													selectedTab == "My Wishlist" && !isMobile
+														? { color: "#1B4B66" }
+														: { color: "#13101E" }
+												}
+											>
+												My Wishlist
+											</label>
+											<img
+												src={
+													selectedTab == "My Wishlist" && !isMobile
+														? greenArrow
+														: arrowProfile
+												}
+												alt="arrow-icon"
+											/>
+										</button>
+									</li>
+									<li>
+										<button onClick={() => handleTabChange("My Reviews")}>
+											<label
+												style={
+													selectedTab == "My Reviews" && !isMobile
+														? { color: "#1B4B66" }
+														: { color: "#13101E" }
+												}
+											>
+												My Reviews
+											</label>
+											<img
+												src={
+													selectedTab == "My Reviews" && !isMobile
+														? greenArrow
+														: arrowProfile
+												}
+												alt="arrow-icon"
+											/>
+										</button>
+									</li>
+									<li>
+										<button onClick={() => handleTabChange("My Addres Book")}>
+											<label
+												style={
+													selectedTab == "My Addres Book" && !isMobile
+														? { color: "#1B4B66" }
+														: { color: "#13101E" }
+												}
+											>
+												My Addres Book
+											</label>
+											<img
+												src={
+													selectedTab == "My Addres Book" && !isMobile
+														? greenArrow
+														: arrowProfile
+												}
+												alt="arrow-icon"
+											/>
+										</button>
+									</li>
+									<li>
+										<button onClick={() => handleTabChange("My Saved Cards")}>
+											<label
+												style={
+													selectedTab == "My Saved Cards" && !isMobile
+														? { color: "#1B4B66" }
+														: { color: "#13101E" }
+												}
+											>
+												My Saved Cards
+											</label>
+											<img
+												src={
+													selectedTab == "My Saved Cards" && !isMobile
+														? greenArrow
+														: arrowProfile
+												}
+												alt="arrow-icon"
+											/>
+										</button>
+									</li>
+								</ul>
+							</nav>
+							<div className="container-button-profile">
+								{selectedTab == "" && (
+									<button
+										onClick={handleLogout}
+										className="button-logout-profile"
+										id="button-logout-mob-profile"
+									>
+										{" "}
+										<img src={logoutIcon} alt="icone de logout" />
+										Logout
+									</button>
+								)}
+							</div>
+							<div></div>
+						</main>
+						<div className="content-profile">
+							{selectedTab == "Personal Information" && <ProfileInfo />}
+							{selectedTab == "My Wishlist" && <Wishlist />}
+							{selectedTab == "Refer and Earn" && <ReferAndEarn />}
+						</div>
+					</div>
+				</div>
+				{selectedTab == "" && (
+					<>
+						{" "}
+						<Footer />
+						<NavMob />
+					</>
+				)}
+				{!isMobile && (
+					<>
+						{" "}
+						<Footer />
+						<NavMob />
+					</>
+				)}
+			</>
+		</>
+	);
 };
 
 export default Profile;
