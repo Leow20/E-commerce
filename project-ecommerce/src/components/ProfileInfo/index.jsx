@@ -83,13 +83,14 @@ const ProfileInfo = () => {
 
   useEffect(() => {
     if (user) {
+      console.log(user);
       setFirstName(user.firstName);
       setLastName(user.lastName);
       setEmail(user.email);
       setDDD(user.ddd);
       setMobileNumber(user.mobileNumber);
       setDateOfBirth(user.dateOfBirth);
-      setImage(user.url);
+      //   setImage(user.url);
     }
   }, [user]);
 
