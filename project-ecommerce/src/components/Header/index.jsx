@@ -4,6 +4,7 @@ import "./header.css";
 //Router-dom
 import { Link } from "react-router-dom";
 import HeaderModal from "../HeaderModal";
+import SearchModal from "../SearchModal";
 import { useState } from "react";
 
 //Images
@@ -20,6 +21,7 @@ import MyBagModal from "../myBagModal";
 function Header({ Page }) {
   const [modal, setModal] = useState(false);
   const [isHovered, setIsHovered] = useState();
+  const [searchMod, setSearchMod] = useState(false);
 
   const urlCompleta = window.location.href;
   const dominio = window.location.origin;
@@ -28,6 +30,12 @@ function Header({ Page }) {
   const handleHover = () => {
     setIsHovered(!isHovered);
   };
+
+  const handleSearch = () => {
+    setSearchMod(true);
+    document.body.style.overflowY = "hidden";
+  };
+  
 
   return (
     <>
@@ -111,7 +119,7 @@ function Header({ Page }) {
                 <img src={addHome} alt="addHome" />
               </Link>
 
-              <button>
+              <button onClick={handleSearch}>
                 <img src={search} alt="lupa" />
               </button>
 
@@ -121,6 +129,7 @@ function Header({ Page }) {
             </div>
           </div>
         </header>
+        {searchMod && <SearchModal />}
       </div>
     </>
   );
