@@ -9,6 +9,11 @@ import Bag from "../../assets/Img/bolsa_rosa.jpg";
 import Perfume from "../../assets/Img/perfume.jpg";
 
 function SearchModal() {
+  const handleChange = (e) => {
+    const digitando = e.target.value;
+    console.log(digitando);
+  };
+
   return (
     <>
       <div className="Window-modalSearch">
@@ -17,6 +22,7 @@ function SearchModal() {
             <img className="redirect-modalSearch" src={Arrow} alt="Back" />
           </Link>
           <input
+            onChange={handleChange}
             type="search"
             name="searchInput"
             id="searchId"
