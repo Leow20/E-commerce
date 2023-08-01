@@ -1,9 +1,5 @@
 import React from "react";
 import heart from "../../assets/icons/Vector.svg";
-import bag from "../../assets/Img/image.jpg";
-import { useState, useEffect } from "react";
-import { storage } from "../../../firebaseConnection";
-import { getDownloadURL, ref } from "firebase/storage";
 
 //Styles
 import "./productContainer.css";
