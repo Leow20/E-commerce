@@ -12,8 +12,9 @@
   justify-content: space-around;
 }
 
-.bar-modalSearch button {
-  background: transparent;
+.redirect-modalSearch {
+  margin-top: 16px;
+  margin-right: 8px;
   transform: rotate(180deg);
 }
 
@@ -80,11 +81,15 @@
   overflow-x: auto;
 }
 
-.recomend-products-modalSearch img {
+.productimg-modalSearch {
   width: 136px;
   height: 138px;
-  flex-shrink: 0;
   margin-right: 16px;
   border-radius: 6px;
   margin-bottom: 8px;
+}
+
+.heart-modalSearch {
+  width: 20px;
+  height: 20px;
 }
