@@ -12,10 +12,10 @@ import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
 import AddProduct from "../Pages/AddProduct";
 
-
 //Routes private
 import Private from "./private";
 import ProductData from "../Pages/ProductData";
+import ResultCategories from "../Pages/ResultCategories";
 
 const Router = () => {
   return (
@@ -32,6 +32,7 @@ const Router = () => {
             </Private>
           }
         />
+        <Route path="/results" element={<ResultCategories />} />
         <Route path="/mybag" element={<MyBag />} />
         <Route path="/notification" element={<Notification />} />
         <Route path="/login" element={<Login />} />
