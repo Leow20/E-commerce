@@ -38,13 +38,22 @@
 
 .title-modalSearch {
   margin-left: 16px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.title-modalSearch:first-child {
+  margin-left: 16px;
+  margin-bottom: 13px;
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
 }
 
 .recent-searchs-modalSearch {
-  padding: 8px 16px;
+  max-width: 330px;
 }
 
 .recent-searchs-modalSearch p {
@@ -62,6 +71,13 @@
 
 .newArrives-modalSearch {
   margin-top: 20px;
+  margin-left: 16px;
+}
+
+.recomend-products-modalSearch {
+  display: flex;
+  max-height: 300px;
+  overflow-x: auto;
 }
 
 .recomend-products-modalSearch img {
@@ -69,8 +85,6 @@
   height: 138px;
   flex-shrink: 0;
   margin-right: 16px;
-}
-
-.recomend-products-modalSearch {
-  max-height: 300px;
+  border-radius: 6px;
+  margin-bottom: 8px;
 }

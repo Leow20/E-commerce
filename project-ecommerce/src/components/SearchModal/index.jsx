@@ -36,18 +36,26 @@ function SearchModal() {
         <div className="newArrives-modalSearch">
           <h4 className="title-modalSearch">New Arrivals</h4>
           <div className="recomend-products-modalSearch">
-            <img src={Bag} alt="" />
-            <h5>Grande</h5>
-            <p>Blossom Pouch</p>
-            <p>$39.49</p>
-            <img src={Perfume} alt="" />
-            <h5>Grande</h5>
-            <p>Blossom Pouch</p>
-            <p>$39.49</p>
-            <img src={Bag} alt="" />
-            <h5>Grande</h5>
-            <p>Blossom Pouch</p>
-            <p>$39.49</p>
+            <div>
+              <img src={Bag} alt="" />
+              <h5>Grande</h5>
+              <p>Blossom Pouch</p>
+              <p>$39.49</p>
+            </div>
+
+            <div>
+              <img src={Perfume} alt="" />
+              <h5>Grande</h5>
+              <p>Blossom Pouch</p>
+              <p>$39.49</p>
+            </div>
+
+            <div>
+              <img src={Bag} alt="" />
+              <h5>Grande</h5>
+              <p>Blossom Pouch</p>
+              <p>$39.49</p>
+            </div>
           </div>
         </div>
       </div>
