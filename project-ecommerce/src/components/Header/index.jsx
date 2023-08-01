@@ -21,7 +21,7 @@ import MyBagModal from "../myBagModal";
 function Header({ Page }) {
   const [modal, setModal] = useState(false);
   const [isHovered, setIsHovered] = useState();
-  const [searchMod, setSearchMod] = useState(false);
+  const [searchMod, setSearchMod] = useState();
 
   const urlCompleta = window.location.href;
   const dominio = window.location.origin;
@@ -32,10 +32,9 @@ function Header({ Page }) {
   };
 
   const handleSearch = () => {
-    setSearchMod(true);
+    setSearchMod(!searchMod);
     document.body.style.overflowY = "hidden";
   };
-  
 
   return (
     <>

@@ -35,3 +35,42 @@
 .bar-modalSearch input[type="search"]:focus {
   background-color: #dfdfdf;
 }
+
+.title-modalSearch {
+  margin-left: 16px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.recent-searchs-modalSearch {
+  padding: 8px 16px;
+}
+
+.recent-searchs-modalSearch p {
+  display: inline-flex;
+  padding: 7px 12px;
+  border-radius: 8px;
+  background: #f4f4f4;
+  margin-right: 7px;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.newArrives-modalSearch {
+  margin-top: 20px;
+}
+
+.recomend-products-modalSearch img {
+  width: 136px;
+  height: 138px;
+  flex-shrink: 0;
+  margin-right: 16px;
+}
+
+.recomend-products-modalSearch {
+  max-height: 300px;
+}
