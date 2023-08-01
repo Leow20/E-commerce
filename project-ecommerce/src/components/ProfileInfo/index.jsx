@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 
 //Style
 import "./ProfileInfo.css";
@@ -13,420 +13,432 @@ import trashIcon from "../../assets/icons/trashIcon.svg";
 import "firebase/auth";
 import { auth, storage, db } from "../../../firebaseConnection";
 import {
-  collection,
-  getDocs,
-  query,
-  setDoc,
-  where,
-  doc,
+	collection,
+	getDocs,
+	query,
+	setDoc,
+	where,
+	doc,
 } from "firebase/firestore";
 import {
-  ref,
-  uploadBytesResumable,
-  deleteObject,
-  getDownloadURL,
+	ref,
+	uploadBytesResumable,
+	deleteObject,
+	getDownloadURL,
 } from "firebase/storage";
 import {
-  EmailAuthProvider,
-  reauthenticateWithCredential,
-  updatePassword,
+	EmailAuthProvider,
+	reauthenticateWithCredential,
+	updatePassword,
 } from "firebase/auth";
+
+//Toast
 import { toast } from "react-toastify";
 
+//Context
+import { UserContext } from "../../Contexts/user";
+
 const ProfileInfo = () => {
-  const userData = localStorage.getItem("userLogado");
-  const user = JSON.parse(userData);
-  const inputRef = useRef(null);
-  const storageRef = ref(storage, `images/users/${user?.uid}`);
+	const { user } = useContext(UserContext);
+	const { fetchUserInfoAndUpdateState } = useContext(UserContext);
+	const { handleUploadImage } = useContext(UserContext);
+	const inputRef = useRef(null);
+	const storageRef = ref(storage, `images/users/${user?.uid}`);
+	const [image, setImage] = useState("");
+	const [firstName, setFirstName] = useState("");
+	const [lastName, setLastName] = useState("");
+	const [email, setEmail] = useState();
+	const [ddd, setDDD] = useState("");
 
-  const [image, setImage] = useState(
-    user && user.URLfoto ? user.URLfoto : userPicture
-  );
+	const [mobileNumber, setMobileNumber] = useState("");
 
-  const [firstName, setFirstName] = useState(user ? user.firstName : "");
-  const [lastName, setLastName] = useState(user ? user.lastName : "");
-  const [email, setEmail] = useState(user ? user.email : "");
-  const [ddd, setDDD] = useState(user ? user.ddd : "");
+	const [dateOfBirth, setDateOfBirth] = useState("");
+	const [currentPassword, setCurrentPassword] = useState("");
+	const [newPassword, setNewPassword] = useState("");
+	const [confirmPassword, setConfirmPassword] = useState("");
+	const [error, setError] = useState("");
 
-  const [mobileNumber, setMobileNumber] = useState(
-    user ? user.mobileNumber : ""
-  );
+	const passwordRegex =
+		/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%^&*()_+])[A-Za-z\d@#$!%^&*()_+]{6,}$/;
 
-  const [dateOfBirth, setDateOfBirth] = useState(user ? user.dateOfBirth : "");
-  const [currentPassword, setCurrentPassword] = useState("");
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState("");
-  const [verify, setVerify] = useState(false);
+	useEffect(() => {
+		if (user) {
+			if (typeof image != "object") {
+				setImage(user.url);
+			}
+			setFirstName(user.firstName);
+			setLastName(user.lastName);
+			setEmail(user.email);
+			setDDD(user.ddd);
+			setMobileNumber(user.mobileNumber);
+			setDateOfBirth(user.dateOfBirth);
+		}
+	}, [user]);
 
-  const passwordRegex =
-    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%^&*()_+])[A-Za-z\d@#$!%^&*()_+]{6,}$/;
+	async function handlePassword() {
+		if (newPassword != "" && confirmPassword != "" && currentPassword != "") {
+			const userAuth = auth.currentUser;
 
-  async function handlePassword() {
-    //ALTERAÇÃO DE SENHA
+			const credential = EmailAuthProvider.credential(
+				userAuth.email,
+				currentPassword
+			);
 
-    //   if (newPassword != confirmPassword) {
-    //     setError("Passwords do not match");
-    //     return false;
-    //   }
+			await reauthenticateWithCredential(userAuth, credential)
+				.then(async () => {})
 
-    //   if (newPassword == "" || confirmPassword == "" || currentPassword == "") {
-    //     setError("Preencha todos os campos da senha");
-    //     toast.warning("Preencha todos os campos da senha");
-    //     return;
-    //   }
+				.catch((error) => {
+					if (error.code == "auth/wrong-password") {
+						setError("Incorrect current password");
+					}
+				});
 
-    if (newPassword != "" && confirmPassword != "" && currentPassword != "") {
-      const userAuth = auth.currentUser;
+			await updatePassword(userAuth, newPassword)
+				.then(async () => {
+					await handleEdit();
+					setConfirmPassword("");
+					setCurrentPassword("");
+					setNewPassword("");
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		}
+	}
 
-      const credential = EmailAuthProvider.credential(
-        userAuth.email,
-        currentPassword
-      );
+	async function handleEdit() {
+		if (error !== "") {
+			return;
+		} else {
+			const q = query(collection(db, "users"), where("uid", "==", user?.uid));
 
-      await reauthenticateWithCredential(userAuth, credential)
-        .then(async () => {
-          alert("entro");
-        })
+			await getDocs(q).then((value) => {
+				value.forEach(async (valueInfo) => {
+					const userData = valueInfo.data();
 
-        .catch((error) => {
-          alert("caiu aq");
-          if (error.code == "auth/wrong-password") {
-            setError("auth/wrong-password");
-            toast.warning("Senha atual incorreta");
-          }
-        });
+					if (
+						userData.uid == user.uid &&
+						user.email == userData.email &&
+						error == ""
+					) {
+						let userInfo = {
+							dateOfBirth: dateOfBirth ? dateOfBirth : userData.dateOfBirth,
+							ddd: ddd ? ddd : userData.ddd,
+							firstName: firstName ? firstName : userData.firstName,
+							lastName: lastName ? lastName : userData.lastName,
+							mobileNumber: mobileNumber ? mobileNumber : userData.mobileNumber,
+							email: userData.email,
+							uid: userData.uid,
+						};
 
-      await updatePassword(userAuth, newPassword)
-        .then(() => {
-          toast.success("Sua senha foi alterada com sucesso!");
-          setConfirmPassword("");
-          setCurrentPassword("");
-          setNewPassword("");
-        })
-        .catch((error) => {
-          console.error(error);
-          if (error.code == "auth/weak-password") {
-            toast.warning("Senha muito fraca");
-          }
-          alert("Erro inesperado");
-          return;
-        });
-    }
-  }
+						await setDoc(doc(db, "users", valueInfo.id), userInfo)
+							.then(() => {
+								toast.success("Successfully updated user information");
+							})
+							.catch((error) => {
+								toast.error("Error updating information");
+								console.log(error);
+							});
+					}
+				});
+			});
+		}
+	}
 
-  async function handleEdit() {
-    const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+	const handleChange = async (e) => {
+		e.preventDefault();
 
-    await getDocs(q).then((value) => {
-      value.forEach(async (valueInfo) => {
-        const userData = valueInfo.data();
+		if (validations() == true) {
+			await handlePassword();
+			if (currentPassword == "" && newPassword == "" && confirmPassword == "") {
+				await handleEdit();
+			}
 
-        if (
-          userData.uid == user.uid &&
-          user.email == userData.email &&
-          error == ""
-        ) {
-          let userInfo = {
-            dateOfBirth: dateOfBirth ? dateOfBirth : userData.dateOfBirth,
-            ddd: ddd ? ddd : userData.ddd,
-            firstName: firstName ? firstName : userData.firstName,
-            lastName: lastName ? lastName : userData.lastName,
-            pasword: newPassword ? newPassword : userData.pasword,
-            mobileNumber: mobileNumber ? mobileNumber : userData.mobileNumber,
-            email: userData.email,
-            uid: userData.uid,
-          };
+			//ALTERAÇÃO DA IMAGEM
+			if (typeof image == "object") {
+				uploadBytesResumable(storageRef, image);
+			} else if (image.length > 0) {
+				console.log(image);
+			} else {
+				deleteObject(storageRef);
+			}
+			setTimeout(() => {
+				fetchUserInfoAndUpdateState(user.uid);
+			}, 3000);
+		}
+	};
 
-          await setDoc(doc(db, "users", valueInfo.id), userInfo)
-            .then(() => {
-              toast.success("Successfully updated user information");
-            })
-            .catch((error) => {
-              toast.error("Error updating information");
-              console.log(error);
-              return;
-            });
-        }
-      });
-    });
-  }
+	const validations = () => {
+		if (
+			firstName === "" ||
+			dateOfBirth === "" ||
+			lastName === "" ||
+			ddd === "" ||
+			mobileNumber === ""
+		) {
+			setError("Fill in all fields");
+			return false;
+		}
 
-  const handleChange = async (e) => {
-    e.preventDefault();
+		if (!checkBiggerAge(dateOfBirth)) {
+			setError("User must be over 18 years old");
+			return false;
+		}
 
-    if (validations() == true) {
-      await handlePassword();
+		if (
+			(newPassword != "" || confirmPassword != "" || currentPassword != "") &&
+			(newPassword == "" || confirmPassword == "" || currentPassword == "")
+		) {
+			setError("Fill in all password fields");
+			return false;
+		}
+		if (newPassword != "" && confirmPassword != "" && currentPassword != "") {
+			if (!passwordRegex.test(newPassword)) {
+				setError(
+					"Password must have at least 6 characters, 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character."
+				);
+				return false;
+			}
+			if (newPassword != confirmPassword) {
+				setError("Passwords do not match");
+				return false;
+			}
+		}
 
-      await handleEdit();
+		return true;
+	};
 
-      //ALTERAÇÃO DOS DADOS
+	function checkBiggerAge(data) {
+		const dataAtual = new Date();
+		const dataNascimento = new Date(data);
+		const idadeEmMilissegundos = dataAtual - dataNascimento;
+		const idadeEmAnos = idadeEmMilissegundos / (1000 * 60 * 60 * 24 * 365.25);
 
-      //ALTERAÇÃO DA IMAGEM
-      if (typeof image == "object") {
-        const uploadTask = uploadBytesResumable(storageRef, image);
-      } else {
-        const deletion = deleteObject(storageRef);
-      }
-      saveInLocalStorage();
-    } else {
-    }
-  };
+		if (idadeEmAnos < 18) {
+			return false;
+		}
+		return true;
+	}
 
-  const validations = () => {
-    if (
-      firstName === "" ||
-      dateOfBirth === "" ||
-      lastName === "" ||
-      email === "" ||
-      mobileNumber === ""
-    ) {
-      alert("perai");
-      setError("Fill in all fields");
-      return false;
-    }
+	return (
+		<div className="page-wrapper-info">
+			<p>Personal Information</p>
+			<hr />
 
-    if (!checkBiggerAge(dateOfBirth)) {
-      setError("User must be over 18 years old");
-      return false;
-    }
+			<div className="user-picture-info">
+				<div className="input-picture" onClick={() => inputRef.current.click()}>
+					{image ? (
+						<img
+							src={
+								typeof image === "object" ? URL.createObjectURL(image) : image
+							}
+						/>
+					) : (
+						<img src={userPicture} />
+					)}
+					<input
+						type="file"
+						name="picture"
+						id="pictureID"
+						style={{ display: "none" }}
+						ref={inputRef}
+						onChange={(e) => setImage(e.target.files[0])}
+					/>
+				</div>
+				<div className="btns-picture-info">
+					<button
+						className="upload-button-info"
+						onClick={() => inputRef.current.click()}
+					>
+						Upload
+					</button>
+					<button
+						className="delete-button-info"
+						onClick={() => {
+							setImage("");
+							document.getElementById("pictureID").value = "";
+						}}
+					>
+						<img src={trashIcon} alt="icone de lixeira" />
+						Delete
+					</button>
+				</div>
+			</div>
+			<form className="form-info" onSubmit={handleChange}>
+				<div className="content-name-info">
+					<div className="container-input-info name-info">
+						<label>First Name</label>
+						<input
+							value={firstName}
+							type="text"
+							onChange={(e) => setFirstName(e.target.value)}
+							onFocus={(e) => setError("")}
+							style={
+								firstName === "" && error == "Fill in all fields"
+									? { border: "1px solid red" }
+									: {}
+							}
+						/>
+					</div>
+					<div className="container-input-info name-info">
+						<label>Last Name</label>
+						<input
+							type="text"
+							value={lastName}
+							onChange={(e) => setLastName(e.target.value)}
+							onFocus={(e) => setError("")}
+							style={
+								lastName === "" && error == "Fill in all fields"
+									? { border: "1px solid red" }
+									: {}
+							}
+						/>
+					</div>
+				</div>
+				<div className="container-input-info">
+					<label>Email</label>
+					<input
+						type="email"
+						value={email}
+						disabled
+						onChange={(e) => setEmail(e.target.value)}
+					/>
+				</div>
+				<div>
+					<div className="container-input-info container-number-info">
+						<label>Mobile Number</label>
+						<div>
+							<input
+								type="number"
+								id="dddID"
+								name="ddd"
+								pattern="[0-9]{2}"
+								maxLength="2"
+								value={ddd}
+								onChange={(e) => setDDD(e.target.value)}
+								onFocus={(e) => setError("")}
+								style={
+									ddd === "" && error == "Fill in all fields"
+										? { border: "1px solid red" }
+										: {}
+								}
+							/>
+							<input
+								type="number"
+								id="numeroID"
+								name="numero"
+								pattern="[0-9]{8,9}"
+								maxLength="9"
+								value={mobileNumber}
+								onChange={(e) => setMobileNumber(e.target.value)}
+								onFocus={(e) => setError("")}
+								style={
+									mobileNumber === "" && error == "Fill in all fields"
+										? { border: "1px solid red" }
+										: {}
+								}
+							/>
+						</div>
+					</div>
+					<div className="container-input-info">
+						<label>Date of Birth</label>
+						<input
+							type="date"
+							value={dateOfBirth}
+							onChange={(e) => setDateOfBirth(e.target.value)}
+							onFocus={(e) => setError("")}
+							style={
+								(dateOfBirth === "" && error == "Fill in all fields") ||
+								(dateOfBirth !== "" &&
+									error == "User must be over 18 years old")
+									? { border: "1px solid red" }
+									: {}
+							}
+						/>
+						<p className="error-p">
+							{error === "User must be over 18 years old" ||
+							error === "Fill in all fields"
+								? error
+								: ""}
+						</p>
+					</div>
+				</div>
+				<h3>Change Password</h3>
+				<hr />
+				<div className="container-input-info">
+					<label>Current Password</label>
+					<input
+						type="password"
+						value={currentPassword}
+						onFocus={(e) => setError("")}
+						onChange={(e) => setCurrentPassword(e.target.value)}
+						style={
+							(currentPassword === "" &&
+								error == "Fill in all password fields") ||
+							(currentPassword != "" && error === "Incorrect current password")
+								? { border: "1px solid red" }
+								: {}
+						}
+					/>
+					<p className="error-p">
+						{currentPassword != "" && error === "Incorrect current password"
+							? error
+							: ""}
+					</p>
+				</div>
+				<div className="container-input-info">
+					<label>New Password</label>
+					<input
+						type="password"
+						value={newPassword}
+						onFocus={(e) => setError("")}
+						onChange={(e) => setNewPassword(e.target.value)}
+						style={
+							(newPassword === "" && error == "Fill in all password fields") ||
+							(newPassword != "" &&
+								error ===
+									"Password must have at least 6 characters, 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character.") ||
+							(newPassword != "" && error === "Passwords do not match")
+								? { border: "1px solid red" }
+								: {}
+						}
+					/>
+					<p className="error-p">
+						{error ===
+						"Password must have at least 6 characters, 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character."
+							? error
+							: ""}
+					</p>
+				</div>
+				<div className="container-input-info">
+					<label>Confirm Password</label>
+					<input
+						type="password"
+						value={confirmPassword}
+						onFocus={(e) => setError("")}
+						onChange={(e) => setConfirmPassword(e.target.value)}
+						style={
+							(confirmPassword === "" &&
+								error == "Fill in all password fields") ||
+							(confirmPassword != "" && error === "Passwords do not match")
+								? { border: "1px solid red" }
+								: {}
+						}
+					/>
+					<p className="error-p">
+						{error === "Fill in all password fields" ||
+						error === "Passwords do not match"
+							? error
+							: ""}
+					</p>
+				</div>
 
-    if (!passwordRegex.test(newPassword)) {
-      setError(
-        "Password must have at least 6 characters, 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character."
-      );
-      toast.error(
-        "Password must have at least 6 characters, 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character."
-      );
-      return false;
-    }
-
-    return true;
-  };
-  async function saveInLocalStorage() {
-    const q = query(collection(db, "users"), where("uid", "==", user?.uid));
-
-    await getDocs(q).then((value) => {
-      value.forEach(async (doc) => {
-        const userData = doc.data();
-        let user = {
-          dateOfBirth: userData.dateOfBirth,
-          ddd: userData.ddd,
-          email: userData.email,
-          firstName: userData.firstName,
-          lastName: userData.lastName,
-          mobileNumber: userData.mobileNumber,
-          uid: userData.uid,
-          URLfoto: await handleUploadImage(userData.uid),
-        };
-
-        localStorage.setItem("userLogado", JSON.stringify(user));
-      });
-    });
-  }
-  const handleUploadImage = async (id) => {
-    const storageRef = storage;
-    const imagemRef = ref(storageRef, `images/users/${id}`);
-
-    const returnURL = await getDownloadURL(imagemRef)
-      .then((url) => {
-        return url;
-      })
-      .catch((error) => {
-        if (error.code === "storage/object-not-found") {
-          return "";
-        }
-      });
-    return returnURL;
-  };
-  function checkBiggerAge(data) {
-    const dataAtual = new Date();
-    const dataNascimento = new Date(data);
-    const idadeEmMilissegundos = dataAtual - dataNascimento;
-    const idadeEmAnos = idadeEmMilissegundos / (1000 * 60 * 60 * 24 * 365.25);
-
-    if (idadeEmAnos < 18) {
-      return false;
-    }
-    return true;
-  }
-
-  return (
-    <div className="page-wrapper-info">
-      <p>Personal Information</p>
-      <hr />
-
-      <div className="user-picture-info">
-        <div className="input-picture" onClick={() => inputRef.current.click()}>
-          {image ? (
-            <img
-              src={
-                typeof image === "object" ? URL.createObjectURL(image) : image
-              }
-            />
-          ) : (
-            <img src={userPicture} />
-          )}
-          <input
-            type="file"
-            name="picture"
-            id="pictureID"
-            style={{ display: "none" }}
-            ref={inputRef}
-            onChange={(e) => setImage(e.target.files[0])}
-          />
-        </div>
-        <div className="btns-picture-info">
-          <button
-            className="upload-button-info"
-            onClick={() => inputRef.current.click()}
-          >
-            Upload
-          </button>
-          <button
-            className="delete-button-info"
-            onClick={() => {
-              setImage("");
-              document.getElementById("pictureID").value = "";
-            }}
-          >
-            <img src={trashIcon} alt="icone de lixeira" />
-            Delete
-          </button>
-        </div>
-      </div>
-      <form className="form-info" onSubmit={handleChange}>
-        <div className="content-name-info">
-          <div className="container-input-info name-info">
-            <label>First Name</label>
-            <input
-              value={firstName}
-              type="text"
-              onChange={(e) => setFirstName(e.target.value)}
-              onFocus={(e) => setError("")}
-              style={
-                firstName === "" && error == "Fill in all fields"
-                  ? { border: "1px solid red" }
-                  : {}
-              }
-            />
-          </div>
-          <div className="container-input-info name-info">
-            <label>Last Name</label>
-            <input
-              type="text"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-              onFocus={(e) => setError("")}
-              style={
-                lastName === "" && error == "Fill in all fields"
-                  ? { border: "1px solid red" }
-                  : {}
-              }
-            />
-          </div>
-        </div>
-        <div className="container-input-info">
-          <label>Email</label>
-          <input
-            type="email"
-            value={email}
-            disabled
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <div className="container-input-info container-number-info">
-            <label>Mobile Number</label>
-            <div>
-              <input
-                type="number"
-                id="dddID"
-                name="ddd"
-                pattern="[0-9]{2}"
-                maxLength="2"
-                value={ddd}
-                onChange={(e) => setDDD(e.target.value)}
-                onFocus={(e) => setError("")}
-                style={
-                  ddd === "" && error == "Fill in all fields"
-                    ? { border: "1px solid red" }
-                    : {}
-                }
-              />
-              <input
-                type="number"
-                id="numeroID"
-                name="numero"
-                pattern="[0-9]{8,9}"
-                maxLength="9"
-                value={mobileNumber}
-                onChange={(e) => setMobileNumber(e.target.value)}
-                onFocus={(e) => setError("")}
-                style={
-                  mobileNumber === "" && error == "Fill in all fields"
-                    ? { border: "1px solid red" }
-                    : {}
-                }
-              />
-            </div>
-          </div>
-          <div className="container-input-info">
-            <label>Date of Birth</label>
-            <input
-              type="date"
-              value={dateOfBirth}
-              onChange={(e) => setDateOfBirth(e.target.value)}
-              onFocus={(e) => setError("")}
-              style={
-                dateOfBirth === "" && error == "Fill in all fields"
-                  ? { border: "1px solid red" }
-                  : {}
-              }
-            />
-          </div>
-        </div>
-        <h3>Change Password</h3>
-        <hr />
-        <div className="container-input-info">
-          <label>Current Password</label>
-          <input
-            type="password"
-            value={currentPassword}
-            onFocus={(e) => setError("")}
-            onChange={(e) => setCurrentPassword(e.target.value)}
-            style={
-              currentPassword != "" && error == "Fill in all fields"
-                ? { border: "1px solid red" }
-                : {}
-            }
-          />
-        </div>
-        <div className="container-input-info">
-          <label>New Password</label>
-          <input
-            type="password"
-            value={newPassword}
-            onFocus={(e) => setError("")}
-            onChange={(e) => setNewPassword(e.target.value)}
-          />
-        </div>
-        <div className="container-input-info">
-          <label>Confirm Password</label>
-          <input
-            type="password"
-            value={confirmPassword}
-            onFocus={(e) => setError("")}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </div>
-        <div className="button-save-info">
-          <button type="submit">Save Changes</button>
-        </div>
-        <p>{error}</p>
-      </form>
-    </div>
-  );
+				<div className="button-save-info">
+					<button type="submit">Save Changes</button>
+				</div>
+			</form>
+		</div>
+	);
 };
 
 export default ProfileInfo;
