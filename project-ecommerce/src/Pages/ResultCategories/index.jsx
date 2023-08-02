@@ -13,14 +13,60 @@ import "./resultCategories.css";
 
 //Component
 import ProductContainer from "../../components/ProductContainer";
+import SlideUpModal from "../../components/SlideUpModal";
 
 const busca = "Hand";
 
 const ResultCategories = () => {
   const { products } = useContext(ProductContext);
   const [result, setResult] = useState("");
+  const [sortby, setSortby] = useState(null);
+  const [showUpModal, setShowUpModal] = useState(false);
+
   const isMobile = useMediaQuery({ maxWidth: 820 });
   var lowProducts = [];
+
+  const handleSortBy = (value) => {
+    setSortby(value);
+  };
+
+  function organizarPorMenorPreco(array) {
+    const value = array.slice().sort((a, b) => {
+      const precoA = parseFloat(a.price.replace("$", ""));
+      const precoB = parseFloat(b.price.replace("$", ""));
+      return precoA - precoB;
+    });
+    console.log(value);
+    setResult(value);
+  }
+
+  // Função para organizar o array de objetos com base no preço (do maior para o menor)
+  function organizarPorMaiorPreco(array) {
+    const value = array.slice().sort((a, b) => {
+      const precoA = parseFloat(a.price.replace("$", ""));
+      const precoB = parseFloat(b.price.replace("$", ""));
+      return precoB - precoA;
+    });
+    console.log(value);
+    setResult(value);
+  }
+
+  function organizarPorMaiorPopularidade(array) {
+    const value = array.slice().sort((a, b) => b.stars - a.stars);
+    console.log(value);
+    setResult(value);
+  }
+
+  function organizarPorMaiorDesconto(array) {
+    const value = array.slice().sort((a, b) => b?.discount - a?.discount);
+    console.log(value);
+    setResult(value);
+  }
+
+  function organizarPorMaisRecente(array) {
+    const value = array.slice().reverse();
+    setResult(value);
+  }
 
   useEffect(() => {
     const transformToLowercase = () => {
@@ -44,16 +90,45 @@ const ResultCategories = () => {
         team.category.includes(busca.toLowerCase()) ||
         team.description.includes(busca.toLowerCase())
     );
-    console.log(filterProducts);
-    setResult(filterProducts);
-    console.log(result);
-  }, [busca]);
+
+    console.log(sortby);
+
+    handleSort(filterProducts, sortby);
+  }, [busca, sortby]);
+
+  function handleSort(filterProducts) {
+    if (sortby) {
+      switch (sortby) {
+        case "priceLowToHigh":
+          return organizarPorMenorPreco(filterProducts);
+        case "priceHighToLow":
+          return organizarPorMaiorPreco(filterProducts);
+        case "popularity":
+          return organizarPorMaiorPopularidade(filterProducts);
+        case "discount":
+          return organizarPorMaiorDesconto(filterProducts);
+        case "latest":
+          return organizarPorMaisRecente(filterProducts);
+        default:
+          console.error("Opção de ordenação inválida!");
+          return filterProducts;
+      }
+    } else {
+      setResult(filterProducts);
+    }
+  }
 
   return (
     <div>
-      {" "}
       {isMobile && (
         <>
+          <div>
+            <SlideUpModal
+              isOpen={showUpModal}
+              page={"result"}
+              onValueReturn={handleSortBy}
+            />
+          </div>
           <div className="page-wrapper-modal-info">
             <header>
               <Link to="/">
@@ -78,13 +153,16 @@ const ResultCategories = () => {
             )}
             {result && (
               <div className="container-products-results">
-                {products.map((product) => (
+                {result.map((product) => (
                   <ProductContainer product={product} key={product.id} />
                 ))}
               </div>
             )}
             <div className="container-filter-result">
-              <div className="content-filter-result">
+              <div
+                className="content-filter-result"
+                onClick={() => setShowUpModal(!showUpModal)}
+              >
                 <img src={sort} alt="sort icon" />
                 <span>SORT</span>
               </div>
