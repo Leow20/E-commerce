@@ -11,13 +11,20 @@ import { ProductContext } from "../../Contexts/products";
 import ProductContainer from "../ProductContainer";
 
 function SearchModal({ closeModal }) {
+  const [searchQuery, setSearchQuery] = useState("");
   const handleChange = (e) => {
-    const digitando = e.target.value;
-    console.log(digitando);
+    setSearchQuery(e.target.value);
   };
 
   const { products } = useContext(ProductContext);
-  console.log(products);
+
+  const filtredProducts = searchQuery ? (
+    products.filter((product) => {
+      return product.name.toLowerCase().includes(searchQuery.toLowerCase());
+    })
+  ) : (
+    <div></div>
+  );
 
   return (
     <>
@@ -50,6 +57,14 @@ function SearchModal({ closeModal }) {
               <Link to={`/product/${product.id}`} key={product.id}>
                 <ProductContainer product={product} />
               </Link>
+            ))}
+          </div>
+
+          <div className="recomend-products-modalSearch">
+            {products.map((product) => (
+              <div key={filtredProducts.name}>
+                <ProductContainer product={product} />
+              </div>
             ))}
           </div>
         </div>
