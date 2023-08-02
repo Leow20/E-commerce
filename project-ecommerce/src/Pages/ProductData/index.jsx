@@ -8,10 +8,9 @@ import { Link } from "react-router-dom";
 import "./productData.css";
 
 //Firebase
-import { db, storage } from "../../../firebaseConnection";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../../../firebaseConnection";
+import { collection, query, where } from "firebase/firestore";
 import { useMediaQuery } from "react-responsive";
-import { getDownloadURL, ref } from "firebase/storage";
 
 //Components
 import Header from "../../components/Header";
@@ -21,6 +20,7 @@ import RatingsAndReviews from "../../components/RatingsandReviews";
 
 //Icon
 import Arrow from "../../assets/HeaderModal/arrow-right-black.svg";
+import ArrowRight from "../../assets/icons/icon-arrow.svg";
 import StarFill from "../../assets/icons/star-fill.svg";
 import Star from "../../assets/icons/star.svg";
 import Bag from "../../assets/icons/bag.svg";
@@ -37,7 +37,7 @@ const ProductData = () => {
 	const isMobile = useMediaQuery({ maxWidth: 619 });
 	const productId = id;
 	const q = query(collection(db, "products"), where("id", "==", productId));
-	const [product, setProduct] = useState([]);
+	const [product, setProduct] = useState({});
 	const [image, setImage] = useState("");
 	const [qtd, setQtd] = useState(1);
 	const [container, setContainer] = useState("Product Description");
@@ -149,10 +149,102 @@ const ProductData = () => {
 						</div>
 
 						<div className="delivery-details-data">
-							<span>Delivery Details</span>
-							<span>Check estimated delivery date/pickup option.</span>
+							<div>
+								<span>Delivery Details</span>
+								<span>Check estimated delivery date/pickup option.</span>
+							</div>
+							<div>
+								<input
+									type="text"
+									name="Pincode input"
+									id="pincodeInputID"
+									placeholder="Enter Valid Pincode"
+								/>
+								<label>CHECK</label>
+							</div>
 						</div>
 
+						<div className="container-btns-content-data">
+							<div className="btn-box-content-data">
+								<hr />
+								<button
+									className={
+										container == "Product Description" ? "active-btn-data" : ""
+									}
+									onClick={() => {
+										if (container != "Product Description") {
+											setContainer("Product Description");
+										} else {
+											setContainer("");
+										}
+									}}
+								>
+									<span>Product Description</span>
+									<img
+										src={Arrow}
+										alt="Arrow"
+										style={{
+											transform: `rotate(${
+												container == "Product Description" ? "90deg" : "0deg"
+											})`,
+										}}
+									/>
+								</button>
+								{container == "Product Description" && (
+									<div>
+										<p>
+											Lorem ipsum dolor sit amet consectetur adipisicing elit.
+											Repellat, ad corporis ipsum explicabo provident doloremque
+											omnis? Tempore, quis ducimus possimus optio dolorum ut
+											eaque rem rerum architecto recusandae, officia nisi.
+										</p>
+									</div>
+								)}
+							</div>
+
+							<div className="btn-box-content-data">
+								<hr />
+								<button
+									className={
+										container == "Ratings and Reviews" ? "active-btn-data" : ""
+									}
+									onClick={() => {
+										if (container != "Ratings and Reviews") {
+											setContainer("Ratings and Reviews");
+										} else {
+											setContainer("");
+										}
+									}}
+								>
+									<span>Ratings and Reviews</span>
+									<img
+										src={Arrow}
+										alt="Arrow"
+										style={{
+											transform: `rotate(${
+												container == "Ratings and Reviews" ? "90deg" : "0deg"
+											})`,
+										}}
+									/>
+								</button>
+								{container == "Ratings and Reviews" && <RatingsAndReviews />}
+							</div>
+						</div>
+
+						<div className="box-invite-friends-data">
+							<hr />
+							<div>
+								<h1>Invite Friends & Earn</h1>
+								<p>Get uptp 100 reward points for every friend you invite</p>
+								<button>
+									<span>Invite Now</span>
+									<img src={ArrowRight} alt="ArrowRight" />
+								</button>
+							</div>
+							<div></div>
+							<hr />
+						</div>
+						<RelatedProducts func={"container"} productObj={product} />
 						<div className="box-btns-data">
 							<button className="add-fav">
 								<img src={Hearth} alt="" />
@@ -483,7 +575,9 @@ const ProductData = () => {
 									</p>
 								</div>
 							)}
-							{container == "Related Products" && <RelatedProducts />}
+							{container == "Related Products" && (
+								<RelatedProducts func={"container"} productObj={product} />
+							)}
 							{container == "Ratings and Reviews" && <RatingsAndReviews />}
 						</div>
 					</div>
