@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 
 //Router Dom
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 //Style
 import "./productData.css";
@@ -17,18 +18,18 @@ import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import RelatedProducts from "../../components/RelatedProducts";
 import RatingsAndReviews from "../../components/RatingsandReviews";
+import SlideUpModal from "../../components/SlideUpModal";
 
 //Icon
 import Arrow from "../../assets/HeaderModal/arrow-right-black.svg";
 import ArrowRight from "../../assets/icons/icon-arrow.svg";
 import StarFill from "../../assets/icons/star-fill.svg";
 import Star from "../../assets/icons/star.svg";
-import Bag from "../../assets/icons/bag.svg";
+import Bag from "../../assets/icons/bag-white.svg";
 import Hearth from "../../assets/icons/icon-wishlist.svg";
 import Similar from "../../assets/icons/view-smilar.svg";
 
-import { useParams } from "react-router-dom";
-
+//Context
 import { ProductContext } from "../../Contexts/products";
 
 const ProductData = () => {
@@ -42,6 +43,13 @@ const ProductData = () => {
 	const [qtd, setQtd] = useState(1);
 	const [container, setContainer] = useState("Product Description");
 	const [classImg, setClassImg] = useState(1);
+	const [showUpModal, setShowUpModal] = useState(false);
+	const productsFiltered = [];
+	products.forEach((element) => {
+		if (element.category === product.category) {
+			productsFiltered.push(element);
+		}
+	});
 
 	useEffect(() => {
 		products.forEach((doc) => {
@@ -67,29 +75,34 @@ const ProductData = () => {
 					</Link>
 				</header>
 				<section className="product-data-section">
+					<SlideUpModal
+						isOpen={showUpModal}
+						page={"Also Like"}
+						filteredProducts={productsFiltered}
+					/>
 					<div className="container-product-data">
 						<div className="box-img-data">
 							<div className="img-data">
 								<img src={image} alt="Product Image" id="productImageID" />
-								<button>
+								<button onClick={() => setShowUpModal(!showUpModal)}>
 									<img src={Similar} alt="View Similar" />
 								</button>
 							</div>
 							<div className="img-data">
 								<img src={image} alt="Product Image" id="productImageID" />
-								<button>
+								<button onClick={() => setShowUpModal(!showUpModal)}>
 									<img src={Similar} alt="View Similar" />
 								</button>
 							</div>
 							<div className="img-data">
 								<img src={image} alt="Product Image" id="productImageID" />
-								<button>
+								<button onClick={() => setShowUpModal(!showUpModal)}>
 									<img src={Similar} alt="View Similar" />
 								</button>
 							</div>
 							<div className="img-data">
 								<img src={image} alt="Product Image" id="productImageID" />
-								<button>
+								<button onClick={() => setShowUpModal(!showUpModal)}>
 									<img src={Similar} alt="View Similar" />
 								</button>
 							</div>
@@ -244,7 +257,10 @@ const ProductData = () => {
 							<div></div>
 							<hr />
 						</div>
-						<RelatedProducts func={"container"} productObj={product} />
+						<RelatedProducts
+							func={"container"}
+							productsFiltered={productsFiltered}
+						/>
 						<div className="box-btns-data">
 							<button className="add-fav">
 								<img src={Hearth} alt="" />
@@ -576,7 +592,10 @@ const ProductData = () => {
 								</div>
 							)}
 							{container == "Related Products" && (
-								<RelatedProducts func={"container"} productObj={product} />
+								<RelatedProducts
+									func={"container"}
+									productsFiltered={productsFiltered}
+								/>
 							)}
 							{container == "Ratings and Reviews" && <RatingsAndReviews />}
 						</div>

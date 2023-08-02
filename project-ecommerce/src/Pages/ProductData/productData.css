@@ -301,6 +301,15 @@
   background-color: #f4f4f4;
 }
 
+.box-btns-data .add-fav span {
+  color: #1B4B66;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 171.4%;
+}
+
 .box-btns-data .add-bag {
   display: flex;
   width: 272px;
@@ -317,6 +326,15 @@
   line-height: 171.4%;
   background-color: #1b4b66;
 }
+
+.box-btns-data .add-bag span {
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 171.4%;
+}
+
 
 .container-btns-content-data {
   width: 100%;
@@ -437,6 +455,14 @@
 }
 
 @media (width>=620px) {
+  .delivery-details-data {
+    align-items: start;
+  }
+
+  .delivery-details-data div:nth-child(1) {
+    align-items: start;
+  }
+
   .product-data-section {
     max-width: 1280px;
     padding: 24px 20px 20px 20px;
