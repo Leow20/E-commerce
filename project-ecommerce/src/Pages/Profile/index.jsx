@@ -155,7 +155,7 @@ const Profile = () => {
 								onClick={() => handleTabChange("Personal Information")}
 							>
 								<img
-									src={image != "" ? image : userNotPicture}
+									src={user && user.url ? user.url : userNotPicture}
 									alt="User Picture"
 								/>
 								<div>
