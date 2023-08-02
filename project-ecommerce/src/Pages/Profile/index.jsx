@@ -36,7 +36,6 @@ const Profile = () => {
 	const [translate, setTranslate] = useState("");
 	const isMobile = useMediaQuery({ maxWidth: 820 });
 	const [show, setShow] = useState("page-wrapper-modal-info");
-	const [image, setImage] = useState("");
 
 	function handleTabChange(tab) {
 		setSelectedTab(tab);
@@ -67,23 +66,6 @@ const Profile = () => {
 				setTranslate("translateY(0px)");
 				break;
 		}
-	}
-	const handleUploadImage = async (id) => {
-		const storageRef = storage;
-		const imagemRef = ref(storageRef, `images/users/${id}`);
-
-		await getDownloadURL(imagemRef)
-			.then((url) => {
-				setImage(url);
-			})
-			.catch((error) => {
-				if (error.code === "storage/object-not-found") {
-					setImage("");
-				}
-			});
-	};
-	if (user) {
-		handleUploadImage(user.uid);
 	}
 
 	useEffect(() => {
