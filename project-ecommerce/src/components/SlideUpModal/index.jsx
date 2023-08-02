@@ -19,12 +19,14 @@ const SlideUpModal = ({ page, isOpen, onValueReturn, filteredProducts }) => {
 		}
 	}, [isOpen]);
 
-	// useEffect(() => {
-	// 	const handleReturnValue = () => {
-	// 		onValueReturn(sortby);
-	// 	};
-	// 	handleReturnValue();
-	// }, [sortby]);
+	useEffect(() => {
+		if (page == "results") {
+			const handleReturnValue = () => {
+				onValueReturn(sortby);
+			};
+			handleReturnValue();
+		}
+	}, [sortby]);
 
 	function handleModalState() {
 		setAnimateModal("container-slide-up animate-modal-close");
