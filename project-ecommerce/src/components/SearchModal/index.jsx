@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import "./SearchMod.css";
 
@@ -7,20 +7,28 @@ import Heart from "../../assets/icons/Fill=False(1).svg";
 
 import Bag from "../../assets/Img/bolsa_rosa.jpg";
 import Perfume from "../../assets/Img/perfume.jpg";
+import { ProductContext } from "../../Contexts/products";
+import ProductContainer from "../ProductContainer";
 
-function SearchModal() {
+function SearchModal({ closeModal }) {
   const handleChange = (e) => {
     const digitando = e.target.value;
     console.log(digitando);
   };
 
+  const { products } = useContext(ProductContext);
+  console.log(products);
+
   return (
     <>
       <div className="Window-modalSearch">
         <div className="bar-modalSearch">
-          <Link to="/">
-            <img className="redirect-modalSearch" src={Arrow} alt="Back" />
-          </Link>
+          <button
+            className="redirect-modalSearch"
+            onClick={() => closeModal(false)}
+          >
+            <img src={Arrow} alt="Back" />
+          </button>
           <input
             onChange={handleChange}
             type="search"
@@ -31,36 +39,18 @@ function SearchModal() {
         </div>
         <h4 className="title-modalSearch">Recent Searchs</h4>
         <div className="recent-searchs-modalSearch">
-          <p>Womens Wrist Watches</p>
-          <p>Chanel Perfumes</p>
-          <p>Claute Bags</p>
+          <button>Womens Wrist Watches</button>
+          <button>Chanel Perfumes</button>
+          <button>Claute Bags</button>
         </div>
         <div className="newArrives-modalSearch">
           <h4 className="title-modalSearch">New Arrivals</h4>
           <div className="recomend-products-modalSearch">
-            <div>
-              <img className="productimg-modalSearch" src={Bag} alt="" />
-              <img className="heart-modalSearch" src={Heart} alt="Heart" />
-              <h5>Grande</h5>
-              <p>Blossom Pouch</p>
-              <p>$39.49</p>
-            </div>
-
-            <div>
-              <img className="productimg-modalSearch" src={Perfume} alt="" />
-              <img className="heart-modalSearch" src={Heart} alt="Heart" />
-              <h5>Grande</h5>
-              <p>Blossom Pouch</p>
-              <p>$39.49</p>
-            </div>
-
-            <div>
-              <img className="productimg-modalSearch" src={Bag} alt="" />
-              <img className="heart-modalSearch" src={Heart} alt="Heart" />
-              <h5>Grande</h5>
-              <p>Blossom Pouch</p>
-              <p>$39.49</p>
-            </div>
+            {products.map((product) => (
+              <Link to={`/product/${product.id}`} key={product.id}>
+                <ProductContainer product={product} />
+              </Link>
+            ))}
           </div>
         </div>
       </div>

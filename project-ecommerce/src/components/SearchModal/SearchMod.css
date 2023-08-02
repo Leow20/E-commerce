@@ -3,7 +3,7 @@
   z-index: 1001;
   height: 800px;
   width: 100%;
-  background-color: rgb(255, 177, 177);
+  background-color: white;
 }
 
 .bar-modalSearch {
@@ -16,6 +16,11 @@
   margin-top: 16px;
   margin-right: 8px;
   transform: rotate(180deg);
+  height: 100%;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .bar-modalSearch input[type="search"] {
@@ -46,7 +51,7 @@
 }
 
 .title-modalSearch:first-child {
-  margin-left: 16px;
+  margin-left: 0px;
   margin-bottom: 13px;
   font-size: 14px;
   font-style: normal;
@@ -54,15 +59,19 @@
 }
 
 .recent-searchs-modalSearch {
-  max-width: 330px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding: 0px 15px;
 }
 
-.recent-searchs-modalSearch p {
+.recent-searchs-modalSearch button {
   display: inline-flex;
   padding: 7px 12px;
   border-radius: 8px;
   background: #f4f4f4;
-  margin-right: 7px;
 
   font-size: 14px;
   font-style: normal;
@@ -77,7 +86,7 @@
 
 .recomend-products-modalSearch {
   display: flex;
-  max-height: 300px;
+  height: 220px;
   overflow-x: auto;
 }
 
