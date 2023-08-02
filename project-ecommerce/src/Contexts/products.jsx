@@ -8,74 +8,74 @@ export const ProductContext = createContext({});
 var productsArray = [];
 
 function ProductProvider({ children }) {
-	const [products, setProducts] = useState("");
+  const [products, setProducts] = useState("");
 
-	const handleProducts = useMemo(async () => {
-		const q = query(collection(db, "products"));
+  const handleProducts = useMemo(async () => {
+    const q = query(collection(db, "products"));
 
-		try {
-			const querySnapshot = await getDocs(q);
-			querySnapshot.forEach((doc) => {
-				let product = {
-					name: doc.data().name,
-					description: doc.data().description,
-					price: doc.data().price,
-					qty: doc.data().qty,
-					stars: doc.data().stars,
-					discount: doc.data().discount,
-					id: doc.data().id,
-					category: doc.data().category,
-				};
-				productsArray.push(product);
-			});
+    try {
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        let product = {
+          name: doc.data().name,
+          description: doc.data().description,
+          price: doc.data().price,
+          qty: doc.data().qty,
+          stars: doc.data().stars,
+          discount: doc.data().discount,
+          id: doc.data().id,
+          category: doc.data().category,
+        };
+        productsArray.push(product);
+      });
 
-			await Promise.all(
-				productsArray.map(async (doc) => {
-					const storageRef = storage;
-					const imageRef = ref(storageRef, `images/products/${doc.id}`);
-					try {
-						const downloadURL = await getDownloadURL(imageRef);
-						doc.url = downloadURL;
-						if (doc.discount != 0) {
-							calculatePriceWithDiscount(doc);
-						}
-					} catch (error) {
-						console.error("Error obtaining image URL:", error);
-					}
-				})
-			);
+      await Promise.all(
+        productsArray.map(async (doc) => {
+          const storageRef = storage;
+          const imageRef = ref(storageRef, `images/products/${doc.id}`);
+          try {
+            const downloadURL = await getDownloadURL(imageRef);
+            doc.url = downloadURL;
+            if (doc.discount != 0) {
+              calculatePriceWithDiscount(doc);
+            }
+          } catch (error) {
+            console.error("Error obtaining image URL:", error);
+          }
+        })
+      );
 
-			setProducts(productsArray);
-		} catch (error) {
-			console.error("Error fetching products:", error);
-		}
-		handleProducts();
-	}, []);
+      setProducts(productsArray);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+    }
+    handleProducts();
+  }, []);
 
-	function calculatePriceWithDiscount(product) {
-		if ("price" in product && "discount" in product) {
-			const originalPrice = parseFloat(
-				product.price.replace("$", "").replace(",", ".")
-			);
-			const discount = parseFloat(product.discount);
+  function calculatePriceWithDiscount(product) {
+    if ("price" in product && "discount" in product) {
+      const originalPrice = parseFloat(
+        product.price.replace("$", "").replace(",", ".")
+      );
+      const discount = parseFloat(product.discount);
 
-			const priceWithDiscount = originalPrice * (1 - discount / 100);
+      const priceWithDiscount = originalPrice * (1 - discount / 100);
 
-			product.priceWithDiscount = `$${priceWithDiscount.toFixed(2)}`;
-		} else {
-			console.log(
-				"The product object does not contain the 'price' and/or 'discount' keys."
-			);
-		}
-	}
+      product.priceWithDiscount = `$${priceWithDiscount.toFixed(2)}`;
+    } else {
+      console.log(
+        "The product object does not contain the 'price' and/or 'discount' keys."
+      );
+    }
+  }
 
-	if (products) {
-		return (
-			<ProductContext.Provider value={{ products }}>
-				{children}
-			</ProductContext.Provider>
-		);
-	}
+  if (products) {
+    return (
+      <ProductContext.Provider value={{ products }}>
+        {children}
+      </ProductContext.Provider>
+    );
+  }
 }
 
 export default ProductProvider;
