@@ -3,6 +3,32 @@
   height: 202px;
 }
 
+.container-product-price {
+  display: flex;
+  gap: 6px;
+}
+.container-product-price span:nth-child(1) {
+  color: #171520;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+.container-product-price span:nth-child(2) {
+  color: #626262;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 16px;
+  text-decoration: line-through;
+}
+
+.container-product-price span:nth-child(3) {
+  color: #e21d1d;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
 @media screen and (min-width: 820px) {
   .img-product-home {
     min-width: 284px;

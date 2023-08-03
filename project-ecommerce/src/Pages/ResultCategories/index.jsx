@@ -167,7 +167,6 @@ const ResultCategories = () => {
           } else if (discountRange === "50+") {
             return discount > 50;
           } else {
-            // Caso algum valor inválido seja selecionado, retornar true para não afetar o filtro.
             return true;
           }
         })
@@ -246,7 +245,7 @@ const ResultCategories = () => {
               <div className="container-products-results">
                 {result.map((product) => (
                   <Link to={`/product/${product.id}`} key={product.id}>
-                    <ProductContainer product={product} />
+                    <ProductContainer product={product} page="result" />
                   </Link>
                 ))}
               </div>
