@@ -22,7 +22,12 @@ const ResultCategories = () => {
   const { products } = useContext(ProductContext);
   const [result, setResult] = useState("");
   const [sortby, setSortby] = useState(null);
-  const [filter, setFilter] = useState({ color: [], rating: [] });
+  const [filter, setFilter] = useState({
+    color: [],
+    rating: [],
+    brand: [],
+    price: [],
+  });
   const [showUpModal, setShowUpModal] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
   const [filterProducts, setFilterProducts] = useState([]);
@@ -99,10 +104,51 @@ const ResultCategories = () => {
         product.description.includes(busca.toLowerCase())
     );
     if (filter.color.length > 0) {
-      filterProducts = products.filter((product) =>
+      console.log(filter);
+      filterProducts = filterProducts.filter((product) =>
         filter.color.some((color) => product.color.includes(color))
       );
       console.log(filterProducts);
+    }
+
+    if (filter.rating.length > 0) {
+      console.log(filter);
+      filterProducts = filterProducts.filter((product) =>
+        filter.rating.some((rating) => product.stars == rating)
+      );
+      console.log(filterProducts);
+    }
+
+    if (filter.brand.length > 0) {
+      console.log(filter);
+      filterProducts = filterProducts.filter((product) =>
+        filter.brand.some((brand) => product.brand == brand)
+      );
+      console.log(filterProducts);
+    }
+
+    if (filter.price.length > 0) {
+      filterProducts = filterProducts.filter((product) =>
+        filter.price.some((priceRange) => {
+          const price = parseFloat(
+            product.price.replace("$", "").replace(".", "")
+          );
+          console.log(price);
+          if (priceRange === "0-50") {
+            return price <= 50;
+          } else if (priceRange === "50-100") {
+            return price > 50 && price <= 100;
+          } else if (priceRange === "100-200") {
+            return price > 100 && price <= 200;
+          } else if (priceRange === "200-400") {
+            return price > 200 && price <= 400;
+          } else if (priceRange === "400") {
+            return price > 400;
+          } else {
+            return true;
+          }
+        })
+      );
     }
 
     console.log(filterProducts);

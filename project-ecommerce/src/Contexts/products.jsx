@@ -26,6 +26,7 @@ function ProductProvider({ children }) {
           id: doc.data().id,
           category: doc.data().category,
           color: doc.data().color,
+          brand: doc.data().brand,
         };
         productsArray.push(product);
       });

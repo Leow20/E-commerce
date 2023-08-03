@@ -9,13 +9,22 @@ import cross from "../../assets/icons/cross.svg";
 //Component
 import ColorsFilter from "../Filters/colorsFilter";
 import ReviewFilter from "../Filters/ReviewFilter";
+import BrandFilter from "../Filters/BrandFilter";
+import PriceRangeFilter from "../Filters/PriceRangeFilter";
 
 const FilterModal = ({ isOpen, onFilterReturn, filterProps }) => {
   const [seletedTab, setSelectedTab] = useState("reviews");
   const [translate, setTranslate] = useState("translateY(0px)");
   const [color, setColor] = useState([]);
   const [rating, setRating] = useState([]);
-  const [filter, setFilter] = useState({ color: [], rating: [] });
+  const [brand, setBrand] = useState([]);
+  const [price, setPrice] = useState([]);
+  const [filter, setFilter] = useState({
+    color: [],
+    rating: [],
+    brand: [],
+    price: [],
+  });
   const [clearFilters, setClearFilters] = useState(true);
   const [open, setOpen] = useState(false);
   const [firstTimeFilter, setFirstTimeFilter] = useState(false);
@@ -69,16 +78,26 @@ const FilterModal = ({ isOpen, onFilterReturn, filterProps }) => {
     setRating(value);
   };
 
+  const handleBrandFilter = (value) => {
+    setBrand(value);
+  };
+
+  const handlePriceFilter = (value) => {
+    setPrice(value);
+  };
+
   function handleApplyChanges() {
     let snapfilter = {};
     snapfilter.color = color;
     snapfilter.rating = rating;
+    snapfilter.brand = brand;
+    snapfilter.price = price;
     setFilter(snapfilter);
     console.log(snapfilter);
   }
 
   const handleClearForm = () => {
-    setFilter([]);
+    setFilter({ color: [], rating: [], brand: [], price: [] });
   };
 
   useEffect(() => {
@@ -156,6 +175,18 @@ const FilterModal = ({ isOpen, onFilterReturn, filterProps }) => {
               {seletedTab == "reviews" && (
                 <ReviewFilter
                   ratingReturn={handleRatingFilter}
+                  filterProps={propsFilter}
+                />
+              )}
+              {seletedTab == "brand" && (
+                <BrandFilter
+                  brandReturn={handleBrandFilter}
+                  filterProps={propsFilter}
+                />
+              )}
+              {seletedTab == "price" && (
+                <PriceRangeFilter
+                  priceReturn={handlePriceFilter}
                   filterProps={propsFilter}
                 />
               )}
