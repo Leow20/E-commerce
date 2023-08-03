@@ -1,3 +1,7 @@
+.container-results .page-wrapper-modal-info {
+  align-items: unset;
+}
+
 .qty-product-result {
   width: 100%;
   margin-top: 21px;
@@ -19,7 +23,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: 22px;
-  margin: 8px 0 0 16px;
+  margin: 8px 0 60px 16px;
 }
 
 .container-products-results .arrival-content-home {
@@ -45,6 +49,10 @@
   align-items: center;
   justify-content: center;
   gap: 4px;
+}
+
+.content-filter-result {
+  cursor: pointer;
 }
 
 .content-filter-result span {

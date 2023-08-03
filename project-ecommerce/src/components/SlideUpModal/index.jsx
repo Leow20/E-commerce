@@ -5,7 +5,7 @@ import "./slideUpModal.css";
 
 const SlideUpModal = ({ page, isOpen, onValueReturn }) => {
   const [open, setOpen] = useState(isOpen);
-  const [sortby, setSortby] = useState("");
+  const [sortby, setSortby] = useState("popularity");
   const [firstTimeSort, setFirstTimeSort] = useState(false);
   const [animateModal, setAnimateModal] = useState("container-slide-up");
 
@@ -33,6 +33,18 @@ const SlideUpModal = ({ page, isOpen, onValueReturn }) => {
     }, 250);
   }
 
+  const sortOptions = [
+    { value: "popularity", label: "Popularity" },
+    { value: "latest", label: "Latest Products" },
+    { value: "priceLowToHigh", label: "Price - Low to High" },
+    { value: "priceHighToLow", label: "Price - High to Low" },
+    { value: "discount", label: "Discount" },
+  ];
+
+  const handleRadioChange = (event) => {
+    setSortby(event.target.value);
+  };
+
   return (
     <div className="page-wrapper-slide-modal">
       {open && (
@@ -48,66 +60,21 @@ const SlideUpModal = ({ page, isOpen, onValueReturn }) => {
               <p>Sort By</p>
               <hr />
               <form className="form-sortby">
-                <label>
-                  <input
-                    type="radio"
-                    name="sortOption"
-                    value="popularity"
-                    onChange={(e) => setSortby(e.target.value)}
-                  />
-                  <div className="input-radio">
-                    <span></span>
-                  </div>
-                  Popularity
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="sortOption"
-                    value="latest"
-                    onChange={(e) => setSortby(e.target.value)}
-                  />
-                  <div className="input-radio">
-                    <span></span>
-                  </div>
-                  Latest Products
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="sortOption"
-                    value="priceLowToHigh"
-                    onChange={(e) => setSortby(e.target.value)}
-                  />
-                  <div className="input-radio">
-                    <span></span>
-                  </div>
-                  Price - Low to High
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="sortOption"
-                    value="priceHighToLow"
-                    onChange={(e) => setSortby(e.target.value)}
-                  />
-                  <div className="input-radio">
-                    <span></span>
-                  </div>
-                  Price - High to Low
-                </label>
-                <label>
-                  <input
-                    type="radio"
-                    name="sortOption"
-                    value="discount"
-                    onChange={(e) => setSortby(e.target.value)}
-                  />
-                  <div className="input-radio">
-                    <span></span>
-                  </div>
-                  Discount
-                </label>
+                {sortOptions.map((option) => (
+                  <label key={option.value}>
+                    <input
+                      type="radio"
+                      name="sortOption"
+                      value={option.value}
+                      checked={sortby === option.value}
+                      onChange={handleRadioChange}
+                    />
+                    <div className="input-radio">
+                      <span></span>
+                    </div>
+                    {option.label}
+                  </label>
+                ))}
               </form>
             </div>
           )}

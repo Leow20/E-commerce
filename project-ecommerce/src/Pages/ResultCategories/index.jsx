@@ -6,7 +6,7 @@ import { ProductContext } from "../../Contexts/products";
 //Icons
 import arrowProfile from "../../assets/icons/arrowProfile.svg";
 import sort from "../../assets/icons/sort.svg";
-import filter from "../../assets/icons/filter.svg";
+import filterIcon from "../../assets/icons/filter.svg";
 
 //Style
 import "./resultCategories.css";
@@ -14,20 +14,29 @@ import "./resultCategories.css";
 //Component
 import ProductContainer from "../../components/ProductContainer";
 import SlideUpModal from "../../components/SlideUpModal";
+import FilterModal from "../../components/FilterModal";
 
-const busca = "Hand";
+const busca = "H";
 
 const ResultCategories = () => {
   const { products } = useContext(ProductContext);
   const [result, setResult] = useState("");
   const [sortby, setSortby] = useState(null);
+  const [filter, setFilter] = useState({ color: [], rating: [] });
   const [showUpModal, setShowUpModal] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
+  const [filterProducts, setFilterProducts] = useState([]);
 
   const isMobile = useMediaQuery({ maxWidth: 820 });
   var lowProducts = [];
 
   const handleSortBy = (value) => {
     setSortby(value);
+  };
+
+  const handleFilter = (value) => {
+    console.log(value);
+    setFilter(value);
   };
 
   function organizarPorMenorPreco(array) {
@@ -40,7 +49,6 @@ const ResultCategories = () => {
     setResult(value);
   }
 
-  // Função para organizar o array de objetos com base no preço (do maior para o menor)
   function organizarPorMaiorPreco(array) {
     const value = array.slice().sort((a, b) => {
       const precoA = parseFloat(a.price.replace("$", ""));
@@ -84,17 +92,24 @@ const ResultCategories = () => {
 
     transformToLowercase();
     console.log(lowProducts);
-    const filterProducts = products.filter(
-      (team) =>
-        team.name.includes(busca.toLowerCase()) ||
-        team.category.includes(busca.toLowerCase()) ||
-        team.description.includes(busca.toLowerCase())
+    var filterProducts = products.filter(
+      (product) =>
+        product.name.includes(busca.toLowerCase()) ||
+        product.category.includes(busca.toLowerCase()) ||
+        product.description.includes(busca.toLowerCase())
     );
+    if (filter.color.length > 0) {
+      filterProducts = products.filter((product) =>
+        filter.color.some((color) => product.color.includes(color))
+      );
+      console.log(filterProducts);
+    }
 
+    console.log(filterProducts);
     console.log(sortby);
 
     handleSort(filterProducts, sortby);
-  }, [busca, sortby]);
+  }, [busca, sortby, filter]);
 
   function handleSort(filterProducts) {
     if (sortby) {
@@ -121,12 +136,19 @@ const ResultCategories = () => {
   return (
     <div>
       {isMobile && (
-        <>
+        <div className="container-results">
           <div>
             <SlideUpModal
               isOpen={showUpModal}
               page={"result"}
               onValueReturn={handleSortBy}
+            />
+          </div>
+          <div>
+            <FilterModal
+              isOpen={showFilter}
+              onFilterReturn={handleFilter}
+              filterProps={filter}
             />
           </div>
           <div className="page-wrapper-modal-info">
@@ -154,7 +176,9 @@ const ResultCategories = () => {
             {result && (
               <div className="container-products-results">
                 {result.map((product) => (
-                  <ProductContainer product={product} key={product.id} />
+                  <Link to={`/product/${product.id}`} key={product.id}>
+                    <ProductContainer product={product} />
+                  </Link>
                 ))}
               </div>
             )}
@@ -166,13 +190,16 @@ const ResultCategories = () => {
                 <img src={sort} alt="sort icon" />
                 <span>SORT</span>
               </div>
-              <div className="content-filter-result">
-                <img src={filter} alt="filter icon" />
+              <div
+                className="content-filter-result"
+                onClick={() => setShowFilter(!showFilter)}
+              >
+                <img src={filterIcon} alt="filter icon" />
                 <span>FILTER</span>
               </div>
             </div>
           </div>
-        </>
+        </div>
       )}
     </div>
   );
