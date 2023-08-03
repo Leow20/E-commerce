@@ -16,6 +16,7 @@ import AddProduct from "../Pages/AddProduct";
 //Routes private
 import Private from "./private";
 import ProductData from "../Pages/ProductData";
+import SearchModal from "../components/SearchModal";
 
 const Router = () => {
   return (
@@ -45,6 +46,7 @@ const Router = () => {
           }
         />
         <Route path="/product/:id" element={<ProductData />} />
+        <Route path="/results/:id" element={<SearchModal />}/>
       </Routes>
     </BrowserRouter>
   );

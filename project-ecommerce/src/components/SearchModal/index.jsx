@@ -1,12 +1,12 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./SearchMod.css";
 
 import Arrow from "../../assets/icons/arrowProfile.svg";
-import Heart from "../../assets/icons/Fill=False(1).svg";
+import Lupa from "../../assets/imgHeader/search.svg";
+import Cross from "../../assets/icons/cross-small.svg";
+import Autofill from "../../assets/icons/auto-fill.svg";
 
-import Bag from "../../assets/Img/bolsa_rosa.jpg";
-import Perfume from "../../assets/Img/perfume.jpg";
 import { ProductContext } from "../../Contexts/products";
 import ProductContainer from "../ProductContainer";
 
@@ -18,13 +18,18 @@ function SearchModal({ closeModal }) {
 
   const { products } = useContext(ProductContext);
 
-  const filtredProducts = searchQuery ? (
-    products.filter((product) => {
-      return product.name.toLowerCase().includes(searchQuery.toLowerCase());
-    })
-  ) : (
-    <div></div>
-  );
+  const filteredProducts = products.filter((product) => {
+    const nameP = product.name.toLowerCase();
+    const categoryP = product.category.toLowerCase();
+    const searchQ = searchQuery.toLowerCase();
+    return nameP.startsWith(searchQ) || categoryP.startsWith(searchQ);
+  });
+
+  const navigate = useNavigate();
+
+  const handleRedirect = () => {
+    navigate(`/results/${searchQuery}`);
+  };
 
   return (
     <>
@@ -43,6 +48,19 @@ function SearchModal({ closeModal }) {
             id="searchId"
             placeholder="Search"
           />
+          <button className="redirect" onClick={handleRedirect}>
+            <img src={Lupa} alt="Search" />
+          </button>
+        </div>
+        <div className="dropdown">
+          {searchQuery &&
+            filteredProducts.map((product) => (
+              <div className="dropdownRow" key={product.id}>
+                <img src={Cross} />
+                {product.name || product.category}
+                <img src={Autofill} />
+              </div>
+            ))}
         </div>
         <h4 className="title-modalSearch">Recent Searchs</h4>
         <div className="recent-searchs-modalSearch">
@@ -57,14 +75,6 @@ function SearchModal({ closeModal }) {
               <Link to={`/product/${product.id}`} key={product.id}>
                 <ProductContainer product={product} />
               </Link>
-            ))}
-          </div>
-
-          <div className="recomend-products-modalSearch">
-            {products.map((product) => (
-              <div key={filtredProducts.name}>
-                <ProductContainer product={product} />
-              </div>
             ))}
           </div>
         </div>
