@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 import "./index.css";
+import { useMediaQuery } from "react-responsive";
 
 const ColorsFilter = ({ colorReturn, filterProps }) => {
+  const isMobile = useMediaQuery({ maxWidth: 820 });
   const colorsData = [
     { name: "Blue", value: "blue" },
     { name: "Marron Red", value: "marron-red" },
@@ -35,7 +37,7 @@ const ColorsFilter = ({ colorReturn, filterProps }) => {
   }, [selectedColors]);
 
   useEffect(() => {
-    if (filterProps) {
+    if (filterProps && isMobile) {
       setSelectedColors(filterProps.color);
       if (filterProps.color == undefined) {
         setSelectedColors([]);

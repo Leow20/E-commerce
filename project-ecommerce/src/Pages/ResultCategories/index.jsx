@@ -3,10 +3,17 @@ import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 import { ProductContext } from "../../Contexts/products";
 
+//Images
+import hero from "../../assets/img/heroCategories.jpg";
+import StarFill from "../../assets/icons/star-fill.svg";
+import Star from "../../assets/icons/star.svg";
+
 //Icons
 import arrowProfile from "../../assets/icons/arrowProfile.svg";
 import sort from "../../assets/icons/sort.svg";
 import filterIcon from "../../assets/icons/filter.svg";
+import arrow from "../../assets/icons/blackArrow.svg";
+import { FaPlus, FaMinus } from "react-icons/fa";
 
 //Style
 import "./resultCategories.css";
@@ -15,8 +22,10 @@ import "./resultCategories.css";
 import ProductContainer from "../../components/ProductContainer";
 import SlideUpModal from "../../components/SlideUpModal";
 import FilterModal from "../../components/FilterModal";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
-const busca = "H";
+const busca = "";
 
 const ResultCategories = () => {
   const { products } = useContext(ProductContext);
@@ -31,6 +40,8 @@ const ResultCategories = () => {
   });
   const [showUpModal, setShowUpModal] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
+  const [tabReview, setTabReview] = useState(false);
+  const [tabColor, setTabColor] = useState(false);
   const [filterProducts, setFilterProducts] = useState([]);
 
   const isMobile = useMediaQuery({ maxWidth: 820 });
@@ -201,6 +212,25 @@ const ResultCategories = () => {
     }
   }
 
+  const [isMenuOpen, setMenuOpen] = useState(false);
+
+  const toggleMenu = (tab) => {
+    if (tab == "color") {
+      setTabColor(!tabColor);
+    } else if (tab == "review") {
+      setTabReview(!tabReview);
+    }
+    console.log(isMenuOpen);
+  };
+
+  const truncateDescription = (description, maxWords) => {
+    const words = description.split(" ");
+    if (words.length > maxWords) {
+      return words.slice(0, maxWords).join(" ") + "...";
+    }
+    return description;
+  };
+
   return (
     <div>
       {isMobile && (
@@ -268,6 +298,133 @@ const ResultCategories = () => {
             </div>
           </div>
         </div>
+      )}
+      {!isMobile && (
+        <>
+          <Header />
+          <div className="page-wrapper-web-result">
+            <div className="hero-results-web">
+              <img src={hero} alt="img hero 70% off" />
+            </div>
+            <div className="path-to-cart-mybag">
+              <p>Home</p>
+              <img src={arrow} />
+              {busca != "" && <p>{busca}</p>}
+              {busca == "" && <p>View All</p>}
+            </div>
+            <h1 className="title-result-web">{busca}</h1>
+          </div>
+          <div className="container-filter-products-result">
+            <div className="container-filters-web">
+              <div className="collapsible-filter">
+                <span>Reviews</span>
+                <button
+                  className="menu-button"
+                  onClick={() => toggleMenu("review")}
+                >
+                  {tabReview ? <FaMinus /> : <FaPlus />}
+                </button>
+                <div className={`menu-items ${tabReview ? "open" : ""}`}>
+                  <FilterModal
+                    isOpen={showFilter}
+                    onFilterReturn={handleFilter}
+                    filterProps={filter}
+                    tab="review"
+                  />
+                </div>
+              </div>
+              <div className="collapsible-filter">
+                <span>Color</span>
+                <button
+                  className="menu-button"
+                  onClick={() => toggleMenu("color")}
+                >
+                  {tabColor ? <FaMinus /> : <FaPlus />}
+                </button>
+                <div className={`menu-items ${tabColor ? "open" : ""}`}>
+                  <FilterModal
+                    isOpen={showFilter}
+                    onFilterReturn={handleFilter}
+                    filterProps={filter}
+                    tab="color"
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="cointainer-products-web">
+              {result && (
+                <div className="container-products-results-web">
+                  {result.map((product) => (
+                    <Link to={`/product/${product.id}`} key={product.id}>
+                      <div className="product-container-result">
+                        <div className="product-image-result">
+                          <img src={product.url} alt="produto" />
+                        </div>
+                        <div className="text-product-result-web">
+                          <span>{truncateDescription(product.name, 2)}</span>
+                          <span>
+                            {truncateDescription(product.description, 2)}
+                          </span>
+                          <div className="content-stars-data">
+                            <img
+                              src={
+                                product.stars > 0 && product.stars >= 1
+                                  ? StarFill
+                                  : Star
+                              }
+                              alt="Stars"
+                            />
+                            <img
+                              src={
+                                product.stars > 1 && product.stars >= 2
+                                  ? StarFill
+                                  : Star
+                              }
+                              alt="Stars"
+                            />
+                            <img
+                              src={
+                                product.stars > 2 && product.stars >= 3
+                                  ? StarFill
+                                  : Star
+                              }
+                              alt="Stars"
+                            />
+                            <img
+                              src={
+                                product.stars > 3 && product.stars >= 4
+                                  ? StarFill
+                                  : Star
+                              }
+                              alt="Stars"
+                            />
+                            <img
+                              src={
+                                product.stars > 4 && product.stars >= 5
+                                  ? StarFill
+                                  : Star
+                              }
+                              alt="Stars"
+                            />
+                          </div>
+                          <div className="container-product-price">
+                            <span>{product.price}</span>
+                            <span>{product.priceWithDiscount}</span>
+                            {product.discount > 0 && (
+                              <span>{product.discount}% OFF</span>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          <Footer />
+        </>
       )}
     </div>
   );

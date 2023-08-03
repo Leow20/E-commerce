@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useMediaQuery } from "react-responsive";
 
 const ReviewFilter = ({ filterProps, ratingReturn }) => {
   const ratingsData = [
@@ -8,7 +9,7 @@ const ReviewFilter = ({ filterProps, ratingReturn }) => {
     { value: "4", label: "4 Stars" },
     { value: "5", label: "5 Stars" },
   ];
-
+  const isMobile = useMediaQuery({ maxWidth: 820 });
   const [selectedRating, setSelectedRating] = useState("");
 
   const handleRadioChange = (event) => {
@@ -30,7 +31,7 @@ const ReviewFilter = ({ filterProps, ratingReturn }) => {
   }, [selectedRating]);
 
   useEffect(() => {
-    if (filterProps) {
+    if (filterProps && isMobile) {
       setSelectedRating(filterProps.rating);
       if (filterProps.rating == undefined) {
         setSelectedColors([]);

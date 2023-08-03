@@ -67,8 +67,8 @@
   border-radius: 50%;
 }
 
-.input-radio,
-span {
+.input-radio span,
+.input-radio {
   transition: 0.3s ease;
   color: #626262;
 }

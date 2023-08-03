@@ -12,8 +12,9 @@ import ReviewFilter from "../Filters/ReviewFilter";
 import BrandFilter from "../Filters/BrandFilter";
 import PriceRangeFilter from "../Filters/PriceRangeFilter";
 import DiscountFilter from "../Filters/DiscountFilter";
+import { useMediaQuery } from "react-responsive";
 
-const FilterModal = ({ isOpen, onFilterReturn, filterProps }) => {
+const FilterModal = ({ isOpen, onFilterReturn, filterProps, tab }) => {
   const [seletedTab, setSelectedTab] = useState("reviews");
   const [translate, setTranslate] = useState("translateY(0px)");
   const [color, setColor] = useState([]);
@@ -33,6 +34,7 @@ const FilterModal = ({ isOpen, onFilterReturn, filterProps }) => {
   const [firstTimeFilter, setFirstTimeFilter] = useState(false);
   const [show, setShow] = useState("page-wrapper-filters");
   const [propsFilter, setPropsFilter] = useState(filterProps);
+  const isMobile = useMediaQuery({ maxWidth: 820 });
 
   useEffect(() => {
     setPropsFilter(filterProps);
@@ -104,6 +106,25 @@ const FilterModal = ({ isOpen, onFilterReturn, filterProps }) => {
     console.log(snapfilter);
   }
 
+  useEffect(() => {
+    if (!isMobile) {
+      let snapfilter = {};
+      snapfilter.color = color;
+      snapfilter.rating = rating;
+      snapfilter.brand = brand;
+      snapfilter.price = price;
+      snapfilter.discount = discount;
+      setFilter(snapfilter);
+      console.log(snapfilter);
+    }
+  }, [color, rating, brand, price, discount]);
+
+  useEffect(() => {
+    if (!isMobile) {
+      handleApplyChanges();
+    }
+  }, [color, rating, brand, price, discount]);
+
   const handleClearForm = () => {
     setFilter({ color: [], rating: [], brand: [], price: [], discount: [] });
   };
@@ -126,7 +147,7 @@ const FilterModal = ({ isOpen, onFilterReturn, filterProps }) => {
 
   return (
     <>
-      {open && (
+      {open && isMobile && (
         <div className={show}>
           <header className="header-filter-modal">
             <h1>Filters</h1>
@@ -210,11 +231,27 @@ const FilterModal = ({ isOpen, onFilterReturn, filterProps }) => {
             <button type="button" onClick={handleClearForm}>
               Clear All
             </button>
-            <button type="button" onClick={handleApplyChanges}>
+            <button type="button" onClick={() => handleApplyChanges()}>
               Apply
             </button>
           </div>
         </div>
+      )}
+      {!isMobile && (
+        <>
+          {tab === "color" && (
+            <ColorsFilter
+              colorReturn={handleColorFilter}
+              filterProps={propsFilter}
+            />
+          )}
+          {tab === "review" && (
+            <ReviewFilter
+              ratingReturn={handleRatingFilter}
+              filterProps={propsFilter}
+            />
+          )}
+        </>
       )}
     </>
   );
