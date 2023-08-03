@@ -12,6 +12,7 @@ import ProductContainer from "../ProductContainer";
 
 function SearchModal({ closeModal }) {
   const [searchQuery, setSearchQuery] = useState("");
+
   const handleChange = (e) => {
     setSearchQuery(e.target.value);
   };
@@ -31,6 +32,11 @@ function SearchModal({ closeModal }) {
     navigate(`/results/${searchQuery}`);
   };
 
+  const completeSearch = (searchText) => {
+    setSearchQuery(searchText);
+    console.log(`busca: ${searchText}`);
+  };
+
   return (
     <>
       <div className="Window-modalSearch">
@@ -42,6 +48,7 @@ function SearchModal({ closeModal }) {
             <img src={Arrow} alt="Back" />
           </button>
           <input
+          value={searchQuery}
             onChange={handleChange}
             type="search"
             name="searchInput"
@@ -58,7 +65,12 @@ function SearchModal({ closeModal }) {
               <div className="dropdownRow" key={product.id}>
                 <img src={Cross} />
                 {product.name || product.category}
-                <img src={Autofill} />
+                <img
+                  onClick={() =>
+                    completeSearch(product.name || product.category)
+                  }
+                  src={Autofill}
+                />
               </div>
             ))}
         </div>
