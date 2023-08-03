@@ -11,6 +11,7 @@ import ColorsFilter from "../Filters/colorsFilter";
 import ReviewFilter from "../Filters/ReviewFilter";
 import BrandFilter from "../Filters/BrandFilter";
 import PriceRangeFilter from "../Filters/PriceRangeFilter";
+import DiscountFilter from "../Filters/DiscountFilter";
 
 const FilterModal = ({ isOpen, onFilterReturn, filterProps }) => {
   const [seletedTab, setSelectedTab] = useState("reviews");
@@ -19,11 +20,13 @@ const FilterModal = ({ isOpen, onFilterReturn, filterProps }) => {
   const [rating, setRating] = useState([]);
   const [brand, setBrand] = useState([]);
   const [price, setPrice] = useState([]);
+  const [discount, setDiscount] = useState([]);
   const [filter, setFilter] = useState({
     color: [],
     rating: [],
     brand: [],
     price: [],
+    discount: [],
   });
   const [clearFilters, setClearFilters] = useState(true);
   const [open, setOpen] = useState(false);
@@ -86,18 +89,23 @@ const FilterModal = ({ isOpen, onFilterReturn, filterProps }) => {
     setPrice(value);
   };
 
+  const handleDiscountFilter = (value) => {
+    setDiscount(value);
+  };
+
   function handleApplyChanges() {
     let snapfilter = {};
     snapfilter.color = color;
     snapfilter.rating = rating;
     snapfilter.brand = brand;
     snapfilter.price = price;
+    snapfilter.discount = discount;
     setFilter(snapfilter);
     console.log(snapfilter);
   }
 
   const handleClearForm = () => {
-    setFilter({ color: [], rating: [], brand: [], price: [] });
+    setFilter({ color: [], rating: [], brand: [], price: [], discount: [] });
   };
 
   useEffect(() => {
@@ -187,6 +195,12 @@ const FilterModal = ({ isOpen, onFilterReturn, filterProps }) => {
               {seletedTab == "price" && (
                 <PriceRangeFilter
                   priceReturn={handlePriceFilter}
+                  filterProps={propsFilter}
+                />
+              )}
+              {seletedTab == "discount" && (
+                <DiscountFilter
+                  discountReturn={handleDiscountFilter}
                   filterProps={propsFilter}
                 />
               )}

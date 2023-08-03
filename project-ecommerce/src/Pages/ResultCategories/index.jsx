@@ -27,6 +27,7 @@ const ResultCategories = () => {
     rating: [],
     brand: [],
     price: [],
+    discount: [],
   });
   const [showUpModal, setShowUpModal] = useState(false);
   const [showFilter, setShowFilter] = useState(false);
@@ -145,6 +146,28 @@ const ResultCategories = () => {
           } else if (priceRange === "400") {
             return price > 400;
           } else {
+            return true;
+          }
+        })
+      );
+    }
+
+    if (filter.discount.length > 0) {
+      filterProducts = filterProducts.filter((product) =>
+        filter.discount.some((discountRange) => {
+          const discount = product.discount;
+          if (discountRange === "10-20") {
+            return discount >= 10 && discount <= 20;
+          } else if (discountRange === "20-30") {
+            return discount > 20 && discount <= 30;
+          } else if (discountRange === "30-40") {
+            return discount > 30 && discount <= 40;
+          } else if (discountRange === "40-50") {
+            return discount > 40 && discount <= 50;
+          } else if (discountRange === "50+") {
+            return discount > 50;
+          } else {
+            // Caso algum valor inválido seja selecionado, retornar true para não afetar o filtro.
             return true;
           }
         })
