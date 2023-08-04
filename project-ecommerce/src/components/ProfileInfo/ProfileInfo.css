@@ -91,6 +91,26 @@
   width: 100%;
 }
 
+.container-input-info div {
+  max-width: max-content;
+  position: relative;
+}
+
+.container-input-info .showPassword-profile {
+  height: 100%;
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.container-input-info .showPassword-profile svg {
+  color: #1b4b66;
+  font-size: 20px;
+}
+
 .form-info {
   width: 100%;
 }

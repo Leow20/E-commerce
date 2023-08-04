@@ -20,12 +20,7 @@ import {
 	where,
 	doc,
 } from "firebase/firestore";
-import {
-	ref,
-	uploadBytesResumable,
-	deleteObject,
-	getDownloadURL,
-} from "firebase/storage";
+import { ref, uploadBytesResumable, deleteObject } from "firebase/storage";
 import {
 	EmailAuthProvider,
 	reauthenticateWithCredential,
@@ -38,10 +33,12 @@ import { toast } from "react-toastify";
 //Context
 import { UserContext } from "../../Contexts/user";
 
+//React Icons
+import { BsEye, BsEyeSlash } from "react-icons/bs";
+
 const ProfileInfo = () => {
 	const { user } = useContext(UserContext);
 	const { fetchUserInfoAndUpdateState } = useContext(UserContext);
-	const { handleUploadImage } = useContext(UserContext);
 	const inputRef = useRef(null);
 	const storageRef = ref(storage, `images/users/${user?.uid}`);
 	const [image, setImage] = useState("");
@@ -57,6 +54,9 @@ const ProfileInfo = () => {
 	const [newPassword, setNewPassword] = useState("");
 	const [confirmPassword, setConfirmPassword] = useState("");
 	const [error, setError] = useState("");
+	const [showCurrentPassword, setShowCurrentPassword] = useState(false);
+	const [showNewPassword, setShowNewPassword] = useState(false);
+	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
 	const passwordRegex =
 		/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%^&*()_+])[A-Za-z\d@#$!%^&*()_+]{6,}$/;
@@ -367,19 +367,29 @@ const ProfileInfo = () => {
 				<hr />
 				<div className="container-input-info">
 					<label>Current Password</label>
-					<input
-						type="password"
-						value={currentPassword}
-						onFocus={(e) => setError("")}
-						onChange={(e) => setCurrentPassword(e.target.value)}
-						style={
-							(currentPassword === "" &&
-								error == "Fill in all password fields") ||
-							(currentPassword != "" && error === "Incorrect current password")
-								? { border: "1px solid red" }
-								: {}
-						}
-					/>
+					<div>
+						<input
+							type={showCurrentPassword ? "text" : "password"}
+							value={currentPassword}
+							onFocus={(e) => setError("")}
+							onChange={(e) => setCurrentPassword(e.target.value)}
+							style={
+								(currentPassword === "" &&
+									error == "Fill in all password fields") ||
+								(currentPassword != "" &&
+									error === "Incorrect current password")
+									? { border: "1px solid red" }
+									: {}
+							}
+						/>
+						<div
+							className="showPassword-profile"
+							onClick={() => setShowCurrentPassword(!showCurrentPassword)}
+						>
+							{showCurrentPassword ? <BsEyeSlash /> : <BsEye />}
+						</div>
+					</div>
+
 					<p className="error-p">
 						{currentPassword != "" && error === "Incorrect current password"
 							? error
@@ -388,21 +398,31 @@ const ProfileInfo = () => {
 				</div>
 				<div className="container-input-info">
 					<label>New Password</label>
-					<input
-						type="password"
-						value={newPassword}
-						onFocus={(e) => setError("")}
-						onChange={(e) => setNewPassword(e.target.value)}
-						style={
-							(newPassword === "" && error == "Fill in all password fields") ||
-							(newPassword != "" &&
-								error ===
-									"Password must have at least 6 characters, 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character.") ||
-							(newPassword != "" && error === "Passwords do not match")
-								? { border: "1px solid red" }
-								: {}
-						}
-					/>
+					<div>
+						<input
+							type={showNewPassword ? "text" : "password"}
+							value={newPassword}
+							onFocus={(e) => setError("")}
+							onChange={(e) => setNewPassword(e.target.value)}
+							style={
+								(newPassword === "" &&
+									error == "Fill in all password fields") ||
+								(newPassword != "" &&
+									error ===
+										"Password must have at least 6 characters, 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character.") ||
+								(newPassword != "" && error === "Passwords do not match")
+									? { border: "1px solid red" }
+									: {}
+							}
+						/>
+						<div
+							className="showPassword-profile"
+							onClick={() => setShowNewPassword(!showNewPassword)}
+						>
+							{showNewPassword ? <BsEyeSlash /> : <BsEye />}
+						</div>
+					</div>
+
 					<p className="error-p">
 						{error ===
 						"Password must have at least 6 characters, 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character."
@@ -412,19 +432,28 @@ const ProfileInfo = () => {
 				</div>
 				<div className="container-input-info">
 					<label>Confirm Password</label>
-					<input
-						type="password"
-						value={confirmPassword}
-						onFocus={(e) => setError("")}
-						onChange={(e) => setConfirmPassword(e.target.value)}
-						style={
-							(confirmPassword === "" &&
-								error == "Fill in all password fields") ||
-							(confirmPassword != "" && error === "Passwords do not match")
-								? { border: "1px solid red" }
-								: {}
-						}
-					/>
+					<div>
+						<input
+							type={showConfirmPassword ? "text" : "password"}
+							value={confirmPassword}
+							onFocus={(e) => setError("")}
+							onChange={(e) => setConfirmPassword(e.target.value)}
+							style={
+								(confirmPassword === "" &&
+									error == "Fill in all password fields") ||
+								(confirmPassword != "" && error === "Passwords do not match")
+									? { border: "1px solid red" }
+									: {}
+							}
+						/>
+						<div
+							className="showPassword-profile"
+							onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+						>
+							{showConfirmPassword ? <BsEyeSlash /> : <BsEye />}
+						</div>
+					</div>
+
 					<p className="error-p">
 						{error === "Fill in all password fields" ||
 						error === "Passwords do not match"
