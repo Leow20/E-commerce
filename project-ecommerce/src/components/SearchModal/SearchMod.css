@@ -1,0 +1,126 @@
+.Window-modalSearch {
+  position: absolute;
+  z-index: 1001;
+  height: 800px;
+  width: 100%;
+  background-color: white;
+}
+
+.bar-modalSearch {
+  display: flex;
+  margin: 16px;
+  justify-content: space-around;
+}
+
+.redirect-modalSearch {
+  margin-top: 16px;
+  margin-right: 8px;
+  transform: rotate(180deg);
+  height: 100%;
+  background: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bar-modalSearch input[type="search"] {
+  background-position: 95%;
+  padding: 13px 15% 13px 15px;
+  border: none;
+  width: 90%;
+  min-width: 258px;
+  height: 44px;
+  border-radius: 4px;
+  color: #626262;
+  background-color: #f1f1f1;
+  transition: all ease-in-out 0.2s;
+}
+
+.bar-modalSearch input[type="search"]:hover,
+.bar-modalSearch input[type="search"]:focus {
+  background-color: #dfdfdf;
+}
+
+.redirect {
+  background: none;
+  position: absolute;
+  top: 25px;
+  right: 10%;
+  z-index: 1002;
+}
+
+.dropdown {
+  background-color: white;
+  position: absolute;
+  width: 100%;
+}
+
+.dropdownRow {
+  display: flex;
+  padding: 13px 16px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-modalSearch {
+  margin-left: 16px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.title-modalSearch:first-child {
+  margin-left: 0px;
+  margin-bottom: 13px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.recent-searchs-modalSearch {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  padding: 0px 15px;
+}
+
+.recent-searchs-modalSearch button {
+  display: inline-flex;
+  padding: 7px 12px;
+  border-radius: 8px;
+  background: #f4f4f4;
+
+  align-items: center;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.newArrives-modalSearch {
+  margin-top: 20px;
+  margin-left: 16px;
+}
+
+.recomend-products-modalSearch {
+  display: flex;
+  min-height: 260px;
+  overflow-x: auto;
+}
+
+.productimg-modalSearch {
+  width: 136px;
+  height: 138px;
+  margin-right: 16px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.heart-modalSearch {
+  width: 20px;
+  height: 20px;
+}
