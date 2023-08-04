@@ -42,6 +42,9 @@ const ResultCategories = () => {
   const [showFilter, setShowFilter] = useState(false);
   const [tabReview, setTabReview] = useState(false);
   const [tabColor, setTabColor] = useState(false);
+  const [tabBrand, setTabBrand] = useState(false);
+  const [tabPrice, setTabPrice] = useState(false);
+  const [tabDiscount, setTabDiscount] = useState(false);
   const [filterProducts, setFilterProducts] = useState([]);
 
   const isMobile = useMediaQuery({ maxWidth: 820 });
@@ -108,7 +111,7 @@ const ResultCategories = () => {
     };
 
     transformToLowercase();
-    console.log(lowProducts);
+    console.log(filter);
     var filterProducts = products.filter(
       (product) =>
         product.name.includes(busca.toLowerCase()) ||
@@ -116,7 +119,6 @@ const ResultCategories = () => {
         product.description.includes(busca.toLowerCase())
     );
     if (filter.color.length > 0) {
-      console.log(filter);
       filterProducts = filterProducts.filter((product) =>
         filter.color.some((color) => product.color.includes(color))
       );
@@ -124,11 +126,9 @@ const ResultCategories = () => {
     }
 
     if (filter.rating.length > 0) {
-      console.log(filter);
       filterProducts = filterProducts.filter((product) =>
         filter.rating.some((rating) => product.stars == rating)
       );
-      console.log(filterProducts);
     }
 
     if (filter.brand.length > 0) {
@@ -136,7 +136,6 @@ const ResultCategories = () => {
       filterProducts = filterProducts.filter((product) =>
         filter.brand.some((brand) => product.brand == brand)
       );
-      console.log(filterProducts);
     }
 
     if (filter.price.length > 0) {
@@ -186,7 +185,6 @@ const ResultCategories = () => {
 
     console.log(filterProducts);
     console.log(sortby);
-
     handleSort(filterProducts, sortby);
   }, [busca, sortby, filter]);
 
@@ -219,6 +217,12 @@ const ResultCategories = () => {
       setTabColor(!tabColor);
     } else if (tab == "review") {
       setTabReview(!tabReview);
+    } else if (tab == "brand") {
+      setTabBrand(!tabBrand);
+    } else if (tab == "price") {
+      setTabPrice(!tabPrice);
+    } else if (tab == "discount") {
+      setTabDiscount(!tabDiscount);
     }
     console.log(isMenuOpen);
   };
@@ -307,7 +311,10 @@ const ResultCategories = () => {
               <img src={hero} alt="img hero 70% off" />
             </div>
             <div className="path-to-cart-mybag">
-              <p>Home</p>
+              <Link to="/">
+                {" "}
+                <p>Home</p>
+              </Link>
               <img src={arrow} />
               {busca != "" && <p>{busca}</p>}
               {busca == "" && <p>View All</p>}
@@ -347,6 +354,57 @@ const ResultCategories = () => {
                     onFilterReturn={handleFilter}
                     filterProps={filter}
                     tab="color"
+                  />
+                </div>
+              </div>
+              <div className="collapsible-filter">
+                <span>Brand</span>
+                <button
+                  className="menu-button"
+                  onClick={() => toggleMenu("brand")}
+                >
+                  {tabBrand ? <FaMinus /> : <FaPlus />}
+                </button>
+                <div className={`menu-items ${tabBrand ? "open" : ""}`}>
+                  <FilterModal
+                    isOpen={showFilter}
+                    onFilterReturn={handleFilter}
+                    filterProps={filter}
+                    tab="brand"
+                  />
+                </div>
+              </div>
+              <div className="collapsible-filter">
+                <span>Price</span>
+                <button
+                  className="menu-button"
+                  onClick={() => toggleMenu("price")}
+                >
+                  {tabPrice ? <FaMinus /> : <FaPlus />}
+                </button>
+                <div className={`menu-items ${tabPrice ? "open" : ""}`}>
+                  <FilterModal
+                    isOpen={showFilter}
+                    onFilterReturn={handleFilter}
+                    filterProps={filter}
+                    tab="price"
+                  />
+                </div>
+              </div>
+              <div className="collapsible-filter">
+                <span>Discount</span>
+                <button
+                  className="menu-button"
+                  onClick={() => toggleMenu("discount")}
+                >
+                  {tabDiscount ? <FaMinus /> : <FaPlus />}
+                </button>
+                <div className={`menu-items ${tabDiscount ? "open" : ""}`}>
+                  <FilterModal
+                    isOpen={showFilter}
+                    onFilterReturn={handleFilter}
+                    filterProps={filter}
+                    tab="discount"
                   />
                 </div>
               </div>
