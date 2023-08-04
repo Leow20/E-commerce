@@ -65,6 +65,8 @@ const ResultCategories = () => {
   const [price, setPrice] = useState([]);
   const [discount, setDiscount] = useState([]);
 
+  const translateXValue = (currentPage - 1) * 44.4;
+
   const isMobile = useMediaQuery({ maxWidth: 820 });
   var lowProducts = [];
 
@@ -474,31 +476,33 @@ const ResultCategories = () => {
             </div>
             <div className="cointainer-products-web">
               <div className="container-bar-sortby">
-                <div className="select-grid-sort">
-                  <img
-                    src={grid}
-                    style={
-                      layout === "grid"
-                        ? { backgroundColor: "#1B4B66" }
-                        : { backgroundColor: "#777" }
-                    }
-                    onClick={() => setLayout("grid")}
-                    alt="icone de grade"
-                  />
-                  <img
-                    src={gridLine}
-                    style={
-                      layout === "line"
-                        ? { backgroundColor: "#1B4B66" }
-                        : { backgroundColor: "" }
-                    }
-                    onClick={() => setLayout("line")}
-                    alt="icone mostrar em linha"
-                  />
+                <div className="content-ornganize-product">
+                  <div className="select-grid-sort">
+                    <img
+                      src={grid}
+                      style={
+                        layout === "grid"
+                          ? { backgroundColor: "#1B4B66" }
+                          : { backgroundColor: "#777" }
+                      }
+                      onClick={() => setLayout("grid")}
+                      alt="icone de grade"
+                    />
+                    <img
+                      src={gridLine}
+                      style={
+                        layout === "line"
+                          ? { backgroundColor: "#1B4B66" }
+                          : { backgroundColor: "" }
+                      }
+                      onClick={() => setLayout("line")}
+                      alt="icone mostrar em linha"
+                    />
+                  </div>
+                  <span>
+                    Showing {firstItem} - {lastItem} of {totalItem} items
+                  </span>
                 </div>
-                <span>
-                  Showing {firstItem} - {lastItem} of {totalItem} items
-                </span>
                 <div>
                   <label htmlFor="itensPorPagina">To Show:</label>
                   <select
@@ -619,31 +623,41 @@ const ResultCategories = () => {
                   ))}
                 </div>
               )}
+              <div className="nav-pages-results">
+                {currentPage !== 1 && (
+                  <button className="buttons-nav" onClick={prevPage}>
+                    Prev
+                  </button>
+                )}
+
+                <ul className="pagination-numbers-results">
+                  <div
+                    className="selected-number-page"
+                    style={{ transform: `translateX(${translateXValue}px)` }}
+                  ></div>
+                  {pageNumbers.map((number) => (
+                    <li key={number} className="numbers-nav-results">
+                      <button onClick={() => setCurrentPage(number)}>
+                        <span
+                          style={
+                            currentPage === number ? { color: "#FFF" } : {}
+                          }
+                        >
+                          {number}
+                        </span>
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+                {currentPage !== Math.ceil(totalItem / itensPorPagina) && (
+                  <button className="buttons-nav" onClick={nextPage}>
+                    Next
+                  </button>
+                )}
+              </div>
             </div>
           </div>
-          <div>
-            <button onClick={prevPage} disabled={currentPage === 1}>
-              Anterior
-            </button>
-            <button
-              onClick={nextPage}
-              disabled={
-                currentPage === Math.ceil(filter.length / itensPorPagina)
-              }
-            >
-              Próxima
-            </button>
-          </div>
-          <ul className="pagination">
-            {pageNumbers.map((number) => (
-              <li
-                key={number}
-                className={number === currentPage ? "active" : ""}
-              >
-                <button onClick={() => setCurrentPage(number)}>{number}</button>
-              </li>
-            ))}
-          </ul>
+          <div></div>
 
           <Footer />
         </>
