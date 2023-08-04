@@ -52,11 +52,11 @@
 .dropdown {
   background-color: white;
   position: absolute;
+  width: 100%;
 }
 
 .dropdownRow {
   display: flex;
-  width: 360px;
   padding: 13px 16px;
   justify-content: space-between;
   align-items: center;
@@ -93,6 +93,8 @@
   border-radius: 8px;
   background: #f4f4f4;
 
+  align-items: center;
+
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -106,7 +108,7 @@
 
 .recomend-products-modalSearch {
   display: flex;
-  height: 260px;
+  min-height: 260px;
   overflow-x: auto;
 }
 

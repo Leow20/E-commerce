@@ -48,7 +48,7 @@ function SearchModal({ closeModal }) {
             <img src={Arrow} alt="Back" />
           </button>
           <input
-          value={searchQuery}
+            value={searchQuery}
             onChange={handleChange}
             type="search"
             name="searchInput"
@@ -63,7 +63,6 @@ function SearchModal({ closeModal }) {
           {searchQuery &&
             filteredProducts.map((product) => (
               <div className="dropdownRow" key={product.id}>
-                <img src={Cross} />
                 {product.name || product.category}
                 <img
                   onClick={() =>
@@ -76,9 +75,15 @@ function SearchModal({ closeModal }) {
         </div>
         <h4 className="title-modalSearch">Recent Searchs</h4>
         <div className="recent-searchs-modalSearch">
-          <button>Womens Wrist Watches</button>
-          <button>Chanel Perfumes</button>
-          <button>Claute Bags</button>
+          <button>
+            Womens Wrist Watches <img src={Cross} />
+          </button>
+          <button>
+            Chanel Perfumes <img src={Cross} />
+          </button>
+          <button>
+            Claute Bags <img src={Cross} />
+          </button>
         </div>
         <div className="newArrives-modalSearch">
           <h4 className="title-modalSearch">New Arrivals</h4>
