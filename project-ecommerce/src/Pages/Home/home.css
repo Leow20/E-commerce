@@ -31,7 +31,7 @@
   padding: 6px;
 }
 
-.hero-mobile-home > div {
+.hero-mobile-home>div {
   flex-grow: 1;
 }
 
@@ -89,6 +89,7 @@
   align-items: center;
   flex-direction: column;
   padding: 7px;
+  background-color: transparent;
 }
 
 .container-categories-home span {
@@ -212,6 +213,7 @@
 
 .content-grid-home {
   position: relative;
+  background-color: transparent;
   transition: all ease-in-out 0.2s;
 }
 
@@ -222,7 +224,9 @@
 .content-grid-home img {
   border-radius: 8px;
   max-width: 156px;
+  min-width: 156px;
   max-height: 156px;
+  min-height: 156px;
   margin: 5px;
   margin-bottom: 8px;
 }
@@ -548,6 +552,7 @@
     width: 100%;
     margin: 26px 0;
   }
+
   .arrival-title-home {
     margin-top: 65px;
   }
@@ -572,7 +577,9 @@
 
   .content-grid-home img {
     max-width: 280px;
+    min-width: 280px;
     max-height: 280px;
+    min-height: 280px;
   }
 
   .content-grid-home:hover {
@@ -604,6 +611,7 @@
   .title-brand-home span a {
     display: none;
   }
+
   .title-brand-home {
     margin-top: 35px;
   }
