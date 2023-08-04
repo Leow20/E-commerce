@@ -3,6 +3,22 @@
   height: 202px;
 }
 
+.img-product-home-button {
+  max-width: max-content;
+  max-height: 24px;
+  display: grid;
+  place-items: center;
+  background-color: transparent;
+}
+
+#imgHeartID {
+  font-size: 16px;
+  padding: 0;
+  color: #1b4b64;
+}
+
+
+
 @media screen and (min-width: 820px) {
   .img-product-home {
     min-width: 284px;
@@ -16,5 +32,10 @@
 
   .text-product-home {
     gap: 6px;
+  }
+
+  #imgHeartID {
+    font-size: 24px;
+    padding: 0;
   }
 }

@@ -30,6 +30,7 @@ import Similar from "../../assets/icons/view-smilar.svg";
 import { useParams } from "react-router-dom";
 
 import { ProductContext } from "../../Contexts/products";
+import WishlistButton from "../../components/WishlistButton";
 
 const ProductData = () => {
 	const { products } = useContext(ProductContext);
@@ -154,9 +155,7 @@ const ProductData = () => {
 						</div>
 
 						<div className="box-btns-data">
-							<button className="add-fav">
-								<img src={Hearth} alt="" />
-							</button>
+							<WishlistButton className="add-fav" product={product} />
 							<button className="add-bag">
 								<img src={Bag} alt="Bag" />
 								<span>Add to Bag</span>
@@ -415,10 +414,11 @@ const ProductData = () => {
 									<img src={Bag} alt="Bag" />
 									<span>Add to Bag</span>
 								</button>
-								<button className="add-fav">
-									<img src={Hearth} alt="" />
-									<span>Add To Wishlist</span>
-								</button>
+								<WishlistButton
+									className="add-fav"
+									product={product}
+									text="Add to Wishlist"
+								/>
 							</div>
 						</div>
 					</div>

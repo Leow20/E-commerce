@@ -31,7 +31,7 @@
   padding: 6px;
 }
 
-.hero-mobile-home > div {
+.hero-mobile-home>div {
   flex-grow: 1;
 }
 
@@ -164,6 +164,7 @@
   font-weight: 600;
   line-height: 16px;
   color: #171520;
+  padding: 0 !important;
   padding-bottom: 2px;
 }
 
@@ -172,6 +173,7 @@
   font-weight: 500;
   line-height: 16px;
   color: #626262;
+  padding: 0 !important;
   padding-bottom: 2px;
 }
 
@@ -180,6 +182,7 @@
   font-size: 14px;
   font-weight: 600;
   line-height: 16px;
+  padding: 0 !important;
   padding-bottom: 2px;
 }
 
@@ -548,6 +551,7 @@
     width: 100%;
     margin: 26px 0;
   }
+
   .arrival-title-home {
     margin-top: 65px;
   }
@@ -604,6 +608,7 @@
   .title-brand-home span a {
     display: none;
   }
+
   .title-brand-home {
     margin-top: 35px;
   }
