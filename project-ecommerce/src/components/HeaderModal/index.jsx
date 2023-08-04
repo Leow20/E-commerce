@@ -67,43 +67,43 @@ const HeaderModal = ({ isOpen, setIsOpen, id = "headerModalId" }) => {
             <h2>Top Categories</h2>
             <ul>
               <li>
-                <Link to="/skincare">
+                <Link to="/results/skincare">
                   <label>Skincare</label>
                   <img src={arrowGray} alt="arrow-icon" />
                 </Link>
               </li>
               <li>
-                <Link to="/apparels">
+                <Link to="/results/apparels">
                   <label>Apparels</label>
                   <img src={arrowGray} alt="arrow-icon" />
                 </Link>
               </li>
               <li>
-                <Link to="/jewellery">
+                <Link to="/results/jewellery">
                   <label>Jewellery</label>
                   <img src={arrowGray} alt="arrow-icon" />
                 </Link>
               </li>
               <li>
-                <Link to="/handbags">
+                <Link to="/results/handbags">
                   <label>Handbags</label>
                   <img src={arrowGray} alt="arrow-icon" />
                 </Link>
               </li>
               <li>
-                <Link to="">
+                <Link to="/results/eyeware">
                   <label>Eyeware</label>
                   <img src={arrowGray} alt="arrow-icon" />
                 </Link>
               </li>
               <li>
-                <Link to="">
+                <Link to="/results/fragrance">
                   <label>Fragrance</label>
                   <img src={arrowGray} alt="arrow-icon" />
                 </Link>
               </li>
               <li>
-                <Link to="/watches">
+                <Link to="/results/watches">
                   <label>Watches</label>
                   <img src={arrowGray} alt="arrow-icon" />
                 </Link>

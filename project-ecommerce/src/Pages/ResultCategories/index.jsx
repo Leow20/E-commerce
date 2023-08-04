@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { ProductContext } from "../../Contexts/products";
 
 //Images
@@ -32,9 +32,9 @@ import BrandFilter from "../../components/Filters/BrandFilter";
 import PriceRangeFilter from "../../components/Filters/PriceRangeFilter";
 import DiscountFilter from "../../components/Filters/DiscountFilter";
 
-const busca = "";
-
 const ResultCategories = () => {
+  const { id } = useParams();
+  const busca = id;
   const { products } = useContext(ProductContext);
   const [result, setResult] = useState("");
   const [sortby, setSortby] = useState("popularity");
@@ -168,7 +168,8 @@ const ResultCategories = () => {
       (product) =>
         product.name.includes(busca.toLowerCase()) ||
         product.category.includes(busca.toLowerCase()) ||
-        product.description.includes(busca.toLowerCase())
+        product.description.includes(busca.toLowerCase()) ||
+        product.brand.includes(busca.toLowerCase())
     );
     if (filter.color.length > 0) {
       filterProducts = filterProducts.filter((product) =>

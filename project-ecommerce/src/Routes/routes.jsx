@@ -33,7 +33,6 @@ const Router = () => {
             </Private>
           }
         />
-        <Route path="/results" element={<ResultCategories />} />
         <Route path="/mybag" element={<MyBag />} />
         <Route path="/notification" element={<Notification />} />
         <Route path="/login" element={<Login />} />
@@ -47,7 +46,7 @@ const Router = () => {
           }
         />
         <Route path="/product/:id" element={<ProductData />} />
-        <Route path="/results/:id" element={<SearchModal />} />
+        <Route path="/results/:id" element={<ResultCategories />} />
       </Routes>
     </BrowserRouter>
   );
