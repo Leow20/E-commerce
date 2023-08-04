@@ -1,5 +1,5 @@
 //React
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 //Style
 import "./headerModal.css";
@@ -11,13 +11,14 @@ import { Link, useNavigate } from "react-router-dom";
 import arrowBlack from "../../assets/HeaderModal/arrow-right-black.svg";
 import arrowGray from "../../assets/HeaderModal/arrow-right-gray.svg";
 import userNotPicture from "../../assets/HeaderModal/user-sem-foto.png";
+import { UserContext } from "../../Contexts/user";
 
 const HeaderModal = ({ isOpen, setIsOpen, id = "headerModalId" }) => {
   const [animation, setAnimation] = useState(
     "content-header-modal animation-header-modal"
   );
 
-  const user = JSON.parse(localStorage.getItem("userLogado"));
+  const { user } = useContext(UserContext);
   const navigate = useNavigate("");
 
   const handleBackClick = (e) => {
