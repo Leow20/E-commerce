@@ -24,6 +24,11 @@ import SlideUpModal from "../../components/SlideUpModal";
 import FilterModal from "../../components/FilterModal";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import ReviewFilter from "../../components/Filters/ReviewFilter";
+import ColorsFilter from "../../components/Filters/colorsFilter";
+import BrandFilter from "../../components/Filters/BrandFilter";
+import PriceRangeFilter from "../../components/Filters/PriceRangeFilter";
+import DiscountFilter from "../../components/Filters/DiscountFilter";
 
 const busca = "";
 
@@ -47,6 +52,12 @@ const ResultCategories = () => {
   const [tabDiscount, setTabDiscount] = useState(false);
   const [filterProducts, setFilterProducts] = useState([]);
 
+  const [color, setColor] = useState([]);
+  const [rating, setRating] = useState([]);
+  const [brand, setBrand] = useState([]);
+  const [price, setPrice] = useState([]);
+  const [discount, setDiscount] = useState([]);
+
   const isMobile = useMediaQuery({ maxWidth: 820 });
   var lowProducts = [];
 
@@ -55,7 +66,6 @@ const ResultCategories = () => {
   };
 
   const handleFilter = (value) => {
-    console.log(value);
     setFilter(value);
   };
 
@@ -65,7 +75,7 @@ const ResultCategories = () => {
       const precoB = parseFloat(b.price.replace("$", ""));
       return precoA - precoB;
     });
-    console.log(value);
+
     setResult(value);
   }
 
@@ -75,19 +85,19 @@ const ResultCategories = () => {
       const precoB = parseFloat(b.price.replace("$", ""));
       return precoB - precoA;
     });
-    console.log(value);
+
     setResult(value);
   }
 
   function organizarPorMaiorPopularidade(array) {
     const value = array.slice().sort((a, b) => b.stars - a.stars);
-    console.log(value);
+
     setResult(value);
   }
 
   function organizarPorMaiorDesconto(array) {
     const value = array.slice().sort((a, b) => b?.discount - a?.discount);
-    console.log(value);
+
     setResult(value);
   }
 
@@ -95,6 +105,39 @@ const ResultCategories = () => {
     const value = array.slice().reverse();
     setResult(value);
   }
+
+  const handleColorFilter = (value) => {
+    setColor(value);
+  };
+
+  const handleRatingFilter = (value) => {
+    setRating(value);
+  };
+
+  const handleBrandFilter = (value) => {
+    setBrand(value);
+  };
+
+  const handlePriceFilter = (value) => {
+    setPrice(value);
+  };
+
+  const handleDiscountFilter = (value) => {
+    setDiscount(value);
+  };
+
+  useEffect(() => {
+    if (!isMobile) {
+      let snapfilter = {};
+      snapfilter.color = color;
+      snapfilter.rating = rating;
+      snapfilter.brand = brand;
+      snapfilter.price = price;
+      snapfilter.discount = discount;
+      setFilter(snapfilter);
+      console.log(snapfilter);
+    }
+  }, [color, rating, brand, price, discount]);
 
   useEffect(() => {
     const transformToLowercase = () => {
@@ -111,7 +154,7 @@ const ResultCategories = () => {
     };
 
     transformToLowercase();
-    console.log(filter);
+
     var filterProducts = products.filter(
       (product) =>
         product.name.includes(busca.toLowerCase()) ||
@@ -122,7 +165,6 @@ const ResultCategories = () => {
       filterProducts = filterProducts.filter((product) =>
         filter.color.some((color) => product.color.includes(color))
       );
-      console.log(filterProducts);
     }
 
     if (filter.rating.length > 0) {
@@ -132,7 +174,6 @@ const ResultCategories = () => {
     }
 
     if (filter.brand.length > 0) {
-      console.log(filter);
       filterProducts = filterProducts.filter((product) =>
         filter.brand.some((brand) => product.brand == brand)
       );
@@ -144,7 +185,7 @@ const ResultCategories = () => {
           const price = parseFloat(
             product.price.replace("$", "").replace(".", "")
           );
-          console.log(price);
+
           if (priceRange === "0-50") {
             return price <= 50;
           } else if (priceRange === "50-100") {
@@ -183,8 +224,6 @@ const ResultCategories = () => {
       );
     }
 
-    console.log(filterProducts);
-    console.log(sortby);
     handleSort(filterProducts, sortby);
   }, [busca, sortby, filter]);
 
@@ -210,8 +249,6 @@ const ResultCategories = () => {
     }
   }
 
-  const [isMenuOpen, setMenuOpen] = useState(false);
-
   const toggleMenu = (tab) => {
     if (tab == "color") {
       setTabColor(!tabColor);
@@ -224,7 +261,6 @@ const ResultCategories = () => {
     } else if (tab == "discount") {
       setTabDiscount(!tabDiscount);
     }
-    console.log(isMenuOpen);
   };
 
   const truncateDescription = (description, maxWords) => {
@@ -332,12 +368,7 @@ const ResultCategories = () => {
                   {tabReview ? <FaMinus /> : <FaPlus />}
                 </button>
                 <div className={`menu-items ${tabReview ? "open" : ""}`}>
-                  <FilterModal
-                    isOpen={showFilter}
-                    onFilterReturn={handleFilter}
-                    filterProps={filter}
-                    tab="review"
-                  />
+                  <ReviewFilter ratingReturn={handleRatingFilter} />
                 </div>
               </div>
               <div className="collapsible-filter">
@@ -349,12 +380,7 @@ const ResultCategories = () => {
                   {tabColor ? <FaMinus /> : <FaPlus />}
                 </button>
                 <div className={`menu-items ${tabColor ? "open" : ""}`}>
-                  <FilterModal
-                    isOpen={showFilter}
-                    onFilterReturn={handleFilter}
-                    filterProps={filter}
-                    tab="color"
-                  />
+                  <ColorsFilter colorReturn={handleColorFilter} />
                 </div>
               </div>
               <div className="collapsible-filter">
@@ -366,12 +392,7 @@ const ResultCategories = () => {
                   {tabBrand ? <FaMinus /> : <FaPlus />}
                 </button>
                 <div className={`menu-items ${tabBrand ? "open" : ""}`}>
-                  <FilterModal
-                    isOpen={showFilter}
-                    onFilterReturn={handleFilter}
-                    filterProps={filter}
-                    tab="brand"
-                  />
+                  <BrandFilter brandReturn={handleBrandFilter} />
                 </div>
               </div>
               <div className="collapsible-filter">
@@ -383,12 +404,7 @@ const ResultCategories = () => {
                   {tabPrice ? <FaMinus /> : <FaPlus />}
                 </button>
                 <div className={`menu-items ${tabPrice ? "open" : ""}`}>
-                  <FilterModal
-                    isOpen={showFilter}
-                    onFilterReturn={handleFilter}
-                    filterProps={filter}
-                    tab="price"
-                  />
+                  <PriceRangeFilter priceReturn={handlePriceFilter} />
                 </div>
               </div>
               <div className="collapsible-filter">
@@ -400,12 +416,7 @@ const ResultCategories = () => {
                   {tabDiscount ? <FaMinus /> : <FaPlus />}
                 </button>
                 <div className={`menu-items ${tabDiscount ? "open" : ""}`}>
-                  <FilterModal
-                    isOpen={showFilter}
-                    onFilterReturn={handleFilter}
-                    filterProps={filter}
-                    tab="discount"
-                  />
+                  <DiscountFilter discountReturn={handleDiscountFilter} />
                 </div>
               </div>
             </div>

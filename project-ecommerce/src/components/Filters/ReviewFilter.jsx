@@ -31,7 +31,7 @@ const ReviewFilter = ({ filterProps, ratingReturn }) => {
   }, [selectedRating]);
 
   useEffect(() => {
-    if (filterProps && isMobile) {
+    if (filterProps) {
       setSelectedRating(filterProps.rating);
       if (filterProps.rating == undefined) {
         setSelectedColors([]);

@@ -14,7 +14,7 @@ import PriceRangeFilter from "../Filters/PriceRangeFilter";
 import DiscountFilter from "../Filters/DiscountFilter";
 import { useMediaQuery } from "react-responsive";
 
-const FilterModal = ({ isOpen, onFilterReturn, filterProps, tab }) => {
+const FilterModal = ({ isOpen, onFilterReturn, filterProps }) => {
   const [seletedTab, setSelectedTab] = useState("reviews");
   const [translate, setTranslate] = useState("translateY(0px)");
   const [color, setColor] = useState([]);
@@ -65,8 +65,6 @@ const FilterModal = ({ isOpen, onFilterReturn, filterProps, tab }) => {
     }
   }
 
-  console.log("aaaa" + filterProps);
-
   useEffect(() => {
     if (!firstTimeFilter) {
       setFirstTimeFilter(true);
@@ -105,25 +103,6 @@ const FilterModal = ({ isOpen, onFilterReturn, filterProps, tab }) => {
     setFilter(snapfilter);
     console.log(snapfilter);
   }
-
-  useEffect(() => {
-    if (!isMobile) {
-      let snapfilter = {};
-      snapfilter.color = color;
-      snapfilter.rating = rating;
-      snapfilter.brand = brand;
-      snapfilter.price = price;
-      snapfilter.discount = discount;
-      setFilter(snapfilter);
-      console.log(snapfilter);
-    }
-  }, [color, rating, brand, price, discount]);
-
-  useEffect(() => {
-    if (!isMobile) {
-      handleApplyChanges();
-    }
-  }, [color, rating, brand, price, discount]);
 
   const handleClearForm = () => {
     setFilter({ color: [], rating: [], brand: [], price: [], discount: [] });
@@ -236,22 +215,6 @@ const FilterModal = ({ isOpen, onFilterReturn, filterProps, tab }) => {
             </button>
           </div>
         </div>
-      )}
-      {!isMobile && (
-        <>
-          {tab === "color" && (
-            <ColorsFilter
-              colorReturn={handleColorFilter}
-              filterProps={propsFilter}
-            />
-          )}
-          {tab === "review" && (
-            <ReviewFilter
-              ratingReturn={handleRatingFilter}
-              filterProps={propsFilter}
-            />
-          )}
-        </>
       )}
     </>
   );

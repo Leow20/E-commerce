@@ -37,7 +37,7 @@ const ColorsFilter = ({ colorReturn, filterProps }) => {
   }, [selectedColors]);
 
   useEffect(() => {
-    if (filterProps && isMobile) {
+    if (filterProps) {
       setSelectedColors(filterProps.color);
       if (filterProps.color == undefined) {
         setSelectedColors([]);
