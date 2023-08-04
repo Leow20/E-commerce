@@ -13,6 +13,8 @@ import arrowProfile from "../../assets/icons/arrowProfile.svg";
 import sort from "../../assets/icons/sort.svg";
 import filterIcon from "../../assets/icons/filter.svg";
 import arrow from "../../assets/icons/blackArrow.svg";
+import gridLine from "../../assets/icons/sort.png";
+import grid from "../../assets/icons/gridH.png";
 import { FaPlus, FaMinus } from "react-icons/fa";
 
 //Style
@@ -35,7 +37,7 @@ const busca = "";
 const ResultCategories = () => {
   const { products } = useContext(ProductContext);
   const [result, setResult] = useState("");
-  const [sortby, setSortby] = useState(null);
+  const [sortby, setSortby] = useState("popularity");
   const [filter, setFilter] = useState({
     color: [],
     rating: [],
@@ -50,7 +52,12 @@ const ResultCategories = () => {
   const [tabBrand, setTabBrand] = useState(false);
   const [tabPrice, setTabPrice] = useState(false);
   const [tabDiscount, setTabDiscount] = useState(false);
-  const [filterProducts, setFilterProducts] = useState([]);
+  const [itensPorPagina, setItensPorPagina] = useState(9);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [firstItem, setFirstItem] = useState("");
+  const [lastItem, setLastItem] = useState("");
+  const [totalItem, setTotalItem] = useState("");
+  const [layout, setLayout] = useState("grid");
 
   const [color, setColor] = useState([]);
   const [rating, setRating] = useState([]);
@@ -76,7 +83,7 @@ const ResultCategories = () => {
       return precoA - precoB;
     });
 
-    setResult(value);
+    return value;
   }
 
   function organizarPorMaiorPreco(array) {
@@ -86,24 +93,24 @@ const ResultCategories = () => {
       return precoB - precoA;
     });
 
-    setResult(value);
+    return value;
   }
 
   function organizarPorMaiorPopularidade(array) {
     const value = array.slice().sort((a, b) => b.stars - a.stars);
 
-    setResult(value);
+    return value;
   }
 
   function organizarPorMaiorDesconto(array) {
     const value = array.slice().sort((a, b) => b?.discount - a?.discount);
 
-    setResult(value);
+    return value;
   }
 
   function organizarPorMaisRecente(array) {
     const value = array.slice().reverse();
-    setResult(value);
+    return value;
   }
 
   const handleColorFilter = (value) => {
@@ -224,8 +231,47 @@ const ResultCategories = () => {
       );
     }
 
-    handleSort(filterProducts, sortby);
-  }, [busca, sortby, filter]);
+    var sortByProducts = handleSort(filterProducts, sortby);
+
+    const indexOfLastProduct = currentPage * itensPorPagina;
+    const indexOfFirstProduct = indexOfLastProduct - itensPorPagina;
+    const currentProducts = sortByProducts.slice(
+      indexOfFirstProduct,
+      indexOfLastProduct
+    );
+
+    setFirstItem(indexOfFirstProduct + 1);
+
+    const lastPage = Math.min(indexOfLastProduct, filterProducts.length);
+
+    setLastItem(lastPage);
+
+    setTotalItem(filterProducts.length);
+
+    setResult(currentProducts);
+  }, [busca, sortby, filter, itensPorPagina, currentPage]);
+
+  const nextPage = () => {
+    if (currentPage < Math.ceil(totalItem / itensPorPagina)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  // Função para navegar para a página anterior
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const pageNumbers = [];
+
+  const totalPages = Math.ceil(totalItem / itensPorPagina);
+
+  // Preenche o array com os números das páginas
+  for (let i = 1; i <= totalPages; i++) {
+    pageNumbers.push(i);
+  }
 
   function handleSort(filterProducts) {
     if (sortby) {
@@ -269,6 +315,12 @@ const ResultCategories = () => {
       return words.slice(0, maxWords).join(" ") + "...";
     }
     return description;
+  };
+
+  const mudarQuantidadeItens = (event) => {
+    const quantidade = parseInt(event.target.value);
+    setItensPorPagina(quantidade);
+    setCurrentPage(1);
   };
 
   return (
@@ -421,19 +473,97 @@ const ResultCategories = () => {
               </div>
             </div>
             <div className="cointainer-products-web">
+              <div className="container-bar-sortby">
+                <div className="select-grid-sort">
+                  <img
+                    src={grid}
+                    style={
+                      layout === "grid"
+                        ? { backgroundColor: "#1B4B66" }
+                        : { backgroundColor: "#777" }
+                    }
+                    onClick={() => setLayout("grid")}
+                    alt="icone de grade"
+                  />
+                  <img
+                    src={gridLine}
+                    style={
+                      layout === "line"
+                        ? { backgroundColor: "#1B4B66" }
+                        : { backgroundColor: "" }
+                    }
+                    onClick={() => setLayout("line")}
+                    alt="icone mostrar em linha"
+                  />
+                </div>
+                <span>
+                  Showing {firstItem} - {lastItem} of {totalItem} items
+                </span>
+                <div>
+                  <label htmlFor="itensPorPagina">To Show:</label>
+                  <select
+                    id="itensPorPagina"
+                    value={itensPorPagina}
+                    onChange={mudarQuantidadeItens}
+                  >
+                    <option value="3">3</option>
+                    <option value="6">6</option>
+                    <option value="9">9</option>
+                    <option value="12">12</option>
+                    <option value="15">15</option>
+                  </select>
+                </div>
+                <div>
+                  <label htmlFor="itensPorPagina">Sort By</label>
+                  <select
+                    value={sortby}
+                    onChange={(e) => setSortby(e.target.value)}
+                  >
+                    <option value="popularity">Popularity</option>
+                    <option value="latest">Latest Products</option>
+                    <option value="priceLowToHigh">Price - Low to High</option>
+                    <option value="priceHighToLow">Price - High to Low</option>
+                    <option value="discount">Discount</option>
+                  </select>
+                </div>
+              </div>
               {result && (
-                <div className="container-products-results-web">
+                <div
+                  className={`${
+                    layout === "line"
+                      ? "container-products-results-line"
+                      : "container-products-results-grid"
+                  }`}
+                >
                   {result.map((product) => (
                     <Link to={`/product/${product.id}`} key={product.id}>
-                      <div className="product-container-result">
+                      <div
+                        className={`${
+                          layout === "line"
+                            ? "product-container-result-line"
+                            : "product-container-result-grid"
+                        }`}
+                      >
                         <div className="product-image-result">
                           <img src={product.url} alt="produto" />
                         </div>
                         <div className="text-product-result-web">
-                          <span>{truncateDescription(product.name, 2)}</span>
-                          <span>
-                            {truncateDescription(product.description, 2)}
-                          </span>
+                          {layout == "grid" && (
+                            <>
+                              <span>
+                                {truncateDescription(product.name, 2)}
+                              </span>
+                              <span>
+                                {truncateDescription(product.description, 2)}
+                              </span>
+                            </>
+                          )}
+                          {layout == "line" && (
+                            <>
+                              <span>{product.name} </span>
+                              <span>{product.description}</span>
+                            </>
+                          )}
                           <div className="content-stars-data">
                             <img
                               src={
@@ -491,6 +621,29 @@ const ResultCategories = () => {
               )}
             </div>
           </div>
+          <div>
+            <button onClick={prevPage} disabled={currentPage === 1}>
+              Anterior
+            </button>
+            <button
+              onClick={nextPage}
+              disabled={
+                currentPage === Math.ceil(filter.length / itensPorPagina)
+              }
+            >
+              Próxima
+            </button>
+          </div>
+          <ul className="pagination">
+            {pageNumbers.map((number) => (
+              <li
+                key={number}
+                className={number === currentPage ? "active" : ""}
+              >
+                <button onClick={() => setCurrentPage(number)}>{number}</button>
+              </li>
+            ))}
+          </ul>
 
           <Footer />
         </>
