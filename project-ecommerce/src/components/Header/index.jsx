@@ -75,7 +75,7 @@ function Header({ Page }) {
             />
           </div>
           <div className="icons-header">
-            <Link to="/wishlist">
+            <Link to="/profile/My Wishlist">
               <img src={wishlist} alt="coracao" />
             </Link>
 

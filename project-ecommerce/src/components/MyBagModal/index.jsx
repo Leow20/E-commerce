@@ -7,7 +7,7 @@ import bolsa from "../../assets/Img/bolsa_rosa.jpg";
 //icons
 import arrow from "../../assets/icons/arroBlue.svg";
 import cross from "../../assets/icons/cross-small.svg";
-import { AiOutlinePlus, AiOutlineMinus } from "react-icons/Ai";
+import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
 const MyBagModal = ({ hover }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -157,7 +157,7 @@ const MyBagModal = ({ hover }) => {
 
             <button className="order-btn-header">Place Order</button>
 
-            <p>Continue Shopping</p>
+            <p onClick={handleMouseLeave}>Continue Shopping</p>
           </div>
         </div>
       )}

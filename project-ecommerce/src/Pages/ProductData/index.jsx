@@ -415,10 +415,11 @@ const ProductData = () => {
                   <img src={Bag} alt="Bag" />
                   <span>Add to Bag</span>
                 </button>
-                <button className="add-fav">
-                  <img src={Hearth} alt="" />
-                  <span>Add To Wishlist</span>
-                </button>
+                <WishlistButton
+                  className="add-fav"
+                  product={product}
+                  text="Add to Wishlist"
+                />
               </div>
             </div>
           </div>

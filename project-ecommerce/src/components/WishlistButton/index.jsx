@@ -15,6 +15,7 @@ function WishlistButton({
   button = true,
   className = "img-product-home-button",
   text = "",
+  type,
 }) {
   const { user } = useContext(UserContext);
   const [wishlist, setWishlist] = useState([]);
@@ -69,6 +70,14 @@ function WishlistButton({
           {text ? <span>{text}</span> : null}
         </button>
       </div>
+    );
+  }
+  if (type == "large") {
+    return (
+      <button className="add-fav">
+        <img src={Hearth} alt="" />
+        <span>Add To Wishlist</span>
+      </button>
     );
   }
 }
