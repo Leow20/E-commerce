@@ -166,9 +166,9 @@ const Home = () => {
                   style={{ width: tamanhoTela }}
                 >
                   {products.slice(0, 8).map((product) => (
-                    <Link to={`/product/${product.id}`} key={product.id}>
+                    <div key={product.id}>
                       <ProductContainer product={product} />
-                    </Link>
+                    </div>
                   ))}
                 </div>
               ) : (
@@ -179,30 +179,22 @@ const Home = () => {
           <section className="second-section">
             <p>Handpicked Collections</p>
             <div className="container-grid-home">
-              <Link to="/results/personal-care">
-                <button className="content-grid-home">
-                  <img src={perfume} alt="imagem perfume" />
-                  <span>Personal Care</span>
-                </button>
-              </Link>
-              <Link to="/results/Handbags">
-                <button className="content-grid-home">
-                  <img src={bolsa} alt="imagem perfume" />
-                  <span>Handbags</span>
-                </button>
-              </Link>
-              <Link to="/results/Watches">
-                <button className="content-grid-home">
-                  <img src={relogio} alt="imagem perfume" />
-                  <span>Wrist Watches</span>
-                </button>
-              </Link>
-              <Link to="/results/sunglasses">
-                <button className="content-grid-home">
-                  <img src={oculos} alt="imagem perfume" />
-                  <span>Sunglasses</span>
-                </button>
-              </Link>
+              <div className="content-grid-home">
+                <img src={perfume} alt="imagem perfume" />{" "}
+                <span>Personal Care</span>
+              </div>
+              <div className="content-grid-home">
+                <img src={perfume} alt="imagem perfume" />{" "}
+                <span>Personal Care</span>
+              </div>
+              <div className="content-grid-home">
+                <img src={perfume} alt="imagem perfume" />{" "}
+                <span>Personal Care</span>
+              </div>
+              <div className="content-grid-home">
+                <img src={perfume} alt="imagem perfume" />{" "}
+                <span>Personal Care</span>
+              </div>
             </div>
           </section>
           <section>
@@ -210,42 +202,30 @@ const Home = () => {
               <div className="title-brand-home">
                 <span>Shop by Brands</span>
                 <span>
-                  <Link to="/results/viewall">
+                  <a>
                     View All <img src={arrowView} alt="icone seta" />
-                  </Link>
+                  </a>
                 </span>{" "}
               </div>
               <div className="container-brand-home">
-                <Link to="/results/zara">
-                  <div className="content-brand-home">
-                    <img src={zara} alt="ZARA" />
-                  </div>
-                </Link>
-                <Link to="/results/d&g">
-                  <div className="content-brand-home">
-                    <img src={DG} alt="D&G" />
-                  </div>
-                </Link>
-                <Link to="/results/h&m">
-                  <div className="content-brand-home">
-                    <img src={HM} alt="H&m" />
-                  </div>
-                </Link>
-                <Link to="/results/biba">
-                  <div className="content-brand-home">
-                    <img src={BIBA} alt="BIBA" />
-                  </div>
-                </Link>
-                <Link to="/results/chanel">
-                  <div className="content-brand-home">
-                    <img src={CHANEL} alt="CHANEL" />
-                  </div>
-                </Link>
-                <Link to="/results/prada">
-                  <div className="content-brand-home">
-                    <img src={PRADA} alt="PRADA" />
-                  </div>
-                </Link>
+                <div className="content-brand-home">
+                  <img src={zara} alt="marca zara" />
+                </div>
+                <div className="content-brand-home">
+                  <img src={zara} alt="marca zara" />
+                </div>
+                <div className="content-brand-home">
+                  <img src={zara} alt="marca zara" />
+                </div>
+                <div className="content-brand-home">
+                  <img src={zara} alt="marca zara" />
+                </div>
+                <div className="content-brand-home">
+                  <img src={zara} alt="marca zara" />
+                </div>
+                <div className="content-brand-home">
+                  <img src={zara} alt="marca zara" />
+                </div>
               </div>
             </div>
           </section>
@@ -265,28 +245,22 @@ const Home = () => {
             <div className="container-makeup-home">
               <span>LIFESTYLE</span>
               <span>Makeup Accessories from Top Brands</span>
-              <Link to="/results/makeup">
-                <div className="button-makeup-home">
-                  <img src={arrowOrange} alt="icone seta" />
-                </div>
-              </Link>
+              <div className="button-makeup-home">
+                <img src={arrowOrange} alt="icone seta" />
+              </div>
             </div>
             <div className="grid-images-home">
               <div className="container-skincare-home">
                 <span>Skincare Essentials</span>
-                <Link to="/results/skincare">
-                  <div className="button-makeup-home">
-                    <img src={arrowPink} alt="icone seta" />
-                  </div>
-                </Link>
+                <div className="button-makeup-home">
+                  <img src={arrowPink} alt="icone seta" />
+                </div>
               </div>
               <div className="container-face-home">
                 <span>Facepacks & Peels</span>
-                <Link to="/results/face">
-                  <div className="button-makeup-home">
-                    <img src={arrowBlue} alt="icone seta" />
-                  </div>
-                </Link>
+                <div className="button-makeup-home">
+                  <img src={arrowBlue} alt="icone seta" />
+                </div>
               </div>
             </div>
           </section>
