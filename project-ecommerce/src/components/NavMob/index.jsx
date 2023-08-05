@@ -94,6 +94,25 @@ const NavMob = ({ page }) => {
           </div>
         </div>
       )}
+      {page === "/#" && (
+        <div className="container-nav">
+          <Link to="/">
+            <img src={iconHome} alt="Icone Home" />
+          </Link>
+
+          <Link to="/categories">
+            <img src={iconCategory} alt="Icone Categorias" />
+          </Link>
+          <Link to="/profile/Personal Information">
+            <img src={iconProfile} alt="Icone Perfil" />
+          </Link>
+          <div className="category-selected-nav">
+            <Link to="/mybag">
+              <img src={iconShop} alt="Icone Mybag" />
+            </Link>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

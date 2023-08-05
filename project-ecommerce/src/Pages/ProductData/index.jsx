@@ -22,7 +22,7 @@ import SlideUpModal from "../../components/SlideUpModal";
 
 //Icon
 import Arrow from "../../assets/HeaderModal/arrow-right-black.svg";
-import ArrowRight from "../../assets/icons/icon-arrow.svg";
+import ArrowRight from "../../assets/icons/blackArrow.svg";
 import StarFill from "../../assets/icons/star-fill.svg";
 import Star from "../../assets/icons/star.svg";
 import Bag from "../../assets/icons/bag-white.svg";
@@ -32,6 +32,7 @@ import Similar from "../../assets/icons/view-smilar.svg";
 //Context
 import { ProductContext } from "../../Contexts/products";
 import WishlistButton from "../../components/WishlistButton";
+import NavMob from "../../components/NavMob";
 
 const ProductData = () => {
   const { products } = useContext(ProductContext);
@@ -247,9 +248,7 @@ const ProductData = () => {
             </div>
 
             <div className="box-btns-data">
-              <button className="add-fav">
-                <img src={Hearth} alt="" />
-              </button>
+              <WishlistButton className="add-fav" product={product} />
               <button className="add-bag">
                 <img src={Bag} alt="Bag" />
                 <span>Add to Bag</span>
@@ -269,13 +268,13 @@ const ProductData = () => {
             <Link to="/">
               <span>Home</span>
             </Link>
-            <img src={Arrow} alt="Arrow" />
+            <img src={ArrowRight} alt="Arrow" />
             <span>
               {category
                 ? category.charAt(0).toUpperCase() + category.slice(1)
                 : null}
             </span>
-            <img src={Arrow} alt="Arrow" />
+            <img src={ArrowRight} alt="Arrow" />
             <span>{product.name}</span>
           </div>
           <div className="container-product-data">
@@ -583,6 +582,7 @@ const ProductData = () => {
           </div>
         </section>
         <Footer />
+        <NavMob page="/#" />
       </>
     );
   }

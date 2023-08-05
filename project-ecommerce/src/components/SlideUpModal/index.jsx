@@ -5,7 +5,7 @@ import "./slideUpModal.css";
 import { Link } from "react-router-dom";
 import ProductContainer from "../ProductContainer";
 
-const SlideUpModal = ({ page, isOpen, onValueReturn }) => {
+const SlideUpModal = ({ page, isOpen, onValueReturn, filteredProducts }) => {
   const [open, setOpen] = useState(isOpen);
   const [sortby, setSortby] = useState("popularity");
   const [firstTimeSort, setFirstTimeSort] = useState(false);
