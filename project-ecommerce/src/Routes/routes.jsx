@@ -26,7 +26,7 @@ const Router = () => {
         <Route path="/about" element={<About />} />
         <Route path="/categories" element={<Categories />} />
         <Route
-          path="/profile"
+          path="/profile/:id"
           element={
             <Private>
               <Profile />

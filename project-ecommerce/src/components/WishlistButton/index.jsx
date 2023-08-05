@@ -19,11 +19,28 @@ function WishlistButton({
   const { user } = useContext(UserContext);
   const [wishlist, setWishlist] = useState([]);
 
+  const loadWishlist = async () => {
+    console.log("aaaaa");
+    const wishlistRef = doc(db, "wishlist", user.uid);
+    const wishlistSnapshot = await getDoc(wishlistRef);
+    if (user) {
+      if (wishlistSnapshot.exists()) {
+        setWishlist(wishlistSnapshot.data().data);
+      } else {
+        setWishlist([]);
+      }
+    }
+  };
+
   const handleWishlist = async () => {
     if (!user || !product) return;
 
+    //loadWishlist();
+
     const index = wishlist.findIndex((item) => item.id === product.id);
-    const updatedWishlist = [...wishlist];
+    const wishlistRef = doc(db, "wishlist", user.uid);
+    const wishlistSnapshot = await getDoc(wishlistRef);
+    const updatedWishlist = wishlistSnapshot.data().data;
     if (index === -1) {
       updatedWishlist.push(product);
     } else {
@@ -37,18 +54,7 @@ function WishlistButton({
   };
 
   useEffect(() => {
-    console.log("aaaaaaa");
-    const loadWishlist = async () => {
-      if (user) {
-        const wishlistRef = doc(db, "wishlist", user.uid);
-        const wishlistSnapshot = await getDoc(wishlistRef);
-        if (wishlistSnapshot.exists()) {
-          setWishlist(wishlistSnapshot.data().data);
-        } else {
-          setWishlist([]);
-        }
-      }
-    };
+    console.log("bbb");
     loadWishlist();
   }, [user]);
 
