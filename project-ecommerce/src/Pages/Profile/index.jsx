@@ -34,7 +34,6 @@ const Profile = () => {
   const { user } = useContext(UserContext);
   const { id } = useParams();
   const [selectedTab, setSelectedTab] = useState(id);
-  console.log(selectedTab);
   const [translate, setTranslate] = useState("");
   const isMobile = useMediaQuery({ maxWidth: 820 });
   const [show, setShow] = useState("page-wrapper-modal-info");
@@ -80,8 +79,8 @@ const Profile = () => {
   useEffect(() => {
     if (isMobile) {
       setSelectedTab("");
-    } else {
-      navigate("/profile/Personal Information");
+    } else if (selectedTab == "" && !isMobile) {
+      setSelectedTab("Personal Information");
       setTranslate("translateY(0px)");
     }
   }, [isMobile]);
@@ -173,7 +172,9 @@ const Profile = () => {
                 <ul>
                   <li>
                     <Link to="/profile/Personal Information">
-                      <button>
+                      <button
+                        onClick={() => handleTabChange("Personal Information")}
+                      >
                         <label
                           style={
                             selectedTab == "Personal Information" && !isMobile
@@ -196,7 +197,7 @@ const Profile = () => {
                   </li>
                   <li>
                     <Link to="/profile/Refer and Earn">
-                      <button>
+                      <button onClick={() => handleTabChange("Refer and Earn")}>
                         <label
                           style={
                             selectedTab == "Refer and Earn" && !isMobile
@@ -219,7 +220,7 @@ const Profile = () => {
                   </li>
                   <li>
                     <Link to="/profile/My Orders">
-                      <button>
+                      <button onClick={() => handleTabChange("My Orders")}>
                         <label
                           style={
                             selectedTab == "My Orders" && !isMobile
@@ -242,7 +243,7 @@ const Profile = () => {
                   </li>
                   <li>
                     <Link to="/profile/My Wishlist">
-                      <button>
+                      <button onClick={() => handleTabChange("My Wishlist")}>
                         <label
                           style={
                             selectedTab == "My Wishlist" && !isMobile
@@ -265,7 +266,7 @@ const Profile = () => {
                   </li>
                   <li>
                     <Link to="/profile/My Reviews">
-                      <button>
+                      <button onClick={() => handleTabChange("My Reviews")}>
                         <label
                           style={
                             selectedTab == "My Reviews" && !isMobile
@@ -288,7 +289,7 @@ const Profile = () => {
                   </li>
                   <li>
                     <Link to="/profile/My Addres Book">
-                      <button>
+                      <button onClick={() => handleTabChange("My Addres Book")}>
                         <label
                           style={
                             selectedTab == "My Addres Book" && !isMobile
@@ -311,7 +312,7 @@ const Profile = () => {
                   </li>
                   <li>
                     <Link to="/profile/My Saved Cards">
-                      <button>
+                      <button onClick={() => handleTabChange("My Saved Cards")}>
                         <label
                           style={
                             selectedTab == "My Saved Cards" && !isMobile
@@ -360,14 +361,14 @@ const Profile = () => {
           <>
             {" "}
             <Footer />
-            <NavMob />
+            <NavMob page="/profile" />
           </>
         )}
         {!isMobile && (
           <>
             {" "}
             <Footer />
-            <NavMob />
+            <NavMob page="/profile" />
           </>
         )}
       </>
