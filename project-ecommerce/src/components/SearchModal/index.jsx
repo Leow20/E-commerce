@@ -9,9 +9,15 @@ import Autofill from "../../assets/icons/auto-fill.svg";
 
 import { ProductContext } from "../../Contexts/products";
 import ProductContainer from "../ProductContainer";
+import { useMediaQuery } from "react-responsive";
 
 function SearchModal({ closeModal }) {
   const [searchQuery, setSearchQuery] = useState("");
+  const isMobile = useMediaQuery({ maxWidth: 820 });
+
+  if (isMobile === false) {
+    closeModal(false);
+  }
 
   const handleChange = (e) => {
     setSearchQuery(e.target.value);
