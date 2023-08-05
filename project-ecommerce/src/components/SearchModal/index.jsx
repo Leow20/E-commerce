@@ -38,6 +38,12 @@ function SearchModal({ closeModal }) {
     navigate(`/results/${searchQuery}`);
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleRedirect();
+    }
+  };
+
   const completeSearch = (searchText) => {
     setSearchQuery(searchText);
     console.log(`busca: ${searchText}`);
@@ -60,6 +66,7 @@ function SearchModal({ closeModal }) {
             name="searchInput"
             id="searchId"
             placeholder="Search"
+            onKeyDown={handleKeyPress}
           />
           <button className="redirect" onClick={handleRedirect}>
             <img src={Lupa} alt="Search" />
