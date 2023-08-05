@@ -80,11 +80,11 @@ span {
   border-radius: 50%;
 }
 
-input[type="radio"]:checked+.input-radio {
+input[type="radio"]:checked + .input-radio {
   border-color: #1b4b66;
 }
 
-input[type="radio"]:checked+.input-radio span {
+input[type="radio"]:checked + .input-radio span {
   background: #1b4b66;
 }
 
@@ -94,7 +94,6 @@ input[type="radio"]:checked+.input-radio span {
   padding: 16px 16px;
   max-width: 1280px;
 }
-
 
 .container-also-like-data-modal h1 {
   width: 100%;
@@ -119,5 +118,5 @@ input[type="radio"]:checked+.input-radio span {
   display: flex;
   align-items: center;
   gap: 16px;
-  overflow-x: scroll;
+  overflow-x: auto;
 }

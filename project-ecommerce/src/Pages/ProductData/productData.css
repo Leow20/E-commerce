@@ -4,10 +4,9 @@
   padding: 15px 0 17px 16px;
 }
 
-
 .container-product-data {
   width: 100%;
-  max-width: 100vw;
+  max-width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -22,7 +21,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 #productImageID {
@@ -151,7 +150,7 @@
   align-items: center;
   gap: 8px;
   margin-bottom: 40px;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 .card-data {
@@ -275,7 +274,6 @@
   cursor: pointer;
 }
 
-
 .box-btns-data {
   width: 100%;
   height: 66px;
@@ -287,8 +285,7 @@
   bottom: 0;
   left: 0;
   gap: 8px;
-  background: #FFF;
-
+  background: #fff;
 }
 
 .box-btns-data .add-fav {
@@ -302,7 +299,7 @@
 }
 
 .box-btns-data .add-fav span {
-  color: #1B4B66;
+  color: #1b4b66;
   text-align: center;
   font-size: 14px;
   font-style: normal;
@@ -328,13 +325,12 @@
 }
 
 .box-btns-data .add-bag span {
-  color: #FFF;
+  color: #fff;
   text-align: center;
   font-size: 14px;
   font-weight: 600;
   line-height: 171.4%;
 }
-
 
 .container-btns-content-data {
   width: 100%;
@@ -351,8 +347,8 @@
 
 .btn-box-content-data hr,
 .box-invite-friends-data hr {
-  width: 100vw;
-  min-width: 100vw;
+  width: 100%;
+  min-width: 100%;
   height: 8px;
   background-color: #f1f1f1;
   border: none;
@@ -430,7 +426,7 @@
 }
 
 .box-invite-friends-data div:nth-child(2) button span {
-  color: #1B4B66;
+  color: #1b4b66;
   font-weight: 600;
   line-height: 171%;
 }
@@ -439,7 +435,7 @@
   width: 94px;
   height: 94px;
   border-radius: 8px;
-  background: #FFE6CA;
+  background: #ffe6ca;
   margin-top: 16px;
   margin-bottom: 16px;
 }
@@ -500,7 +496,7 @@
 
   .box-content-data {
     width: 100%;
-    max-width: 100vw;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
