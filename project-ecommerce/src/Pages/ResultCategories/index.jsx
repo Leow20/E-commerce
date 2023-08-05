@@ -237,6 +237,11 @@ const ResultCategories = () => {
       indexOfFirstProduct,
       indexOfLastProduct
     );
+    if (!isMobile) {
+      setResult(currentProducts);
+    } else {
+      setResult(sortByProducts);
+    }
 
     setFirstItem(indexOfFirstProduct + 1);
 
@@ -245,8 +250,6 @@ const ResultCategories = () => {
     setLastItem(lastPage);
 
     setTotalItem(filterProducts.length);
-
-    setResult(currentProducts);
   }, [busca, sortby, filter, itensPorPagina, currentPage]);
 
   const nextPage = () => {
