@@ -42,231 +42,271 @@ import ProductContainer from "../../components/ProductContainer";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-	const { products } = useContext(ProductContext);
-	const [tamanhoTela, setTamanhoTela] = useState(window.innerWidth - 37);
-	const [loading, setLoading] = useState(true);
+  const { products } = useContext(ProductContext);
+  const [tamanhoTela, setTamanhoTela] = useState(window.innerWidth - 37);
+  const [loading, setLoading] = useState(true);
 
-	useEffect(() => {
-		const atualizarTamanhoTela = () => {
-			setTamanhoTela(window.innerWidth - 37);
-		};
+  useEffect(() => {
+    const atualizarTamanhoTela = () => {
+      setTamanhoTela(window.innerWidth - 37);
+    };
 
-		window.addEventListener("resize", atualizarTamanhoTela);
+    window.addEventListener("resize", atualizarTamanhoTela);
 
-		return () => {
-			window.removeEventListener("resize", atualizarTamanhoTela);
-		};
-	}, []);
+    return () => {
+      window.removeEventListener("resize", atualizarTamanhoTela);
+    };
+  }, []);
 
-	useEffect(() => {
-		console.log(products);
-		if (products) {
-			setLoading(false);
-		} else {
-			setLoading(true);
-		}
-	}, [ProductContext]);
+  useEffect(() => {
+    console.log(products);
+    if (products) {
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
+  }, [ProductContext]);
 
-	return (
-		<div>
-			<Header Page="Home" />
-			<main className="main-home">
-				<div className="page-wrapper-home">
-					<section className="first-section-home">
-						<div className="warning-home">
-							<p>
-								We are currently experiencing local customs clearance delays.
-								For the latest updates, please check your order status{" "}
-								<a>here</a>
-							</p>
-						</div>
-						<div className="hero-mobile-home" style={{ width: tamanhoTela }}>
-							<img src={funkMob} alt="Carry your funk" />
-							<img src={spring} alt="Carry your funk" />
-							<img src={funkMob} alt="Carry your funk" />
-						</div>
-						<div className="hero-web-home">
-							<img src={funkDesk} alt="Carry your funk" />
-							<button className="button-hero-home">
-								<img src={arrow}></img>
-								<span>See More</span>
-							</button>
-						</div>
-						<div className="categories-home">
-							<span>Top Categories</span>
-							<div
-								className="categories-select-home"
-								style={{ width: tamanhoTela }}
-							>
-								<button className="container-categories-home">
-									<div className="content-categorie-home">
-										<img src={skinCare} alt="skincare icon" />
-									</div>
-									<span>Skincare</span>
-								</button>
-								<button className="container-categories-home">
-									<div className="content-categorie-home">
-										<img src={jewellery} alt="skincare icon" />
-									</div>
-									<span>Jewellery</span>
-								</button>
-								<button className="container-categories-home">
-									<div className="content-categorie-home">
-										<img src={handbag} alt="skincare icon" />
-									</div>
-									<span>Handbags</span>
-								</button>
-								<button className="container-categories-home">
-									<div className="content-categorie-home">
-										<img src={watches} alt="skincare icon" />
-									</div>
-									<span>Watches</span>
-								</button>
-								<button className="container-categories-home">
-									<div className="content-categorie-home">
-										<BsEyeglasses color="#1b4b64" fontSize="32px" />
-									</div>
-									<span>Eyewera</span>
-								</button>
-								<button className="container-categories-home">
-									<div className="content-categorie-home">
-										<GiPerfumeBottle color="#1b4b64" fontSize="32px" />
-									</div>
-									<span>Fragrance</span>
-								</button>
-							</div>
-						</div>
-						<div className="container-arrival-title-home">
-							<div className="arrival-title-home">
-								<span>New Arrivals</span>
-								<span>
-									<a>
-										View All <img src={arrowView} alt="icone seta" />
-									</a>
-								</span>
-							</div>
+  return (
+    <div>
+      <Header Page="Home" />
+      <main className="main-home">
+        <div className="page-wrapper-home">
+          <section className="first-section-home">
+            <div className="warning-home">
+              <p>
+                We are currently experiencing local customs clearance delays.
+                For the latest updates, please check your order status{" "}
+                <a>here</a>
+              </p>
+            </div>
+            <div className="hero-mobile-home" style={{ width: tamanhoTela }}>
+              <img src={funkMob} alt="Carry your funk" />
+              <img src={spring} alt="Carry your funk" />
+              <img src={funkMob} alt="Carry your funk" />
+            </div>
+            <div className="hero-web-home">
+              <img src={funkDesk} alt="Carry your funk" />
+              <Link to="/results/handbags">
+                <button className="button-hero-home">
+                  <img src={arrow}></img>
+                  <span>See More</span>
+                </button>
+              </Link>
+            </div>
+            <div className="categories-home">
+              <span>Top Categories</span>
+              <div
+                className="categories-select-home"
+                style={{ width: tamanhoTela }}
+              >
+                <Link to="/results/Skincare">
+                  <button className="container-categories-home">
+                    <div className="content-categorie-home">
+                      <img src={skinCare} alt="skincare icon" />
+                    </div>
+                    <span>Skincare</span>
+                  </button>
+                </Link>
+                <Link to="/results/Jewellery">
+                  <button className="container-categories-home">
+                    <div className="content-categorie-home">
+                      <img src={jewellery} alt="skincare icon" />
+                    </div>
+                    <span>Jewellery</span>
+                  </button>
+                </Link>
+                <Link to="/results/Handbags">
+                  <button className="container-categories-home">
+                    <div className="content-categorie-home">
+                      <img src={handbag} alt="skincare icon" />
+                    </div>
+                    <span>Handbags</span>
+                  </button>
+                </Link>
+                <Link to="/results/Watches">
+                  <button className="container-categories-home">
+                    <div className="content-categorie-home">
+                      <img src={watches} alt="skincare icon" />
+                    </div>
+                    <span>Watches</span>
+                  </button>
+                </Link>
+                <Link to="/results/Eyewear">
+                  <button className="container-categories-home">
+                    <div className="content-categorie-home">
+                      <BsEyeglasses color="#1b4b64" fontSize="32px" />
+                    </div>
+                    <span>Eyewear</span>
+                  </button>
+                </Link>
+                <Link to="/results/Fragrance">
+                  <button className="container-categories-home">
+                    <div className="content-categorie-home">
+                      <GiPerfumeBottle color="#1b4b64" fontSize="32px" />
+                    </div>
+                    <span>Fragrance</span>
+                  </button>
+                </Link>
+              </div>
+            </div>
+            <div className="container-arrival-title-home">
+              <div className="arrival-title-home">
+                <span>New Arrivals</span>
+                <span>
+                  <Link to="/results/viewall">
+                    View All <img src={arrowView} alt="icone seta" />
+                  </Link>
+                </span>
+              </div>
 
-							{!loading && products.length > 0 ? (
-								<div
-									className="container-arrival-home"
-									style={{ width: tamanhoTela }}
-								>
-									{products.slice(0, 8).map((product) => (
-										<Link to={`/product/${product.id}`} key={product.id}>
-											<ProductContainer product={product} />
-										</Link>
-									))}
-								</div>
-							) : (
-								<div>Loading</div>
-							)}
-						</div>
-					</section>
-					<section className="second-section">
-						<p>Handpicked Collections</p>
-						<div className="container-grid-home">
-							<button className="content-grid-home">
-								<img src={perfume} alt="imagem perfume" />
-								<span>Personal Care</span>
-							</button>
-							<button className="content-grid-home">
-								<img src={bolsa} alt="imagem perfume" />
-								<span>Handbags</span>
-							</button>
-							<button className="content-grid-home">
-								<img src={relogio} alt="imagem perfume" />
-								<span>Wrist Watches</span>
-							</button>
-							<button className="content-grid-home">
-								<img src={oculos} alt="imagem perfume" />
-								<span>Sunglasses</span>
-							</button>
-						</div>
-					</section>
-					<section>
-						<div>
-							<div className="title-brand-home">
-								<span>Shop by Brands</span>
-								<span>
-									<a>
-										View All <img src={arrowView} alt="icone seta" />
-									</a>
-								</span>{" "}
-							</div>
-							<div className="container-brand-home">
-								<div className="content-brand-home">
-									<img src={zara} alt="ZARA" />
-								</div>
-								<div className="content-brand-home">
-									<img src={DG} alt="D&G" />
-								</div>
-								<div className="content-brand-home">
-									<img src={HM} alt="H&m" />
-								</div>
-								<div className="content-brand-home">
-									<img src={BIBA} alt="BIBA" />
-								</div>
-								<div className="content-brand-home">
-									<img src={CHANEL} alt="CHANEL" />
-								</div>
-								<div className="content-brand-home">
-									<img src={PRADA} alt="PRADA" />
-								</div>
-							</div>
-						</div>
-					</section>
-					<div className="container-shortcut-home">
-						<img src={shortcut} alt="card" />
-						<div className="text-shortcut-home">
-							<span>
-								Discover your favrouite products faster with CORA’L web app.
-							</span>
-							<span>
-								Add Shortcut <img src={shortcutIcon} alt="icone seta" />
-							</span>
-						</div>
-					</div>
-					<section className="fourth-section-home">
-						<span className="title-makeup-home">Makeup & Skincare</span>
-						<div className="container-makeup-home">
-							<span>LIFESTYLE</span>
-							<span>Makeup Accessories from Top Brands</span>
-							<div className="button-makeup-home">
-								<img src={arrowOrange} alt="icone seta" />
-							</div>
-						</div>
-						<div className="grid-images-home">
-							<div className="container-skincare-home">
-								<span>Skincare Essentials</span>
-								<div className="button-makeup-home">
-									<img src={arrowPink} alt="icone seta" />
-								</div>
-							</div>
-							<div className="container-face-home">
-								<span>Facepacks & Peels</span>
-								<div className="button-makeup-home">
-									<img src={arrowBlue} alt="icone seta" />
-								</div>
-							</div>
-						</div>
-					</section>
-					<section className="fifth-section-home">
-						<span className="trending-title-home">Trending Deals</span>
-						<div className="container-trending-home">
-							<div className="hero-mobile-home" style={{ width: tamanhoTela }}>
-								<img src={funkMob} alt="Carry your funk" />
-								<img src={spring} alt="Carry your funk" />
-								<img src={funkMob} alt="Carry your funk" />
-							</div>
-						</div>
-					</section>
-				</div>
-			</main>
+              {!loading && products.length > 0 ? (
+                <div
+                  className="container-arrival-home"
+                  style={{ width: tamanhoTela }}
+                >
+                  {products.slice(0, 8).map((product) => (
+                    <Link to={`/product/${product.id}`} key={product.id}>
+                      <ProductContainer product={product} />
+                    </Link>
+                  ))}
+                </div>
+              ) : (
+                <div>Loading</div>
+              )}
+            </div>
+          </section>
+          <section className="second-section">
+            <p>Handpicked Collections</p>
+            <div className="container-grid-home">
+              <Link to="/results/personal-care">
+                <button className="content-grid-home">
+                  <img src={perfume} alt="imagem perfume" />
+                  <span>Personal Care</span>
+                </button>
+              </Link>
+              <Link to="/results/Handbags">
+                <button className="content-grid-home">
+                  <img src={bolsa} alt="imagem perfume" />
+                  <span>Handbags</span>
+                </button>
+              </Link>
+              <Link to="/results/Watches">
+                <button className="content-grid-home">
+                  <img src={relogio} alt="imagem perfume" />
+                  <span>Wrist Watches</span>
+                </button>
+              </Link>
+              <Link to="/results/sunglasses">
+                <button className="content-grid-home">
+                  <img src={oculos} alt="imagem perfume" />
+                  <span>Sunglasses</span>
+                </button>
+              </Link>
+            </div>
+          </section>
+          <section>
+            <div>
+              <div className="title-brand-home">
+                <span>Shop by Brands</span>
+                <span>
+                  <Link to="/results/viewall">
+                    View All <img src={arrowView} alt="icone seta" />
+                  </Link>
+                </span>{" "}
+              </div>
+              <div className="container-brand-home">
+                <Link to="/results/zara">
+                  <div className="content-brand-home">
+                    <img src={zara} alt="ZARA" />
+                  </div>
+                </Link>
+                <Link to="/results/d&g">
+                  <div className="content-brand-home">
+                    <img src={DG} alt="D&G" />
+                  </div>
+                </Link>
+                <Link to="/results/h&m">
+                  <div className="content-brand-home">
+                    <img src={HM} alt="H&m" />
+                  </div>
+                </Link>
+                <Link to="/results/biba">
+                  <div className="content-brand-home">
+                    <img src={BIBA} alt="BIBA" />
+                  </div>
+                </Link>
+                <Link to="/results/chanel">
+                  <div className="content-brand-home">
+                    <img src={CHANEL} alt="CHANEL" />
+                  </div>
+                </Link>
+                <Link to="/results/prada">
+                  <div className="content-brand-home">
+                    <img src={PRADA} alt="PRADA" />
+                  </div>
+                </Link>
+              </div>
+            </div>
+          </section>
+          <div className="container-shortcut-home">
+            <img src={shortcut} alt="card" />
+            <div className="text-shortcut-home">
+              <span>
+                Discover your favrouite products faster with CORA’L web app.
+              </span>
+              <span>
+                Add Shortcut <img src={shortcutIcon} alt="icone seta" />
+              </span>
+            </div>
+          </div>
+          <section className="fourth-section-home">
+            <span className="title-makeup-home">Makeup & Skincare</span>
+            <div className="container-makeup-home">
+              <span>LIFESTYLE</span>
+              <span>Makeup Accessories from Top Brands</span>
+              <Link to="/results/makeup">
+                <div className="button-makeup-home">
+                  <img src={arrowOrange} alt="icone seta" />
+                </div>
+              </Link>
+            </div>
+            <div className="grid-images-home">
+              <div className="container-skincare-home">
+                <span>Skincare Essentials</span>
+                <Link to="/results/skincare">
+                  <div className="button-makeup-home">
+                    <img src={arrowPink} alt="icone seta" />
+                  </div>
+                </Link>
+              </div>
+              <div className="container-face-home">
+                <span>Facepacks & Peels</span>
+                <Link to="/results/face">
+                  <div className="button-makeup-home">
+                    <img src={arrowBlue} alt="icone seta" />
+                  </div>
+                </Link>
+              </div>
+            </div>
+          </section>
+          <section className="fifth-section-home">
+            <span className="trending-title-home">Trending Deals</span>
+            <div className="container-trending-home">
+              <div className="hero-mobile-home" style={{ width: tamanhoTela }}>
+                <img src={funkMob} alt="Carry your funk" />
+                <img src={spring} alt="Carry your funk" />
+                <img src={funkMob} alt="Carry your funk" />
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
 
-			<NavMob />
-			<Footer />
-		</div>
-	);
+      <NavMob />
+      <Footer />
+    </div>
+  );
 };
 
 export default Home;

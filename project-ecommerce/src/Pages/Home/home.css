@@ -31,7 +31,7 @@
   padding: 6px;
 }
 
-.hero-mobile-home>div {
+.hero-mobile-home > div {
   flex-grow: 1;
 }
 
@@ -496,6 +496,11 @@
   .button-hero-home img {
     width: 24px;
     height: 24px;
+  }
+
+  .img-product-home img:first-child {
+    width: 286px;
+    height: 286px;
   }
 
   .button-hero-home span {

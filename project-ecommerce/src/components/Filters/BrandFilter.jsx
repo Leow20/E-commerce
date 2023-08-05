@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 const BrandFilter = ({ brandReturn, filterProps }) => {
   const brandsData = [
     { value: "zara", label: "Zara" },
-    { value: "dng", label: "D&G (Dolce & Gabbana)" },
-    { value: "hm", label: "H&M" },
+    { value: "d&g", label: "D&G (Dolce & Gabbana)" },
+    { value: "h&m", label: "H&M" },
     { value: "chanel", label: "Chanel" },
     { value: "prada", label: "Prada" },
     { value: "biba", label: "Biba" },

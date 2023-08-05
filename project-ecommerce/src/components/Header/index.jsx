@@ -50,19 +50,19 @@ function Header({ Page }) {
           <nav className="nav-category-header">
             <ul>
               <li>
-                <Link to="/handbags">Handbags</Link>
+                <Link to="/results/handbags">Handbags</Link>
               </li>
               <li>
-                <Link to="/watches">Watches</Link>
+                <Link to="/results/watches">Watches</Link>
               </li>
               <li>
-                <Link to="/skincare">Skincare</Link>
+                <Link to="/results/skincare">Skincare</Link>
               </li>
               <li>
-                <Link to="/jewellery">Jewellery</Link>
+                <Link to="/results/jewellery">Jewellery</Link>
               </li>
               <li>
-                <Link to="/apparels">Apparels</Link>
+                <Link to="/results/apparels">Apparels</Link>
               </li>
             </ul>
           </nav>

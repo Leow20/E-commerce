@@ -7,6 +7,7 @@ import { ProductContext } from "../../Contexts/products";
 import hero from "../../assets/img/heroCategories.jpg";
 import StarFill from "../../assets/icons/star-fill.svg";
 import Star from "../../assets/icons/star.svg";
+import notSearch from "../../assets/img/art.jpg";
 
 //Icons
 import arrowProfile from "../../assets/icons/arrowProfile.svg";
@@ -34,7 +35,7 @@ import DiscountFilter from "../../components/Filters/DiscountFilter";
 
 const ResultCategories = () => {
   const { id } = useParams();
-  const busca = id;
+  const [busca, setBusca] = useState("");
   const { products } = useContext(ProductContext);
   const [result, setResult] = useState("");
   const [sortby, setSortby] = useState("popularity");
@@ -58,12 +59,20 @@ const ResultCategories = () => {
   const [lastItem, setLastItem] = useState("");
   const [totalItem, setTotalItem] = useState("");
   const [layout, setLayout] = useState("grid");
-
   const [color, setColor] = useState([]);
   const [rating, setRating] = useState([]);
   const [brand, setBrand] = useState([]);
   const [price, setPrice] = useState([]);
   const [discount, setDiscount] = useState([]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    if (id == "viewall") {
+      setBusca("");
+    } else {
+      setBusca(id);
+    }
+  }, [id]);
 
   const translateXValue = (currentPage - 1) * 44.4;
 
@@ -77,6 +86,7 @@ const ResultCategories = () => {
   const handleFilter = (value) => {
     setFilter(value);
   };
+  console.log(products);
 
   function organizarPorMenorPreco(array) {
     const value = array.slice().sort((a, b) => {
@@ -149,27 +159,12 @@ const ResultCategories = () => {
   }, [color, rating, brand, price, discount]);
 
   useEffect(() => {
-    const transformToLowercase = () => {
-      if (products) {
-        products.forEach((item) => {
-          const transformedItem = {
-            ...item,
-            name: item.name.toLowerCase(),
-            description: item.description.toLowerCase(),
-          };
-          lowProducts.push(transformedItem);
-        });
-      }
-    };
-
-    transformToLowercase();
-
     var filterProducts = products.filter(
       (product) =>
-        product.name.includes(busca.toLowerCase()) ||
+        product.name.toLowerCase().includes(busca.toLowerCase()) ||
         product.category.includes(busca.toLowerCase()) ||
-        product.description.includes(busca.toLowerCase()) ||
-        product.brand.includes(busca.toLowerCase())
+        product.description.toLowerCase().includes(busca.toLowerCase()) ||
+        product.brand.toLowerCase().includes(busca.toLowerCase())
     );
     if (filter.color.length > 0) {
       filterProducts = filterProducts.filter((product) =>
@@ -326,6 +321,10 @@ const ResultCategories = () => {
     setCurrentPage(1);
   };
 
+  const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   return (
     <div>
       {isMobile && (
@@ -353,14 +352,15 @@ const ResultCategories = () => {
                 </div>
               </Link>
 
-              <h1>{busca}</h1>
+              <h1>{capitalizeFirstLetter(busca)}</h1>
             </header>
-            {result.length > 1 && isMobile ? (
+            {result.length > 1 && isMobile && (
               <div className="qty-product-result">
                 {" "}
                 <p>{`${result.length} Products`}</p>
               </div>
-            ) : (
+            )}
+            {result.length == 1 && isMobile && (
               <div className="qty-product-result">
                 {" "}
                 <p>{`${result.length} Product`}</p>
@@ -373,8 +373,31 @@ const ResultCategories = () => {
                     <ProductContainer product={product} page="result" />
                   </Link>
                 ))}
+                {result.length == 0 && (
+                  <>
+                    <div className="page-wrapper-no-result">
+                      <img src={notSearch} alt="imagem sem resultado" />
+                      <div className="title-not-found-result">
+                        <h1>Whoops!</h1>
+                        <p>
+                          We coudn’t find what you’re looking for. Try something
+                          else.
+                        </p>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             )}
+            {result.length == 0 && (
+              <Link to="/">
+                {" "}
+                <div className="container-button-back-home">
+                  <button className="button-back-home">Back to Home</button>
+                </div>
+              </Link>
+            )}
+
             <div className="container-filter-result">
               <div
                 className="content-filter-result"
@@ -397,6 +420,7 @@ const ResultCategories = () => {
       {!isMobile && (
         <>
           <Header />
+
           <div className="page-wrapper-web-result">
             <div className="hero-results-web">
               <img src={hero} alt="img hero 70% off" />
@@ -407,10 +431,10 @@ const ResultCategories = () => {
                 <p>Home</p>
               </Link>
               <img src={arrow} />
-              {busca != "" && <p>{busca}</p>}
+              {busca != "" && <p> {capitalizeFirstLetter(busca)}</p>}
               {busca == "" && <p>View All</p>}
             </div>
-            <h1 className="title-result-web">{busca}</h1>
+            <h1 className="title-result-web">{capitalizeFirstLetter(busca)}</h1>
           </div>
           <div className="container-filter-products-result">
             <div className="container-filters-web">
@@ -476,62 +500,68 @@ const ResultCategories = () => {
               </div>
             </div>
             <div className="cointainer-products-web">
-              <div className="container-bar-sortby">
-                <div className="content-ornganize-product">
-                  <div className="select-grid-sort">
-                    <img
-                      src={grid}
-                      style={
-                        layout === "grid"
-                          ? { backgroundColor: "#1B4B66" }
-                          : { backgroundColor: "#777" }
-                      }
-                      onClick={() => setLayout("grid")}
-                      alt="icone de grade"
-                    />
-                    <img
-                      src={gridLine}
-                      style={
-                        layout === "line"
-                          ? { backgroundColor: "#1B4B66" }
-                          : { backgroundColor: "" }
-                      }
-                      onClick={() => setLayout("line")}
-                      alt="icone mostrar em linha"
-                    />
+              {result.length > 0 && (
+                <div className="container-bar-sortby">
+                  <div className="content-ornganize-product">
+                    <div className="select-grid-sort">
+                      <img
+                        src={grid}
+                        style={
+                          layout === "grid"
+                            ? { backgroundColor: "#1B4B66" }
+                            : { backgroundColor: "#777" }
+                        }
+                        onClick={() => setLayout("grid")}
+                        alt="icone de grade"
+                      />
+                      <img
+                        src={gridLine}
+                        style={
+                          layout === "line"
+                            ? { backgroundColor: "#1B4B66" }
+                            : { backgroundColor: "" }
+                        }
+                        onClick={() => setLayout("line")}
+                        alt="icone mostrar em linha"
+                      />
+                    </div>
+                    <span>
+                      Showing {firstItem} - {lastItem} of {totalItem} items
+                    </span>
                   </div>
-                  <span>
-                    Showing {firstItem} - {lastItem} of {totalItem} items
-                  </span>
+                  <div>
+                    <label htmlFor="itensPorPagina">To Show:</label>
+                    <select
+                      id="itensPorPagina"
+                      value={itensPorPagina}
+                      onChange={mudarQuantidadeItens}
+                    >
+                      <option value="3">3</option>
+                      <option value="6">6</option>
+                      <option value="9">9</option>
+                      <option value="12">12</option>
+                      <option value="15">15</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="itensPorPagina">Sort By</label>
+                    <select
+                      value={sortby}
+                      onChange={(e) => setSortby(e.target.value)}
+                    >
+                      <option value="popularity">Popularity</option>
+                      <option value="latest">Latest Products</option>
+                      <option value="priceLowToHigh">
+                        Price - Low to High
+                      </option>
+                      <option value="priceHighToLow">
+                        Price - High to Low
+                      </option>
+                      <option value="discount">Discount</option>
+                    </select>
+                  </div>
                 </div>
-                <div>
-                  <label htmlFor="itensPorPagina">To Show:</label>
-                  <select
-                    id="itensPorPagina"
-                    value={itensPorPagina}
-                    onChange={mudarQuantidadeItens}
-                  >
-                    <option value="3">3</option>
-                    <option value="6">6</option>
-                    <option value="9">9</option>
-                    <option value="12">12</option>
-                    <option value="15">15</option>
-                  </select>
-                </div>
-                <div>
-                  <label htmlFor="itensPorPagina">Sort By</label>
-                  <select
-                    value={sortby}
-                    onChange={(e) => setSortby(e.target.value)}
-                  >
-                    <option value="popularity">Popularity</option>
-                    <option value="latest">Latest Products</option>
-                    <option value="priceLowToHigh">Price - Low to High</option>
-                    <option value="priceHighToLow">Price - High to Low</option>
-                    <option value="discount">Discount</option>
-                  </select>
-                </div>
-              </div>
+              )}
               {result && (
                 <div
                   className={`${
@@ -612,8 +642,8 @@ const ResultCategories = () => {
                             />
                           </div>
                           <div className="container-product-price">
-                            <span>{product.price}</span>
                             <span>{product.priceWithDiscount}</span>
+                            <span>{product.price}</span>
                             {product.discount > 0 && (
                               <span>{product.discount}% OFF</span>
                             )}
@@ -624,38 +654,55 @@ const ResultCategories = () => {
                   ))}
                 </div>
               )}
-              <div className="nav-pages-results">
-                {currentPage !== 1 && (
-                  <button className="buttons-nav" onClick={prevPage}>
-                    Prev
-                  </button>
-                )}
+              {console.log(result.length)}
+              {result.length > 1 && (
+                <div className="nav-pages-results">
+                  {currentPage !== 1 && (
+                    <button className="buttons-nav" onClick={prevPage}>
+                      Prev
+                    </button>
+                  )}
 
-                <ul className="pagination-numbers-results">
-                  <div
-                    className="selected-number-page"
-                    style={{ transform: `translateX(${translateXValue}px)` }}
-                  ></div>
-                  {pageNumbers.map((number) => (
-                    <li key={number} className="numbers-nav-results">
-                      <button onClick={() => setCurrentPage(number)}>
-                        <span
-                          style={
-                            currentPage === number ? { color: "#FFF" } : {}
-                          }
-                        >
-                          {number}
-                        </span>
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-                {currentPage !== Math.ceil(totalItem / itensPorPagina) && (
-                  <button className="buttons-nav" onClick={nextPage}>
-                    Next
-                  </button>
-                )}
-              </div>
+                  <ul className="pagination-numbers-results">
+                    <div
+                      className="selected-number-page"
+                      style={{ transform: `translateX(${translateXValue}px)` }}
+                    ></div>
+                    {pageNumbers.map((number) => (
+                      <li key={number} className="numbers-nav-results">
+                        <button onClick={() => setCurrentPage(number)}>
+                          <span
+                            style={
+                              currentPage === number ? { color: "#FFF" } : {}
+                            }
+                          >
+                            {number}
+                          </span>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                  {currentPage !== Math.ceil(totalItem / itensPorPagina) && (
+                    <button className="buttons-nav" onClick={nextPage}>
+                      Next
+                    </button>
+                  )}
+                </div>
+              )}
+              {result.length == 0 && (
+                <>
+                  <div className="page-wrapper-no-result">
+                    <img src={notSearch} alt="imagem sem resultado" />
+                    <div className="title-not-found-result">
+                      <h1>Whoops!</h1>
+                      <p>
+                        We coudn’t find what you’re looking for. Try something
+                        else.
+                      </p>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           </div>
           <div></div>
