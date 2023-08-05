@@ -46,7 +46,7 @@ const HeaderModal = ({ isOpen, setIsOpen, id = "headerModalId" }) => {
       <div id={id} className="header-modal" onClick={handleBackClick}>
         <div className={animation}>
           <div className="profile-header-modal">
-            <button onClick={() => navigate("/profile")}>
+            <button onClick={() => navigate("/profile/Personal Information")}>
               <div>
                 <img
                   src={user && user.URLfoto ? user.URLfoto : userNotPicture}

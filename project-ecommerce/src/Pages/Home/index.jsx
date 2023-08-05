@@ -277,7 +277,7 @@ const Home = () => {
         </div>
       </main>
 
-      <NavMob />
+      <NavMob page="/" />
       <Footer />
     </div>
   );

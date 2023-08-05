@@ -79,7 +79,7 @@ function Header({ Page }) {
               <img src={wishlist} alt="coracao" />
             </Link>
 
-            <Link to="/profile">
+            <Link to="/profile/Personal Information">
               <img src={perfil} alt="perfil" />
             </Link>
 
