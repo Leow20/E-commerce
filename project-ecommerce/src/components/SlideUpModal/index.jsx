@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 
 //Style
 import "./slideUpModal.css";
+import { Link } from "react-router-dom";
+import ProductContainer from "../ProductContainer";
 
 const SlideUpModal = ({ page, isOpen, onValueReturn }) => {
   const [open, setOpen] = useState(isOpen);
@@ -18,10 +20,12 @@ const SlideUpModal = ({ page, isOpen, onValueReturn }) => {
   }, [isOpen]);
 
   useEffect(() => {
-    const handleReturnValue = () => {
-      onValueReturn(sortby);
-    };
-    handleReturnValue();
+    if (page == "results") {
+      const handleReturnValue = () => {
+        onValueReturn(sortby);
+      };
+      handleReturnValue();
+    }
   }, [sortby]);
 
   function handleModalState() {
@@ -76,6 +80,19 @@ const SlideUpModal = ({ page, isOpen, onValueReturn }) => {
                   </label>
                 ))}
               </form>
+            </div>
+          )}
+          {page == "Also Like" && (
+            <div className="container-also-like-data-modal">
+              <h1>You may also like</h1>
+              <hr />
+              <div className="box-products-data">
+                {filteredProducts.map((product) => (
+                  <Link to={`/product/${product.id}`} key={product.id}>
+                    <ProductContainer product={product} />
+                  </Link>
+                ))}
+              </div>
             </div>
           )}
         </div>

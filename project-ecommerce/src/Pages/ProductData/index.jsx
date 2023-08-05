@@ -3,32 +3,33 @@ import React, { useContext, useEffect, useState } from "react";
 
 //Router Dom
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 //Style
 import "./productData.css";
 
 //Firebase
-import { db, storage } from "../../../firebaseConnection";
-import { collection, getDocs, query, where } from "firebase/firestore";
+import { db } from "../../../firebaseConnection";
+import { collection, query, where } from "firebase/firestore";
 import { useMediaQuery } from "react-responsive";
-import { getDownloadURL, ref } from "firebase/storage";
 
 //Components
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import RelatedProducts from "../../components/RelatedProducts";
 import RatingsAndReviews from "../../components/RatingsandReviews";
+import SlideUpModal from "../../components/SlideUpModal";
 
 //Icon
 import Arrow from "../../assets/HeaderModal/arrow-right-black.svg";
+import ArrowRight from "../../assets/icons/icon-arrow.svg";
 import StarFill from "../../assets/icons/star-fill.svg";
 import Star from "../../assets/icons/star.svg";
-import Bag from "../../assets/icons/bag.svg";
+import Bag from "../../assets/icons/bag-white.svg";
 import Hearth from "../../assets/icons/icon-wishlist.svg";
 import Similar from "../../assets/icons/view-smilar.svg";
 
-import { useParams } from "react-router-dom";
-
+//Context
 import { ProductContext } from "../../Contexts/products";
 import WishlistButton from "../../components/WishlistButton";
 
@@ -38,11 +39,18 @@ const ProductData = () => {
   const isMobile = useMediaQuery({ maxWidth: 619 });
   const productId = id;
   const q = query(collection(db, "products"), where("id", "==", productId));
-  const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState({});
   const [image, setImage] = useState("");
   const [qtd, setQtd] = useState(1);
   const [container, setContainer] = useState("Product Description");
   const [classImg, setClassImg] = useState(1);
+  const [showUpModal, setShowUpModal] = useState(false);
+  const productsFiltered = [];
+  products.forEach((element) => {
+    if (element.category === product.category) {
+      productsFiltered.push(element);
+    }
+  });
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -69,29 +77,34 @@ const ProductData = () => {
           </Link>
         </header>
         <section className="product-data-section">
+          <SlideUpModal
+            isOpen={showUpModal}
+            page={"Also Like"}
+            filteredProducts={productsFiltered}
+          />
           <div className="container-product-data">
             <div className="box-img-data">
               <div className="img-data">
                 <img src={image} alt="Product Image" id="productImageID" />
-                <button>
+                <button onClick={() => setShowUpModal(!showUpModal)}>
                   <img src={Similar} alt="View Similar" />
                 </button>
               </div>
               <div className="img-data">
                 <img src={image} alt="Product Image" id="productImageID" />
-                <button>
+                <button onClick={() => setShowUpModal(!showUpModal)}>
                   <img src={Similar} alt="View Similar" />
                 </button>
               </div>
               <div className="img-data">
                 <img src={image} alt="Product Image" id="productImageID" />
-                <button>
+                <button onClick={() => setShowUpModal(!showUpModal)}>
                   <img src={Similar} alt="View Similar" />
                 </button>
               </div>
               <div className="img-data">
                 <img src={image} alt="Product Image" id="productImageID" />
-                <button>
+                <button onClick={() => setShowUpModal(!showUpModal)}>
                   <img src={Similar} alt="View Similar" />
                 </button>
               </div>
@@ -151,12 +164,92 @@ const ProductData = () => {
             </div>
 
             <div className="delivery-details-data">
-              <span>Delivery Details</span>
-              <span>Check estimated delivery date/pickup option.</span>
+              <div>
+                <span>Delivery Details</span>
+                <span>Check estimated delivery date/pickup option.</span>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  name="Pincode input"
+                  id="pincodeInputID"
+                  placeholder="Enter Valid Pincode"
+                />
+                <label>CHECK</label>
+              </div>
+            </div>
+
+            <div className="container-btns-content-data">
+              <div className="btn-box-content-data">
+                <hr />
+                <button
+                  className={
+                    container == "Product Description" ? "active-btn-data" : ""
+                  }
+                  onClick={() => {
+                    if (container != "Product Description") {
+                      setContainer("Product Description");
+                    } else {
+                      setContainer("");
+                    }
+                  }}
+                >
+                  <span>Product Description</span>
+                  <img
+                    src={Arrow}
+                    alt="Arrow"
+                    style={{
+                      transform: `rotate(${
+                        container == "Product Description" ? "90deg" : "0deg"
+                      })`,
+                    }}
+                  />
+                </button>
+                {container == "Product Description" && (
+                  <div>
+                    <p>
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Repellat, ad corporis ipsum explicabo provident doloremque
+                      omnis? Tempore, quis ducimus possimus optio dolorum ut
+                      eaque rem rerum architecto recusandae, officia nisi.
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              <div className="btn-box-content-data">
+                <hr />
+                <button
+                  className={
+                    container == "Ratings and Reviews" ? "active-btn-data" : ""
+                  }
+                  onClick={() => {
+                    if (container != "Ratings and Reviews") {
+                      setContainer("Ratings and Reviews");
+                    } else {
+                      setContainer("");
+                    }
+                  }}
+                >
+                  <span>Ratings and Reviews</span>
+                  <img
+                    src={Arrow}
+                    alt="Arrow"
+                    style={{
+                      transform: `rotate(${
+                        container == "Ratings and Reviews" ? "90deg" : "0deg"
+                      })`,
+                    }}
+                  />
+                </button>
+                {container == "Ratings and Reviews" && <RatingsAndReviews />}
+              </div>
             </div>
 
             <div className="box-btns-data">
-              <WishlistButton className="add-fav" product={product} />
+              <button className="add-fav">
+                <img src={Hearth} alt="" />
+              </button>
               <button className="add-bag">
                 <img src={Bag} alt="Bag" />
                 <span>Add to Bag</span>
