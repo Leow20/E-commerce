@@ -3,6 +3,10 @@
   height: 202px;
 }
 
+.img-product-home-button {
+  background-color: #fff;
+}
+
 @media screen and (min-width: 820px) {
   .img-product-home {
     min-width: 284px;

@@ -31,7 +31,7 @@
   padding: 6px;
 }
 
-.hero-mobile-home>div {
+.hero-mobile-home > div {
   flex-grow: 1;
 }
 
@@ -539,11 +539,6 @@
 
   .arrival-content-home span:nth-child(3) {
     font-size: 16px;
-  }
-
-  .container-arrival-home img:last-child {
-    width: 19px;
-    height: 19px;
   }
 
   .text-product-home span {
