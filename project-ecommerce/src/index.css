@@ -57,6 +57,25 @@
     transform: translateX(-750px);
   }
 }
+@keyframes slide-up-open {
+  from {
+    transform: translateY(700px);
+  }
+
+  to {
+    transform: translateY(0px);
+  }
+}
+
+@keyframes slide-up-close {
+  from {
+    transform: translateY(0px);
+  }
+
+  to {
+    transform: translateY(750px);
+  }
+}
 
 @keyframes spin {
   from {

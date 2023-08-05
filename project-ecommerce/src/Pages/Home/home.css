@@ -31,7 +31,7 @@
   padding: 6px;
 }
 
-.hero-mobile-home>div {
+.hero-mobile-home > div {
   flex-grow: 1;
 }
 
@@ -165,6 +165,7 @@
   font-weight: 600;
   line-height: 16px;
   color: #171520;
+  padding: 0 !important;
   padding-bottom: 2px;
 }
 
@@ -173,6 +174,7 @@
   font-weight: 500;
   line-height: 16px;
   color: #626262;
+  padding: 0 !important;
   padding-bottom: 2px;
 }
 
@@ -181,6 +183,7 @@
   font-size: 14px;
   font-weight: 600;
   line-height: 16px;
+  padding: 0 !important;
   padding-bottom: 2px;
 }
 
@@ -498,6 +501,11 @@
     height: 24px;
   }
 
+  .img-product-home img:first-child {
+    width: 286px;
+    height: 286px;
+  }
+
   .button-hero-home span {
     width: 80px;
     font-size: 16px;
@@ -531,11 +539,6 @@
 
   .arrival-content-home span:nth-child(3) {
     font-size: 16px;
-  }
-
-  .container-arrival-home img:last-child {
-    width: 19px;
-    height: 19px;
   }
 
   .text-product-home span {

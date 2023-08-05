@@ -4,6 +4,7 @@ import "./header.css";
 //Router-dom
 import { Link } from "react-router-dom";
 import HeaderModal from "../HeaderModal";
+import SearchModal from "../SearchModal";
 import { useState } from "react";
 
 //Images
@@ -20,6 +21,7 @@ import MyBagModal from "../myBagModal";
 function Header({ Page }) {
   const [modal, setModal] = useState(false);
   const [isHovered, setIsHovered] = useState();
+  const [searchMod, setSearchMod] = useState();
 
   const urlCompleta = window.location.href;
   const dominio = window.location.origin;
@@ -27,6 +29,11 @@ function Header({ Page }) {
 
   const handleHover = () => {
     setIsHovered(!isHovered);
+  };
+
+  const handleSearch = () => {
+    setSearchMod(!searchMod);
+    document.body.style.overflowY = "hidden";
   };
 
   return (
@@ -43,19 +50,19 @@ function Header({ Page }) {
           <nav className="nav-category-header">
             <ul>
               <li>
-                <Link to="/handbags">Handbags</Link>
+                <Link to="/results/handbags">Handbags</Link>
               </li>
               <li>
-                <Link to="/watches">Watches</Link>
+                <Link to="/results/watches">Watches</Link>
               </li>
               <li>
-                <Link to="/skincare">Skincare</Link>
+                <Link to="/results/skincare">Skincare</Link>
               </li>
               <li>
-                <Link to="/jewellery">Jewellery</Link>
+                <Link to="/results/jewellery">Jewellery</Link>
               </li>
               <li>
-                <Link to="/apparels">Apparels</Link>
+                <Link to="/results/apparels">Apparels</Link>
               </li>
             </ul>
           </nav>
@@ -72,7 +79,7 @@ function Header({ Page }) {
               <img src={wishlist} alt="coracao" />
             </Link>
 
-            <Link to="/profile">
+            <Link to="/profile/Personal Information">
               <img src={perfil} alt="perfil" />
             </Link>
 
@@ -111,7 +118,7 @@ function Header({ Page }) {
                 <img src={addHome} alt="addHome" />
               </Link>
 
-              <button>
+              <button onClick={handleSearch}>
                 <img src={search} alt="lupa" />
               </button>
 
@@ -121,6 +128,7 @@ function Header({ Page }) {
             </div>
           </div>
         </header>
+        {searchMod && <SearchModal closeModal={setSearchMod} />}
       </div>
     </>
   );

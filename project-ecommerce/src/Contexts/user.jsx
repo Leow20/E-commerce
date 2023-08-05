@@ -1,7 +1,15 @@
 import React, { createContext, useEffect, useState } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { auth, db, storage } from "../../firebaseConnection";
-import { collection, getDocs, query, where } from "@firebase/firestore";
+import {
+	collection,
+	getDocs,
+	query,
+	where,
+	setDoc,
+	doc,
+	getDoc,
+} from "@firebase/firestore";
 import { getDownloadURL, ref } from "firebase/storage";
 
 export const UserContext = createContext({});
@@ -10,14 +18,12 @@ function UserProvider({ children }) {
 	const [user, setUser] = useState("");
 
 	const fetchUserInfoAndUpdateState = async (uid) => {
+		const q = query(collection(db, "users"), where("uid", "==", uid));
 		try {
-			const q = query(collection(db, "users"), where("uid", "==", uid));
-
 			await getDocs(q).then((value) => {
 				value.forEach(async (valueInfo) => {
 					const userData = valueInfo.data();
 					handleUploadImage(userData);
-					console.log("Aqui");
 				});
 			});
 		} catch (error) {
@@ -38,7 +44,6 @@ function UserProvider({ children }) {
 			}
 		}
 		setUser(user);
-		console.log(user);
 	};
 
 	useEffect(() => {
@@ -53,7 +58,11 @@ function UserProvider({ children }) {
 
 	return (
 		<UserContext.Provider
-			value={{ user, fetchUserInfoAndUpdateState, handleUploadImage }}
+			value={{
+				user,
+				fetchUserInfoAndUpdateState,
+				handleUploadImage,
+			}}
 		>
 			{children}
 		</UserContext.Provider>
