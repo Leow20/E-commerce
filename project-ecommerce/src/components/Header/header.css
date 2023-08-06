@@ -115,6 +115,20 @@
   position: relative;
 }
 
+.button-get-started-header {
+  min-width: 100px;
+  min-height: 42px;
+  max-height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background-color: #1b4b66;
+  padding: 1%;
+  border-radius: 10px;
+  font-size: 14px;
+}
+
 .icons-header button,
 .icons-responsivo button {
   background-color: transparent;
@@ -341,6 +355,7 @@
 }
 
 @media (max-width: 820px) {
+
   .logo-header,
   .nav-category-header ul,
   .search-bar-header input[type="search"],
@@ -361,6 +376,9 @@
     font-size: 20px;
     font-weight: 600;
     line-height: 26px;
+    text-align: center;
+    display: flex;
+    align-items: center;
   }
 
   .logo-menu button {
@@ -389,6 +407,12 @@
     display: flex;
     align-items: center;
     gap: 24px;
+  }
+
+  .button-get-started-header {
+    min-width: 80px;
+    min-height: 30px;
+    font-size: 12px;
   }
 
   .icons-responsivo span {
