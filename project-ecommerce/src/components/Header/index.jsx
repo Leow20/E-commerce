@@ -155,7 +155,7 @@ function Header({ Page }) {
 							</div>
 						) : (
 							<div className="icons-responsivo">
-								<button>
+								<button onClick={handleSearch}>
 									<img src={search} alt="lupa" />
 								</button>
 								<Link className="button-get-started-header" to="/getstarted">

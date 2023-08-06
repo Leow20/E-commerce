@@ -563,21 +563,21 @@
     max-width: max-content;
   }
 
-  .box-text-data div h3 {
+  .box-text-data .box-price-data div h3 {
     font-size: 40px;
     font-weight: 700;
     line-height: 130%;
     margin-right: 16px;
   }
 
-  .box-text-data div h4 {
+  .box-text-data .box-price-data div h4 {
     font-size: 34px;
     font-weight: 600;
     line-height: 76.4%;
     margin-right: 16px;
   }
 
-  .box-text-data div h5 {
+  .box-text-data .box-price-data div h5 {
     font-size: 20px;
     font-weight: 600;
     line-height: 130%;

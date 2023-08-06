@@ -154,22 +154,22 @@
     line-height: 16px;
   }
 
-  .text-product-wishlist div {
+  .box-price {
     width: 100%;
     display: flex;
     align-items: center;
     gap: 6px;
   }
 
-  .text-product-wishlist div h3 {
+  .box-price h3 {
     color: #171520;
-    font-size: 14px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 600;
     line-height: 16px;
   }
 
-  .text-product-wishlist div h4 {
+  .box-price h4 {
     color: #626262;
     font-size: 10px;
     font-weight: 500;
@@ -178,7 +178,7 @@
 
   }
 
-  .text-product-wishlist div h5 {
+  .box-price h5 {
     color: #E21D1D;
     font-size: 10px;
     font-weight: 500;
