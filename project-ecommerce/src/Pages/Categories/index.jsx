@@ -51,7 +51,7 @@ const Categories = () => {
           </div>
         </Link>
       </div>
-      <NavMob />
+      <NavMob page="/categories" />
     </>
   );
 };

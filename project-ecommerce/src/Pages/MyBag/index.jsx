@@ -18,6 +18,7 @@ import ArrowDown from "../../assets/imgFooter/ArrowDown.svg";
 
 import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
+import NavMob from "../../components/NavMob";
 
 const MyBag = () => {
   const products = true;
@@ -338,6 +339,7 @@ const MyBag = () => {
           </div>
         </div>
       )}
+      <NavMob page="/mybag" />
     </>
   );
 };
