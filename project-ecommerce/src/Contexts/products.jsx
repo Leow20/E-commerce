@@ -3,32 +3,43 @@ import React, { createContext, useEffect, useMemo, useState } from "react";
 import { db, storage } from "../../firebaseConnection";
 import { getDownloadURL, ref } from "@firebase/storage";
 
+const refReview = query(collection(db, "review"));
+
 export const ProductContext = createContext({});
+
+export const reviewContext = createContext({});
 
 var productsArray = [];
 
 function ProductProvider({ children }) {
   const [products, setProducts] = useState("");
+  const [review, setReview] = useState("");
 
   const handleProducts = useMemo(async () => {
     const q = query(collection(db, "products"));
 
     try {
       const querySnapshot = await getDocs(q);
+      const snapshot = await getDocs(refReview);
+
       querySnapshot.forEach((doc) => {
         let product = {
           name: doc.data().name,
           description: doc.data().description,
           price: doc.data().price,
           qty: doc.data().qty,
-          stars: doc.data().stars,
           discount: doc.data().discount,
           id: doc.data().id,
           category: doc.data().category,
           color: doc.data().color,
           brand: doc.data().brand,
         };
+        handleReview(doc.data().id, snapshot).then((value) => {
+          product.stars = value.averageRating;
+          product.totalRating = value.totalRatings;
+        });
         productsArray.push(product);
+        console.log(productsArray);
       });
 
       await Promise.all(
@@ -54,6 +65,43 @@ function ProductProvider({ children }) {
     handleProducts();
   }, []);
 
+  async function handleReview(id, snapshot) {
+    let totalRatings = 0;
+    let numRatings = 0;
+    let review = {};
+
+    let reviewArray = [];
+
+    snapshot.forEach((doc) => {
+      if (id == doc.data().product) {
+        const rating = doc.data().rating;
+        if (rating >= 1 && rating <= 5) {
+          totalRatings += rating;
+          numRatings++;
+        }
+      }
+
+      review = {
+        title: doc.data().title,
+        description: doc.data().description,
+        rating: doc.data().rating,
+        user: doc.data().uid,
+        product: doc.data().product,
+      };
+      reviewArray.push(review);
+    });
+
+    setReview(reviewArray);
+
+    const averageRating =
+      numRatings > 0 ? Math.min(5, totalRatings / numRatings) : 0;
+
+    return {
+      averageRating: averageRating,
+      totalRatings: numRatings,
+    };
+  }
+
   function calculatePriceWithDiscount(product) {
     if ("price" in product && "discount" in product) {
       const originalPrice = parseFloat(
@@ -73,7 +121,7 @@ function ProductProvider({ children }) {
 
   if (products) {
     return (
-      <ProductContext.Provider value={{ products }}>
+      <ProductContext.Provider value={{ products, review }}>
         {children}
       </ProductContext.Provider>
     );

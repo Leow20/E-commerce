@@ -1,0 +1,137 @@
+.page-wrapper-add-review {
+  width: 100%;
+  position: fixed;
+  z-index: 3000;
+  height: 100vh;
+}
+
+.page-wrapper-add-review .product-data-header img {
+  width: 22px;
+  height: 22px;
+}
+
+.page-wrapper-add-review .product-data-header span {
+  color: #1b4b66;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 26px;
+}
+
+.content-rating-review {
+  padding: 40px 16px 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 400px;
+}
+
+.content-rating-review span {
+  color: #171520;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+.product-rating {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.product-rating img {
+  cursor: pointer;
+}
+
+.review-fields {
+  width: 100%;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  max-width: 400px;
+}
+
+.review-fields label {
+  color: #171520;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+.review-fields div:first-child {
+  margin-top: 40px;
+}
+
+.review-fields input {
+  width: 100%;
+  max-width: 400px;
+  padding: 14px 16px;
+  border: none;
+  background-color: #f1f1f1;
+  color: #626262;
+}
+
+.review-fields textarea {
+  resize: none;
+  width: 100%;
+  min-height: 96px;
+  padding: 14px 16px 16px;
+  max-width: 400px;
+  border: none;
+  background-color: #f1f1f1;
+  color: #626262;
+}
+
+.content-file-review {
+  height: 80px;
+  width: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #f1f1f1;
+}
+
+.custom-file-input {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  cursor: pointer;
+  padding: 8px;
+  background-color: #1b4b66;
+  color: white !important;
+  border-radius: 50%;
+}
+
+.content-file-review svg {
+  cursor: pointer;
+}
+
+.container-images-review {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 5px;
+  overflow-x: auto;
+}
+
+.custom-file-input input[type="file"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.container-images-review img {
+  width: 80px !important;
+  height: 80px !important;
+  border-radius: 8px;
+}

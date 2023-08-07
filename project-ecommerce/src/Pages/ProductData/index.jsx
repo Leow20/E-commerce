@@ -26,8 +26,8 @@ import ArrowRight from "../../assets/icons/blackArrow.svg";
 import StarFill from "../../assets/icons/star-fill.svg";
 import Star from "../../assets/icons/star.svg";
 import Bag from "../../assets/icons/bag-white.svg";
-import Hearth from "../../assets/icons/icon-wishlist.svg";
 import Similar from "../../assets/icons/view-smilar.svg";
+import Hearth from "../../assets/icons/icon-wishlist.svg";
 
 //Context
 import { ProductContext } from "../../Contexts/products";
@@ -46,6 +46,7 @@ const ProductData = () => {
   const [container, setContainer] = useState("Product Description");
   const [classImg, setClassImg] = useState(1);
   const [showUpModal, setShowUpModal] = useState(false);
+  const [rating, setRating] = useState(null);
   const productsFiltered = [];
   products.forEach((element) => {
     if (element.category === product.category) {
@@ -62,8 +63,6 @@ const ProductData = () => {
       }
     });
   }, []);
-
-  console.log(product);
 
   if (isMobile && product) {
     return (
@@ -128,17 +127,24 @@ const ProductData = () => {
               )}
             </div>
 
-            <div className="box-stars-data">
-              <div className="content-stars-data">
-                <span className="span-stars-data">{product.stars}</span>
-                <img src={product.stars == 0 ? Star : StarFill} alt="Stars" />
-              </div>
+            <Link to={`/review/${product.id}`}>
+              <div className="box-stars-data">
+                <div className="content-stars-data">
+                  <span className="span-stars-data">{product.stars}</span>
+                  <img src={product.stars == 0 ? Star : StarFill} alt="Stars" />
+                </div>
 
-              <div className="content-text-stars-data">
-                <h2>Average Rating</h2>
-                <p>43 Ratings & 23 Reviews</p>
+                <div className="content-text-stars-data">
+                  <h2>Average Rating</h2>
+                  {product.totalRating != 1 && (
+                    <p>{product.totalRating} Reviews</p>
+                  )}
+                  {product.totalRating == 1 && (
+                    <p>{product.totalRating} Review</p>
+                  )}
+                </div>
               </div>
-            </div>
+            </Link>
 
             <div className="box-cards-data">
               <div className="card-data">
@@ -358,50 +364,59 @@ const ProductData = () => {
                 <p>{product.description}</p>
                 <div className="box-stars-data">
                   <div className="content-stars-data">
-                    <img
-                      src={
-                        product.stars > 0 && product.stars >= 1
-                          ? StarFill
-                          : Star
-                      }
-                      alt="Stars"
-                    />
-                    <img
-                      src={
-                        product.stars > 1 && product.stars >= 2
-                          ? StarFill
-                          : Star
-                      }
-                      alt="Stars"
-                    />
-                    <img
-                      src={
-                        product.stars > 2 && product.stars >= 3
-                          ? StarFill
-                          : Star
-                      }
-                      alt="Stars"
-                    />
-                    <img
-                      src={
-                        product.stars > 3 && product.stars >= 4
-                          ? StarFill
-                          : Star
-                      }
-                      alt="Stars"
-                    />
-                    <img
-                      src={
-                        product.stars > 4 && product.stars >= 5
-                          ? StarFill
-                          : Star
-                      }
-                      alt="Stars"
-                    />
+                    <Link to={`/review/${product.id}`}>
+                      <img
+                        src={
+                          product.stars > 0 && product.stars >= 1
+                            ? StarFill
+                            : Star
+                        }
+                        alt="Stars"
+                      />
+                      <img
+                        src={
+                          product.stars > 1 && product.stars >= 2
+                            ? StarFill
+                            : Star
+                        }
+                        alt="Stars"
+                      />
+                      <img
+                        src={
+                          product.stars > 2 && product.stars >= 3
+                            ? StarFill
+                            : Star
+                        }
+                        alt="Stars"
+                      />
+                      <img
+                        src={
+                          product.stars > 3 && product.stars >= 4
+                            ? StarFill
+                            : Star
+                        }
+                        alt="Stars"
+                      />
+                      <img
+                        src={
+                          product.stars > 4 && product.stars >= 5
+                            ? StarFill
+                            : Star
+                        }
+                        alt="Stars"
+                      />
+                    </Link>
                   </div>
-                  <div className="rating-data">
-                    <span>(0) Ratings</span>
-                  </div>
+                  <Link to={`/review/${product.id}`}>
+                    <div className="rating-data">
+                      {product.totalRating != 1 && (
+                        <span>{product.totalRating} Reviews</span>
+                      )}
+                      {product.totalRating == 1 && (
+                        <span>{product.totalRating} Review</span>
+                      )}
+                    </div>
+                  </Link>
                 </div>
 
                 {product.discount == 0 ? (
