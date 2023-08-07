@@ -1,0 +1,23 @@
+.container-page404 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.container-page404 img {
+  margin-bottom: 30px;
+}
+
+.container-page404 h4 {
+  margin-top: 20px;
+}
+
+.button-page404 {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: absolute;
+  bottom: 35px;
+}
