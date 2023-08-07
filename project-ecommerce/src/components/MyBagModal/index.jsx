@@ -1,9 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 
-//Images
-import bolsa from "../../assets/Img/bolsa_rosa.jpg";
-
 //icons
 import arrow from "../../assets/icons/arroBlue.svg";
 import cross from "../../assets/icons/cross-small.svg";
@@ -13,6 +10,7 @@ import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import { UserContext } from "../../Contexts/user";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { db } from "../../../firebaseConnection";
+import CounterMyBag from "../CounterMyBag";
 
 const MyBagModal = ({ hover }) => {
 	const [isHovered, setIsHovered] = useState(false);
@@ -94,7 +92,15 @@ const MyBagModal = ({ hover }) => {
 			totalPrecoComDesconto,
 		};
 	};
-
+	const handleUpload = async (product, index) => {
+		const updatedProducts = [...bag];
+		updatedProducts.splice(index, product);
+		setBag(updatedProducts);
+		if (user) {
+			await setDoc(doc(db, "bag", user.uid), { data: updatedProducts });
+		}
+	};
+	console.log(bag);
 	return (
 		<div>
 			{isHovered && (
@@ -111,11 +117,8 @@ const MyBagModal = ({ hover }) => {
 
 					<div className="max-product-header">
 						{bag.map((product, index) => (
-							<>
-								<div
-									className="mybag-container-product-header"
-									key={product.id}
-								>
+							<div key={product.id}>
+								<div className="mybag-container-product-header">
 									<div className="img-product-mybag-header">
 										<img src={product.url} />
 									</div>
@@ -123,29 +126,12 @@ const MyBagModal = ({ hover }) => {
 									<div className="desc-product-mybag-header">
 										<p>{product.name}</p>
 										<p>{truncateDescription(product.description, 3)}</p>
-										<div className="box-counter-product-header">
-											<button
-												onClick={() => {
-													(quantity < product.qty && quantity > 1) ||
-													quantity == product.qty
-														? setQuantity(quantity - 1)
-														: null;
-												}}
-											>
-												-
-											</button>
-											<p>{quantity ? quantity : product.qtyBag}</p>
-
-											<button
-												onClick={() => {
-													quantity < product.qty
-														? setQuantity(quantity + 1)
-														: null;
-												}}
-											>
-												+
-											</button>
-										</div>
+										<CounterMyBag
+											product={product}
+											key={product.id}
+											index={index}
+											handleUpload={handleUpload}
+										/>
 									</div>
 
 									<div className="price-product-header">
@@ -160,7 +146,7 @@ const MyBagModal = ({ hover }) => {
 									</div>
 								</div>
 								<hr className="line-product-header" />
-							</>
+							</div>
 						))}
 					</div>
 
