@@ -12,10 +12,10 @@ function Erro404() {
       <div className="container-page404">
         <img src={erro} alt="" />
         <h2>Ops... this page is not found</h2>
-        <h4>click the button to go back to home</h4>
+        <h4>click the button to go Back to Home</h4>
 
         <Link to="/" className="button-page404">
-          <ButtonBigMob>back to home</ButtonBigMob>
+          <ButtonBigMob>Back to Home</ButtonBigMob>
         </Link>
       </div>
     </div>
