@@ -213,7 +213,7 @@ const AddProduct = () => {
           >
             <option value="">Selecione uma categoria</option>
             <option value="handbags">Handbags</option>
-            <option value="jewllery">Jewllery</option>
+            <option value="jewellery">Jewellery</option>
             <option value="watches">Watches</option>
             <option value="skincare">Skincare</option>
             <option value="personal-care">Personal Care</option>

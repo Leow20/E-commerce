@@ -35,6 +35,15 @@
     gap: 30px;
   }
 
+  .wishlist p {
+    color: #626262;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px;
+    margin-top: 8px;
+  }
+
   .wishlist-container-products {
     width: 100%;
     display: flex;
@@ -104,10 +113,16 @@
   }
 
   .arrival-content-wishlist {
-    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    position: relative;
+  }
+
+  .button-wishlist {
+    position: absolute;
+    right: 0;
+    background-color: transparent;
   }
 
   .text-product-wishlist {
@@ -139,7 +154,38 @@
     line-height: 16px;
   }
 
-  .card-wishlist button {
+  .box-price {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .box-price h3 {
+    color: #171520;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 16px;
+  }
+
+  .box-price h4 {
+    color: #626262;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 16px;
+    text-decoration-line: line-through;
+
+  }
+
+  .box-price h5 {
+    color: #E21D1D;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 16px;
+  }
+
+  .card-wishlist .button-bag-wishlist {
     display: flex;
     width: 151px;
     height: 36px;
@@ -195,4 +241,7 @@
 .wishlist-container-products {
   padding-top: 15px;
   padding-left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
