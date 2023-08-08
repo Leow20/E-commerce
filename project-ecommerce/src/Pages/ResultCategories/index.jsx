@@ -87,13 +87,28 @@ const ResultCategories = () => {
 	const handleFilter = (value) => {
 		setFilter(value);
 	};
-	console.log(products);
 
 	function organizarPorMenorPreco(array) {
 		const value = array.slice().sort((a, b) => {
-			const precoA = parseFloat(a.price.replace("$", ""));
-			const precoB = parseFloat(b.price.replace("$", ""));
-			return precoA - precoB;
+			let priceA;
+			let priceB;
+
+			if (a.priceWithDiscount) {
+				priceA = parseFloat(
+					a.priceWithDiscount.replace("$", "").replace(",", "")
+				);
+			} else {
+				priceA = parseFloat(a.price.replace("$", "").replace(".", ""));
+			}
+			if (b.priceWithDiscount) {
+				priceB = parseFloat(
+					b.priceWithDiscount.replace("$", "").replace(",", "")
+				);
+			} else {
+				priceB = parseFloat(b.price.replace("$", "").replace(".", ""));
+			}
+
+			return priceA - priceB;
 		});
 
 		return value;
@@ -101,9 +116,25 @@ const ResultCategories = () => {
 
 	function organizarPorMaiorPreco(array) {
 		const value = array.slice().sort((a, b) => {
-			const precoA = parseFloat(a.price.replace("$", ""));
-			const precoB = parseFloat(b.price.replace("$", ""));
-			return precoB - precoA;
+			let priceA;
+			let priceB;
+
+			if (a.priceWithDiscount) {
+				priceA = parseFloat(
+					a.priceWithDiscount.replace("$", "").replace(",", "")
+				);
+			} else {
+				priceA = parseFloat(a.price.replace("$", "").replace(".", ""));
+			}
+			if (b.priceWithDiscount) {
+				priceB = parseFloat(
+					b.priceWithDiscount.replace("$", "").replace(",", "")
+				);
+			} else {
+				priceB = parseFloat(b.price.replace("$", "").replace(".", ""));
+			}
+
+			return priceB - priceA;
 		});
 
 		return value;
@@ -155,7 +186,6 @@ const ResultCategories = () => {
 			snapfilter.price = price;
 			snapfilter.discount = discount;
 			setFilter(snapfilter);
-			console.log(snapfilter);
 		}
 	}, [color, rating, brand, price, discount]);
 
@@ -188,9 +218,14 @@ const ResultCategories = () => {
 		if (filter.price.length > 0) {
 			filterProducts = filterProducts.filter((product) =>
 				filter.price.some((priceRange) => {
-					const price = parseFloat(
-						product.price.replace("$", "").replace(".", "")
-					);
+					let price;
+					if (product.priceWithDiscount) {
+						price = parseFloat(
+							product.priceWithDiscount.replace("$", "").replace(",", "")
+						);
+					} else {
+						price = parseFloat(product.price.replace("$", "").replace(".", ""));
+					}
 
 					if (priceRange === "0-50") {
 						return price <= 50;
@@ -320,9 +355,11 @@ const ResultCategories = () => {
 	};
 
 	const mudarQuantidadeItens = (event) => {
-		const quantidade = parseInt(event.target.value);
-		setItensPorPagina(quantidade);
-		setCurrentPage(1);
+		if (!isMobile) {
+			const quantidade = parseInt(event.target.value);
+			setItensPorPagina(quantidade);
+			setCurrentPage(1);
+		}
 	};
 
 	const capitalizeFirstLetter = (string) => {
@@ -568,18 +605,20 @@ const ResultCategories = () => {
 							)}
 							{result && (
 								<div
-									className={`${layout === "line"
+									className={`${
+										layout === "line"
 											? "container-products-results-line"
 											: "container-products-results-grid"
-										}`}
+									}`}
 								>
 									{result.map((product) => (
 										<div
 											key={product.id}
-											className={`${layout === "line"
+											className={`${
+												layout === "line"
 													? "product-container-result-line"
 													: "product-container-result-grid"
-												}`}
+											}`}
 										>
 											<Link to={`/product/${product.id}`} key={product.id}>
 												<div className="product-image-result">
@@ -669,7 +708,6 @@ const ResultCategories = () => {
 									))}
 								</div>
 							)}
-							{console.log(result.length)}
 							{result.length > 1 && (
 								<div className="nav-pages-results">
 									{currentPage !== 1 && (

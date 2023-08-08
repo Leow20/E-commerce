@@ -20,7 +20,6 @@ function WishlistButton({
 	const [wishlist, setWishlist] = useState([]);
 
 	const loadWishlist = async () => {
-		console.log("aaaaa");
 		const wishlistRef = doc(db, "wishlist", user.uid);
 		const wishlistSnapshot = await getDoc(wishlistRef);
 		if (user) {
@@ -49,13 +48,11 @@ function WishlistButton({
 		}
 
 		setWishlist(updatedWishlist);
-		console.log(updatedWishlist);
 
 		await setDoc(doc(db, "wishlist", user.uid), { data: updatedWishlist });
 	};
 
 	useEffect(() => {
-		console.log("bbb");
 		loadWishlist();
 	}, [user]);
 
