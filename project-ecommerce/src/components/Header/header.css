@@ -81,7 +81,7 @@
 }
 
 .search-bar-header input[type="search"] {
-  background: url("../../assets/imgHeader/search.svg") no-repeat;
+  position: relative;
   background-position: 8px;
   padding: 13px 20px 13px 40px;
   border: none;
@@ -99,10 +99,12 @@
   background-color: #dfdfdf;
 }
 
-#lupa-id {
+.lupa-redirect {
+  background: none;
   position: absolute;
-  left: 8px;
   top: 10px;
+  left: 10px;
+  z-index: 1002;
 }
 
 .icons-header {
