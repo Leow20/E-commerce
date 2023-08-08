@@ -19,8 +19,11 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  position: absolute;
-  bottom: 35px;
+}
+
+.button-page404 button {
+  margin-bottom: 35px;
+  margin-top: 10px;
 }
 
 @media (min-width: 625px) {
