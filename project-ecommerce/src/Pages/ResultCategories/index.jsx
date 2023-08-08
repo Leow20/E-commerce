@@ -238,6 +238,11 @@ const ResultCategories = () => {
 			indexOfFirstProduct,
 			indexOfLastProduct
 		);
+		if (!isMobile) {
+			setResult(currentProducts);
+		} else {
+			setResult(sortByProducts);
+		}
 
 		setFirstItem(indexOfFirstProduct + 1);
 
@@ -246,8 +251,6 @@ const ResultCategories = () => {
 		setLastItem(lastPage);
 
 		setTotalItem(filterProducts.length);
-
-		setResult(currentProducts);
 	}, [busca, sortby, filter, itensPorPagina, currentPage]);
 
 	const nextPage = () => {
@@ -565,20 +568,18 @@ const ResultCategories = () => {
 							)}
 							{result && (
 								<div
-									className={`${
-										layout === "line"
+									className={`${layout === "line"
 											? "container-products-results-line"
 											: "container-products-results-grid"
-									}`}
+										}`}
 								>
 									{result.map((product) => (
 										<div
 											key={product.id}
-											className={`${
-												layout === "line"
+											className={`${layout === "line"
 													? "product-container-result-line"
 													: "product-container-result-grid"
-											}`}
+												}`}
 										>
 											<Link to={`/product/${product.id}`} key={product.id}>
 												<div className="product-image-result">
