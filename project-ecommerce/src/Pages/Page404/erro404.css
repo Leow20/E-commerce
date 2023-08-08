@@ -7,6 +7,7 @@
 }
 
 .container-page404 img {
+  width: 300px;
   margin-bottom: 30px;
 }
 
@@ -20,4 +21,10 @@
   width: 100%;
   position: absolute;
   bottom: 35px;
+}
+
+@media (min-width: 625px) {
+  .container-page404 img {
+    width: 600px;
+  }
 }

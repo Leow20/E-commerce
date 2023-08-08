@@ -1,7 +1,7 @@
 import React from "react";
 import "./erro404.css";
 
-import erro from "../../assets/Img/noAddress.jpg";
+import erro from "../../assets/Img/Error.jpg";
 
 import ButtonBigMob from "../../components/ButtonBigMobile";
 import { Link } from "react-router-dom";
