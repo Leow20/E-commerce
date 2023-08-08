@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
+import { ProductContext } from "../../Contexts/products";
+import ProductContainer from "../ProductContainer";
+import { Link } from "react-router-dom";
+import "./relatedProducts.css";
 
-const RelatedProducts = () => {
-	return (
-		<div>
-			Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi sint
-			saepe ipsum. Rem laborum voluptate quaerat animi consectetur ipsum nisi
-			culpa praesentium, necessitatibus atque odit illo, rerum aut adipisci
-			suscipit. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex
-			recusandae quisquam minus, debitis est nihil? Voluptatum id autem ad
-			voluptates expedita illum nesciunt. Amet libero laborum quam id iusto
-			asperiores.
-		</div>
-	);
+const RelatedProducts = ({ func, productsFiltered }) => {
+	if (func == "container") {
+		return (
+			<div className="container-also-like-data">
+				<h1>You may also like</h1>
+				<div className="box-products-data">
+					{productsFiltered.map((product) => (
+						<Link to={`/product/${product.id}`} key={product.id}>
+							<ProductContainer product={product} />
+						</Link>
+					))}
+				</div>
+			</div>
+		);
+	}
 };
 
 export default RelatedProducts;

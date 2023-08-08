@@ -68,13 +68,13 @@ function Footer() {
           <div className="container-footer container-footer-mobal">
             <div className="coluna-footer mob-footer">
               <h4>Shop by Category</h4>
-              <Link to="/skincare">Skincare</Link>
-              <Link to="/">Personal Care</Link>
-              <Link to="/handbags">Handbags</Link>
-              <Link to="/">Appareis</Link>
-              <Link to="/watches">Watches</Link>
-              <Link to="/">Eye Wear</Link>
-              <Link to="/jewellery">Jewellery</Link>
+              <Link to="/results/skincare">Skincare</Link>
+              <Link to="/results/personal care">Personal Care</Link>
+              <Link to="/results/handbags">Handbags</Link>
+              <Link to="/results/apparels">Apparels</Link>
+              <Link to="/results/watches">Watches</Link>
+              <Link to="/results/eyewear">Eyewear</Link>
+              <Link to="/results/jewellery">Jewellery</Link>
             </div>
 
             {tamanhoTela < 841 && open === true ? (
@@ -127,10 +127,18 @@ function Footer() {
             )}
 
             <div className="Logos-footer">
-              <img src={FB} alt="" />
-              <img src={Insta} alt="" />
-              <img src={Twitter} alt="" />
-              <img src={Youtube} alt="" />
+              <a href="https://pt-br.facebook.com/" target="_blank">
+                <img src={FB} alt="" />
+              </a>
+              <a href="https://instagram.com/" target="_blank">
+                <img src={Insta} alt="" />
+              </a>
+              <a href="https://twitter.com/" target="_blank">
+                <img src={Twitter} alt="" />
+              </a>
+              <a href="https://youtube.com/" target="_blank">
+                <img src={Youtube} alt="" />
+              </a>
             </div>
 
             <div className="location-footer">
@@ -148,13 +156,13 @@ function Footer() {
           <div className="container-footer container-footer-mobal">
             <div className="coluna-footer mob-footer">
               <h4>Shop by Category</h4>
-              <Link to="/skincare">Skincare</Link>
-              <Link to="/">Personal Care</Link>
-              <Link to="/handbags">Handbags</Link>
-              <Link to="/">Appareis</Link>
-              <Link to="/watches">Watches</Link>
-              <Link to="/">Eye Wear</Link>
-              <Link to="/jewellery">Jewellery</Link>
+              <Link to="/results/skincare">Skincare</Link>
+              <Link to="/results/Personal Care">Personal Care</Link>
+              <Link to="/results/handbags">Handbags</Link>
+              <Link to="/results/Apparels">Apparels</Link>
+              <Link to="/results/watches">Watches</Link>
+              <Link to="/results/eyewear">Eyewear</Link>
+              <Link to="/results/jewellery">Jewellery</Link>
             </div>
 
             {tamanhoTela < 841 && open === true ? (
@@ -206,10 +214,18 @@ function Footer() {
             )}
 
             <div className="Logos-footer">
-              <img src={FB} alt="" />
-              <img src={Insta} alt="" />
-              <img src={Twitter} alt="" />
-              <img src={Youtube} alt="" />
+              <a href="https://pt-br.facebook.com/" target="_blank">
+                <img src={FB} alt="" />
+              </a>
+              <a href="https://instagram.com/" target="_blank">
+                <img src={Insta} alt="" />
+              </a>
+              <a href="https://twitter.com/" target="_blank">
+                <img src={Twitter} alt="" />
+              </a>
+              <a href="https://youtube.com/" target="_blank">
+                <img src={Youtube} alt="" />
+              </a>
             </div>
 
             <div className="location-footer">

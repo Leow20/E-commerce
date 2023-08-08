@@ -1,0 +1,123 @@
+.container-slide-up {
+  width: 100%;
+  height: auto;
+  background-color: #fff;
+  border-radius: 12px 12px 0 0;
+  position: fixed;
+  bottom: 0;
+  z-index: 2500;
+  animation: slide-up-open forwards 0.3s ease-in-out;
+}
+
+.animate-modal-close {
+  animation: slide-up-close forwards 0.3s ease-in-out;
+}
+
+.container-sortby-modal p {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  letter-spacing: 0em;
+  color: #626262;
+  padding: 19px 0 0 16px;
+}
+
+.container-sortby-modal hr {
+  border: none;
+  width: 90%;
+  height: 1px;
+  margin: 8px 0 0 16px;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.page-wrapper-slide-modal .modal-brackground {
+  z-index: 2400;
+}
+
+.form-sortby {
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  margin: 16px;
+}
+
+.form-sortby label {
+  color: #626262;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.form-sortby input[type="radio"] {
+  display: none;
+}
+
+.input-radio {
+  border: 1px solid #626262;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.input-radio span,
+.input-radio {
+  transition: 0.3s ease;
+  color: #626262;
+}
+
+.input-radio span {
+  content: "";
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+input[type="radio"]:checked + .input-radio {
+  border-color: #1b4b66;
+}
+
+input[type="radio"]:checked + .input-radio span {
+  background: #1b4b66;
+}
+
+.container-also-like-data-modal {
+  width: 100vw;
+  display: block;
+  padding: 16px 16px;
+  max-width: 1280px;
+}
+
+.container-also-like-data-modal h1 {
+  width: 100%;
+  color: #626262;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 114.286%;
+  margin-bottom: 8px;
+}
+
+.container-also-like-data-modal hr {
+  width: 100%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.12);
+  margin-bottom: 24px;
+}
+
+.container-also-like-data-modal .box-products-data {
+  width: 100%;
+  height: max-content;
+  padding-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  overflow-x: auto;
+}
