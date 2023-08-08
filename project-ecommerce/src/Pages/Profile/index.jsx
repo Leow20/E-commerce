@@ -115,6 +115,7 @@ const Profile = () => {
           {selectedTab == "Personal Information" && <ProfileInfo />}
           {selectedTab == "My Wishlist" && <Wishlist />}
           {selectedTab == "Refer and Earn" && <ReferAndEarn />}
+          {selectedTab == "My Addres Book" && <AddressBook />}
         </div>
       )}
       <>
@@ -354,6 +355,7 @@ const Profile = () => {
               {selectedTab == "Personal Information" && <ProfileInfo />}
               {selectedTab == "My Wishlist" && <Wishlist />}
               {selectedTab == "Refer and Earn" && <ReferAndEarn />}
+              {selectedTab == "My Addres Book" && <AddressBook />}
             </div>
           </div>
         </div>

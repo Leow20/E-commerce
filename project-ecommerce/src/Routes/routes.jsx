@@ -11,6 +11,7 @@ import Notification from "../Pages/Notification";
 import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
 import AddProduct from "../Pages/AddProduct";
+import GetStarted from "../Pages/GetStarted";
 
 
 //Routes private
