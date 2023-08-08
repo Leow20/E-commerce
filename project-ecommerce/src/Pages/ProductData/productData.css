@@ -6,13 +6,14 @@
 
 .container-product-data {
   width: 100%;
-  max-width: 100vw;
+  max-width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 0;
   padding: 8px 16px 11px 16px;
+  margin-bottom: 66px;
 }
 
 .box-img-data {
@@ -20,7 +21,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 #productImageID {
@@ -149,7 +150,7 @@
   align-items: center;
   gap: 8px;
   margin-bottom: 40px;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 .card-data {
@@ -219,29 +220,72 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 7px;
+  gap: 8px;
+  margin-bottom: 18px;
 }
 
-.delivery-details-data span:nth-child(1) {
+.delivery-details-data div:nth-child(1) {
+  width: 100%;
+  max-width: 328px;
+  display: flex;
+  flex-direction: column;
+}
+
+.delivery-details-data div:nth-child(1) span:nth-child(1) {
   color: #171520;
   font-size: 14px;
   font-weight: 600;
   line-height: 114.2%;
 }
 
-.delivery-details-data span:nth-child(2) {
+.delivery-details-data div:nth-child(1) span:nth-child(2) {
   color: #626262;
   font-size: 14px;
   font-weight: 500;
   line-height: 128.5%;
 }
 
+.delivery-details-data div:nth-child(2) {
+  position: relative;
+  width: 100%;
+  max-width: 328px;
+  display: block;
+}
+
+.delivery-details-data div:nth-child(2) input {
+  width: 100%;
+  max-width: 328px;
+  display: flex;
+  padding: 18px 12px 18px 16px;
+  align-items: center;
+  border-radius: 4px;
+  background: #f1f1f1;
+  border: none;
+}
+
+.delivery-details-data div:nth-child(2) label {
+  color: #1b4b66;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 114.2%;
+  position: absolute;
+  right: 12px;
+  top: 18px;
+  cursor: pointer;
+}
+
 .box-btns-data {
   width: 100%;
+  height: 66px;
+  padding: 11px 17px;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
   gap: 8px;
+  background: #fff;
 }
 
 .box-btns-data .add-fav {
@@ -252,6 +296,20 @@
   align-items: center;
   border-radius: 8px;
   background-color: #f4f4f4;
+}
+
+.box-btns-data .add-fav svg {
+  width: 19px;
+  height: 19px;
+}
+
+.box-btns-data .add-fav span {
+  color: #1b4b66;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 171.4%;
 }
 
 .box-btns-data .add-bag {
@@ -271,13 +329,141 @@
   background-color: #1b4b66;
 }
 
+.box-btns-data .add-bag span {
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 171.4%;
+}
+
+.container-btns-content-data {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.btn-box-content-data {
+  width: 100%;
+  display: block;
+  position: relative;
+}
+
+.btn-box-content-data hr,
+.box-invite-friends-data hr {
+  width: 100%;
+  min-width: 100%;
+  height: 8px;
+  background-color: #f1f1f1;
+  border: none;
+  position: relative;
+  left: -16px;
+}
+
+.box-invite-friends-data hr:last-child {
+  bottom: 0;
+}
+
+.btn-box-content-data button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #fff;
+  border: none;
+  padding: 12px 0 12px 0;
+}
+
+.btn-box-content-data button span {
+  color: #171520;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+.btn-box-content-data div {
+  margin-bottom: 16px;
+}
+
+.box-invite-friends-data {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.box-invite-friends-data div:nth-child(2) {
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.box-invite-friends-data div:nth-child(2) h1 {
+  color: #171520;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  margin-bottom: 4px;
+}
+
+.box-invite-friends-data div:nth-child(2) p {
+  max-width: 215px;
+  color: #626262;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  margin-bottom: 8px;
+}
+
+.box-invite-friends-data div:nth-child(2) button {
+  display: flex;
+  width: 102px;
+  height: 30px;
+  justify-content: space-between;
+  gap: 7px;
+  align-items: center;
+  background-color: transparent;
+}
+
+.box-invite-friends-data div:nth-child(2) button span {
+  color: #1b4b66;
+  font-weight: 600;
+  line-height: 171%;
+}
+
+.box-invite-friends-data div:nth-child(3) {
+  width: 94px;
+  height: 94px;
+  border-radius: 8px;
+  background: #ffe6ca;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
 @media (width>419px) {
   .delivery-details-data {
+    align-items: center;
+  }
+
+  .delivery-details-data div:nth-child(1) {
     align-items: center;
   }
 }
 
 @media (width>=620px) {
+  .delivery-details-data {
+    align-items: start;
+  }
+
+  .delivery-details-data div:nth-child(1) {
+    align-items: start;
+  }
+
   .product-data-section {
     max-width: 1280px;
     padding: 24px 20px 20px 20px;
@@ -315,7 +501,7 @@
 
   .box-content-data {
     width: 100%;
-    max-width: 100vw;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -377,21 +563,21 @@
     max-width: max-content;
   }
 
-  .box-text-data div h3 {
+  .box-text-data .box-price-data div h3 {
     font-size: 40px;
     font-weight: 700;
     line-height: 130%;
     margin-right: 16px;
   }
 
-  .box-text-data div h4 {
+  .box-text-data .box-price-data div h4 {
     font-size: 34px;
     font-weight: 600;
     line-height: 76.4%;
     margin-right: 16px;
   }
 
-  .box-text-data div h5 {
+  .box-text-data .box-price-data div h5 {
     font-size: 20px;
     font-weight: 600;
     line-height: 130%;
@@ -578,6 +764,7 @@
     justify-content: start;
     gap: 24px;
     max-width: max-content;
+    position: relative;
   }
 
   .box-btns-data .add-bag {

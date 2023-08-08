@@ -17,6 +17,8 @@ import Erro404 from "../Pages/Page404";
 //Routes private
 import Private from "./private";
 import ProductData from "../Pages/ProductData";
+import SearchModal from "../components/SearchModal";
+import ResultCategories from "../Pages/ResultCategories";
 
 const Router = () => {
   return (
@@ -26,7 +28,7 @@ const Router = () => {
         <Route path="/about" element={<About />} />
         <Route path="/categories" element={<Categories />} />
         <Route
-          path="/profile"
+          path="/profile/:id"
           element={
             <Private>
               <Profile />
@@ -46,6 +48,7 @@ const Router = () => {
           }
         />
         <Route path="/product/:id" element={<ProductData />} />
+        <Route path="/results/:id" element={<ResultCategories />} />
         <Route path="/getstarted" element={<GetStarted />} />
         <Route path="*" element={<Erro404 />} />
       </Routes>
