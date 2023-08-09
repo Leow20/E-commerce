@@ -14,26 +14,51 @@ import { ProductContext } from "../../Contexts/products";
 import "./Review.css";
 import ReviewBar from "../../components/ReviewBar";
 import AddReview from "../../components/AddReview";
+import { db, storage } from "../../../firebaseConnection";
+import { getDownloadURL, listAll, ref } from "firebase/storage";
+import { UserContext } from "../../Contexts/user";
+import { collection, getDocs, query } from "firebase/firestore";
 
 const Review = () => {
   const { id } = useParams();
-  const { products, review } = useContext(ProductContext);
+  const { products, review, reviewImg, user } = useContext(ProductContext);
 
-  console.log(review);
+  console.log(user);
 
   const [product, setProduct] = useState("");
   const [currentReviews, setCurrentReviews] = useState([]);
+  const [imgReview, setImgReview] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [loadingImg, setLoadingImg] = useState(false);
 
   useEffect(() => {
     const snapProduct = products.filter((product) => product.id == id);
-    const snapReview = review.filter((review) => review.product == id);
     setProduct(snapProduct[0]);
-    setCurrentReviews(snapReview);
-    console.log(snapReview);
-  }, []);
+    if (review) {
+      const snapReview = review.filter((review) => review.product == id);
+      const reviewsWithUserNames = snapReview.map((review) => {
+        console.log(user);
+        const currentUser = user.find((user) => user.uid === review.user);
+
+        if (currentUser) {
+          const userName = `${currentUser.firstName} ${currentUser.lastName}`;
+          return { ...review, userName };
+        }
+
+        return review;
+      });
+      setCurrentReviews(reviewsWithUserNames);
+      console.log(snapReview);
+    }
+    if (reviewImg) {
+      const snapReview = reviewImg.filter((review) => review.product == id);
+      setImgReview(snapReview);
+      console.log(snapReview);
+    }
+  }, [products, review, reviewImg]);
 
   const starCounts = [5, 4, 3, 2, 1];
+  console.log(currentReviews);
   const starRatings = starCounts.map((star) => ({
     star,
     count: currentReviews.filter((review) => review.rating === star).length,
@@ -59,184 +84,75 @@ const Review = () => {
             />
           </Link>
         </header>
-        <div className="container-review-product">
-          <div className="container-info-review">
-            <p>{product.name}</p>
-            <p>{product.description}</p>
-          </div>
-          <div>
-            <div className="average-rating">
-              <div className="total-stars">
-                <span>{averageRating.toFixed(1)} </span>
-                <span className="rating-icon">
-                  <img src={StarFill} alt="iconde de estrela" />
-                </span>
-              </div>
-              <h2>Average Rating</h2>
-            </div>
-            {starRatings.map(({ star, count }) => (
-              <div className="review-bar-container" key={star}>
-                <div className="rating-label">
-                  <span>{star}.0</span>
-                </div>
-                <ReviewBar rating={count} starCount={totalReviews} />
-              </div>
-            ))}
-            <div className="container-costumer-photos">
-              <h5>Customer Photos</h5>
-              <div className="content-photos-costumer">
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-              </div>
-            </div>
-            <div className="separator-review"></div>
-          </div>
 
-          <section className="section-users-reviews">
-            <div className="card-review">
-              <div className="infos-user-review">
-                <div className="stars-review-user">
-                  <span>4.5</span>
-                  <img src={StarFill} alt="icone de estrela " />
-                </div>
-                <div className="content-info-user">
-                  <span>Leonardo Winter</span>
-                  <span>05/08/2023</span>
-                </div>
-              </div>
-              <div className="description-review">
-                <p>Must go for the class feel.</p>
-                <p>
-                  Totally amazing! I loved the material and the quality. It has
-                  a jolly vibe in it which makes me feel happy everytime I put
-                  it on.
-                </p>
-              </div>
-              <div className="content-photos-costumer">
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-              </div>
+        {currentReviews.length > 0 && imgReview.length > 0 && (
+          <div className="container-review-product">
+            <div className="container-info-review">
+              <p>{product.name}</p>
+              <p>{product.description}</p>
             </div>
-            <div className="card-review">
-              <div className="infos-user-review">
-                <div className="stars-review-user">
-                  <span>4.5</span>
-                  <img src={StarFill} alt="icone de estrela " />
+            <div>
+              <div className="average-rating">
+                <div className="total-stars">
+                  <span>{averageRating.toFixed(1)} </span>
+                  <span className="rating-icon">
+                    <img src={StarFill} alt="iconde de estrela" />
+                  </span>
                 </div>
-                <div className="content-info-user">
-                  <span>Leonardo Winter</span>
-                  <span>05/08/2023</span>
+                <h2>Average Rating</h2>
+              </div>
+              {starRatings.map(({ star, count }) => (
+                <div className="review-bar-container" key={star}>
+                  <div className="rating-label">
+                    <span>{star}.0</span>
+                  </div>
+                  <ReviewBar rating={count} starCount={totalReviews} />
+                </div>
+              ))}
+              <div className="container-costumer-photos">
+                <h5>Customer Photos</h5>
+                <div className="content-photos-costumer">
+                  {imgReview.map((doc) => {
+                    if (product.id == doc.product) {
+                      return (
+                        <div key={doc.url}>
+                          <img src={doc.url} alt="fotos dos usuarios" />
+                        </div>
+                      );
+                    }
+                  })}
                 </div>
               </div>
-              <div className="description-review">
-                <p>Must go for the class feel.</p>
-                <p>
-                  Totally amazing! I loved the material and the quality. It has
-                  a jolly vibe in it which makes me feel happy everytime I put
-                  it on.
-                </p>
-              </div>
-              <div className="content-photos-costumer">
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-              </div>
+              <div className="separator-review"></div>
             </div>
-            <div className="card-review">
-              <div className="infos-user-review">
-                <div className="stars-review-user">
-                  <span>4.5</span>
-                  <img src={StarFill} alt="icone de estrela " />
+
+            <section className="section-users-reviews">
+              {currentReviews.map((review) => (
+                <div key={review.title} className="card-review">
+                  <div className="infos-user-review">
+                    <div className="stars-review-user">
+                      <span>{review.rating}</span>
+                      <img src={StarFill} alt="icone de estrela " />
+                    </div>
+                    <div className="content-info-user">
+                      <span>{review.userName}</span>
+                      <span>{review.date}</span>
+                    </div>
+                  </div>
+                  <div className="description-review">
+                    <p>{review.title}</p>
+                    <p>{review.description}</p>
+                  </div>
+                  <div className="content-photos-costumer">
+                    <div>
+                      <img src={product.url} alt="fotos dos usuarios" />
+                    </div>
+                  </div>
                 </div>
-                <div className="content-info-user">
-                  <span>Leonardo Winter</span>
-                  <span>05/08/2023</span>
-                </div>
-              </div>
-              <div className="description-review">
-                <p>Must go for the class feel.</p>
-                <p>
-                  Totally amazing! I loved the material and the quality. It has
-                  a jolly vibe in it which makes me feel happy everytime I put
-                  it on.
-                </p>
-              </div>
-              <div className="content-photos-costumer">
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-                <div>
-                  <img src={product.url} alt="fotos dos usuarios" />
-                </div>
-              </div>
-            </div>
-          </section>
-        </div>
+              ))}
+            </section>
+          </div>
+        )}
       </div>
       <div className="container-button-add-review">
         <button

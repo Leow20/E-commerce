@@ -14,6 +14,7 @@ import { UserContext } from "../../Contexts/user";
 import { ref, uploadBytesResumable } from "firebase/storage";
 import { db, storage } from "../../../firebaseConnection";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const AddReview = ({ isOpen, product }) => {
   const { user } = useContext(UserContext);
@@ -25,7 +26,9 @@ const AddReview = ({ isOpen, product }) => {
   const [reviewImages, setReviewImages] = useState([]);
   const [show, setShow] = useState("page-wrapper-modal-info");
 
-  const q = query(collection(db, "review"));
+  const navigate = useNavigate();
+
+  const q = query(collection(db, "reviews"));
 
   useEffect(() => {
     if (!firstTime) {
@@ -64,6 +67,14 @@ const AddReview = ({ isOpen, product }) => {
   }
 
   async function handleAddReview() {
+    const verifyReview = await getDocs(q);
+
+    verifyReview.forEach((doc) => {
+      if (doc.data().user == user.uid) {
+        return error;
+      }
+    });
+
     await addDoc(q, {
       title: reviewTitle,
       rating: rating,
@@ -71,6 +82,7 @@ const AddReview = ({ isOpen, product }) => {
       uid: user.uid,
       product: product.id,
       date: obterDataFormatada(),
+      nameUser: user.firstName,
     })
       .then(() => {
         if (reviewImages.length > 0) {
@@ -79,10 +91,11 @@ const AddReview = ({ isOpen, product }) => {
           reviewImages.forEach((doc) => {
             const storageRef = ref(
               storage,
-              `images/reviews/${user.uid}/${product.id}/${doc.name}/`
+              `images/reviews/${product.id}/${user.uid}/${doc.name}`
             );
             uploadBytesResumable(storageRef, doc);
           });
+          //window.location.reload();
         }
         toast.success("Review enviada com sucesso!");
       })

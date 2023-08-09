@@ -1,19 +1,22 @@
 import { collection, getDocs, query } from "@firebase/firestore";
 import React, { createContext, useEffect, useMemo, useState } from "react";
 import { db, storage } from "../../firebaseConnection";
-import { getDownloadURL, ref } from "@firebase/storage";
+import { getDownloadURL, ref, listAll } from "@firebase/storage";
 
-const refReview = query(collection(db, "review"));
+const refReview = query(collection(db, "reviews"));
 
 export const ProductContext = createContext({});
 
-export const reviewContext = createContext({});
-
 var productsArray = [];
+var userArray = [];
 
 function ProductProvider({ children }) {
   const [products, setProducts] = useState("");
   const [review, setReview] = useState("");
+  const [reviewImg, setReviewImg] = useState("");
+  const [user, setUser] = useState("");
+  var arr = [];
+  const refUser = query(collection(db, "users"));
 
   const handleProducts = useMemo(async () => {
     const q = query(collection(db, "products"));
@@ -21,6 +24,17 @@ function ProductProvider({ children }) {
     try {
       const querySnapshot = await getDocs(q);
       const snapshot = await getDocs(refReview);
+      const snapUser = await getDocs(refUser);
+
+      snapUser.forEach((user) => {
+        let currentUser = {
+          firstName: user.data().firstName,
+          lastName: user.data().lastName,
+          uid: user.data().uid,
+        };
+        userArray.push(currentUser);
+        setUser(userArray);
+      });
 
       querySnapshot.forEach((doc) => {
         let product = {
@@ -39,6 +53,7 @@ function ProductProvider({ children }) {
           product.totalRating = value.totalRatings;
         });
         productsArray.push(product);
+        handleUsers(product.id, snapUser);
         console.log(productsArray);
       });
 
@@ -69,7 +84,6 @@ function ProductProvider({ children }) {
     let totalRatings = 0;
     let numRatings = 0;
     let review = {};
-
     let reviewArray = [];
 
     snapshot.forEach((doc) => {
@@ -89,9 +103,8 @@ function ProductProvider({ children }) {
         product: doc.data().product,
       };
       reviewArray.push(review);
+      setReview(reviewArray);
     });
-
-    setReview(reviewArray);
 
     const averageRating =
       numRatings > 0 ? Math.min(5, totalRatings / numRatings) : 0;
@@ -119,9 +132,48 @@ function ProductProvider({ children }) {
     }
   }
 
-  if (products) {
+  async function handleUsers(id, querySnapshot) {
+    try {
+      querySnapshot.forEach((user) => {
+        const storageRef = storage;
+        const imageRef = ref(
+          storageRef,
+          `images/reviews/${id}/${user.data().uid}`
+        );
+        let imgUser = {};
+
+        listAll(imageRef)
+          .then((result) => {
+            result.items.forEach(async (itemRef) => {
+              await getDownloadURL(itemRef)
+                .then((url) => {
+                  imgUser = {
+                    url,
+                    user: user.data().uid,
+                    product: id,
+                  };
+                  arr.push(imgUser);
+                  console.log(arr);
+                })
+                .catch((error) => {
+                  console.error("Erro ao obter a URL da imagem:", error);
+                });
+            });
+            setReviewImg(arr);
+          })
+          .catch((error) => {
+            console.error("Erro ao listar as imagens:", error);
+          });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  console.log(arr);
+
+  if (products && reviewImg) {
     return (
-      <ProductContext.Provider value={{ products, review }}>
+      <ProductContext.Provider value={{ products, review, reviewImg, user }}>
         {children}
       </ProductContext.Provider>
     );
