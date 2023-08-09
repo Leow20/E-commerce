@@ -23,7 +23,7 @@ const Review = () => {
   const { id } = useParams();
   const { products, review, reviewImg, user } = useContext(ProductContext);
 
-  console.log(user);
+  console.log(review);
 
   const [product, setProduct] = useState("");
   const [currentReviews, setCurrentReviews] = useState([]);
@@ -54,8 +54,9 @@ const Review = () => {
       const snapReview = reviewImg.filter((review) => review.product == id);
       setImgReview(snapReview);
       console.log(snapReview);
+      console.log(reviewImg);
     }
-  }, [products, review, reviewImg]);
+  }, [products, review, reviewImg, user]);
 
   const starCounts = [5, 4, 3, 2, 1];
   console.log(currentReviews);
@@ -84,7 +85,8 @@ const Review = () => {
             />
           </Link>
         </header>
-
+        {console.log(currentReviews)}
+        {console.log(imgReview)}
         {currentReviews.length > 0 && imgReview.length > 0 && (
           <div className="container-review-product">
             <div className="container-info-review">
@@ -128,7 +130,7 @@ const Review = () => {
 
             <section className="section-users-reviews">
               {currentReviews.map((review) => (
-                <div key={review.title} className="card-review">
+                <div key={review.user} className="card-review">
                   <div className="infos-user-review">
                     <div className="stars-review-user">
                       <span>{review.rating}</span>
@@ -144,9 +146,18 @@ const Review = () => {
                     <p>{review.description}</p>
                   </div>
                   <div className="content-photos-costumer">
-                    <div>
-                      <img src={product.url} alt="fotos dos usuarios" />
-                    </div>
+                    {reviewImg.map((doc) => {
+                      if (
+                        doc.user == review.user &&
+                        doc.product == product.id
+                      ) {
+                        return (
+                          <div key={doc.url}>
+                            <img src={doc.url} alt="fotos dos usuarios" />
+                          </div>
+                        );
+                      }
+                    })}
                   </div>
                 </div>
               ))}

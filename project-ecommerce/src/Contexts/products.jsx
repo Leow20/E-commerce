@@ -95,12 +95,16 @@ function ProductProvider({ children }) {
         }
       }
 
+      totalRatings =
+        Math.floor(totalRatings) + parseFloat((totalRatings % 1).toFixed(1));
+
       review = {
         title: doc.data().title,
         description: doc.data().description,
         rating: doc.data().rating,
         user: doc.data().uid,
         product: doc.data().product,
+        date: doc.data().date,
       };
       reviewArray.push(review);
       setReview(reviewArray);

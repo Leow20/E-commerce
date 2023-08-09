@@ -9,7 +9,7 @@ import cross from "../../assets/icons/cross.svg";
 import StarFill from "../../assets/icons/star-fill.svg";
 import Star from "../../assets/icons/star.svg";
 import { AiOutlinePlus } from "react-icons/ai";
-import { addDoc, collection, query } from "firebase/firestore";
+import { addDoc, collection, getDocs, query, where } from "firebase/firestore";
 import { UserContext } from "../../Contexts/user";
 import { ref, uploadBytesResumable } from "firebase/storage";
 import { db, storage } from "../../../firebaseConnection";
@@ -29,6 +29,24 @@ const AddReview = ({ isOpen, product }) => {
   const navigate = useNavigate();
 
   const q = query(collection(db, "reviews"));
+
+  const checkIfUserReviewedProduct = async () => {
+    const reviewsRef = collection(db, "reviews");
+    const qRef = query(
+      reviewsRef,
+      where("uid", "==", user.uid),
+      where("product", "==", product.id)
+    );
+
+    console.log(user.uid);
+    console.log(product.id);
+
+    const querySnapshot = await getDocs(qRef);
+
+    console.log(!querySnapshot.empty);
+
+    return !querySnapshot.empty; // Retorna true se o usuário já fez uma avaliação para o mesmo produto
+  };
 
   useEffect(() => {
     if (!firstTime) {
@@ -67,42 +85,54 @@ const AddReview = ({ isOpen, product }) => {
   }
 
   async function handleAddReview() {
-    const verifyReview = await getDocs(q);
+    try {
+      let verify = await checkIfUserReviewedProduct();
+      console.log(verify);
 
-    verifyReview.forEach((doc) => {
-      if (doc.data().user == user.uid) {
-        return error;
+      if (verify) {
+        toast.error("Você não pode avaliar um produto mais de uma vez");
+        return;
       }
-    });
 
-    await addDoc(q, {
-      title: reviewTitle,
-      rating: rating,
-      description: reviewDescription,
-      uid: user.uid,
-      product: product.id,
-      date: obterDataFormatada(),
-      nameUser: user.firstName,
-    })
-      .then(() => {
-        if (reviewImages.length > 0) {
-          alert("aq veio");
-          console.log(reviewImages);
-          reviewImages.forEach((doc) => {
-            const storageRef = ref(
-              storage,
-              `images/reviews/${product.id}/${user.uid}/${doc.name}`
-            );
-            uploadBytesResumable(storageRef, doc);
-          });
-          //window.location.reload();
-        }
-        toast.success("Review enviada com sucesso!");
+      if (
+        reviewTitle == "" ||
+        rating == "" ||
+        reviewDescription == "" ||
+        reviewImages.length < 1
+      ) {
+        toast.error("Preencha todos os campos");
+        return;
+      }
+
+      await addDoc(q, {
+        title: reviewTitle,
+        rating: rating,
+        description: reviewDescription,
+        uid: user.uid,
+        product: product.id,
+        date: obterDataFormatada(),
+        nameUser: user.firstName,
       })
-      .catch((error) => {
-        console.log(error);
-        toast.error("Erro ao enviar review");
-      });
+        .then(() => {
+          if (reviewImages.length > 0) {
+            console.log(reviewImages);
+            reviewImages.forEach((doc) => {
+              const storageRef = ref(
+                storage,
+                `images/reviews/${product.id}/${user.uid}/${doc.name}`
+              );
+              uploadBytesResumable(storageRef, doc);
+            });
+          }
+          toast.success("Review enviada com sucesso!");
+        })
+        .catch((error) => {
+          console.log(error);
+          toast.error("Erro ao enviar review");
+        });
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   function handleModalState() {
@@ -169,7 +199,9 @@ const AddReview = ({ isOpen, product }) => {
                   </label>
                 </div>
               </div>
-              <button onClick={handleAddReview}>Submit Review</button>
+              <button className="button-add-review " onClick={handleAddReview}>
+                Submit Review
+              </button>
             </div>
           </div>
         </div>

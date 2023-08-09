@@ -1,5 +1,5 @@
 .container-review-product {
-  width: 100%;
+  margin: 0 auto;
   height: 100vh;
   max-width: 1280px;
 }
@@ -206,8 +206,12 @@
   width: 100%;
   position: fixed;
   bottom: 0;
+  left: 0;
+  right: 0;
   background-color: #fff;
   z-index: 2500;
+  max-width: 458px;
+  margin: 0 auto;
 }
 
 .button-add-review {
