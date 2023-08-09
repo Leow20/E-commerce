@@ -1,7 +1,11 @@
 .Window-modalSearch {
-  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  position: fixed;
   z-index: 1001;
-  height: 800px;
+  height: 100vh;
   width: 100%;
   background-color: white;
 }
@@ -87,14 +91,20 @@
   padding: 0px 15px;
 }
 
-.recent-searchs-modalSearch button {
-  display: inline-flex;
+.recent-searchs-modalSearch div {
+  display: flex;
   padding: 7px 12px;
   border-radius: 8px;
   background: #f4f4f4;
-
   align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
 
+.recent-searchs-modalSearch div button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
@@ -123,4 +133,9 @@
 .heart-modalSearch {
   width: 20px;
   height: 20px;
+}
+
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  display: none;
 }

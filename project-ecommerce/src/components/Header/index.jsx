@@ -2,7 +2,7 @@
 import "./header.css";
 
 //Router-dom
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import HeaderModal from "../HeaderModal";
 import SearchModal from "../SearchModal";
 import { useContext, useEffect, useState } from "react";
@@ -17,6 +17,7 @@ import notificacao from "../../assets/imgHeader/notification.svg";
 import menu from "../../assets/imgHeader/leadingIcon.svg";
 import addHome from "../../assets/imgHeader/addHomes.svg";
 import MyBagModal from "../myBagModal";
+import Lupa from "../../assets/imgHeader/search.svg";
 
 //Context
 import { UserContext } from "../../Contexts/user";
@@ -31,9 +32,27 @@ function Header({ Page }) {
 	const isMobile = useMediaQuery({ maxWidth: 820 });
 	const [searchMod, setSearchMod] = useState();
 
+  const [searchQuery, setSearchQuery] = useState("");
+
 	const urlCompleta = window.location.href;
 	const dominio = window.location.origin;
 	const page = urlCompleta.replace(dominio, "");
+
+  const handleChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const navigate = useNavigate();
+
+  const handleRedirect = () => {
+    navigate(`/results/${searchQuery}`);
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleRedirect();
+    }
+  };
 
 	const handleHover = () => {
 		setIsHovered(!isHovered);
@@ -41,7 +60,7 @@ function Header({ Page }) {
 
 	const handleSearch = () => {
 		setSearchMod(!searchMod);
-		document.body.style.overflowY = "hidden";
+		// document.body.style.overflowY = "hidden";
 	};
 	useEffect(() => {
 		onAuthStateChanged(auth, (user) => {
@@ -84,11 +103,17 @@ function Header({ Page }) {
 						</ul>
 					</nav>
 					<div className="search-bar-header">
+            <button className="lupa-redirect" onClick={handleRedirect}>
+              <img src={Lupa} alt="Search" />
+            </button>
 						<input
+              value={searchQuery}
+              onChange={handleChange}
 							type="search"
 							name="searchInput"
 							id="searchId"
 							placeholder="Search for products or brands....."
+              onKeyDown={handleKeyPress}
 						/>
 					</div>
 					{user ? (
@@ -165,6 +190,7 @@ function Header({ Page }) {
 						)}
 					</div>
 				</header>
+				{searchMod && <SearchModal closeModal={setSearchMod} />}
 			</div>
 		</>
 	);

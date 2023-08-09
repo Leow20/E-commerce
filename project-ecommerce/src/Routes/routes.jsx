@@ -11,6 +11,8 @@ import Notification from "../Pages/Notification";
 import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
 import AddProduct from "../Pages/AddProduct";
+import GetStarted from "../Pages/GetStarted";
+
 
 //Routes private
 import Private from "./private";
@@ -47,6 +49,7 @@ const Router = () => {
         />
         <Route path="/product/:id" element={<ProductData />} />
         <Route path="/results/:id" element={<ResultCategories />} />
+        <Route path="/getstarted" element={<GetStarted />} />
       </Routes>
     </BrowserRouter>
   );
