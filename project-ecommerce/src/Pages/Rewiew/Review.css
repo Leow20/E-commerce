@@ -2,6 +2,7 @@
   margin: 0 auto;
   height: 100vh;
   max-width: 1280px;
+  width: 100%;
 }
 .container-info-review {
   margin: 16px;
@@ -225,4 +226,22 @@
   color: #fff;
   border-radius: 8px;
   margin: 11px 16px;
+}
+
+.content-noreviews {
+  margin: auto auto;
+  padding-bottom: 125px;
+  width: 80%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.content-noreviews span {
+  margin-bottom: 25px;
+}
+
+@media screen and (min-width: 820px) {
+  .container-review-product {
+    width: 49%;
+  }
 }

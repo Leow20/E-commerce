@@ -29,6 +29,7 @@ import { toast } from "react-toastify";
 //Context
 import { useContext } from "react";
 import { UserContext } from "../../Contexts/user";
+import MyReviews from "../../components/MyReviews";
 
 const Profile = () => {
   const { user } = useContext(UserContext);
@@ -115,6 +116,7 @@ const Profile = () => {
           {selectedTab == "Personal Information" && <ProfileInfo />}
           {selectedTab == "My Wishlist" && <Wishlist />}
           {selectedTab == "Refer and Earn" && <ReferAndEarn />}
+          {selectedTab == "My Reviews" && <MyReviews />}
         </div>
       )}
       <>
@@ -354,6 +356,7 @@ const Profile = () => {
               {selectedTab == "Personal Information" && <ProfileInfo />}
               {selectedTab == "My Wishlist" && <Wishlist />}
               {selectedTab == "Refer and Earn" && <ReferAndEarn />}
+              {selectedTab == "My Reviews" && <MyReviews />}
             </div>
           </div>
         </div>

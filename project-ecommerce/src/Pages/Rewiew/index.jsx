@@ -23,8 +23,6 @@ const Review = () => {
   const { id } = useParams();
   const { products, review, reviewImg, user } = useContext(ProductContext);
 
-  console.log(review);
-
   const [product, setProduct] = useState("");
   const [currentReviews, setCurrentReviews] = useState([]);
   const [imgReview, setImgReview] = useState([]);
@@ -37,7 +35,6 @@ const Review = () => {
     if (review) {
       const snapReview = review.filter((review) => review.product == id);
       const reviewsWithUserNames = snapReview.map((review) => {
-        console.log(user);
         const currentUser = user.find((user) => user.uid === review.user);
 
         if (currentUser) {
@@ -48,18 +45,15 @@ const Review = () => {
         return review;
       });
       setCurrentReviews(reviewsWithUserNames);
-      console.log(snapReview);
     }
     if (reviewImg) {
       const snapReview = reviewImg.filter((review) => review.product == id);
       setImgReview(snapReview);
-      console.log(snapReview);
-      console.log(reviewImg);
     }
   }, [products, review, reviewImg, user]);
 
   const starCounts = [5, 4, 3, 2, 1];
-  console.log(currentReviews);
+
   const starRatings = starCounts.map((star) => ({
     star,
     count: currentReviews.filter((review) => review.rating === star).length,
@@ -85,15 +79,13 @@ const Review = () => {
             />
           </Link>
         </header>
-        {console.log(currentReviews)}
-        {console.log(imgReview)}
         {currentReviews.length > 0 && imgReview.length > 0 && (
           <div className="container-review-product">
             <div className="container-info-review">
               <p>{product.name}</p>
               <p>{product.description}</p>
             </div>
-            <div>
+            <div className="container-all-reviews">
               <div className="average-rating">
                 <div className="total-stars">
                   <span>{averageRating.toFixed(1)} </span>
@@ -164,6 +156,15 @@ const Review = () => {
             </section>
           </div>
         )}
+        {currentReviews.length == 0 ||
+          (!imgReview && (
+            <div className="content-noreviews">
+              <span>
+                Oops... Looks like there are no reviews yet. Be the pioneer and
+                share your thoughts!
+              </span>
+            </div>
+          ))}
       </div>
       <div className="container-button-add-review">
         <button

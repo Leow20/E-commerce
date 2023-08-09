@@ -54,7 +54,6 @@ function ProductProvider({ children }) {
         });
         productsArray.push(product);
         handleUsers(product.id, snapUser);
-        console.log(productsArray);
       });
 
       await Promise.all(
@@ -157,7 +156,6 @@ function ProductProvider({ children }) {
                     product: id,
                   };
                   arr.push(imgUser);
-                  console.log(arr);
                 })
                 .catch((error) => {
                   console.error("Erro ao obter a URL da imagem:", error);
@@ -173,7 +171,6 @@ function ProductProvider({ children }) {
       console.log(error);
     }
   }
-  console.log(arr);
 
   if (products && reviewImg) {
     return (

@@ -38,12 +38,7 @@ const AddReview = ({ isOpen, product }) => {
       where("product", "==", product.id)
     );
 
-    console.log(user.uid);
-    console.log(product.id);
-
     const querySnapshot = await getDocs(qRef);
-
-    console.log(!querySnapshot.empty);
 
     return !querySnapshot.empty; // Retorna true se o usuário já fez uma avaliação para o mesmo produto
   };
@@ -71,7 +66,6 @@ const AddReview = ({ isOpen, product }) => {
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
     setReviewImages(files);
-    console.log(files);
   };
 
   function obterDataFormatada() {
@@ -87,7 +81,6 @@ const AddReview = ({ isOpen, product }) => {
   async function handleAddReview() {
     try {
       let verify = await checkIfUserReviewedProduct();
-      console.log(verify);
 
       if (verify) {
         toast.error("Você não pode avaliar um produto mais de uma vez");
@@ -115,7 +108,6 @@ const AddReview = ({ isOpen, product }) => {
       })
         .then(() => {
           if (reviewImages.length > 0) {
-            console.log(reviewImages);
             reviewImages.forEach((doc) => {
               const storageRef = ref(
                 storage,

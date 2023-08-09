@@ -226,29 +226,33 @@ const ProductData = () => {
 
               <div className="btn-box-content-data">
                 <hr />
-                <button
-                  className={
-                    container == "Ratings and Reviews" ? "active-btn-data" : ""
-                  }
-                  onClick={() => {
-                    if (container != "Ratings and Reviews") {
-                      setContainer("Ratings and Reviews");
-                    } else {
-                      setContainer("");
+                <Link to={`/review/${product.id}`}>
+                  <button
+                    className={
+                      container == "Ratings and Reviews"
+                        ? "active-btn-data"
+                        : ""
                     }
-                  }}
-                >
-                  <span>Ratings and Reviews</span>
-                  <img
-                    src={Arrow}
-                    alt="Arrow"
-                    style={{
-                      transform: `rotate(${
-                        container == "Ratings and Reviews" ? "90deg" : "0deg"
-                      })`,
+                    onClick={() => {
+                      if (container != "Ratings and Reviews") {
+                        setContainer("Ratings and Reviews");
+                      } else {
+                        setContainer("");
+                      }
                     }}
-                  />
-                </button>
+                  >
+                    <span>Ratings and Reviews</span>
+                    <img
+                      src={Arrow}
+                      alt="Arrow"
+                      style={{
+                        transform: `rotate(${
+                          container == "Ratings and Reviews" ? "90deg" : "0deg"
+                        })`,
+                      }}
+                    />
+                  </button>
+                </Link>
                 {container == "Ratings and Reviews" && <RatingsAndReviews />}
               </div>
             </div>
@@ -555,17 +559,21 @@ const ProductData = () => {
               >
                 Related Products
               </button>
-              <button
-                className={
-                  container == "Ratings and Reviews" ? "active-btn-data" : ""
-                }
-                style={
-                  container != "Ratings and Reviews" ? { color: "#626262" } : {}
-                }
-                onClick={() => setContainer("Ratings and Reviews")}
-              >
-                Ratings and Reviews
-              </button>
+              <Link to={`/review/${product.id}`}>
+                <button
+                  className={
+                    container == "Ratings and Reviews" ? "active-btn-data" : ""
+                  }
+                  style={
+                    container != "Ratings and Reviews"
+                      ? { color: "#626262" }
+                      : {}
+                  }
+                  onClick={() => setContainer("Ratings and Reviews")}
+                >
+                  Ratings and Reviews
+                </button>
+              </Link>
             </div>
 
             <div className="box-content-btns-data">
