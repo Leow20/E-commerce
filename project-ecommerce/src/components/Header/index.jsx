@@ -190,6 +190,7 @@ function Header({ Page }) {
 						)}
 					</div>
 				</header>
+				{searchMod && <SearchModal closeModal={setSearchMod} />}
 			</div>
 		</>
 	);
