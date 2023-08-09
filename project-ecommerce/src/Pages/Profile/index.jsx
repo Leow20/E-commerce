@@ -291,7 +291,7 @@ const Profile = () => {
                   </li>
                   <li>
                     <Link to="/profile/My Address Book">
-                      <button onClick={() => handleTabChange("My Addres Book")}>
+                      <button onClick={() => handleTabChange("My Address Book")}>
                         <label
                           style={
                             selectedTab == "My Address Book" && !isMobile
@@ -299,7 +299,7 @@ const Profile = () => {
                               : { color: "#13101E" }
                           }
                         >
-                          My Addres Book
+                          My Address Book
                         </label>
                         <img
                           src={
