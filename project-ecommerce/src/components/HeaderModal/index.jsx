@@ -1,5 +1,5 @@
 //React
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 //Style
 import "./headerModal.css";
@@ -11,13 +11,14 @@ import { Link, useNavigate } from "react-router-dom";
 import arrowBlack from "../../assets/HeaderModal/arrow-right-black.svg";
 import arrowGray from "../../assets/HeaderModal/arrow-right-gray.svg";
 import userNotPicture from "../../assets/HeaderModal/user-sem-foto.png";
+import { UserContext } from "../../Contexts/user";
 
 const HeaderModal = ({ isOpen, setIsOpen, id = "headerModalId" }) => {
   const [animation, setAnimation] = useState(
     "content-header-modal animation-header-modal"
   );
 
-  const user = JSON.parse(localStorage.getItem("userLogado"));
+  const { user } = useContext(UserContext);
   const navigate = useNavigate("");
 
   const handleBackClick = (e) => {
@@ -45,7 +46,7 @@ const HeaderModal = ({ isOpen, setIsOpen, id = "headerModalId" }) => {
       <div id={id} className="header-modal" onClick={handleBackClick}>
         <div className={animation}>
           <div className="profile-header-modal">
-            <button onClick={() => navigate("/profile")}>
+            <button onClick={() => navigate("/profile/Personal Information")}>
               <div>
                 <img
                   src={user && user.URLfoto ? user.URLfoto : userNotPicture}
@@ -67,43 +68,43 @@ const HeaderModal = ({ isOpen, setIsOpen, id = "headerModalId" }) => {
             <h2>Top Categories</h2>
             <ul>
               <li>
-                <Link to="/skincare">
+                <Link to="/results/skincare">
                   <label>Skincare</label>
                   <img src={arrowGray} alt="arrow-icon" />
                 </Link>
               </li>
               <li>
-                <Link to="/apparels">
+                <Link to="/results/apparels">
                   <label>Apparels</label>
                   <img src={arrowGray} alt="arrow-icon" />
                 </Link>
               </li>
               <li>
-                <Link to="/jewellery">
+                <Link to="/results/jewellery">
                   <label>Jewellery</label>
                   <img src={arrowGray} alt="arrow-icon" />
                 </Link>
               </li>
               <li>
-                <Link to="/handbags">
+                <Link to="/results/handbags">
                   <label>Handbags</label>
                   <img src={arrowGray} alt="arrow-icon" />
                 </Link>
               </li>
               <li>
-                <Link to="">
+                <Link to="/results/eyeware">
                   <label>Eyeware</label>
                   <img src={arrowGray} alt="arrow-icon" />
                 </Link>
               </li>
               <li>
-                <Link to="">
+                <Link to="/results/fragrance">
                   <label>Fragrance</label>
                   <img src={arrowGray} alt="arrow-icon" />
                 </Link>
               </li>
               <li>
-                <Link to="/watches">
+                <Link to="/results/watches">
                   <label>Watches</label>
                   <img src={arrowGray} alt="arrow-icon" />
                 </Link>

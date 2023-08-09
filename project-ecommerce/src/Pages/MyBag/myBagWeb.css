@@ -2,16 +2,39 @@
   width: 100%;
   max-width: 1280px;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 23px;
 }
 
 .path-to-cart-mybag {
   display: flex;
   align-items: center;
+  padding-top: 20px;
+}
+
+.windonw-web-mybag>h1 {
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 44px;
+  color: #1b4b66;
+  margin-bottom: 36px;
+}
+
+.path-to-cart-mybag p {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #626262;
+}
+
+.path-to-cart-mybag p:nth-child(1) {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 18px;
+  color: #1b4b66;
 }
 
 .path-to-cart-mybag img {
-  margin: 0px 1%;
+  margin: 0px 23px;
 }
 
 .cart-mybag {
@@ -31,9 +54,24 @@
   display: flex;
 }
 
-.product-name-mybag {
+.product-name-mybag,
+.price-mybag,
+.qty-mybag {
   margin-right: 314px;
   margin-bottom: 8px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  color: #626262;
+}
+
+.line-info-mybag p {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  color: #626262;
 }
 
 .price-mybag {
@@ -42,6 +80,34 @@
 
 .qty-mybag {
   margin-right: 78px;
+}
+
+.price-qty-mybag p {
+  margin-bottom: 0px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  color: #171520;
+}
+
+.price-qty-mybag p:nth-child(3) {
+  max-width: 51.25px;
+}
+
+.text-mybag p:nth-child(1),
+.text-mybag p:nth-child(2),
+.text-mybag p:nth-child(3) {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  color: #171520;
+}
+
+.text-mybag p:nth-child(2),
+.text-mybag p:nth-child(3) {
+  color: #626262;
 }
 
 .product-pic-mybag {
@@ -77,7 +143,7 @@
 }
 
 .btns-mybag button:first-child {
-  color: black;
+  color: #1b4b66;
 }
 
 .btns-mybag button {
@@ -85,23 +151,28 @@
   text-decoration-line: underline;
   border: none;
   background: none;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
 }
 
 .box-button-footer {
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-between;
   background-color: white;
   width: 100%;
   height: 48px;
+  margin-top: 68px;
 }
 
 .coral-footer {
-  font-size: 14px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 500;
-  line-height: 18px;
-  padding: 15px 16px;
+  line-height: 20px;
 }
 
 .icon-button-footer {
@@ -118,11 +189,12 @@
   transform: scale(1.2);
 }
 
-.coupon-input-mybag {
+.coupon-input-mybag,
+.coupon-input-mybag-mob {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 16px;
+  margin-top: 32px;
   margin-bottom: 36px;
   width: 332px;
   padding: 14px 12px 14px 16px;
@@ -130,14 +202,21 @@
   background-color: #f4f4f4;
 }
 
-.coupon-input-mybag button {
+.coupon-input-mybag button,
+.coupon-input-mybag-mob button {
   background-color: transparent;
   border: none;
   box-shadow: none;
   margin-right: 12px;
+  color: #1b4b66;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px;
 }
 
-.coupon-input-mybag input {
+.coupon-input-mybag input,
+.coupon-input-mybag-mob input {
   background-color: transparent;
   border: none;
   box-shadow: none;
@@ -150,7 +229,12 @@
 }
 
 .summary-mybag h4 {
-  padding: 16px 0px;
+  padding: 6px 0px;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 26px;
+  color: #13101e;
 }
 
 .summary-mybag p {
@@ -162,12 +246,30 @@
   flex-direction: row;
   position: relative;
   top: 40px;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 32px;
+}
+
+.summary-btns-mybag button {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.web-container-mybag hr {
+  border: none;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.12);
 }
 
 .summary-btns-mybag button:first-child {
   background-color: #1b4b66;
   color: white;
+}
+
+.summary-btns-mybag button:last-child {
+  color: #1b4b66;
 }
 
 .summary-btns-mybag button {
@@ -186,16 +288,34 @@
   justify-content: space-between;
 }
 
+.space-divs-mybag p {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20px;
+  color: #626262;
+}
+
+.space-divs-mybag p:nth-child(4) {
+  font-weight: 600;
+  color: #171520;
+}
+
+.space-numbers-mybag p {
+  color: #171520;
+  text-align: right;
+}
+
 @media (max-width: 1220px) {
   .web-container-mybag {
-    flex-direction: column; 
+    flex-direction: column;
   }
 
   .summary-mybag {
-    order: 1; 
+    order: 1;
   }
 
   .box-functional {
-    order: 2; 
+    order: 2;
   }
 }

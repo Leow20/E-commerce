@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./navMob.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 //Icons
 import iconShop from "../../assets/icons/bag.svg";
@@ -13,11 +13,7 @@ import iconProfileFill from "../../assets/icons/profile.svg";
 import iconHomeFill from "../../assets/icons/home(1).svg";
 import iconCategoryFill from "../../assets/icons/categories.svg";
 
-const NavMob = () => {
-  const urlCompleta = window.location.href;
-  const dominio = window.location.origin;
-  const page = urlCompleta.replace(dominio, "");
-
+const NavMob = ({ page }) => {
   return (
     <nav>
       {page === "/" && (
@@ -31,7 +27,7 @@ const NavMob = () => {
           <Link to="/categories">
             <img src={iconCategory} alt="Icone Categorias" />
           </Link>
-          <Link to="/profile">
+          <Link to="/profile/Personal Information">
             <img src={iconProfile} alt="Icone Perfil" />
           </Link>
           <Link to="/mybag">
@@ -50,7 +46,7 @@ const NavMob = () => {
               <span>Categories</span>
             </Link>
           </div>
-          <Link to="/profile">
+          <Link to="/profile/Personal Information">
             <img src={iconProfile} alt="Icone Perfil" />
           </Link>
           <Link to="/mybag">
@@ -58,7 +54,7 @@ const NavMob = () => {
           </Link>
         </div>
       )}
-      {page === "/profile" && (
+      {page == `/profile` && (
         <div className="container-nav">
           <Link to="/">
             <img src={iconHome} alt="Icone Home" />
@@ -68,7 +64,7 @@ const NavMob = () => {
             <img src={iconCategory} alt="Icone Categorias" />
           </Link>
           <div className="category-selected-nav">
-            <Link to="/profile">
+            <Link to="/profile/Personal Information">
               <img src={iconProfileFill} alt="Icone Perfil" />
               <span>Profile</span>
             </Link>
@@ -87,13 +83,32 @@ const NavMob = () => {
           <Link to="/categories">
             <img src={iconCategory} alt="Icone Categorias" />
           </Link>
-          <Link to="/profile">
+          <Link to="/profile/Personal Information">
             <img src={iconProfile} alt="Icone Perfil" />
           </Link>
           <div className="category-selected-nav">
             <Link to="/mybag">
               <img src={iconShopFill} alt="Icone Mybag" />
               <span>MyBag</span>
+            </Link>
+          </div>
+        </div>
+      )}
+      {page === "/#" && (
+        <div className="container-nav">
+          <Link to="/">
+            <img src={iconHome} alt="Icone Home" />
+          </Link>
+
+          <Link to="/categories">
+            <img src={iconCategory} alt="Icone Categorias" />
+          </Link>
+          <Link to="/profile/Personal Information">
+            <img src={iconProfile} alt="Icone Perfil" />
+          </Link>
+          <div className="category-selected-nav">
+            <Link to="/mybag">
+              <img src={iconShop} alt="Icone Mybag" />
             </Link>
           </div>
         </div>
