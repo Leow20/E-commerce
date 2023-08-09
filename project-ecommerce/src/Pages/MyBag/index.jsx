@@ -335,7 +335,9 @@ const MyBag = () => {
 					</div>
 
 					<div className="button-mybag">
+						<Link to="/">
 						<ButtonBigMob>Continue Shopping</ButtonBigMob>
+						</Link>
 					</div>
 				</>
 			) : (
