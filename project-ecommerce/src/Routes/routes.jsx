@@ -14,6 +14,7 @@ import AddProduct from "../Pages/AddProduct";
 import GetStarted from "../Pages/GetStarted";
 import Erro404 from "../Pages/Page404";
 
+
 //Routes private
 import Private from "./private";
 import ProductData from "../Pages/ProductData";

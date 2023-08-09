@@ -33,6 +33,7 @@ import Similar from "../../assets/icons/view-smilar.svg";
 import { ProductContext } from "../../Contexts/products";
 import WishlistButton from "../../components/WishlistButton";
 import NavMob from "../../components/NavMob";
+import BagButton from "../../components/BagButton";
 
 const ProductData = () => {
 	const { products } = useContext(ProductContext);
@@ -252,10 +253,7 @@ const ProductData = () => {
 						/>
 						<div className="box-btns-data">
 							<WishlistButton className="add-fav" product={product} />
-							<button className="add-bag">
-								<img src={Bag} alt="Bag" />
-								<span>Add to Bag</span>
-							</button>
+							<BagButton product={product} />
 						</div>
 					</div>
 				</section>
@@ -506,10 +504,7 @@ const ProductData = () => {
 							</div>
 
 							<div className="box-btns-data">
-								<button className="add-bag">
-									<img src={Bag} alt="Bag" />
-									<span>Add to Bag</span>
-								</button>
+								<BagButton product={product} qty={qtd} />
 								<WishlistButton
 									className="add-fav"
 									product={product}

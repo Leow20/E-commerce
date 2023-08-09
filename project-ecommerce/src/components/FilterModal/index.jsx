@@ -124,6 +124,11 @@ const FilterModal = ({ isOpen, onFilterReturn, filterProps }) => {
     }, 400);
   }
 
+  const handleCloseAndFilter = () => {
+    handleApplyChanges();
+    handleModalState();
+  };
+
   return (
     <>
       {open && isMobile && (
@@ -210,7 +215,7 @@ const FilterModal = ({ isOpen, onFilterReturn, filterProps }) => {
             <button type="button" onClick={handleClearForm}>
               Clear All
             </button>
-            <button type="button" onClick={() => handleApplyChanges()}>
+            <button type="button" onClick={() => handleCloseAndFilter()}>
               Apply
             </button>
           </div>
