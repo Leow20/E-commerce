@@ -9,6 +9,7 @@ import arrow from "../../assets/icons/arroBlue.svg";
 import cross from "../../assets/icons/cross-small.svg";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 
+
 const MyBagModal = ({ hover }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [fistTime, setFirstTime] = useState(true);
