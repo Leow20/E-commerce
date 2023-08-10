@@ -13,12 +13,12 @@ import SignUp from "../Pages/SignUp";
 import AddProduct from "../Pages/AddProduct";
 import GetStarted from "../Pages/GetStarted";
 
-
 //Routes private
 import Private from "./private";
 import ProductData from "../Pages/ProductData";
 import SearchModal from "../components/SearchModal";
 import ResultCategories from "../Pages/ResultCategories";
+import AddAddress from "../components/AddAddress";
 
 const Router = () => {
   return (
@@ -47,6 +47,16 @@ const Router = () => {
             </Private>
           }
         />
+
+        <Route
+          path="/addaddress"
+          element={
+            <Private>
+              <AddAddress />
+            </Private>
+          }
+        />
+
         <Route path="/product/:id" element={<ProductData />} />
         <Route path="/results/:id" element={<ResultCategories />} />
         <Route path="/getstarted" element={<GetStarted />} />
