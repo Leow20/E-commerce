@@ -36,9 +36,12 @@
     border-radius: 8px;
     background: #1B4B66;
     width: 328px;
-    padding: 10px 120px;
-    margin-top: 237px;
+    padding: 10px 10px;
     color: #FFFFFF;
+    margin-bottom: 11px;
+    position: absolute;
+    bottom: 0;
+
 }
 
 .address-h1 {
@@ -48,4 +51,11 @@
     line-height: 26px;
     color: #1b4b66;
     display: block !important;
+}
+
+@media (width>=820px) {
+    .address-button {
+        position: relative;
+        margin-top: 25px;
+    }
 }
