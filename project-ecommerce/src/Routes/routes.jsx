@@ -12,47 +12,47 @@ import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
 import AddProduct from "../Pages/AddProduct";
 import GetStarted from "../Pages/GetStarted";
-
+import ProductData from "../Pages/ProductData";
+import ResultCategories from "../Pages/ResultCategories";
+import Payments from "../components/Payments";
 
 //Routes private
 import Private from "./private";
-import ProductData from "../Pages/ProductData";
-import SearchModal from "../components/SearchModal";
-import ResultCategories from "../Pages/ResultCategories";
 
 const Router = () => {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/categories" element={<Categories />} />
-        <Route
-          path="/profile/:id"
-          element={
-            <Private>
-              <Profile />
-            </Private>
-          }
-        />
-        <Route path="/mybag" element={<MyBag />} />
-        <Route path="/notification" element={<Notification />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route
-          path="/addproduct"
-          element={
-            <Private>
-              <AddProduct />
-            </Private>
-          }
-        />
-        <Route path="/product/:id" element={<ProductData />} />
-        <Route path="/results/:id" element={<ResultCategories />} />
-        <Route path="/getstarted" element={<GetStarted />} />
-      </Routes>
-    </BrowserRouter>
-  );
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route path="/" element={<Home />} />
+				<Route path="/about" element={<About />} />
+				<Route path="/categories" element={<Categories />} />
+				<Route
+					path="/profile/:id"
+					element={
+						<Private>
+							<Profile />
+						</Private>
+					}
+				/>
+				<Route path="/mybag" element={<MyBag />} />
+				<Route path="/notification" element={<Notification />} />
+				<Route path="/login" element={<Login />} />
+				<Route path="/signup" element={<SignUp />} />
+				<Route
+					path="/addproduct"
+					element={
+						<Private>
+							<AddProduct />
+						</Private>
+					}
+				/>
+				<Route path="/product/:id" element={<ProductData />} />
+				<Route path="/results/:id" element={<ResultCategories />} />
+				<Route path="/getstarted" element={<GetStarted />} />
+				<Route path="/payments" element={<Payments />} />
+			</Routes>
+		</BrowserRouter>
+	);
 };
 
 export default Router;
