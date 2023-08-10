@@ -11,26 +11,27 @@ import { db } from "../../../firebaseConnection";
 import { UserContext } from "../../Contexts/user";
 
 function WishlistButton({
-	product,
-	button = true,
-	className = "img-product-home-button",
-	text = "",
+  product,
+  button = true,
+  className = "img-product-home-button",
+  text = "",
 }) {
 	const { user } = useContext(UserContext);
 	const [wishlist, setWishlist] = useState([]);
 
-	const loadWishlist = async () => {
-		const wishlistRef = doc(db, "wishlist", user.uid);
-		const wishlistSnapshot = await getDoc(wishlistRef);
-		if (user) {
-			if (wishlistSnapshot.exists()) {
-				setWishlist(wishlistSnapshot.data().data);
-			} else {
-				setWishlist([]);
-				await setDoc(doc(db, "wishlist", user.uid), { data: wishlist });
-			}
-		}
-	};
+  const loadWishlist = async () => {
+    console.log("aaaaa");
+    const wishlistRef = doc(db, "wishlist", user.uid);
+    const wishlistSnapshot = await getDoc(wishlistRef);
+    if (user) {
+      if (wishlistSnapshot.exists()) {
+        setWishlist(wishlistSnapshot.data().data);
+      } else {
+        setWishlist([]);
+        await setDoc(doc(db, "wishlist", user.uid), { data: wishlist });
+      }
+    }
+  };
 
 	const handleWishlist = async () => {
 		if (!user || !product) return;
@@ -59,16 +60,24 @@ function WishlistButton({
 	const isProductInWishlist = wishlist.some((item) => item.id === product.id);
 	const HeartIcon = isProductInWishlist ? AiFillHeart : AiOutlineHeart;
 
-	if (button) {
-		return (
-			<div>
-				<button onClick={handleWishlist} className={className}>
-					<HeartIcon id="imgHeartID" fill="#1b4b66" />
-					{text ? <span>{text}</span> : null}
-				</button>
-			</div>
-		);
-	}
+  if (button) {
+    return (
+      <div>
+        <button onClick={handleWishlist} className={className}>
+          <HeartIcon id="imgHeartID" fill="#1b4b66" />
+          {text ? <span>{text}</span> : null}
+        </button>
+      </div>
+    );
+  }
+  if (type == "large") {
+    return (
+      <button className="add-fav">
+        <img src={Hearth} alt="" />
+        <span>Add To Wishlist</span>
+      </button>
+    );
+  }
 }
 
 export default WishlistButton;
