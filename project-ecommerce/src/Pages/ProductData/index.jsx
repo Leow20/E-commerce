@@ -33,6 +33,7 @@ import Hearth from "../../assets/icons/icon-wishlist.svg";
 import { ProductContext } from "../../Contexts/products";
 import WishlistButton from "../../components/WishlistButton";
 import NavMob from "../../components/NavMob";
+import BagButton from "../../components/BagButton";
 
 const ProductData = () => {
   const { products } = useContext(ProductContext);
@@ -224,143 +225,139 @@ const ProductData = () => {
                 )}
               </div>
 
-              <div className="btn-box-content-data">
-                <hr />
-                <Link to={`/review/${product.id}`}>
-                  <button
-                    className={
-                      container == "Ratings and Reviews"
-                        ? "active-btn-data"
-                        : ""
-                    }
-                    onClick={() => {
-                      if (container != "Ratings and Reviews") {
-                        setContainer("Ratings and Reviews");
-                      } else {
-                        setContainer("");
-                      }
-                    }}
-                  >
-                    <span>Ratings and Reviews</span>
-                    <img
-                      src={Arrow}
-                      alt="Arrow"
-                      style={{
-                        transform: `rotate(${
-                          container == "Ratings and Reviews" ? "90deg" : "0deg"
-                        })`,
-                      }}
-                    />
-                  </button>
-                </Link>
-                {container == "Ratings and Reviews" && <RatingsAndReviews />}
-              </div>
-            </div>
-
-            <div className="box-btns-data">
-              <WishlistButton className="add-fav" product={product} />
-              <button className="add-bag">
-                <img src={Bag} alt="Bag" />
-                <span>Add to Bag</span>
-              </button>
-            </div>
-          </div>
-        </section>
-      </>
-    );
-  } else if (!isMobile && product) {
-    const category = product.category;
-    return (
-      <>
-        <Header Page={product.name} />
-        <section className="product-data-section">
-          <div className="box-title-data">
-            <Link to="/">
-              <span>Home</span>
-            </Link>
-            <img src={ArrowRight} alt="Arrow" />
-            <span>
-              {category
-                ? category.charAt(0).toUpperCase() + category.slice(1)
-                : null}
-            </span>
-            <img src={ArrowRight} alt="Arrow" />
-            <span>{product.name}</span>
-          </div>
-          <div className="container-product-data">
-            <div className="container-img-data">
-              <div className="img-data">
-                <img src={image} alt="Product Image" id="productImageID" />
-              </div>
-              <div className="img-navigation-data">
-                <button
-                  className="btn-arrow-left"
-                  onClick={() => {
-                    classImg != 1 && classImg >= 1 && setClassImg(classImg - 1);
-                  }}
-                >
-                  <img
-                    src={Arrow}
-                    alt="Arrow left"
-                    style={{ transform: "rotate(180deg)" }}
-                  />
-                </button>
-                <div>
-                  <button
-                    onClick={() => {
-                      setClassImg(1);
-                    }}
-                  >
-                    <img
-                      src={image}
-                      alt="Product Image"
-                      className={classImg == 1 ? "active-img" : ""}
-                    />
-                  </button>
-                  <button
-                    onClick={() => {
-                      setClassImg(2);
-                    }}
-                  >
-                    <img
-                      src={image}
-                      alt="Product Image"
-                      className={classImg == 2 ? "active-img" : ""}
-                    />
-                  </button>
-                  <button
-                    onClick={() => {
-                      setClassImg(3);
-                    }}
-                  >
-                    <img
-                      src={image}
-                      alt="Product Image"
-                      className={classImg == 3 ? "active-img" : ""}
-                    />
-                  </button>
-                  <button
-                    onClick={() => {
-                      setClassImg(4);
-                    }}
-                  >
-                    <img
-                      src={image}
-                      alt="Product Image"
-                      className={classImg == 4 ? "active-img" : ""}
-                    />
-                  </button>
-                </div>
-                <button
-                  className="btn-arrow-right"
-                  onClick={() => {
-                    classImg != 4 && classImg <= 4 && setClassImg(classImg + 1);
-                  }}
-                >
-                  <img src={Arrow} alt="Arrow left" />
-                </button>
-              </div>
-            </div>
+							<div className="btn-box-content-data">
+								<hr />
+								<button
+									className={
+										container == "Ratings and Reviews" ? "active-btn-data" : ""
+									}
+									onClick={() => {
+										if (container != "Ratings and Reviews") {
+											setContainer("Ratings and Reviews");
+										} else {
+											setContainer("");
+										}
+									}}
+								>
+									<span>Ratings and Reviews</span>
+									<img
+										src={Arrow}
+										alt="Arrow"
+										style={{
+											transform: `rotate(${
+												container == "Ratings and Reviews" ? "90deg" : "0deg"
+											})`,
+										}}
+									/>
+								</button>
+								{container == "Ratings and Reviews" && <RatingsAndReviews />}
+							</div>
+						</div>
+						<RelatedProducts
+							func={"container"}
+							productsFiltered={productsFiltered}
+						/>
+						<div className="box-btns-data">
+							<WishlistButton className="add-fav" product={product} />
+							<BagButton product={product} />
+						</div>
+					</div>
+				</section>
+			</>
+		);
+	} else if (!isMobile && product) {
+		const category = product.category;
+		return (
+			<>
+				<Header Page={product.name} />
+				<section className="product-data-section">
+					<div className="box-title-data">
+						<Link to="/">
+							<span>Home</span>
+						</Link>
+						<img src={ArrowRight} alt="Arrow" />
+						<span>
+							{category
+								? category.charAt(0).toUpperCase() + category.slice(1)
+								: null}
+						</span>
+						<img src={ArrowRight} alt="Arrow" />
+						<span>{product.name}</span>
+					</div>
+					<div className="container-product-data">
+						<div className="container-img-data">
+							<div className="img-data">
+								<img src={image} alt="Product Image" id="productImageID" />
+							</div>
+							<div className="img-navigation-data">
+								<button
+									className="btn-arrow-left"
+									onClick={() => {
+										classImg != 1 && classImg >= 1 && setClassImg(classImg - 1);
+									}}
+								>
+									<img
+										src={Arrow}
+										alt="Arrow left"
+										style={{ transform: "rotate(180deg)" }}
+									/>
+								</button>
+								<div>
+									<button
+										onClick={() => {
+											setClassImg(1);
+										}}
+									>
+										<img
+											src={image}
+											alt="Product Image"
+											className={classImg == 1 ? "active-img" : ""}
+										/>
+									</button>
+									<button
+										onClick={() => {
+											setClassImg(2);
+										}}
+									>
+										<img
+											src={image}
+											alt="Product Image"
+											className={classImg == 2 ? "active-img" : ""}
+										/>
+									</button>
+									<button
+										onClick={() => {
+											setClassImg(3);
+										}}
+									>
+										<img
+											src={image}
+											alt="Product Image"
+											className={classImg == 3 ? "active-img" : ""}
+										/>
+									</button>
+									<button
+										onClick={() => {
+											setClassImg(4);
+										}}
+									>
+										<img
+											src={image}
+											alt="Product Image"
+											className={classImg == 4 ? "active-img" : ""}
+										/>
+									</button>
+								</div>
+								<button
+									className="btn-arrow-right"
+									onClick={() => {
+										classImg != 4 && classImg <= 4 && setClassImg(classImg + 1);
+									}}
+								>
+									<img src={Arrow} alt="Arrow left" />
+								</button>
+							</div>
+						</div>
 
             <div className="box-content-data">
               <div className="box-text-data">
@@ -521,19 +518,16 @@ const ProductData = () => {
                 </div>
               </div>
 
-              <div className="box-btns-data">
-                <button className="add-bag">
-                  <img src={Bag} alt="Bag" />
-                  <span>Add to Bag</span>
-                </button>
-                <WishlistButton
-                  className="add-fav"
-                  product={product}
-                  text="Add to Wishlist"
-                />
-              </div>
-            </div>
-          </div>
+							<div className="box-btns-data">
+								<BagButton product={product} qty={qtd} />
+								<WishlistButton
+									className="add-fav"
+									product={product}
+									text="Add to Wishlist"
+								/>
+							</div>
+						</div>
+					</div>
 
           <div className="container-content-data">
             <div className="btns-box-content-data">

@@ -12,6 +12,7 @@ import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
 import AddProduct from "../Pages/AddProduct";
 import GetStarted from "../Pages/GetStarted";
+import Erro404 from "../Pages/Page404";
 
 
 //Routes private
@@ -59,6 +60,7 @@ const Router = () => {
         <Route path="/product/:id" element={<ProductData />} />
         <Route path="/results/:id" element={<ResultCategories />} />
         <Route path="/getstarted" element={<GetStarted />} />
+        <Route path="*" element={<Erro404 />} />
       </Routes>
     </BrowserRouter>
   );

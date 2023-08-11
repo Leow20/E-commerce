@@ -9,8 +9,6 @@ import bag from "../../assets/Img/image.jpg";
 
 //Icons
 import Arrow from "../../assets/imgFooter/ArrowDown.svg";
-import heart from "../../assets/icons/Vector.svg";
-import BagIcon from "../../assets/imgHeader/bag.svg";
 
 //Router dom
 import { Link, Navigate } from "react-router-dom";
@@ -26,6 +24,7 @@ import { UserContext } from "../../Contexts/user";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../firebaseConnection";
 import WishlistButton from "../WishlistButton";
+import BagButton from "../BagButton";
 
 const Wishlist = () => {
 	const isMobile = useMediaQuery({ maxWidth: 820 });
@@ -128,9 +127,7 @@ const Wishlist = () => {
 										className="button-wishlist"
 									/>
 								</div>
-								<button className="button-bag-wishlist">
-									<img src={BagIcon} alt="Icone de sacola" /> Add to bag
-								</button>
+								<BagButton product={product} className="button-bag-wishlist" />
 							</div>
 						))}
 				</div>
