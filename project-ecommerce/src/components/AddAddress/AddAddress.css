@@ -38,18 +38,46 @@
   width: 100%;
 }
 
+.info-add-address select {
+  background-color: rgb(146, 127, 100);
+  border-radius: 4px;
+  margin-bottom: 16px;
+  width: 90%;
+  height: 42px;
+}
+
 .inputs-info-add-address {
   background-color: rgb(146, 127, 100);
   border-radius: 4px;
   margin-bottom: 16px;
   width: 90%;
+  height: 42px;
 }
 
 .container-phone-add-address {
   display: flex;
+  width: 90%;
+  justify-content: space-between;
 }
 
-.small-input-add-address{
-    width: 52px;
-    height: 42px;
+.small-input-add-address {
+  width: 13%;
+  height: 42px;
+  background-color: aquamarine;
+}
+
+.medium-input-add-address {
+  background-color: chartreuse;
+  width: 82%;
+  height: 42px;
+}
+
+.div-buttons-add-address {
+  display: flex;
+  width: 90%;
+  justify-content: flex-start;
+}
+.div-buttons-add-address button {
+  background-color: royalblue;
+  padding: 7px 12px;
 }
