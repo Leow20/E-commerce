@@ -31,7 +31,7 @@
   padding: 6px;
 }
 
-.hero-mobile-home > div {
+.hero-mobile-home>div {
   flex-grow: 1;
 }
 
@@ -167,6 +167,7 @@
   color: #171520;
   padding: 0 !important;
   padding-bottom: 2px;
+  text-align: left;
 }
 
 .arrival-content-home span:nth-child(2) {
@@ -176,6 +177,7 @@
   color: #626262;
   padding: 0 !important;
   padding-bottom: 2px;
+  text-align: left;
 }
 
 .arrival-content-home span:nth-child(3) {

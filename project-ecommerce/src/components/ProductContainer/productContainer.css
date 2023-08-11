@@ -3,6 +3,10 @@
   height: 202px;
 }
 
+.btn-up-modal {
+  background-color: transparent;
+}
+
 .img-product-home-button {
   background-color: #fff;
 }
