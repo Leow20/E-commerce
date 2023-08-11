@@ -99,8 +99,10 @@ const MyReviews = () => {
                         />
                       </div>
                     </div>
-                    <span>{produto.name}</span>
-                    <span>{review.title}</span>
+                    <div className="content-info-product-myreview">
+                      <span>{produto.name}</span>
+                      <span>{review.title}</span>
+                    </div>
                     <p>{truncateDescription(review.description)}</p>
                   </div>
                 </Link>
