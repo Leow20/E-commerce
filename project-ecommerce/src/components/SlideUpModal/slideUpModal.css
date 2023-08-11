@@ -83,11 +83,11 @@
   border-radius: 50%;
 }
 
-input[type="radio"]:checked+.input-radio {
+input[type="radio"]:checked + .input-radio {
   border-color: #1b4b66;
 }
 
-input[type="radio"]:checked+.input-radio span {
+input[type="radio"]:checked + .input-radio span {
   background: #1b4b66;
 }
 
@@ -241,7 +241,7 @@ input[type="radio"]:checked+.input-radio span {
   font-size: 16px;
   font-weight: 700;
   line-height: 16px;
-  transition: all 1s;
+  transition: all 0.4s;
 }
 
 .btn-active-size {
@@ -267,7 +267,7 @@ input[type="radio"]:checked+.input-radio span {
   align-items: center;
   gap: 8px;
   border-radius: 8px;
-  background: #F4F4F4;
+  background: #f4f4f4;
 }
 
 .box-btn-product-details button:nth-child(2) {
@@ -278,8 +278,8 @@ input[type="radio"]:checked+.input-radio span {
   align-items: center;
   gap: 8px;
   border-radius: 8px;
-  background: #1B4B66;
-  color: #FFF;
+  background: #1b4b66;
+  color: #fff;
   text-align: center;
   font-size: 14px;
   font-weight: 600;
