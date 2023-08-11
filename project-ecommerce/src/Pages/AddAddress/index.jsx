@@ -2,9 +2,16 @@ import "./AddAddress.css";
 
 import arrow from "../../assets/icons/arrowProfile.svg";
 
-import ButtonBigMob from "../ButtonBigMobile";
+import ButtonBigMob from "../../components/ButtonBigMobile";
+import { useState } from "react";
 
 function AddAddress() {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleCheckboxChange = () => {
+    setIsChecked(!isChecked);
+  };
+
   return (
     <>
       <header className="header-add-address">
@@ -69,7 +76,11 @@ function AddAddress() {
       </div>
 
       <div className="checkbox-add-address">
-        <button>asdf</button>
+        <input
+          type="checkbox"
+          checked={isChecked}
+          onChange={handleCheckboxChange}
+        />
         <p>Use as default delivery address.</p>
       </div>
 

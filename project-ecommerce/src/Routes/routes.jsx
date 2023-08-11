@@ -19,7 +19,7 @@ import Private from "./private";
 import ProductData from "../Pages/ProductData";
 import SearchModal from "../components/SearchModal";
 import ResultCategories from "../Pages/ResultCategories";
-import AddAddress from "../components/AddAddress";
+import AddAddress from "../Pages/AddAddress";
 
 const Router = () => {
   return (

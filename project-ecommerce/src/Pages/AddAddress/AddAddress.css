@@ -81,12 +81,16 @@
   background-color: royalblue;
   padding: 7px 2%;
   margin-left: 8px;
+  border-radius: 5px;
 }
 
 .checkbox-add-address {
   display: flex;
 }
 
-.checkbox-add-address button {
+.checkbox-add-address input {
   border: 1px solid black;
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
 }
