@@ -79,5 +79,14 @@
 }
 .div-buttons-add-address button {
   background-color: royalblue;
-  padding: 7px 12px;
+  padding: 7px 2%;
+  margin-left: 8px;
+}
+
+.checkbox-add-address {
+  display: flex;
+}
+
+.checkbox-add-address button {
+  border: 1px solid black;
 }

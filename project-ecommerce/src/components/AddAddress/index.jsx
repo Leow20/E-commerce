@@ -2,6 +2,8 @@ import "./AddAddress.css";
 
 import arrow from "../../assets/icons/arrowProfile.svg";
 
+import ButtonBigMob from "../ButtonBigMobile";
+
 function AddAddress() {
   return (
     <>
@@ -64,8 +66,14 @@ function AddAddress() {
           <button>Office</button>
           <button>Other </button>
         </div>
-
       </div>
+
+      <div className="checkbox-add-address">
+        <button>asdf</button>
+        <p>Use as default delivery address.</p>
+      </div>
+
+      <ButtonBigMob>Save Address</ButtonBigMob>
     </>
   );
 }
