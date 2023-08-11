@@ -1,0 +1,55 @@
+.header-add-address {
+  display: flex;
+  align-items: center;
+}
+
+.header-add-address img {
+  justify-content: center;
+  align-items: center;
+  margin: 16px;
+  transform: rotate(180deg);
+}
+
+.header-add-address h1 {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.info-add-address {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-add-address p {
+  margin: 8px auto 0 auto;
+  width: 90%;
+}
+
+.line-add-address {
+  margin: 8px auto 16px auto;
+  width: 90%;
+}
+
+.info-add-address {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.inputs-info-add-address {
+  background-color: rgb(146, 127, 100);
+  border-radius: 4px;
+  margin-bottom: 16px;
+  width: 90%;
+}
+
+.container-phone-add-address {
+  display: flex;
+}
+
+.small-input-add-address{
+    width: 52px;
+    height: 42px;
+}
