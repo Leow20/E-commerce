@@ -40,6 +40,7 @@ import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../../Contexts/products";
 import ProductContainer from "../../components/ProductContainer";
 import { Link } from "react-router-dom";
+import SlideUpModal from "../../components/SlideUpModal";
 
 const Home = () => {
 	const { products } = useContext(ProductContext);
