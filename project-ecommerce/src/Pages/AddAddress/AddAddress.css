@@ -46,6 +46,10 @@
   height: 42px;
 }
 
+.space-add-address {
+  margin-top: 68px;
+}
+
 .inputs-info-add-address {
   background-color: rgb(146, 127, 100);
   border-radius: 4px;
@@ -80,12 +84,14 @@
 .div-buttons-add-address button {
   background-color: royalblue;
   padding: 7px 2%;
-  margin-left: 8px;
+  margin-right: 8px;
   border-radius: 5px;
 }
 
 .checkbox-add-address {
   display: flex;
+  margin-top: 74px;
+  justify-content: center;
 }
 
 .checkbox-add-address input {
@@ -93,4 +99,17 @@
   width: 18px;
   height: 18px;
   border-radius: 3px;
+}
+
+.aling-checkbox-add-address {
+  display: flex;
+  justify-content: flex-start;
+  width: 90%;
+}
+
+.button-save-add-address {
+  display: flex;
+  justify-content: center;
+  margin-top: 43px;
+  margin-bottom: 20px;
 }

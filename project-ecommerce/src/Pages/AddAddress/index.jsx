@@ -3,6 +3,8 @@ import "./AddAddress.css";
 import arrow from "../../assets/icons/arrowProfile.svg";
 
 import ButtonBigMob from "../../components/ButtonBigMobile";
+
+import { Link } from "react-router-dom";
 import { useState } from "react";
 
 function AddAddress() {
@@ -15,7 +17,9 @@ function AddAddress() {
   return (
     <>
       <header className="header-add-address">
-        <img src={arrow} />
+        <Link to="/profile/:id">
+          <img src={arrow} />
+        </Link>
         <h1>Add New Address</h1>
       </header>
 
@@ -43,7 +47,7 @@ function AddAddress() {
         </div>
       </div>
 
-      <div className="info-add-address">
+      <div className="info-add-address space-add-address">
         <p>Delivery Address</p>
         <hr className="line-add-address" />
         <div className="info-add-address">
@@ -76,15 +80,19 @@ function AddAddress() {
       </div>
 
       <div className="checkbox-add-address">
-        <input
-          type="checkbox"
-          checked={isChecked}
-          onChange={handleCheckboxChange}
-        />
-        <p>Use as default delivery address.</p>
+        <div className="aling-checkbox-add-address">
+          <input
+            type="checkbox"
+            checked={isChecked}
+            onChange={handleCheckboxChange}
+          />
+          <p>Use as default delivery address.</p>
+        </div>
       </div>
 
-      <ButtonBigMob>Save Address</ButtonBigMob>
+      <div className="button-save-add-address">
+        <ButtonBigMob>Save Address</ButtonBigMob>
+      </div>
     </>
   );
 }
