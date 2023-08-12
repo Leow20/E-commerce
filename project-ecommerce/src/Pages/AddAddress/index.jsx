@@ -19,6 +19,10 @@ function AddAddress() {
     setSelectedButton(buttonName);
   }
 
+  const handleSubmit = () => {
+    alert("chamou");
+  };
+
   return (
     <>
       <header className="header-add-address">
@@ -64,14 +68,17 @@ function AddAddress() {
           <input
             className="inputs-info-add-address"
             type="text"
-            placeholder="Pin Code"
+            placeholder="Street Address"
           />
           <input
             className="inputs-info-add-address"
             type="text"
-            placeholder="Pin Code"
+            placeholder="City"
           />
           <select name="" id="">
+            <option value="" disabled selected>
+              State
+            </option>
             <option value="1">1</option>
             <option value="2">2</option>
           </select>
@@ -117,7 +124,9 @@ function AddAddress() {
       </div>
 
       <div className="button-save-add-address">
-        <ButtonBigMob>Save Address</ButtonBigMob>
+        <form onSubmit={handleSubmit}>
+          <ButtonBigMob>Save Address</ButtonBigMob>
+        </form>
       </div>
     </>
   );
