@@ -29,7 +29,13 @@ const Payments = () => {
 		return (
 			<div className="container-payments">
 				<div className="box-payment">
-					<div className="box-text-payment">
+					<div
+						className={
+							content === "Debit Card/Credit Card"
+								? "box-text-payment back-active-mob"
+								: "box-text-payment"
+						}
+					>
 						<h1>Debit Card/Credit Card</h1>
 						<button
 							onClick={() =>
@@ -77,7 +83,13 @@ const Payments = () => {
 					) : null}
 				</div>
 				<div className="box-payment">
-					<div className="box-text-payment">
+					<div
+						className={
+							content === "UPI"
+								? "box-text-payment back-active-mob"
+								: "box-text-payment"
+						}
+					>
 						<h1>UPI</h1>
 						<button
 							onClick={() =>
@@ -143,20 +155,26 @@ const Payments = () => {
 					) : null}
 				</div>
 				<div className="box-payment">
-					<div className="box-text-payment">
-						<h1>Aplle Pay</h1>
+					<div
+						className={
+							content === "Apple Pay"
+								? "box-text-payment back-active-mob"
+								: "box-text-payment"
+						}
+					>
+						<h1>Apple Pay</h1>
 						<button
 							onClick={() =>
-								content === "Aplle Pay"
+								content === "Apple Pay"
 									? setContent("")
-									: setContent("Aplle Pay")
+									: setContent("Apple Pay")
 							}
 						>
-							{content == "Aplle Pay" ? "-" : "+"}
+							{content == "Apple Pay" ? "-" : "+"}
 						</button>
 					</div>
 
-					{content === "Aplle Pay" ? (
+					{content === "Apple Pay" ? (
 						<>
 							<div className="content-payment">
 								<ContentPayment
@@ -191,7 +209,13 @@ const Payments = () => {
 					) : null}
 				</div>
 				<div className="box-payment">
-					<div className="box-text-payment">
+					<div
+						className={
+							content === "Amazon Pay"
+								? "box-text-payment back-active-mob"
+								: "box-text-payment"
+						}
+					>
 						<h1>Amazon Pay</h1>
 						<button
 							onClick={() =>

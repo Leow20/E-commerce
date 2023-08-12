@@ -1,14 +1,12 @@
 .container-payments {
   display: block;
-  padding: 0 11px;
 }
 
 .content-payment {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 20px;
-  padding-bottom: 16px;
+  padding: 20px 11px 16px;
   gap: 16px;
 }
 
@@ -22,7 +20,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 0;
+  padding: 15px 11px;
 }
 
 .box-text-payment h1 {
@@ -180,8 +178,17 @@
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
+.back-active-mob {
+  background-color: #F1F1F1;
+}
 
 
 @media (width>820px) {
@@ -196,6 +203,7 @@
   .content-payment {
     width: 100%;
     align-items: start;
+    gap: 40px;
     border-radius: 8px;
     border: 1px solid #1B4B66;
     padding: 0;
@@ -312,6 +320,7 @@
 
   .back-active {
     background-color: #ebf6f7;
+    border-radius: 8px;
   }
 
   .box-content-type {

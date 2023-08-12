@@ -14,7 +14,6 @@ import AddProduct from "../Pages/AddProduct";
 import GetStarted from "../Pages/GetStarted";
 import ProductData from "../Pages/ProductData";
 import ResultCategories from "../Pages/ResultCategories";
-import Payments from "../components/Payments";
 
 //Routes private
 import Private from "./private";
@@ -49,7 +48,6 @@ const Router = () => {
 				<Route path="/product/:id" element={<ProductData />} />
 				<Route path="/results/:id" element={<ResultCategories />} />
 				<Route path="/getstarted" element={<GetStarted />} />
-				<Route path="/payments" element={<Payments />} />
 			</Routes>
 		</BrowserRouter>
 	);
