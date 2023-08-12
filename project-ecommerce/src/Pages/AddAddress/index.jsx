@@ -9,10 +9,15 @@ import { useState } from "react";
 
 function AddAddress() {
   const [isChecked, setIsChecked] = useState(false);
+  const [selectedButton, setSelectedButton] = useState(null);
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
+
+  function handleButtonSelect(buttonName) {
+    setSelectedButton(buttonName);
+  }
 
   return (
     <>
@@ -73,9 +78,30 @@ function AddAddress() {
         </div>
 
         <div className="div-buttons-add-address">
-          <button>Home</button>
-          <button>Office</button>
-          <button>Other </button>
+          <button
+            className={`${
+              selectedButton === "Home" ? "selected-button" : ""
+            } button-style-add-address`}
+            onClick={() => handleButtonSelect("Home")}
+          >
+            Home
+          </button>
+          <button
+            className={`${
+              selectedButton === "Office" ? "selected-button" : ""
+            } button-style-add-address`}
+            onClick={() => handleButtonSelect("Office")}
+          >
+            Office
+          </button>
+          <button
+            className={`${
+              selectedButton === "Other" ? "selected-button" : ""
+            } button-style-add-address`}
+            onClick={() => handleButtonSelect("Other")}
+          >
+            Other
+          </button>
         </div>
       </div>
 
