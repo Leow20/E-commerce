@@ -38,7 +38,7 @@
   width: 100%;
 }
 
-.info-add-address select {
+/* .info-add-address select {
   background-color: #f1f1f1;
   border: none;
   border-radius: 4px;
@@ -46,7 +46,7 @@
   padding-left: 16px;
   width: 90%;
   height: 42px;
-}
+} */
 
 .space-add-address {
   margin-top: 68px;

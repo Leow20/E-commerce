@@ -11,6 +11,12 @@ function AddAddress() {
   const [isChecked, setIsChecked] = useState(false);
   const [selectedButton, setSelectedButton] = useState(null);
 
+  const [addressData, setAddressData] = useState({
+    street: "",
+    city: "",
+    state: "",
+  });
+
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
   };
@@ -25,13 +31,16 @@ function AddAddress() {
 
   const checkCEP = (e) => {
     const cep = e.target.value.replace(/\D/g, "");
-    console.log(cep);
     fetch(`https://viacep.com.br/ws/${cep}/json/`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        setAddressData({
+          street: data.logradouro || "",
+          city: data.localidade || "",
+          state: data.uf || "",
+        });
       });
-  };  
+  };
 
   return (
     <>
@@ -80,19 +89,30 @@ function AddAddress() {
             className="inputs-info-add-address"
             type="text"
             placeholder="Street Address"
+            value={addressData.street}
+            onChange={(e) =>
+              setAddressData({ ...addressData, street: e.target.value })
+            }
           />
           <input
             className="inputs-info-add-address"
             type="text"
             placeholder="City"
+            value={addressData.city}
+            onChange={(e) =>
+              setAddressData({ ...addressData, city: e.target.value })
+            }
           />
-          <select name="" id="" defaultValue="">
-            <option value="" disabled>
-              Select an option
-            </option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-          </select>
+
+          <input
+            className="inputs-info-add-address"
+            type="text"
+            placeholder="State"
+            value={addressData.state}
+            onChange={(e) =>
+              setAddressData({ ...addressData, state: e.target.value })
+            }
+          />
         </div>
 
         <div className="div-buttons-add-address">
