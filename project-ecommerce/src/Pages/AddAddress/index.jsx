@@ -23,6 +23,16 @@ function AddAddress() {
     alert("chamou");
   };
 
+  const checkCEP = (e) => {
+    const cep = e.target.value.replace(/\D/g, "");
+    console.log(cep);
+    fetch(`https://viacep.com.br/ws/${cep}/json/`)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      });
+  };  
+
   return (
     <>
       <header className="header-add-address">
@@ -64,6 +74,7 @@ function AddAddress() {
             className="inputs-info-add-address"
             type="text"
             placeholder="Pin Code"
+            onBlur={checkCEP}
           />
           <input
             className="inputs-info-add-address"
@@ -75,9 +86,9 @@ function AddAddress() {
             type="text"
             placeholder="City"
           />
-          <select name="" id="">
-            <option value="" disabled selected>
-              State
+          <select name="" id="" defaultValue="">
+            <option value="" disabled>
+              Select an option
             </option>
             <option value="1">1</option>
             <option value="2">2</option>
