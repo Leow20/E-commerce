@@ -5,12 +5,16 @@ import arrow from "../../assets/icons/arrowProfile.svg";
 import ButtonBigMob from "../../components/ButtonBigMobile";
 
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function AddAddress() {
   const [isChecked, setIsChecked] = useState(false);
   const [selectedButton, setSelectedButton] = useState(null);
 
+  const [pre, setPre] = useState();
+  const [phone, setPhone] = useState();
+  const [name, setName] = useState();
+  const [pincode, setPincode] = useState();
   const [addressData, setAddressData] = useState({
     street: "",
     city: "",
@@ -25,9 +29,18 @@ function AddAddress() {
     setSelectedButton(buttonName);
   }
 
-  const handleSubmit = () => {
-    alert("chamou");
-  };
+  const fullnumber = `${pre}-${phone}`;
+
+  async function handleSubmit() {
+    console.log(name);
+    console.log(fullnumber);
+
+    const pinFormat = pincode.replace(/\D/g, "");
+    console.log(pinFormat);
+    console.log(addressData.street);
+    console.log(addressData.city);
+    console.log(addressData.state);
+  }
 
   const checkCEP = (e) => {
     const cep = e.target.value.replace(/\D/g, "");
@@ -59,17 +72,26 @@ function AddAddress() {
             className="inputs-info-add-address"
             type="text"
             placeholder="Full Name"
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
           />
           <div className="container-phone-add-address">
             <input
               className="small-input-add-address"
               type="number"
               placeholder="+11"
+              onChange={(e) => {
+                setPre(e.target.value);
+              }}
             />
             <input
               className="medium-input-add-address"
               type="number"
               placeholder="Contact Number"
+              onChange={(e) => {
+                setPhone(e.target.value);
+              }}
             />
           </div>
         </div>
@@ -84,6 +106,9 @@ function AddAddress() {
             type="text"
             placeholder="Pin Code"
             onBlur={checkCEP}
+            onChange={(e) => {
+              setPincode(e.target.value);
+            }}
           />
           <input
             className="inputs-info-add-address"
@@ -107,7 +132,7 @@ function AddAddress() {
           <input
             className="inputs-info-add-address"
             type="text"
-            placeholder="State"
+            placeholder="State: SP"
             value={addressData.state}
             onChange={(e) =>
               setAddressData({ ...addressData, state: e.target.value })
@@ -155,9 +180,9 @@ function AddAddress() {
       </div>
 
       <div className="button-save-add-address">
-        <form onSubmit={handleSubmit}>
+        <div onClick={handleSubmit}>
           <ButtonBigMob>Save Address</ButtonBigMob>
-        </form>
+        </div>
       </div>
     </>
   );
