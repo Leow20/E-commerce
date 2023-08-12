@@ -6,6 +6,8 @@ import ButtonBigMob from "../../components/ButtonBigMobile";
 
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { db } from "../../../firebaseConnection";
+import { addDoc, collection } from "firebase/firestore";
 
 function AddAddress() {
   const [isChecked, setIsChecked] = useState(false);
@@ -19,6 +21,7 @@ function AddAddress() {
     street: "",
     city: "",
     state: "",
+    selectedButton: null,
   });
 
   const handleCheckboxChange = () => {
@@ -35,11 +38,24 @@ function AddAddress() {
     console.log(name);
     console.log(fullnumber);
 
-    const pinFormat = pincode.replace(/\D/g, "");
-    console.log(pinFormat);
+    const pinCode = pincode.replace(/\D/g, "");
+    console.log(pinCode);
     console.log(addressData.street);
     console.log(addressData.city);
     console.log(addressData.state);
+    console.log(selectedButton);
+
+    const location = await addDoc(collection(db, "locationUser"), {
+      name,
+      fullnumber,
+      pinCode,
+      street: addressData.street,
+      city: addressData.city,
+      state: addressData.state,
+      selectedButton,
+    });
+
+    console.log(location);
   }
 
   const checkCEP = (e) => {
