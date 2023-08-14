@@ -1,7 +1,7 @@
 import React from "react";
 import { useMediaQuery } from "react-responsive";
 
-const OrderSummary = ({ bag }) => {
+const OrderSummary = ({ bag, button }) => {
   const isWeb = useMediaQuery({ minWidth: 820 });
   const calculateTotalPrice = (produtos) => {
     let totalDesconto = 0;
@@ -61,7 +61,6 @@ const OrderSummary = ({ bag }) => {
       ) : (
         <>
           <div className="space-order">
-            <div className="img-circles"></div>
             <div className="order-details">
               <h3>Order Details</h3>
               <div className="space-divs-mybag">
@@ -82,15 +81,20 @@ const OrderSummary = ({ bag }) => {
                   </p>
                 </div>
               </div>
-              <div className="confirm-details">
-                <div>
-                  <p>Total Bag Amount</p>
-                  <p>
-                    ${calculateTotalPrice(bag).totalPrecoComDesconto.toFixed(2)}
-                  </p>
+              {button !== false && (
+                <div className="confirm-details">
+                  <div>
+                    <p>Total Bag Amount</p>
+                    <p>
+                      $
+                      {calculateTotalPrice(bag).totalPrecoComDesconto.toFixed(
+                        2
+                      )}
+                    </p>
+                  </div>
+                  <button>Place Order</button>
                 </div>
-                <button>Place Order</button>
-              </div>
+              )}
             </div>
           </div>
         </>

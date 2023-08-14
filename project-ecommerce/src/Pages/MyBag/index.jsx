@@ -28,6 +28,7 @@ import OrderSummaryModal from "../../components/OrderSummaryModal";
 
 const MyBag = () => {
   const [open, setOpen] = useState(false);
+  const [orderOpen, setOrderOpen] = useState(true);
   const [bag, setBag] = useState([]);
   const { user } = useContext(UserContext);
   const { products } = useContext(ProductContext);
@@ -312,7 +313,7 @@ const MyBag = () => {
         </>
       ) : (
         <>
-          <OrderSummaryModal bag={bag} />
+          <OrderSummaryModal bag={bag} isOpen={orderOpen} />
           <div className="window-mybag">
             <div className="productIn">
               <div className="container-title-mybag">
@@ -390,7 +391,51 @@ const MyBag = () => {
                 </div>
               </div>
 
-              <OrderSummary bag={bag} />
+              <div className="space-order">
+                <div className="order-details">
+                  <h3>Order Details</h3>
+                  <div className="space-divs-mybag">
+                    <div>
+                      <p>Sub Total</p>
+                      <p>Discount</p>
+                      <p>Delivery Fee</p>
+                      <p>Grand Total</p>
+                    </div>
+                    <div className="space-numbers-mybag">
+                      <p>
+                        $
+                        {calculateTotalPrice(bag).totalPrecoSemDesconto.toFixed(
+                          2
+                        )}
+                      </p>
+                      <p>
+                        -${calculateTotalPrice(bag).totalDesconto.toFixed(2)}
+                      </p>
+                      <p>-$0.00</p>
+                      <p>
+                        $
+                        {calculateTotalPrice(bag).totalPrecoComDesconto.toFixed(
+                          2
+                        )}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="confirm-details">
+                    <div>
+                      <p>Total Bag Amount</p>
+                      <p>
+                        $
+                        {calculateTotalPrice(bag).totalPrecoComDesconto.toFixed(
+                          2
+                        )}
+                      </p>
+                    </div>
+                    <button onClick={() => setOrderOpen(!orderOpen)}>
+                      Place Order
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </>
