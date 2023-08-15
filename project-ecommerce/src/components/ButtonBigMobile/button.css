@@ -4,6 +4,8 @@
   border-radius: 8px;
   background-color: #1b4b66;
   color: white;
+  margin: 0 11px;
+  max-width: 450px;
 }
 
 /* @media (min-width: 820px) {
