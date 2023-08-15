@@ -16,6 +16,7 @@ function AddAddress() {
   const [selectedButton, setSelectedButton] = useState("Home");
   const { user } = useContext(UserContext);
 
+  const [apiError, setApiError] = useState(null);
   const [pre, setPre] = useState("");
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
@@ -47,16 +48,19 @@ function AddAddress() {
   const fullnumber = `${pre}-${phone}`;
 
   async function handleSubmit() {
-    console.log(address);
     if (
       pre === "" ||
       phone === "" ||
-      address.city === "" ||
-      address.street === "" ||
-      address.state === "" ||
-      pincode === ""
+      addressData.city === "" ||
+      addressData.street === "" ||
+      addressData.state === "" ||
+      pincode === "" ||
+      apiError || // Adicionar verificação para erro da API
+      addressData.city === "" ||
+      addressData.street === "" ||
+      addressData.state === ""
     ) {
-      toast.warn("Fill all the fields");
+      toast.warn("Fill all the fields and ensure address data is valid");
       return;
     } else {
       console.log(name);
@@ -99,18 +103,28 @@ function AddAddress() {
   const checkCEP = (e) => {
     const cep = e.target.value.replace(/\D/g, "");
     fetch(`https://viacep.com.br/ws/${cep}/json/`)
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error("Failed to fetch address information");
+        }
+        return res.json();
+      })
       .then((data) => {
         setAddressData({
           street: data.logradouro || address.street,
           city: data.localidade || "",
           state: data.uf || "",
         });
+        setApiError(null); // Limpar erro se a requisição for bem-sucedida
+      })
+      .catch((error) => {
+        setApiError("Invalid CEP or failed to fetch data"); // Configurar erro de requisição
+        toast.error("An error occurred while fetching address data");
       });
   };
 
   return (
-    <div className="page-wrapper-addaddres">
+    <>
       <header className="header-add-address">
         <Link to="/profile/:id">
           <img src={arrow} />
@@ -138,7 +152,6 @@ function AddAddress() {
               onChange={(e) => {
                 setPre(e.target.value);
               }}
-              maxLength={2}
             />
             <input
               className="medium-input-add-address"
@@ -147,7 +160,6 @@ function AddAddress() {
               onChange={(e) => {
                 setPhone(e.target.value);
               }}
-              maxLength={9}
             />
           </div>
         </div>
@@ -241,7 +253,7 @@ function AddAddress() {
           <ButtonBigMob>Save Address</ButtonBigMob>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 
