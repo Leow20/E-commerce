@@ -11,6 +11,7 @@ import PlaceHolder from "../../assets/icons/placeholder.svg";
 import Bag from "../../assets/icons/bag-white.svg";
 import arrow from "../../assets/HeaderModal/arrow-right-gray.svg";
 import { useMediaQuery } from "react-responsive";
+import BagButton from "../BagButton";
 
 const SlideUpModal = ({
   page,
@@ -188,10 +189,7 @@ const SlideUpModal = ({
                 <Link to={`/product/${product.id}`}>
                   <img src={PlaceHolder} alt="" />
                 </Link>
-                <button>
-                  <img src={Bag} alt="" />
-                  Add to Bag
-                </button>
+                <BagButton product={product} />
               </div>
             </div>
           )}

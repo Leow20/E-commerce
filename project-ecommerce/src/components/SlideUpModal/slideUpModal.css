@@ -291,3 +291,28 @@ input[type="radio"]:checked + .input-radio span {
   max-height: 24px;
   padding: 0 !important;
 }
+
+.add-bag {
+  display: flex;
+  width: 272px;
+  padding: 10px 0;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  color: #fff;
+  gap: 8px;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 171.4%;
+  background-color: #1b4b66;
+}
+
+ .add-bag span {
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 171.4%;
+}
