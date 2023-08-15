@@ -126,7 +126,7 @@ function AddAddress() {
   return (
     <>
       <header className="header-add-address">
-        <Link to="/profile/:id">
+        <Link to="/profile/Personal Infomartion">
           <img src={arrow} />
         </Link>
         <h1>Add New Address</h1>
