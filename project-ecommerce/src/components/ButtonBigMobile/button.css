@@ -5,3 +5,10 @@
   background-color: #1b4b66;
   color: white;
 }
+
+@media (min-width: 625px) {
+  .button-big-mob{
+    width: 600px;
+    height: 60px;
+  }
+}
