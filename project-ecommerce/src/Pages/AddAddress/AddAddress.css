@@ -1,6 +1,13 @@
+.page-wrapper-addaddres hr {
+  border: none;
+  background: var(--seperator, rgba(0, 0, 0, 0.12));
+  height: 1px;
+}
+
 .header-add-address {
   display: flex;
   align-items: center;
+  gap: 12px;
 }
 
 .header-add-address img {
@@ -14,6 +21,7 @@
   font-size: 20px;
   font-style: normal;
   font-weight: 600;
+  color: #1b4b66;
 }
 
 .info-add-address {
@@ -24,6 +32,10 @@
 .info-add-address p {
   margin: 8px auto 0 auto;
   width: 90%;
+  color: #626262;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
 }
 
 .line-add-address {
@@ -69,7 +81,7 @@
 }
 
 .small-input-add-address {
-  width: 13%;
+  width: 15%;
   height: 42px;
   background-color: #f1f1f1;
   border: none;
@@ -91,10 +103,13 @@
   width: 90%;
   justify-content: flex-start;
 }
+
 .div-buttons-add-address button {
   padding: 7px 2%;
   margin-right: 8px;
-  border-radius: 5px;
+  border-radius: 8px;
+  width: 65px;
+  height: 32px;
 }
 
 .checkbox-add-address {
@@ -126,6 +141,13 @@
   justify-content: center;
   margin-top: 43px;
   margin-bottom: 20px;
+  width: 100%;
+}
+
+.button-save-add-address div {
+  width: 100%;
+  margin: 0 11px;
+  max-width: 360px;
 }
 
 .selected-button {

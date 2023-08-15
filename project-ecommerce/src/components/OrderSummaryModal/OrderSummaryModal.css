@@ -120,9 +120,8 @@
 
 .button-proceed {
   width: 95%;
-  max-width: 400px;
   height: 44px;
-  margin: 11px 16px 11px 0;
+  margin: 11px auto;
   background-color: #1b4b66;
   color: #fff;
   border-radius: 8px;
@@ -132,6 +131,8 @@
   line-height: 24px;
   position: fixed;
   bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .container-modal-summary .page-wrapper-modal-info header {
