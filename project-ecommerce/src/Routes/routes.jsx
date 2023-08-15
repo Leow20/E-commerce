@@ -20,6 +20,7 @@ import Private from "./private";
 import ProductData from "../Pages/ProductData";
 import SearchModal from "../components/SearchModal";
 import ResultCategories from "../Pages/ResultCategories";
+import Review from "../Pages/Rewiew";
 
 const Router = () => {
   return (
@@ -45,6 +46,14 @@ const Router = () => {
           element={
             <Private>
               <AddProduct />
+            </Private>
+          }
+        />
+        <Route
+          path="/review/:id"
+          element={
+            <Private>
+              <Review />
             </Private>
           }
         />
