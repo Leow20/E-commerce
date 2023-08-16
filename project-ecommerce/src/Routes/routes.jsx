@@ -12,14 +12,15 @@ import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
 import AddProduct from "../Pages/AddProduct";
 import GetStarted from "../Pages/GetStarted";
+import ProductData from "../Pages/ProductData";
+import ResultCategories from "../Pages/ResultCategories";
 import Erro404 from "../Pages/Page404";
+import Checkout from "../Pages/Checkout";
+import Review from "../Pages/Rewiew";
+import AddAddress from "../Pages/AddAddress";
 
 //Routes private
 import Private from "./private";
-import ProductData from "../Pages/ProductData";
-import Checkout from "../Pages/Checkout";
-import ResultCategories from "../Pages/ResultCategories";
-import AddAddress from "../Pages/AddAddress";
 
 const Router = () => {
 	return (
@@ -45,6 +46,14 @@ const Router = () => {
 					element={
 						<Private>
 							<AddProduct />
+						</Private>
+					}
+				/>
+				<Route
+					path="/review/:id"
+					element={
+						<Private>
+							<Review />
 						</Private>
 					}
 				/>

@@ -26,8 +26,8 @@ import ArrowRight from "../../assets/icons/blackArrow.svg";
 import StarFill from "../../assets/icons/star-fill.svg";
 import Star from "../../assets/icons/star.svg";
 import Bag from "../../assets/icons/bag-white.svg";
-import Hearth from "../../assets/icons/icon-wishlist.svg";
 import Similar from "../../assets/icons/view-smilar.svg";
+import Hearth from "../../assets/icons/icon-wishlist.svg";
 
 //Context
 import { ProductContext } from "../../Contexts/products";
@@ -201,9 +201,8 @@ const ProductData = () => {
                     src={Arrow}
                     alt="Arrow"
                     style={{
-                      transform: `rotate(${
-                        container == "Product Description" ? "90deg" : "0deg"
-                      })`,
+                      transform: `rotate(${container == "Product Description" ? "90deg" : "0deg"
+                        })`,
                     }}
                   />
                 </button>
@@ -238,9 +237,8 @@ const ProductData = () => {
                     src={Arrow}
                     alt="Arrow"
                     style={{
-                      transform: `rotate(${
-                        container == "Ratings and Reviews" ? "90deg" : "0deg"
-                      })`,
+                      transform: `rotate(${container == "Ratings and Reviews" ? "90deg" : "0deg"
+                        })`,
                     }}
                   />
                 </button>
