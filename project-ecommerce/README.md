@@ -5,12 +5,12 @@
 Project carried out in a squad during my internship at Compass UOL, with the aim of promoting teamwork using the agile Scrum methodology and improving developers' hard skills in the React.Js framework.
 
 ## 👇Index
-- <a href="funcionalidades">Project Features</a>
-- <a href="layout">Layout </a>
-- <a href="rodar">How to run this project? </a>
-- <a href="tecUtilizadas">Technologies used </a>
-- <a href="desenvolvedores">Developers </a>
-- <a href="futImplementações">Future implementations </a>
+- <a href="#💻project-features">Project Features</a>
+- <a href="#📱layout">Layout </a>
+- <a href="#💡-how-to-run-this-project ">How to run this project? </a>
+- <a href="#👨‍💻technologies-used">Technologies used </a>
+- <a href="#😎developers">Developers </a>
+- <a href="#🚀future-implementations">Future implementations </a>
 
 ## 💻Project Features
 - [x] User registration
