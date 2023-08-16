@@ -14,13 +14,13 @@ import AddProduct from "../Pages/AddProduct";
 import GetStarted from "../Pages/GetStarted";
 import Erro404 from "../Pages/Page404";
 
-
 //Routes private
 import Private from "./private";
 import ProductData from "../Pages/ProductData";
 import SearchModal from "../components/SearchModal";
 import ResultCategories from "../Pages/ResultCategories";
 import Review from "../Pages/Rewiew";
+import AddAddress from "../Pages/AddAddress";
 
 const Router = () => {
   return (
@@ -57,6 +57,16 @@ const Router = () => {
             </Private>
           }
         />
+
+        <Route
+          path="/addaddress"
+          element={
+            <Private>
+              <AddAddress />
+            </Private>
+          }
+        />
+
         <Route path="/product/:id" element={<ProductData />} />
         <Route path="/results/:id" element={<ResultCategories />} />
         <Route path="/getstarted" element={<GetStarted />} />
