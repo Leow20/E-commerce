@@ -1,8 +1,8 @@
 # Project Ecommerce Coral
 
-![Logo Coral](../project-ecommerce/src/assets/README/logo.png)
+![Logo Coral](../project-ecommerce/src/assets/README/Logo.png)
 
-Project carried out in squad during internship at Compass UOl company.
+Project carried out in a squad during my internship at Compass UOL, with the aim of promoting teamwork using the agile Scrum methodology and improving developers' hard skills in the React.Js framework.
 
 ## 👇Index
 - <a href="funcionalidades">Project Features</a>
@@ -37,7 +37,7 @@ Project carried out in squad during internship at Compass UOl company.
 
 ```bash
 #Clone this repository
-$ git clone linkrepositório
+$ git clone linkrepository
 
 #Access the project folder in your terminal
 $ cd project-ecommerce
