@@ -30,6 +30,7 @@ import { toast } from "react-toastify";
 //Context
 import { useContext } from "react";
 import { UserContext } from "../../Contexts/user";
+import MyOrders from "../../components/MyOrders";
 
 const Profile = () => {
   const { user } = useContext(UserContext);
@@ -117,6 +118,7 @@ const Profile = () => {
           {selectedTab == "My Wishlist" && <Wishlist />}
           {selectedTab == "Refer and Earn" && <ReferAndEarn />}
           {selectedTab == "My Address Book" && <AddressBook />}
+          {selectedTab == "My Orders" && <MyOrders />}
         </div>
       )}
       <>
@@ -291,7 +293,9 @@ const Profile = () => {
                   </li>
                   <li>
                     <Link to="/profile/My Address Book">
-                      <button onClick={() => handleTabChange("My Address Book")}>
+                      <button
+                        onClick={() => handleTabChange("My Address Book")}
+                      >
                         <label
                           style={
                             selectedTab == "My Address Book" && !isMobile
@@ -357,6 +361,7 @@ const Profile = () => {
               {selectedTab == "My Wishlist" && <Wishlist />}
               {selectedTab == "Refer and Earn" && <ReferAndEarn />}
               {selectedTab == "My Address Book" && <AddressBook />}
+              {selectedTab == "My Orders" && <MyOrders />}
             </div>
           </div>
         </div>
