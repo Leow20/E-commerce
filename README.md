@@ -1,6 +1,6 @@
 # Project Ecommerce Coral
 
-![Logo Coral](../project-ecommerce/src/assets/README/Logo.png)
+![Logo Coral](project-ecommerce/src/assets/README/Logo.png)
 
 Project carried out in a squad during my internship at Compass UOL, with the aim of promoting teamwork using the agile Scrum methodology and improving developers' hard skills in the React.Js framework.
 
@@ -21,17 +21,17 @@ Project carried out in a squad during my internship at Compass UOL, with the aim
 - [x] User profile
 
 ## 📱Layout
-![tela de cadastro](../project-ecommerce/src/assets/README/telaCadastro.png)
+![tela de cadastro](project-ecommerce/src/assets/README/telaCadastro.png)
 
-![tela de produto](../project-ecommerce/src/assets/README/pageProduto.png)
+![tela de produto](project-ecommerce/src/assets/README/pageProduto.png)
 
-![tela de login](../project-ecommerce/src/assets/README/telaLogin.png)
+![tela de login](project-ecommerce/src/assets/README/telaLogin.png)
 
-![tela de compra](../project-ecommerce/src/assets/README/pageCompra.png)
+![tela de compra](project-ecommerce/src/assets/README/pageCompra.png)
 
-![produtos na bag](../project-ecommerce/src/assets/README/addBag.png)
+![produtos na bag](project-ecommerce/src/assets/README/addBag.png)
 
-![perfil do usuario](../project-ecommerce/src/assets/README/perfilUsuario.png)
+![perfil do usuario](project-ecommerce/src/assets/README/perfilUsuario.png)
 
 ## 💡 How to run this project?
 
