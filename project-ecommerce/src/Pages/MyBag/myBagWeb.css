@@ -225,7 +225,8 @@
 
 .summary-mybag {
   margin-left: 5%;
-  width: 411px;
+  max-width: 411px;
+  min-width: 200px;
 }
 
 .summary-mybag h4 {

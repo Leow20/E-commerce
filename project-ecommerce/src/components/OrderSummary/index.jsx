@@ -2,7 +2,15 @@ import React from "react";
 import { useMediaQuery } from "react-responsive";
 import { Link } from "react-router-dom";
 
-const OrderSummary = ({ bag, button, display = "block" }) => {
+const OrderSummary = ({
+	bag,
+	button,
+	display = "flex",
+	title = "Order Summary",
+	hrClass = "",
+	paddR = "0",
+	margL = "5%",
+}) => {
 	const isWeb = useMediaQuery({ minWidth: 820 });
 	const calculateTotalPrice = (produtos) => {
 		let totalDesconto = 0;
@@ -32,14 +40,14 @@ const OrderSummary = ({ bag, button, display = "block" }) => {
 	return (
 		<>
 			{isWeb ? (
-				<div className="summary-mybag">
-					<h4>Order Summary</h4>
-					<hr />
-					<div className="space-divs-mybag">
+				<div className="summary-mybag" style={{ marginLeft: margL }}>
+					<h4>{title}</h4>
+					<hr className={hrClass} />
+					<div className="space-divs-mybag" style={{ paddingRight: paddR }}>
 						<div>
 							<p>Sub Total</p>
 							<p>Discount</p>
-							<p>Delivery Fee</p>
+							<p>Delivery Free</p>
 							<p>Grand Total</p>
 						</div>
 						<div className="space-numbers-mybag">
@@ -68,7 +76,7 @@ const OrderSummary = ({ bag, button, display = "block" }) => {
 								<div>
 									<p>Sub Total</p>
 									<p>Discount</p>
-									<p>Delivery Fee</p>
+									<p>Delivery Free</p>
 									<p>Grand Total</p>
 								</div>
 								<div className="space-numbers-mybag">
