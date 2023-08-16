@@ -40,13 +40,13 @@ Project carried out in squad during internship at Compass UOl company.
 $ git clone linkrepositório
 
 #Access the project folder in your terminal
-$ cd E-commerce
+$ cd project-ecommerce
 
 #Install the dependencies
 $ npm install
 
 #Run the application
-$npm run dev
+$ npm run dev
 
 #The application will be started on port 3000, go to the browser: http://localhost:3000.
 
