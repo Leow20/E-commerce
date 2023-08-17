@@ -1,20 +1,35 @@
 import React, { useContext, useEffect, useState } from "react";
+
+//Style
 import "./checkout.css";
 
+//Icons
 import Arrow from "../../assets/icons/arrowProfile.svg";
-import { Link } from "react-router-dom";
 import edit from "../../assets/icons/edit.svg";
-import SlideUpModal from "../../components/SlideUpModal";
-import { useMediaQuery } from "react-responsive";
-import { db } from "../../../firebaseConnection";
-import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
-import { UserContext } from "../../Contexts/user";
 import ArrowDown from "../../assets/imgFooter/ArrowDown.svg";
-import OrderSummary from "../../components/OrderSummary";
+
+//Router-dom
+import { Link } from "react-router-dom";
+
+//Components
+import SlideUpModal from "../../components/SlideUpModal";
+import Payments from "../../components/Payments";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
+import OrderSummary from "../../components/OrderSummary";
+
+//React-Responsive
+import { useMediaQuery } from "react-responsive";
+
+//Firebase
+import { db } from "../../../firebaseConnection";
+import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
+
+//Context
+import { UserContext } from "../../Contexts/user";
+
+//Toastify
 import { toast } from "react-toastify";
-import Payments from "../../components/Payments";
 
 const Checkout = () => {
 	const [slideOpen, setSlideOpen] = useState(false);
@@ -36,12 +51,14 @@ const Checkout = () => {
 		selectedButton: selectedButton,
 	});
 	const [address, setAddress] = useState([]);
+	const [selectAddress, setSelectAddress] = useState({});
 	const [content, setContent] = useState("");
 	const [payment, setPayment] = useState("");
 	const [codePayment, setCodePayment] = useState("");
 	const [save, setSave] = useState(false);
 	const [order, setOrder] = useState("");
 	const [arrOrder, setArrOrder] = useState([]);
+	const [loading, setLoading] = useState(true);
 
 	function handleButtonSelect(buttonName) {
 		setSelectedButton(buttonName);
@@ -51,6 +68,8 @@ const Checkout = () => {
 		if (user) {
 			if (locationSnapshot.exists()) {
 				setAddress(locationSnapshot.data().data);
+				setSelectAddress(locationSnapshot.data().data[0]);
+				setLoading(false);
 			}
 		}
 	}
@@ -64,11 +83,22 @@ const Checkout = () => {
 			addressData.state === "" ||
 			pincode === "" ||
 			apiError ||
-			content === "" ||
-			payment === "" ||
-			name === "" ||
-			bag.length === 0 ||
-			(content === "UPI" && codePayment === "") ||
+			name === ""
+		) {
+			toast.warn("Fill in all address fields");
+			return false;
+		} else if (content === "") {
+			toast.warn("Select payment type");
+			return false;
+		} else if (payment === "") {
+			toast.warn("Select a payment method");
+			return false;
+		} else if (bag.length === 0) {
+			toast.warn("You have no products in the bag");
+		} else if (content === "UPI" && codePayment === "") {
+			toast.warn(`Fill in the field "Enter your UPI Id"`);
+			return false;
+		} else if (
 			(content === "Amazon Pay" &&
 				payment === "Amazon Gift Card" &&
 				codePayment === "") ||
@@ -76,7 +106,7 @@ const Checkout = () => {
 				payment === "Apple Gift Card" &&
 				codePayment === "")
 		) {
-			toast.warn("Fill all the fields and ensure address data is valid");
+			toast.warn(`Fill in the field "Enter your Gift Crad code"`);
 			return false;
 		} else {
 			if (
@@ -125,8 +155,10 @@ const Checkout = () => {
 		const orders = await getDoc(doc(db, "payments", user.uid));
 		if (user) {
 			if (orders.exists()) {
-				setArrOrder(orders.data().data);
-				console.log(orders.data().data);
+				if (orders.data().data) {
+					setArrOrder(orders.data().data);
+					console.log(orders.data().data);
+				}
 			}
 		}
 	}
@@ -152,7 +184,7 @@ const Checkout = () => {
 						address: {
 							name: name,
 							fullNumber: pre + "-" + phone,
-							CEP: pincode,
+							pinCode: pincode,
 							street: addressData.street,
 							city: addressData.city,
 							state: addressData.state,
@@ -161,7 +193,6 @@ const Checkout = () => {
 					},
 				};
 				arrOrder.push(object);
-				console.log(arrOrder);
 				await setDoc(doc(db, "payments", user.uid), { data: arrOrder }).then(
 					async () => {
 						await setDoc(doc(db, "bag", user.uid), { data: [] }).then(() => {
@@ -171,6 +202,64 @@ const Checkout = () => {
 						loadOrders();
 					}
 				);
+			}
+		} else {
+			if (
+				(content !== "" &&
+					payment !== "" &&
+					selectAddress &&
+					content === "UPI" &&
+					codePayment !== "") ||
+				(payment === "Amazon Gift Card" && codePayment !== "") ||
+				(payment === "Apple Gift Card" && codePayment !== "")
+			) {
+				const object = {
+					[order]: {
+						date: getCurrentFormattedDate(),
+						paymentMethod: content,
+						typeOfPayment: payment,
+						codePayment: codePayment,
+						savePayment: save,
+						bag: bag,
+						prices: {
+							totalDesconto: calculateTotalPrice(bag).totalDesconto,
+							totalPrecoComDesconto:
+								calculateTotalPrice(bag).totalPrecoComDesconto,
+							totalPrecoSemDesconto:
+								calculateTotalPrice(bag).totalPrecoSemDesconto,
+						},
+						address: selectAddress,
+					},
+				};
+				arrOrder.push(object);
+				await setDoc(doc(db, "payments", user.uid), { data: arrOrder }).then(
+					async () => {
+						await setDoc(doc(db, "bag", user.uid), { data: [] }).then(() => {
+							toast.success("Congratiolationssssssssssss");
+							loadBag();
+						});
+						loadOrders();
+					}
+				);
+			} else {
+				if (!selectAddress) {
+					return toast.warn("Select an address");
+				}
+				if (content === "") {
+					return toast.warn("Select payment type");
+				}
+				if (payment === "") {
+					return toast.warn("Select a payment method");
+				}
+				if (content === "UPI" && codePayment === "") {
+					return toast.warn(`Fill in the field "Enter your UPI Id"`);
+				}
+				if (
+					(payment === "Amazon Gift Card" && codePayment === "") ||
+					(payment === "Apple Gift Card" && codePayment === "")
+				) {
+					return toast.warn(`Fill in the field "Enter your Gift Crad code"`);
+				}
 			}
 		}
 	};
@@ -215,7 +304,7 @@ const Checkout = () => {
 	useEffect(() => {
 		loadOrders();
 		loadBag();
-		loadLocationUser;
+		loadLocationUser();
 		generateRandom6DigitNumber();
 		console.log(arrOrder);
 	}, [user]);
@@ -226,7 +315,6 @@ const Checkout = () => {
 		}
 		return description;
 	};
-
 	if (isMobile)
 		return (
 			<>
@@ -244,8 +332,10 @@ const Checkout = () => {
 							style={{ maxWidth: "none" }}
 						>
 							<div className="address-select-deliver">
-								<span>Nome do Endereço</span>
-								<span>1460 Jenric Lane, Ashmor Drive</span>
+								<span>{loading || selectAddress.name}</span>
+								<span>
+									{loading || selectAddress.street + ", " + selectAddress.city}
+								</span>
 							</div>
 							<div
 								className="edit-current-address"
@@ -325,7 +415,13 @@ const Checkout = () => {
 						<button onClick={handlePayment}>Pay Now</button>
 					</div>
 				</section>
-				<SlideUpModal page="result" isOpen={slideOpen} />
+				<SlideUpModal
+					page="location"
+					isOpen={slideOpen}
+					address={address}
+					selectAddress={selectAddress}
+					setSelectAddress={setSelectAddress}
+				/>
 			</>
 		);
 	else
