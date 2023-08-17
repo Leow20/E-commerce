@@ -7,7 +7,7 @@ Project carried out in a squad during our internship at Compass UOL, with the ai
 ## 👇Index
 - <a href="#project-features">Project Features</a>
 - <a href="#layout">Layout </a>
-- <a href="#how-to-run-this-project ">How to run this project? </a>
+- <a href="#-how-to-run-this-project ">How to run this project? </a>
 - <a href="#technologies-used">Technologies used </a>
 - <a href="#developers">Developers </a>
 - <a href="#future-implementations">Future implementations </a>
