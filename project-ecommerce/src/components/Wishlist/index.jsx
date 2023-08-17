@@ -105,6 +105,7 @@ const Wishlist = () => {
 					{wishlist &&
 						wishlist.map((product) => (
 							<div className="card-wishlist" key={product.id}>
+								<h5 className="tranding-wishlist">Tranding</h5>
 								<img src={product.url} alt="bolsa" width={150} height={157} />
 								<div className="arrival-content-wishlist">
 									<div className="text-product-wishlist">

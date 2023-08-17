@@ -204,6 +204,22 @@
   }
 }
 
+.tranding-wishlist{
+  position: relative;
+  left: 80px;
+  background-color: #ff8c4b;
+  color: white;
+  width: 63px;
+  padding: 4px 0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+}
+
 .wishlist-btn-empty-products {
   display: none;
 }
