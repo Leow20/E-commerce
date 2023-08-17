@@ -122,6 +122,10 @@
   margin-right: 16px;
 }
 
+.tranding-web img{
+  border: 3px solid #ff8c4b;
+}
+
 .text-mybag p {
   margin-bottom: 8px;
   width: 220px;

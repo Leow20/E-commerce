@@ -621,6 +621,7 @@ const ResultCategories = () => {
                     >
                       <Link to={`/product/${product.id}`} key={product.id}>
                         <div className="product-image-result">
+                          <h5 className="product-tranding">Tranding</h5>
                           <img src={product.url} alt="produto" />
                         </div>
                       </Link>

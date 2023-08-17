@@ -179,7 +179,7 @@ const MyBag = () => {
                 <hr />
 
                 {bag.map((product, index) => (
-                  <div className="product-pic-mybag" key={product.id}>
+                  <div className="product-pic-mybag tranding-web" key={product.id}>
                     <img src={product.url} />
                     <div className="text-mybag">
                       <p>{product.name}</p>
@@ -327,6 +327,7 @@ const MyBag = () => {
                 <div>
                   {bag.map((product, index) => (
                     <div className="box-product" key={product.id}>
+                      <h5 className="mybag-tranding-mob">Tranding</h5>
                       <div className="box-aling">
                         <img src={product.url} />
                         <div className="info-mybag">
