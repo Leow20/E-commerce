@@ -2,7 +2,7 @@
 
 ![Logo Coral](project-ecommerce/src/assets/README/Logo.png)
 
-Project carried out in a squad during my internship at Compass UOL, with the aim of promoting teamwork using the agile Scrum methodology and improving developers' hard skills in the React.Js framework.
+Project carried out in a squad during our internship at Compass UOL, with the aim of promoting teamwork using the agile Scrum methodology and improving developers' hard skills in the ReactJS framework.
 
 ## 👇Index
 - <a href="#💻project-features">Project Features</a>
