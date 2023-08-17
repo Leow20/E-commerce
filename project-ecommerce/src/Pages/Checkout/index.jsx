@@ -196,7 +196,7 @@ const Checkout = () => {
 				await setDoc(doc(db, "payments", user.uid), { data: arrOrder }).then(
 					async () => {
 						await setDoc(doc(db, "bag", user.uid), { data: [] }).then(() => {
-							toast.success("Congratiolationssssssssssss");
+							toast.success("Payment successful!");
 							loadBag();
 						});
 						loadOrders();
@@ -359,9 +359,8 @@ const Checkout = () => {
 								src={ArrowDown}
 								alt="Arrow Down"
 								style={{
-									transform: `rotate(${
-										contentCheckout === "Product Details" ? "180deg" : "0deg"
-									})`,
+									transform: `rotate(${contentCheckout === "Product Details" ? "180deg" : "0deg"
+										})`,
 								}}
 							/>
 						</button>
@@ -391,9 +390,8 @@ const Checkout = () => {
 								src={ArrowDown}
 								alt="Arrow Down"
 								style={{
-									transform: `rotate(${
-										contentPayment === "Payment Method" ? "180deg" : "0deg"
-									})`,
+									transform: `rotate(${contentPayment === "Payment Method" ? "180deg" : "0deg"
+										})`,
 								}}
 							/>
 						</button>
@@ -452,9 +450,8 @@ const Checkout = () => {
 										src={ArrowDown}
 										alt="Arrow Down"
 										style={{
-											transform: `rotate(${
-												contentCheckout === "New Address" ? "180deg" : "0deg"
-											})`,
+											transform: `rotate(${contentCheckout === "New Address" ? "180deg" : "0deg"
+												})`,
 										}}
 									/>
 								</button>
@@ -503,25 +500,22 @@ const Checkout = () => {
 										</div>
 										<div className="div-buttons-add-address">
 											<button
-												className={`${
-													selectedButton === "Home" ? "selected-button" : ""
-												} button-style-add-address`}
+												className={`${selectedButton === "Home" ? "selected-button" : ""
+													} button-style-add-address`}
 												onClick={() => handleButtonSelect("Home")}
 											>
 												Home
 											</button>
 											<button
-												className={`${
-													selectedButton === "Office" ? "selected-button" : ""
-												} button-style-add-address`}
+												className={`${selectedButton === "Office" ? "selected-button" : ""
+													} button-style-add-address`}
 												onClick={() => handleButtonSelect("Office")}
 											>
 												Office
 											</button>
 											<button
-												className={`${
-													selectedButton === "Other" ? "selected-button" : ""
-												} button-style-add-address`}
+												className={`${selectedButton === "Other" ? "selected-button" : ""
+													} button-style-add-address`}
 												onClick={() => handleButtonSelect("Other")}
 											>
 												Other
@@ -596,9 +590,8 @@ const Checkout = () => {
 										src={ArrowDown}
 										alt="Arrow Down"
 										style={{
-											transform: `rotate(${
-												contentPayment === "Payment Method" ? "180deg" : "0deg"
-											})`,
+											transform: `rotate(${contentPayment === "Payment Method" ? "180deg" : "0deg"
+												})`,
 										}}
 									/>
 								</button>
