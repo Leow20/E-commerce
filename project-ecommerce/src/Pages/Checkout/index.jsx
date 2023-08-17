@@ -7,19 +7,19 @@ import edit from "../../assets/icons/edit.svg";
 import SlideUpModal from "../../components/SlideUpModal";
 import { useMediaQuery } from "react-responsive";
 import { db } from "../../../firebaseConnection";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
 import { UserContext } from "../../Contexts/user";
 import ArrowDown from "../../assets/imgFooter/ArrowDown.svg";
 import OrderSummary from "../../components/OrderSummary";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import { toast } from "react-toastify";
+import Payments from "../../components/Payments";
 
 const Checkout = () => {
 	const [slideOpen, setSlideOpen] = useState(false);
 	const [contentCheckout, setContentCheckout] = useState("");
 	const [contentPayment, setContentPayment] = useState("");
-
 	const isMobile = useMediaQuery({ maxWidth: 820 });
 	const [bag, setBag] = useState([]);
 	const { user } = useContext(UserContext);
@@ -36,6 +36,12 @@ const Checkout = () => {
 		selectedButton: selectedButton,
 	});
 	const [address, setAddress] = useState([]);
+	const [content, setContent] = useState("");
+	const [payment, setPayment] = useState("");
+	const [codePayment, setCodePayment] = useState("");
+	const [save, setSave] = useState(false);
+	const [order, setOrder] = useState("");
+	const [arrOrder, setArrOrder] = useState([]);
 
 	function handleButtonSelect(buttonName) {
 		setSelectedButton(buttonName);
@@ -49,9 +55,7 @@ const Checkout = () => {
 		}
 	}
 
-	const fullnumber = `${pre}-${phone}`;
-
-	async function handleSubmitAddress() {
+	function VerifyAddressAndPayment() {
 		if (
 			pre === "" ||
 			phone === "" ||
@@ -60,47 +64,29 @@ const Checkout = () => {
 			addressData.state === "" ||
 			pincode === "" ||
 			apiError ||
-			addressData.city === "" ||
-			addressData.street === "" ||
-			addressData.state === ""
+			content === "" ||
+			payment === "" ||
+			name === "" ||
+			bag.length === 0 ||
+			(content === "UPI" && codePayment === "") ||
+			(content === "Amazon Pay" &&
+				payment === "Amazon Gift Card" &&
+				codePayment === "") ||
+			(content === "Apple Pay" &&
+				payment === "Apple Gift Card" &&
+				codePayment === "")
 		) {
 			toast.warn("Fill all the fields and ensure address data is valid");
-			return;
+			return false;
 		} else {
-			console.log(name);
-			console.log(fullnumber);
-
-			const pinCode = pincode.replace(/\D/g, "");
-			console.log(pinCode);
-			console.log(addressData.street);
-			console.log(addressData.city);
-			console.log(addressData.state);
-			console.log(selectedButton);
-			loadLocationUser();
-
-			address.push({
-				name,
-				fullnumber,
-				pinCode,
-				street: addressData.street,
-				city: addressData.city,
-				state: addressData.state,
-				selectedButton,
-			});
-
-			const location = await setDoc(doc(db, "locationUser", user?.uid), {
-				data: address,
-			}).then(() => {
-				toast.success("Address successfully registered");
-				setPincode("");
-				setAddressData({
-					street: "",
-					city: "",
-					state: "",
-				});
-			});
-
-			console.log(location);
+			if (
+				(content !== "UPI" && codePayment !== "") ||
+				(payment !== "Amazon Gift Card" && codePayment !== "") ||
+				(payment !== "Apple Gift Card" && codePayment !== "")
+			) {
+				setCodePayment("");
+			}
+			return true;
 		}
 	}
 
@@ -119,10 +105,10 @@ const Checkout = () => {
 					city: data.localidade || "",
 					state: data.uf || "",
 				});
-				setApiError(null); // Limpar erro se a requisição for bem-sucedida
+				setApiError(null);
 			})
 			.catch((error) => {
-				setApiError("Invalid CEP or failed to fetch data"); // Configurar erro de requisição
+				setApiError("Invalid CEP or failed to fetch data");
 				toast.error("An error occurred while fetching address data");
 			});
 	};
@@ -135,8 +121,103 @@ const Checkout = () => {
 			}
 		}
 	};
+	async function loadOrders() {
+		const orders = await getDoc(doc(db, "payments", user.uid));
+		if (user) {
+			if (orders.exists()) {
+				setArrOrder(orders.data().data);
+				console.log(orders.data().data);
+			}
+		}
+	}
+
+	const handlePayment = async () => {
+		if (!isMobile && user) {
+			if (VerifyAddressAndPayment() === true) {
+				const object = {
+					[order]: {
+						date: getCurrentFormattedDate(),
+						paymentMethod: content,
+						typeOfPayment: payment,
+						codePayment: codePayment,
+						savePayment: save,
+						bag: bag,
+						prices: {
+							totalDesconto: calculateTotalPrice(bag).totalDesconto,
+							totalPrecoComDesconto:
+								calculateTotalPrice(bag).totalPrecoComDesconto,
+							totalPrecoSemDesconto:
+								calculateTotalPrice(bag).totalPrecoSemDesconto,
+						},
+						address: {
+							name: name,
+							fullNumber: pre + "-" + phone,
+							CEP: pincode,
+							street: addressData.street,
+							city: addressData.city,
+							state: addressData.state,
+							selectedButton: selectedButton,
+						},
+					},
+				};
+				arrOrder.push(object);
+				console.log(arrOrder);
+				await setDoc(doc(db, "payments", user.uid), { data: arrOrder }).then(
+					async () => {
+						await setDoc(doc(db, "bag", user.uid), { data: [] }).then(() => {
+							toast.success("Congratiolationssssssssssss");
+							loadBag();
+						});
+						loadOrders();
+					}
+				);
+			}
+		}
+	};
+
+	function generateRandom6DigitNumber() {
+		const min = 10000;
+		const max = 99999;
+		setOrder("ORDER" + (Math.floor(Math.random() * (max - min + 1)) + min));
+	}
+	const calculateTotalPrice = (produtos) => {
+		let totalDesconto = 0;
+		let totalPrecoSemDesconto = 0;
+		let totalPrecoComDesconto = 0;
+
+		produtos.forEach((product) => {
+			const preco = parseFloat(product.price.replace("$", ""));
+			const desconto = parseFloat(product.discount);
+			const precoSemDesconto = preco * parseFloat(product.qtyBag);
+			const valorDesconto =
+				((preco * desconto) / 100) * parseFloat(product.qtyBag);
+			const precoComDesconto = precoSemDesconto - valorDesconto;
+
+			totalDesconto += valorDesconto;
+			totalPrecoSemDesconto += precoSemDesconto;
+			totalPrecoComDesconto += precoComDesconto;
+		});
+
+		return {
+			totalDesconto,
+			totalPrecoSemDesconto,
+			totalPrecoComDesconto,
+		};
+	};
+	function getCurrentFormattedDate() {
+		const currentDate = new Date();
+		const day = String(currentDate.getDate()).padStart(2, "0");
+		const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+		const year = currentDate.getFullYear();
+		return `${day}/${month}/${year}`;
+	}
+
 	useEffect(() => {
+		loadOrders();
 		loadBag();
+		loadLocationUser;
+		generateRandom6DigitNumber();
+		console.log(arrOrder);
 	}, [user]);
 	const truncateDescription = (description, maxWords) => {
 		const words = description.split(" ");
@@ -228,11 +309,20 @@ const Checkout = () => {
 						</button>
 					</div>
 					{contentPayment === "Payment Method" && (
-						<div>COMPONENTE PAGAMENTOS</div>
+						<Payments
+							content={content}
+							setContent={setContent}
+							payment={payment}
+							setPayment={setPayment}
+							save={save}
+							setSave={setSave}
+							codePayment={codePayment}
+							setCodePayment={setCodePayment}
+						/>
 					)}
 					<OrderSummary button={false} display={"none"} bag={bag} />
 					<div className="btn-pay-now">
-						<button>Pay Now</button>
+						<button onClick={handlePayment}>Pay Now</button>
 					</div>
 				</section>
 				<SlideUpModal page="result" isOpen={slideOpen} />
@@ -420,11 +510,20 @@ const Checkout = () => {
 							</div>
 
 							{contentPayment === "Payment Method" && (
-								<div>COMPONENTE PAGAMENTOS</div>
+								<Payments
+									content={content}
+									setContent={setContent}
+									payment={payment}
+									setPayment={setPayment}
+									save={save}
+									setSave={setSave}
+									codePayment={codePayment}
+									setCodePayment={setCodePayment}
+								/>
 							)}
 							<div className="btns-checkout">
 								<Link to="/mybag">Back to Cart</Link>
-								<button>Pay Now</button>
+								<button onClick={handlePayment}>Pay Now</button>
 							</div>
 						</div>
 

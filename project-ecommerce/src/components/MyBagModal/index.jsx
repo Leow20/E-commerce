@@ -100,7 +100,6 @@ const MyBagModal = ({ hover }) => {
 			await setDoc(doc(db, "bag", user.uid), { data: updatedProducts });
 		}
 	};
-	console.log(bag);
 	return (
 		<div>
 			{isHovered && (

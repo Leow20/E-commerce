@@ -10,6 +10,8 @@ const ContentPayment = ({
 	id = "",
 	save,
 	setSave,
+	codePayment,
+	setCodePayment,
 }) => {
 	const isMobile = useMediaQuery({ maxWidth: 820 });
 	return (
@@ -54,6 +56,8 @@ const ContentPayment = ({
 							name="UPI ID"
 							id="upiID"
 							placeholder="Enter your Gift Card code"
+							value={codePayment}
+							onChange={(e) => setCodePayment(e.target.value)}
 						/>
 						<p>Eg: XXXX-XXXX-XXXX</p>
 					</div>
@@ -70,6 +74,10 @@ const ContentPayment = ({
 							name="UPI ID"
 							id="upiID"
 							placeholder="Enter your UPI Id"
+							value={codePayment}
+							onChange={(e) => {
+								setCodePayment(e.target.value);
+							}}
 						/>
 						<p>Eg: 1234567890@ybl</p>
 					</div>
