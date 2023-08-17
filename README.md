@@ -2,15 +2,15 @@
 
 ![Logo Coral](project-ecommerce/src/assets/README/Logo.png)
 
-Project carried out in a squad during my internship at Compass UOL, with the aim of promoting teamwork using the agile Scrum methodology and improving developers' hard skills in the React.Js framework.
+Project carried out in a squad during our internship at Compass UOL, with the aim of promoting teamwork using the agile Scrum methodology and improving developers' hard skills in the ReactJS framework.
 
 ## 👇Index
-- <a href="#💻project-features">Project Features</a>
-- <a href="#📱layout">Layout </a>
-- <a href="#💡-how-to-run-this-project ">How to run this project? </a>
-- <a href="#👨‍💻technologies-used">Technologies used </a>
-- <a href="#😎developers">Developers </a>
-- <a href="#🚀future-implementations">Future implementations </a>
+- <a href="#project-features">Project Features</a>
+- <a href="#layout">Layout </a>
+- <a href="#-how-to-run-this-project ">How to run this project? </a>
+- <a href="#technologies-used">Technologies used </a>
+- <a href="#developers">Developers </a>
+- <a href="#future-implementations">Future implementations </a>
 
 ## 💻Project Features
 - [x] User registration
@@ -23,9 +23,9 @@ Project carried out in a squad during my internship at Compass UOL, with the aim
 ## 📱Layout
 ![tela de cadastro](project-ecommerce/src/assets/README/telaCadastro.png)
 
-![tela de produto](project-ecommerce/src/assets/README/pageProduto.png)
-
 ![tela de login](project-ecommerce/src/assets/README/telaLogin.png)
+
+![tela de produto](project-ecommerce/src/assets/README/pageProduto.png)
 
 ![tela de compra](project-ecommerce/src/assets/README/pageCompra.png)
 
@@ -37,7 +37,7 @@ Project carried out in a squad during my internship at Compass UOL, with the aim
 
 ```bash
 #Clone this repository
-$ git clone linkrepository
+$ git clone https://github.com/Leow20/E-commerce
 
 #Access the project folder in your terminal
 $ cd project-ecommerce

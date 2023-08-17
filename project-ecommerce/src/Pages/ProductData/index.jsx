@@ -47,6 +47,7 @@ const ProductData = () => {
   const [container, setContainer] = useState("Product Description");
   const [classImg, setClassImg] = useState(1);
   const [showUpModal, setShowUpModal] = useState(false);
+  const [rating, setRating] = useState(null);
   const productsFiltered = [];
   products.forEach((element) => {
     if (element.category === product.category) {
@@ -63,8 +64,6 @@ const ProductData = () => {
       }
     });
   }, []);
-
-  console.log(product);
 
   if (isMobile && product) {
     return (
@@ -129,17 +128,24 @@ const ProductData = () => {
               )}
             </div>
 
-            <div className="box-stars-data">
-              <div className="content-stars-data">
-                <span className="span-stars-data">{product.stars}</span>
-                <img src={product.stars == 0 ? Star : StarFill} alt="Stars" />
-              </div>
+            <Link to={`/review/${product.id}`}>
+              <div className="box-stars-data">
+                <div className="content-stars-data">
+                  <span className="span-stars-data">{product.stars}</span>
+                  <img src={product.stars == 0 ? Star : StarFill} alt="Stars" />
+                </div>
 
-              <div className="content-text-stars-data">
-                <h2>Average Rating</h2>
-                <p>43 Ratings & 23 Reviews</p>
+                <div className="content-text-stars-data">
+                  <h2>Average Rating</h2>
+                  {product.totalRating != 1 && (
+                    <p>{product.totalRating} Reviews</p>
+                  )}
+                  {product.totalRating == 1 && (
+                    <p>{product.totalRating} Review</p>
+                  )}
+                </div>
               </div>
-            </div>
+            </Link>
 
             <div className="box-cards-data">
               <div className="card-data">
@@ -201,8 +207,9 @@ const ProductData = () => {
                     src={Arrow}
                     alt="Arrow"
                     style={{
-                      transform: `rotate(${container == "Product Description" ? "90deg" : "0deg"
-                        })`,
+                      transform: `rotate(${
+                        container == "Product Description" ? "90deg" : "0deg"
+                      })`,
                     }}
                   />
                 </button>
@@ -218,138 +225,139 @@ const ProductData = () => {
                 )}
               </div>
 
-              <div className="btn-box-content-data">
-                <hr />
-                <button
-                  className={
-                    container == "Ratings and Reviews" ? "active-btn-data" : ""
-                  }
-                  onClick={() => {
-                    if (container != "Ratings and Reviews") {
-                      setContainer("Ratings and Reviews");
-                    } else {
-                      setContainer("");
-                    }
-                  }}
-                >
-                  <span>Ratings and Reviews</span>
-                  <img
-                    src={Arrow}
-                    alt="Arrow"
-                    style={{
-                      transform: `rotate(${container == "Ratings and Reviews" ? "90deg" : "0deg"
-                        })`,
-                    }}
-                  />
-                </button>
-                {container == "Ratings and Reviews" && <RatingsAndReviews />}
-              </div>
-            </div>
-            <RelatedProducts
-              func={"container"}
-              productsFiltered={productsFiltered}
-            />
-            <div className="box-btns-data">
-              <WishlistButton className="add-fav" product={product} />
-              <BagButton product={product} />
-            </div>
-          </div>
-        </section>
-      </>
-    );
-  } else if (!isMobile && product) {
-    const category = product.category;
-    return (
-      <>
-        <Header Page={product.name} />
-        <section className="product-data-section">
-          <div className="box-title-data">
-            <Link to="/">
-              <span>Home</span>
-            </Link>
-            <img src={ArrowRight} alt="Arrow" />
-            <span>
-              {category
-                ? category.charAt(0).toUpperCase() + category.slice(1)
-                : null}
-            </span>
-            <img src={ArrowRight} alt="Arrow" />
-            <span>{product.name}</span>
-          </div>
-          <div className="container-product-data">
-            <div className="container-img-data">
-              <div className="img-data">
-                <img src={image} alt="Product Image" id="productImageID" />
-              </div>
-              <div className="img-navigation-data">
-                <button
-                  className="btn-arrow-left"
-                  onClick={() => {
-                    classImg != 1 && classImg >= 1 && setClassImg(classImg - 1);
-                  }}
-                >
-                  <img
-                    src={Arrow}
-                    alt="Arrow left"
-                    style={{ transform: "rotate(180deg)" }}
-                  />
-                </button>
-                <div>
-                  <button
-                    onClick={() => {
-                      setClassImg(1);
-                    }}
-                  >
-                    <img
-                      src={image}
-                      alt="Product Image"
-                      className={classImg == 1 ? "active-img" : ""}
-                    />
-                  </button>
-                  <button
-                    onClick={() => {
-                      setClassImg(2);
-                    }}
-                  >
-                    <img
-                      src={image}
-                      alt="Product Image"
-                      className={classImg == 2 ? "active-img" : ""}
-                    />
-                  </button>
-                  <button
-                    onClick={() => {
-                      setClassImg(3);
-                    }}
-                  >
-                    <img
-                      src={image}
-                      alt="Product Image"
-                      className={classImg == 3 ? "active-img" : ""}
-                    />
-                  </button>
-                  <button
-                    onClick={() => {
-                      setClassImg(4);
-                    }}
-                  >
-                    <img
-                      src={image}
-                      alt="Product Image"
-                      className={classImg == 4 ? "active-img" : ""}
-                    />
-                  </button>
-                </div>
-                <button
-                  className="btn-arrow-right"
-                  onClick={() => {
-                    classImg != 4 && classImg <= 4 && setClassImg(classImg + 1);
-                  }}
-                >
-                  <img src={Arrow} alt="Arrow left" />
-                </button>
-              </div>
-            </div>
+							<div className="btn-box-content-data">
+								<hr />
+								<button
+									className={
+										container == "Ratings and Reviews" ? "active-btn-data" : ""
+									}
+									onClick={() => {
+										if (container != "Ratings and Reviews") {
+											setContainer("Ratings and Reviews");
+										} else {
+											setContainer("");
+										}
+									}}
+								>
+									<span>Ratings and Reviews</span>
+									<img
+										src={Arrow}
+										alt="Arrow"
+										style={{
+											transform: `rotate(${
+												container == "Ratings and Reviews" ? "90deg" : "0deg"
+											})`,
+										}}
+									/>
+								</button>
+								{container == "Ratings and Reviews" && <RatingsAndReviews />}
+							</div>
+						</div>
+						<RelatedProducts
+							func={"container"}
+							productsFiltered={productsFiltered}
+						/>
+						<div className="box-btns-data">
+							<WishlistButton className="add-fav" product={product} />
+							<BagButton product={product} />
+						</div>
+					</div>
+				</section>
+			</>
+		);
+	} else if (!isMobile && product) {
+		const category = product.category;
+		return (
+			<>
+				<Header Page={product.name} />
+				<section className="product-data-section">
+					<div className="box-title-data">
+						<Link to="/">
+							<span>Home</span>
+						</Link>
+						<img src={ArrowRight} alt="Arrow" />
+						<span>
+							{category
+								? category.charAt(0).toUpperCase() + category.slice(1)
+								: null}
+						</span>
+						<img src={ArrowRight} alt="Arrow" />
+						<span>{product.name}</span>
+					</div>
+					<div className="container-product-data">
+						<div className="container-img-data">
+							<div className="img-data">
+								<img src={image} alt="Product Image" id="productImageID" />
+							</div>
+							<div className="img-navigation-data">
+								<button
+									className="btn-arrow-left"
+									onClick={() => {
+										classImg != 1 && classImg >= 1 && setClassImg(classImg - 1);
+									}}
+								>
+									<img
+										src={Arrow}
+										alt="Arrow left"
+										style={{ transform: "rotate(180deg)" }}
+									/>
+								</button>
+								<div>
+									<button
+										onClick={() => {
+											setClassImg(1);
+										}}
+									>
+										<img
+											src={image}
+											alt="Product Image"
+											className={classImg == 1 ? "active-img" : ""}
+										/>
+									</button>
+									<button
+										onClick={() => {
+											setClassImg(2);
+										}}
+									>
+										<img
+											src={image}
+											alt="Product Image"
+											className={classImg == 2 ? "active-img" : ""}
+										/>
+									</button>
+									<button
+										onClick={() => {
+											setClassImg(3);
+										}}
+									>
+										<img
+											src={image}
+											alt="Product Image"
+											className={classImg == 3 ? "active-img" : ""}
+										/>
+									</button>
+									<button
+										onClick={() => {
+											setClassImg(4);
+										}}
+									>
+										<img
+											src={image}
+											alt="Product Image"
+											className={classImg == 4 ? "active-img" : ""}
+										/>
+									</button>
+								</div>
+								<button
+									className="btn-arrow-right"
+									onClick={() => {
+										classImg != 4 && classImg <= 4 && setClassImg(classImg + 1);
+									}}
+								>
+									<img src={Arrow} alt="Arrow left" />
+								</button>
+							</div>
+						</div>
 
             <div className="box-content-data">
               <div className="box-text-data">
@@ -357,50 +365,59 @@ const ProductData = () => {
                 <p>{product.description}</p>
                 <div className="box-stars-data">
                   <div className="content-stars-data">
-                    <img
-                      src={
-                        product.stars > 0 && product.stars >= 1
-                          ? StarFill
-                          : Star
-                      }
-                      alt="Stars"
-                    />
-                    <img
-                      src={
-                        product.stars > 1 && product.stars >= 2
-                          ? StarFill
-                          : Star
-                      }
-                      alt="Stars"
-                    />
-                    <img
-                      src={
-                        product.stars > 2 && product.stars >= 3
-                          ? StarFill
-                          : Star
-                      }
-                      alt="Stars"
-                    />
-                    <img
-                      src={
-                        product.stars > 3 && product.stars >= 4
-                          ? StarFill
-                          : Star
-                      }
-                      alt="Stars"
-                    />
-                    <img
-                      src={
-                        product.stars > 4 && product.stars >= 5
-                          ? StarFill
-                          : Star
-                      }
-                      alt="Stars"
-                    />
+                    <Link to={`/review/${product.id}`}>
+                      <img
+                        src={
+                          product.stars > 0 && product.stars >= 1
+                            ? StarFill
+                            : Star
+                        }
+                        alt="Stars"
+                      />
+                      <img
+                        src={
+                          product.stars > 1 && product.stars >= 2
+                            ? StarFill
+                            : Star
+                        }
+                        alt="Stars"
+                      />
+                      <img
+                        src={
+                          product.stars > 2 && product.stars >= 3
+                            ? StarFill
+                            : Star
+                        }
+                        alt="Stars"
+                      />
+                      <img
+                        src={
+                          product.stars > 3 && product.stars >= 4
+                            ? StarFill
+                            : Star
+                        }
+                        alt="Stars"
+                      />
+                      <img
+                        src={
+                          product.stars > 4 && product.stars >= 5
+                            ? StarFill
+                            : Star
+                        }
+                        alt="Stars"
+                      />
+                    </Link>
                   </div>
-                  <div className="rating-data">
-                    <span>(0) Ratings</span>
-                  </div>
+                  <Link to={`/review/${product.id}`}>
+                    <div className="rating-data">
+                      {product.totalRating != 1 && (
+                        <span>{product.totalRating} Reviews</span>
+                      )}
+                      {product.totalRating == 1 && (
+                        <span>{product.totalRating} Review</span>
+                      )}
+                    </div>
+                  </Link>
                 </div>
 
                 {product.discount == 0 ? (
@@ -536,17 +553,21 @@ const ProductData = () => {
               >
                 Related Products
               </button>
-              <button
-                className={
-                  container == "Ratings and Reviews" ? "active-btn-data" : ""
-                }
-                style={
-                  container != "Ratings and Reviews" ? { color: "#626262" } : {}
-                }
-                onClick={() => setContainer("Ratings and Reviews")}
-              >
-                Ratings and Reviews
-              </button>
+              <Link to={`/review/${product.id}`}>
+                <button
+                  className={
+                    container == "Ratings and Reviews" ? "active-btn-data" : ""
+                  }
+                  style={
+                    container != "Ratings and Reviews"
+                      ? { color: "#626262" }
+                      : {}
+                  }
+                  onClick={() => setContainer("Ratings and Reviews")}
+                >
+                  Ratings and Reviews
+                </button>
+              </Link>
             </div>
 
             <div className="box-content-btns-data">
@@ -572,12 +593,7 @@ const ProductData = () => {
                   </p>
                 </div>
               )}
-              {container == "Related Products" && (
-                <RelatedProducts
-                  func={"container"}
-                  productsFiltered={productsFiltered}
-                />
-              )}
+              {container == "Related Products" && <RelatedProducts />}
               {container == "Ratings and Reviews" && <RatingsAndReviews />}
             </div>
           </div>
