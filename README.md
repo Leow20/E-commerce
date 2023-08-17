@@ -23,9 +23,9 @@ Project carried out in a squad during our internship at Compass UOL, with the ai
 ## 📱Layout
 ![tela de cadastro](project-ecommerce/src/assets/README/telaCadastro.png)
 
-![tela de produto](project-ecommerce/src/assets/README/pageProduto.png)
-
 ![tela de login](project-ecommerce/src/assets/README/telaLogin.png)
+
+![tela de produto](project-ecommerce/src/assets/README/pageProduto.png)
 
 ![tela de compra](project-ecommerce/src/assets/README/pageCompra.png)
 
