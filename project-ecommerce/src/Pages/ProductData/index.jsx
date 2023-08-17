@@ -518,16 +518,16 @@ const ProductData = () => {
                 </div>
               </div>
 
-							<div className="box-btns-data">
-								<BagButton product={product} qty={qtd} />
-								<WishlistButton
-									className="add-fav"
-									product={product}
-									text="Add to Wishlist"
-								/>
-							</div>
-						</div>
-					</div>
+              <div className="box-btns-data">
+                <BagButton product={product} qty={qtd} />
+                <WishlistButton
+                  className="add-fav"
+                  product={product}
+                  text="Add to Wishlist"
+                />
+              </div>
+            </div>
+          </div>
 
           <div className="container-content-data">
             <div className="btns-box-content-data">

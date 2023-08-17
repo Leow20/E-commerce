@@ -1,0 +1,140 @@
+.container-modal-summary .page-wrapper-modal-info {
+  position: fixed;
+  align-items: unset;
+  padding-left: 11px;
+}
+
+.container-modal-summary {
+  width: 100%;
+  padding-left: 16px;
+}
+
+.container-select-deliver {
+  margin-top: 30px;
+}
+
+.container-select-deliver p {
+  color: #626262;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+.content-select-deliver {
+  width: 97.5%;
+  height: 70px;
+  max-width: 410px;
+  border-radius: 8px;
+  background-color: #f4f4f4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  margin: 8px 0 24px;
+}
+
+.address-select-deliver {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.address-select-deliver span:nth-child(1) {
+  color: #171520;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+  width: 100%;
+}
+
+.address-select-deliver span:nth-child(2) {
+  color: #626262;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.edit-current-address {
+  width: 40px;
+  height: 44px;
+  background-color: #1b4b66;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-img-summary-modal span {
+  color: #626262;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+.content-img-summary {
+  width: 100%;
+  max-height: 162px;
+  overflow: auto;
+  margin-top: 12px;
+}
+
+.container-img-summary-modal img {
+  width: 56px;
+  height: 56px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.content-product-summary {
+  display: flex;
+  flex-direction: row;
+}
+
+.content-product-summary div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+
+.content-product-summary div span {
+  color: #626262;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.content-product-summary div span:nth-child(1) {
+  color: #171520;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+.container-modal-summary .space-order {
+  margin-left: -16px;
+}
+
+.button-proceed {
+  width: 95%;
+  height: 44px;
+  margin: 11px auto;
+  background-color: #1b4b66;
+  color: #fff;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.container-modal-summary .page-wrapper-modal-info header {
+  padding-left: 4px;
+}

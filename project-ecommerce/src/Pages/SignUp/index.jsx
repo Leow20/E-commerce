@@ -140,7 +140,7 @@ const SignUp = () => {
 			dateOfBirth: dateOfBirth,
 			uid: id,
 		})
-			.then(() => {})
+			.then(() => { })
 			.catch((error) => {
 				console.log(error);
 			});
@@ -232,14 +232,14 @@ const SignUp = () => {
 								}}
 								style={
 									(email == "" && showError == "Fill in all fields") ||
-									(email != "" && showError == "Enter a valid email address") ||
-									(email != "" && showError == "Email already exists")
+										(email != "" && showError == "Enter a valid email address") ||
+										(email != "" && showError == "Email already exists")
 										? { border: "1px solid red" }
 										: {}
 								}
 							/>
 							{(email != "" && showError == "Enter a valid email address") ||
-							(email != "" && showError == "Email already exists") ? (
+								(email != "" && showError == "Email already exists") ? (
 								<p>{showError}</p>
 							) : null}
 						</div>
@@ -297,8 +297,8 @@ const SignUp = () => {
 								}}
 								style={
 									(dateOfBirth == "" && showError == "Fill in all fields") ||
-									(dateOfBirth != "" &&
-										showError == "User must be over 18 years old")
+										(dateOfBirth != "" &&
+											showError == "User must be over 18 years old")
 										? { border: "1px solid red" }
 										: {}
 								}
@@ -320,10 +320,10 @@ const SignUp = () => {
 								}}
 								style={
 									(password == "" && showError == "Fill in all fields") ||
-									(password != "" &&
-										showError ==
+										(password != "" &&
+											showError ==
 											"Password must have at least 6 characters, 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character.") ||
-									(password != "" && showError == "Passwords do not match")
+										(password != "" && showError == "Passwords do not match")
 										? { border: "1px solid red" }
 										: {}
 								}
@@ -336,7 +336,7 @@ const SignUp = () => {
 							</div>
 							{password != "" &&
 								showError ==
-									"Password must have at least 6 characters, 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character." && (
+								"Password must have at least 6 characters, 1 number, 1 uppercase letter, 1 lowercase letter, and 1 special character." && (
 									<p>{showError}</p>
 								)}
 						</div>
@@ -353,8 +353,8 @@ const SignUp = () => {
 								style={
 									(confirmPassword == "" &&
 										showError == "Fill in all fields") ||
-									(confirmPassword != "" &&
-										showError == "Passwords do not match")
+										(confirmPassword != "" &&
+											showError == "Passwords do not match")
 										? { border: "1px solid red" }
 										: {}
 								}
@@ -384,7 +384,7 @@ const SignUp = () => {
 
 					<div className="btn-and-link-signup">
 						<button type="submit" id="submitSignupId">
-							Cadastre-se
+							Sign Up
 						</button>
 						<span>
 							Already have an account? <Link to="/login">Login now</Link>

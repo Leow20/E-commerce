@@ -22,6 +22,7 @@ import Footer from "../../components/Footer";
 import ProfileInfo from "../../components/ProfileInfo";
 import Wishlist from "../../components/Wishlist";
 import ReferAndEarn from "../../components/ReferAndEarn";
+import AddressBook from "../../components/AddressBook";
 import { signOut } from "firebase/auth";
 import { auth, storage } from "../../../firebaseConnection";
 import { toast } from "react-toastify";
@@ -60,7 +61,7 @@ const Profile = () => {
       case "My Reviews":
         setTranslate("translateY(240px)");
         break;
-      case "My Addres Book":
+      case "My Address Book":
         setTranslate("translateY(300px)");
         break;
       case "My Saved Cards":
@@ -117,6 +118,7 @@ const Profile = () => {
           {selectedTab == "My Wishlist" && <Wishlist />}
           {selectedTab == "Refer and Earn" && <ReferAndEarn />}
           {selectedTab == "My Reviews" && <MyReviews />}
+          {selectedTab == "My Address Book" && <AddressBook />}
         </div>
       )}
       <>
@@ -290,20 +292,20 @@ const Profile = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/profile/My Addres Book">
-                      <button onClick={() => handleTabChange("My Addres Book")}>
+                    <Link to="/profile/My Address Book">
+                      <button onClick={() => handleTabChange("My Address Book")}>
                         <label
                           style={
-                            selectedTab == "My Addres Book" && !isMobile
+                            selectedTab == "My Address Book" && !isMobile
                               ? { color: "#1B4B66" }
                               : { color: "#13101E" }
                           }
                         >
-                          My Addres Book
+                          My Address Book
                         </label>
                         <img
                           src={
-                            selectedTab == "My Addres Book" && !isMobile
+                            selectedTab == "My Address Book" && !isMobile
                               ? greenArrow
                               : arrowProfile
                           }
@@ -357,6 +359,7 @@ const Profile = () => {
               {selectedTab == "My Wishlist" && <Wishlist />}
               {selectedTab == "Refer and Earn" && <ReferAndEarn />}
               {selectedTab == "My Reviews" && <MyReviews />}
+              {selectedTab == "My Address Book" && <AddressBook />}
             </div>
           </div>
         </div>
