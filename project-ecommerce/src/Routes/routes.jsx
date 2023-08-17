@@ -12,6 +12,8 @@ import Login from "../Pages/Login";
 import SignUp from "../Pages/SignUp";
 import AddProduct from "../Pages/AddProduct";
 import GetStarted from "../Pages/GetStarted";
+import ProductData from "../Pages/ProductData";
+import ResultCategories from "../Pages/ResultCategories";
 import Erro404 from "../Pages/Page404";
 
 //Routes private

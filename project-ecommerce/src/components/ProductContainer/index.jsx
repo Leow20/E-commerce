@@ -38,6 +38,7 @@ const ProductContainer = ({ product }) => {
 						key={product.id}
 					>
 						<img src={product.url} alt="Imagem Produto" />
+						<h5 className="tranding-product-home">Tranding</h5>
 					</button>
 					<div
 						className="arrival-content-home"
@@ -75,6 +76,7 @@ const ProductContainer = ({ product }) => {
 				<>
 					<Link to={`/product/${product.id}`} key={product.id}>
 						<img src={product.url} alt="Imagem Produto" />
+						<h5 className="tranding-product-home">Tranding</h5>
 					</Link>
 					<div
 						className="arrival-content-home"
