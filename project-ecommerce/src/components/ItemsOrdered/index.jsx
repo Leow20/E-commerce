@@ -14,7 +14,7 @@ import BagButton from "../BagButton";
 import ButtonBigMob from "../../components/ButtonBigMobile";
 import { useMediaQuery } from "react-responsive";
 
-const ItemsOrdered = ({ isOpen, order, orderKey, state }) => {
+const ItemsOrdered = ({ isOpen, order, state }) => {
   const [firstTime, setFirstTime] = useState(false);
   const [open, setOpen] = useState(false);
   const [show, setShow] = useState("page-wrapper-modal-info");
@@ -54,7 +54,7 @@ const ItemsOrdered = ({ isOpen, order, orderKey, state }) => {
               </header>
               <div className="card-items-ordered">
                 <div className="cart-text-ordered">
-                  <span>{`#${orderKey}`}</span>
+                  <span>{`Order#${order.orderCode}`}</span>
                   <div>
                     <span>Place On</span>
                     <span>{order.date}</span>

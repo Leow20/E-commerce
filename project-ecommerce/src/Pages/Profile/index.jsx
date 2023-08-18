@@ -39,6 +39,7 @@ const Profile = () => {
   const [translate, setTranslate] = useState("");
   const isMobile = useMediaQuery({ maxWidth: 820 });
   const [show, setShow] = useState("page-wrapper-modal-info");
+  const [orderCode, setOrderCode] = useState("");
 
   const navigate = useNavigate();
 
@@ -103,6 +104,11 @@ const Profile = () => {
     });
   };
 
+  useEffect(() => {
+    var orderData = localStorage.getItem("orderData");
+    setOrderCode(JSON.stringify(orderData));
+  }, [selectedTab]);
+
   return (
     <>
       {selectedTab !== "" && isMobile && (
@@ -112,7 +118,7 @@ const Profile = () => {
               <img src={arrowProfile} alt="icone seta" />
             </div>
 
-            <h1>{selectedTab}</h1>
+            <h1>{orderCode}</h1>
           </header>
           {selectedTab == "Personal Information" && <ProfileInfo />}
           {selectedTab == "My Wishlist" && <Wishlist />}

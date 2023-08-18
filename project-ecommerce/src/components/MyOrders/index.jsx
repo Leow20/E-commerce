@@ -33,9 +33,7 @@ const MyOrders = ({ user }) => {
         querySnapshot.docs.forEach((doc) => {
           console.log(user.uid);
           console.log(doc.id);
-          if (doc.id == "udFgAEvijnTh0KRq2Q32xemn0Dg2") {
-            //  PRECISA SUBSTITUIR ESTE ID
-
+          if (doc.id == user.uid) {
             let dadosPedidos = {
               id: doc.id,
               ...doc.data(),
@@ -79,17 +77,15 @@ const MyOrders = ({ user }) => {
 
   console.log(orders);
 
-  function handleItemOrdered(orderKey, order, state) {
+  function handleItemOrdered(order, state) {
     if (isMobile) {
       setIsOpen(!isOpen);
       setOrder(order);
-      setId(orderKey);
       setState(state);
     } else {
       setOpenOrdered(true);
       setIsOpen(!isOpen);
       setOrder(order);
-      setId(orderKey);
       setState(state);
     }
   }
@@ -168,17 +164,16 @@ const MyOrders = ({ user }) => {
                   const orderKey = Object.keys(order)[0];
                   const orderData = order[orderKey];
                   const tab = order.tab;
+
                   return (
                     <div key={index}>
                       <div
                         className="card-order"
-                        onClick={() =>
-                          handleItemOrdered(orderKey, orderData, tab)
-                        }
+                        onClick={() => handleItemOrdered(orderData, tab)}
                       >
                         <div className="text-card-order">
                           <span>{orderData.date}</span>
-                          <span>#{orderKey}</span>
+                          <span>#{orderData.orderCode}</span>
                           <span>${orderData.prices.totalPrecoSemDesconto}</span>
                           {!isMobile && selectedTab == "Completed" && (
                             <span>Paid</span>
@@ -199,7 +194,7 @@ const MyOrders = ({ user }) => {
           </div>
         </>
       )}
-      <ItemsOrdered isOpen={isOpen} order={order} orderKey={id} state={state} />
+      <ItemsOrdered isOpen={isOpen} order={order} state={state} />
       <OrderedDesktop
         isOpen={openOrdered}
         order={order}
