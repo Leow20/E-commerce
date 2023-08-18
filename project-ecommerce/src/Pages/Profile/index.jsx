@@ -28,9 +28,9 @@ import { auth, storage } from "../../../firebaseConnection";
 import { toast } from "react-toastify";
 
 //Context
+import MyOrders from "../../components/MyOrders";
 import { useContext } from "react";
 import { UserContext } from "../../Contexts/user";
-import MyOrders from "../../components/MyOrders";
 
 const Profile = () => {
   const { user } = useContext(UserContext);
@@ -118,7 +118,7 @@ const Profile = () => {
           {selectedTab == "My Wishlist" && <Wishlist />}
           {selectedTab == "Refer and Earn" && <ReferAndEarn />}
           {selectedTab == "My Address Book" && <AddressBook />}
-          {selectedTab == "My Orders" && <MyOrders />}
+          {selectedTab == "My Orders" && <MyOrders user={user} />}
         </div>
       )}
       <>
@@ -361,7 +361,7 @@ const Profile = () => {
               {selectedTab == "My Wishlist" && <Wishlist />}
               {selectedTab == "Refer and Earn" && <ReferAndEarn />}
               {selectedTab == "My Address Book" && <AddressBook />}
-              {selectedTab == "My Orders" && <MyOrders />}
+              {selectedTab == "My Orders" && <MyOrders user={user} />}
             </div>
           </div>
         </div>

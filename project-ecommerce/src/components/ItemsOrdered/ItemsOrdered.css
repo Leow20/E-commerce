@@ -156,6 +156,7 @@
   width: 94%;
   margin-bottom: 11px;
   margin-top: 11px;
+  max-width: unset;
 }
 
 .separator-ordered {
@@ -172,7 +173,7 @@
   gap: 8px;
 }
 
-.container-order-details div {
+.container-order-details .content-price-ordered {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -182,14 +183,14 @@
   margin-bottom: 8px;
 }
 
-.container-order-details div span:first-child {
+.container-order-details .content-price-ordered span:first-child {
   color: #626262;
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
 }
 
-.container-order-details div span:last-child {
+.container-order-details .content-price-ordered span:last-child {
   color: #171520;
   text-align: right;
   font-size: 14px;
@@ -220,12 +221,13 @@
 }
 
 .content-details-state div {
-  width: 46px;
+  width: auto;
   height: 22px;
   background-color: #f1f1f1;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 5px;
 }
 
 .content-details-state div span {
@@ -291,12 +293,94 @@
     margin: 0;
   }
 
-  .content-products-ordered div {
+  .content-products-ordered > div {
     flex-direction: row;
+    justify-content: space-between;
   }
 
   .content-products-ordered img {
     width: 75px;
     height: 80px;
+  }
+
+  .content-info-ordered {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .text-info-ordered {
+    width: 100%;
+  }
+
+  .text-info-ordered span {
+    padding: 0;
+  }
+
+  .container-qty-price {
+    display: flex;
+    flex-direction: row !important;
+    gap: 50px !important;
+  }
+
+  .text-info-ordered span:nth-child(1),
+  .text-info-ordered span:nth-child(2) {
+    font-size: 16px;
+  }
+
+  .title-oder-information {
+    color: #13101e;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 26px;
+    margin-top: 53px;
+  }
+
+  .container-sections-information span {
+    padding: 0;
+  }
+
+  .container-order-details {
+    margin-left: 0;
+  }
+
+  .section-order-details {
+    width: 260px;
+  }
+
+  .page-wrapper-web-ordered p {
+    margin-top: 16px;
+  }
+
+  .container-address-details {
+    margin-left: 0;
+  }
+
+  .section-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .buttons-ordered-web {
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    margin-top: 46px;
+    gap: 24px;
+  }
+
+  .buttons-ordered-web button:nth-child(1) {
+    width: 136px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background-color: #1b4b66;
+    color: #fff;
+  }
+
+  .buttons-ordered-web .button-ordered {
+    height: 40px;
   }
 }

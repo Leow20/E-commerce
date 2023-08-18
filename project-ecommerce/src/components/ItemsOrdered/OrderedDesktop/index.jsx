@@ -1,32 +1,9 @@
 import React, { useState } from "react";
 
 import bolsa from "../../../assets/Img/bolsa_rosa.jpg";
+import { Link } from "react-router-dom";
 
-const bag = [
-  {
-    id: 1,
-    name: "coach",
-    descrition: "bolsa daora",
-    price: "$54.99",
-    qty: 1,
-  },
-  {
-    id: 2,
-    name: "handbag",
-    descrition: "bolsa daora",
-    price: "$154.99",
-    qty: 2,
-  },
-  {
-    id: 3,
-    name: "coach",
-    descrition: "bolsa daora",
-    price: "$54.99",
-    qty: 1,
-  },
-];
-
-const OrderedDesktop = ({ isOpen }) => {
+const OrderedDesktop = ({ isOpen, order, orderKey, state }) => {
   const [selectedTab, setSelectedTab] = useState("Items Ordered");
 
   return (
@@ -95,21 +72,76 @@ const OrderedDesktop = ({ isOpen }) => {
           <p>Product Name</p>
           <hr />
           <div className="container-products-ordered">
-            {bag.map((product) => (
+            {order.bag.map((product) => (
               <div className="content-products-ordered">
                 <div>
-                  <img src={bolsa} alt="imagem do produto" />
+                  <img src={product.url} alt="imagem do produto" />
                 </div>
                 <div className="text-info-ordered">
-                  <div>
+                  <div className="content-info-ordered">
                     <span>{product.name}</span>
-                    <span>{product.descrition}</span>
+                    <span>{product.description}</span>
                   </div>
-                  <span>{product.price}</span>
-                  <span>Qty- {product.qty}</span>
+                  <div className="container-qty-price">
+                    <span>{product.price}</span>
+                    <span>Qty- {product.qtyBag}</span>
+                  </div>
                 </div>
               </div>
             ))}
+            <div className="container-sections-information">
+              <h4 className="title-oder-information">Order Information</h4>
+              <hr />
+              <div className="section-container">
+                <section className="section-order-details">
+                  <p>Order Details</p>
+                  <div className="container-order-details">
+                    <div className="content-price-ordered">
+                      <span>Sub Total</span>
+                      <span>
+                        ${order.prices.totalPrecoSemDesconto.toFixed(2)}
+                      </span>
+                    </div>
+                    <div className="content-price-ordered">
+                      <span>Discount</span>
+                      <span>${order.prices.totalDesconto.toFixed(2)}</span>
+                    </div>
+                    <div className="content-price-ordered">
+                      <span>Delivery Free</span>
+                      <span>-$0.00</span>
+                    </div>
+                    <div className="content-price-ordered">
+                      <span>Grand Total</span>
+                      <span>
+                        ${order.prices.totalPrecoComDesconto.toFixed(2)}
+                      </span>
+                    </div>
+                  </div>
+                </section>
+                <section className="payment-details-ordered">
+                  <p>Payment Details</p>
+                  <span>{order.typeOfPayment}</span>
+                </section>
+                <section>
+                  <p>Address Details</p>
+                  <div className="container-address-details">
+                    <div className="content-details-state">
+                      <span>{order.address.name}</span>
+                      <div>
+                        <span>{order.address.selectedButton}</span>
+                      </div>
+                    </div>
+                    <span>{order.address.street}</span>
+                    <span>{order.address.city}</span>
+                    <span>{order.address.pinCode}</span>
+                  </div>
+                </section>
+              </div>
+              <div className="buttons-ordered-web">
+                <button>Reorder</button>
+                <button className="button-ordered">Add Rating</button>
+              </div>
+            </div>
           </div>
         </div>
       )}
