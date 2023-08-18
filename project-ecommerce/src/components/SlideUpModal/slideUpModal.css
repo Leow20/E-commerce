@@ -291,8 +291,3 @@ input[type="radio"]:checked + .input-radio span {
   max-height: 24px;
   padding: 0 !important;
 }
-
-.box-product-details img {
-  border: #ff8c4b 3px solid;
-  border-radius: 4px;
-}

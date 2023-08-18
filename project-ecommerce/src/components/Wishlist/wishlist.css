@@ -175,11 +175,10 @@
     font-weight: 500;
     line-height: 16px;
     text-decoration-line: line-through;
-
   }
 
   .box-price h5 {
-    color: #E21D1D;
+    color: #e21d1d;
     font-size: 8px;
     font-weight: 500;
     line-height: 16px;
@@ -204,9 +203,8 @@
   }
 }
 
-.tranding-wishlist{
-  position: relative;
-  left: 80px;
+.tranding-wishlist {
+  position: absolute;
   background-color: #ff8c4b;
   color: white;
   width: 63px;

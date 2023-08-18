@@ -179,8 +179,14 @@ const MyBag = () => {
                 <hr />
 
                 {bag.map((product, index) => (
-                  <div className="product-pic-mybag tranding-web" key={product.id}>
+                  <div
+                    className="product-pic-mybag tranding-web"
+                    key={product.id}
+                  >
                     <img src={product.url} />
+                    {product.stars >= 4.5 ? (
+                      <h5 className="tranding-bag-web">Tranding</h5>
+                    ) : null}
                     <div className="text-mybag">
                       <p>{product.name}</p>
                       <p>{truncateDescription(product.description, 3)}</p>
@@ -327,7 +333,9 @@ const MyBag = () => {
                 <div>
                   {bag.map((product, index) => (
                     <div className="box-product" key={product.id}>
-                      <h5 className="mybag-tranding-mob">Tranding</h5>
+                      {product.stars >= 4.5 ? (
+                        <h5 className="mybag-tranding-mob">Tranding</h5>
+                      ) : null}
                       <div className="box-aling">
                         <img src={product.url} />
                         <div className="info-mybag">
