@@ -11,7 +11,7 @@
   padding-top: 20px;
 }
 
-.windonw-web-mybag > h1 {
+.windonw-web-mybag>h1 {
   font-size: 34px;
   font-weight: 600;
   line-height: 44px;
@@ -225,7 +225,8 @@
 
 .summary-mybag {
   margin-left: 5%;
-  width: 411px;
+  max-width: 411px;
+  min-width: 200px;
 }
 
 .summary-mybag h4 {
@@ -264,7 +265,7 @@
   background: rgba(0, 0, 0, 0.12);
 }
 
-.summary-btns-mybag button:first-child {
+.summary-btns-mybag a:first-child {
   background-color: #1b4b66;
   color: white;
 }
@@ -273,7 +274,8 @@
   color: #1b4b66;
 }
 
-.summary-btns-mybag button {
+.summary-btns-mybag button,
+.summary-btns-mybag a {
   display: flex;
   justify-content: center;
   align-items: center;

@@ -18,11 +18,16 @@ import AmazonPay from "../../assets/icons/amazon-pay.svg";
 import UPI from "../../assets/icons/UPI.svg";
 import Card from "../../assets/icons/Card.svg";
 
-const Payments = () => {
-	const [content, setContent] = useState("");
-	const [payment, setPayment] = useState("");
-	const [save, setSave] = useState(false);
-
+const Payments = ({
+	content,
+	setContent,
+	payment,
+	setPayment,
+	save,
+	setSave,
+	codePayment,
+	setCodePayment,
+}) => {
 	const isMobile = useMediaQuery({ maxWidth: 820 });
 
 	if (isMobile) {
@@ -59,6 +64,8 @@ const Payments = () => {
 									select={setPayment}
 									classNameImg={"credit"}
 									payment={payment}
+									codePayment={codePayment}
+									setCodePayment={setCodePayment}
 								/>
 								<ContentPayment
 									image={
@@ -77,6 +84,8 @@ const Payments = () => {
 									classNameImg={"credit"}
 									select={setPayment}
 									payment={payment}
+									codePayment={codePayment}
+									setCodePayment={setCodePayment}
 								/>
 							</div>
 						</>
@@ -109,6 +118,8 @@ const Payments = () => {
 									select={setPayment}
 									payment={payment}
 									id={GooglePay}
+									codePayment={codePayment}
+									setCodePayment={setCodePayment}
 								/>
 								<ContentPayment
 									image={PhonePe}
@@ -116,6 +127,8 @@ const Payments = () => {
 									select={setPayment}
 									payment={payment}
 									classNameImg="upi"
+									codePayment={codePayment}
+									setCodePayment={setCodePayment}
 								/>
 								<ContentPayment
 									image={Paytm}
@@ -123,6 +136,8 @@ const Payments = () => {
 									select={setPayment}
 									payment={payment}
 									classNameImg="upi"
+									codePayment={codePayment}
+									setCodePayment={setCodePayment}
 								/>
 							</div>
 							{payment === "Paytm" ||
@@ -135,6 +150,10 @@ const Payments = () => {
 											name="UPI ID"
 											id="upiID"
 											placeholder="Enter your UPI Id"
+											value={codePayment}
+											onChange={(e) => {
+												setCodePayment(e.target.value);
+											}}
 										/>
 										<p>Eg: 1234567890@ybl</p>
 									</div>
@@ -183,6 +202,8 @@ const Payments = () => {
 									select={setPayment}
 									classNameImg={"apple"}
 									payment={payment}
+									codePayment={codePayment}
+									setCodePayment={setCodePayment}
 								/>
 								<ContentPayment
 									image={ApplePay}
@@ -190,6 +211,8 @@ const Payments = () => {
 									select={setPayment}
 									payment={payment}
 									classNameImg={"apple"}
+									codePayment={codePayment}
+									setCodePayment={setCodePayment}
 								/>
 							</div>
 							{payment === "Apple Gift Card" ? (
@@ -200,6 +223,10 @@ const Payments = () => {
 											name="UPI ID"
 											id="upiID"
 											placeholder="Enter your Gift Card code"
+											value={codePayment}
+											onChange={(e) => {
+												setCodePayment(e.target.value);
+											}}
 										/>
 										<p>Eg: XXXX-XXXX-XXXX</p>
 									</div>
@@ -237,6 +264,8 @@ const Payments = () => {
 									select={setPayment}
 									classNameImg={"credit"}
 									payment={payment}
+									codePayment={codePayment}
+									setCodePayment={setCodePayment}
 								/>
 								<ContentPayment
 									image={AmazonPay}
@@ -244,6 +273,8 @@ const Payments = () => {
 									classNameImg={"credit"}
 									payment={payment}
 									select={setPayment}
+									codePayment={codePayment}
+									setCodePayment={setCodePayment}
 								/>
 							</div>
 							{payment === "Amazon Gift Card" ? (
@@ -254,6 +285,10 @@ const Payments = () => {
 											name="UPI ID"
 											id="upiID"
 											placeholder="Enter your Gift Card code"
+											value={codePayment}
+											onChange={(e) => {
+												setCodePayment(e.target.value);
+											}}
 										/>
 										<p>Eg: XXXX-XXXX-XXXX</p>
 									</div>
@@ -352,6 +387,8 @@ const Payments = () => {
 								select={setPayment}
 								classNameImg={"credit"}
 								payment={payment}
+								codePayment={codePayment}
+								setCodePayment={setCodePayment}
 							/>
 							<ContentPayment
 								image={
@@ -361,6 +398,8 @@ const Payments = () => {
 								classNameImg={"credit"}
 								select={setPayment}
 								payment={payment}
+								codePayment={codePayment}
+								setCodePayment={setCodePayment}
 							/>
 							<ContentPayment
 								image={
@@ -370,6 +409,8 @@ const Payments = () => {
 								classNameImg={"credit"}
 								select={setPayment}
 								payment={payment}
+								codePayment={codePayment}
+								setCodePayment={setCodePayment}
 							/>
 						</div>
 					</>
@@ -385,6 +426,8 @@ const Payments = () => {
 								id={GooglePay}
 								save={save}
 								setSave={setSave}
+								codePayment={codePayment}
+								setCodePayment={setCodePayment}
 							/>
 
 							<ContentPayment
@@ -395,6 +438,8 @@ const Payments = () => {
 								classNameImg="upi"
 								save={save}
 								setSave={setSave}
+								codePayment={codePayment}
+								setCodePayment={setCodePayment}
 							/>
 
 							<ContentPayment
@@ -405,6 +450,8 @@ const Payments = () => {
 								classNameImg="upi"
 								save={save}
 								setSave={setSave}
+								codePayment={codePayment}
+								setCodePayment={setCodePayment}
 							/>
 						</div>
 					</>
@@ -438,6 +485,8 @@ const Payments = () => {
 								select={setPayment}
 								classNameImg={"apple"}
 								payment={payment}
+								codePayment={codePayment}
+								setCodePayment={setCodePayment}
 							/>
 
 							<ContentPayment
@@ -446,6 +495,8 @@ const Payments = () => {
 								classNameImg={"apple"}
 								payment={payment}
 								select={setPayment}
+								codePayment={codePayment}
+								setCodePayment={setCodePayment}
 							/>
 						</div>
 					</>
