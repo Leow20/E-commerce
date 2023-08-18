@@ -36,7 +36,14 @@ const Router = () => {
             </Private>
           }
         />
-        <Route path="/mybag" element={<MyBag />} />
+        <Route
+          path="/mybag"
+          element={
+            <Private>
+              <MyBag />
+            </Private>
+          }
+        />
         <Route path="/notification" element={<Notification />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
