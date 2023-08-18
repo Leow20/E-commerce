@@ -167,7 +167,8 @@ const Checkout = () => {
 		if (!isMobile && user) {
 			if (VerifyAddressAndPayment() === true) {
 				const object = {
-					[order]: {
+					order: {
+						orderCode: order,
 						date: getCurrentFormattedDate(),
 						paymentMethod: content,
 						typeOfPayment: payment,
@@ -214,7 +215,8 @@ const Checkout = () => {
 				(payment === "Apple Gift Card" && codePayment !== "")
 			) {
 				const object = {
-					[order]: {
+					order: {
+						orderCode: order,
 						date: getCurrentFormattedDate(),
 						paymentMethod: content,
 						typeOfPayment: payment,
@@ -235,7 +237,7 @@ const Checkout = () => {
 				await setDoc(doc(db, "payments", user.uid), { data: arrOrder }).then(
 					async () => {
 						await setDoc(doc(db, "bag", user.uid), { data: [] }).then(() => {
-							toast.success("Congratiolationssssssssssss");
+							toast.success("Payment successful!");
 							loadBag();
 						});
 						loadOrders();
@@ -267,7 +269,7 @@ const Checkout = () => {
 	function generateRandom6DigitNumber() {
 		const min = 10000;
 		const max = 99999;
-		setOrder("ORDER" + (Math.floor(Math.random() * (max - min + 1)) + min));
+		setOrder(Math.floor(Math.random() * (max - min + 1)) + min);
 	}
 	const calculateTotalPrice = (produtos) => {
 		let totalDesconto = 0;
@@ -359,8 +361,9 @@ const Checkout = () => {
 								src={ArrowDown}
 								alt="Arrow Down"
 								style={{
-									transform: `rotate(${contentCheckout === "Product Details" ? "180deg" : "0deg"
-										})`,
+									transform: `rotate(${
+										contentCheckout === "Product Details" ? "180deg" : "0deg"
+									})`,
 								}}
 							/>
 						</button>
@@ -390,8 +393,9 @@ const Checkout = () => {
 								src={ArrowDown}
 								alt="Arrow Down"
 								style={{
-									transform: `rotate(${contentPayment === "Payment Method" ? "180deg" : "0deg"
-										})`,
+									transform: `rotate(${
+										contentPayment === "Payment Method" ? "180deg" : "0deg"
+									})`,
 								}}
 							/>
 						</button>
@@ -450,8 +454,9 @@ const Checkout = () => {
 										src={ArrowDown}
 										alt="Arrow Down"
 										style={{
-											transform: `rotate(${contentCheckout === "New Address" ? "180deg" : "0deg"
-												})`,
+											transform: `rotate(${
+												contentCheckout === "New Address" ? "180deg" : "0deg"
+											})`,
 										}}
 									/>
 								</button>
@@ -500,22 +505,25 @@ const Checkout = () => {
 										</div>
 										<div className="div-buttons-add-address">
 											<button
-												className={`${selectedButton === "Home" ? "selected-button" : ""
-													} button-style-add-address`}
+												className={`${
+													selectedButton === "Home" ? "selected-button" : ""
+												} button-style-add-address`}
 												onClick={() => handleButtonSelect("Home")}
 											>
 												Home
 											</button>
 											<button
-												className={`${selectedButton === "Office" ? "selected-button" : ""
-													} button-style-add-address`}
+												className={`${
+													selectedButton === "Office" ? "selected-button" : ""
+												} button-style-add-address`}
 												onClick={() => handleButtonSelect("Office")}
 											>
 												Office
 											</button>
 											<button
-												className={`${selectedButton === "Other" ? "selected-button" : ""
-													} button-style-add-address`}
+												className={`${
+													selectedButton === "Other" ? "selected-button" : ""
+												} button-style-add-address`}
 												onClick={() => handleButtonSelect("Other")}
 											>
 												Other
@@ -590,8 +598,9 @@ const Checkout = () => {
 										src={ArrowDown}
 										alt="Arrow Down"
 										style={{
-											transform: `rotate(${contentPayment === "Payment Method" ? "180deg" : "0deg"
-												})`,
+											transform: `rotate(${
+												contentPayment === "Payment Method" ? "180deg" : "0deg"
+											})`,
 										}}
 									/>
 								</button>
