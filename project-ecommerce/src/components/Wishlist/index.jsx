@@ -56,7 +56,6 @@ const Wishlist = () => {
 	};
 	useEffect(() => {
 		loadWishlist();
-		console.log("WISHHHH");
 	}, []);
 
 	if (!loading) {
@@ -146,7 +145,7 @@ const Wishlist = () => {
 		}
 	} else {
 		return (
-			<div className="wishlist">
+			<div className="wishlist-loader">
 				<Loading page={"container"} />
 			</div>
 		);

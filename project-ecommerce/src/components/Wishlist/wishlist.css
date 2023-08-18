@@ -246,7 +246,15 @@
   align-items: center;
 }
 
+.wishlist-loader {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media (width>=820px) {
+
   .box-price h3 {
     font-size: 16px;
   }
