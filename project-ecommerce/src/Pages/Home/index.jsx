@@ -41,11 +41,13 @@ import { ProductContext } from "../../Contexts/products";
 import ProductContainer from "../../components/ProductContainer";
 import { Link } from "react-router-dom";
 import SlideUpModal from "../../components/SlideUpModal";
+import Loading from "../../components/Loading";
 
 const Home = () => {
 	const { products } = useContext(ProductContext);
 	const [tamanhoTela, setTamanhoTela] = useState(window.innerWidth - 37);
 	const [loading, setLoading] = useState(true);
+	const [animation, setAnimation] = useState("");
 
 	useEffect(() => {
 		const atualizarTamanhoTela = () => {
@@ -62,8 +64,12 @@ const Home = () => {
 	useEffect(() => {
 		console.log(products);
 		if (products) {
-			setLoading(false);
+			setTimeout(() => {
+				setLoading(false);
+				setAnimation("close-loading");
+			}, 1000);
 		} else {
+			setAnimation("");
 			setLoading(true);
 		}
 	}, [ProductContext]);
@@ -161,7 +167,7 @@ const Home = () => {
 								</span>
 							</div>
 
-							{!loading && products.length > 0 ? (
+							{!loading ? (
 								<div
 									className="container-arrival-home"
 									style={{ width: tamanhoTela }}
@@ -173,7 +179,12 @@ const Home = () => {
 									))}
 								</div>
 							) : (
-								<div>Loading</div>
+								<div
+									className="container-arrival-home"
+									style={{ marginRight: "0" }}
+								>
+									<Loading page={"container"} animation={animation} />
+								</div>
 							)}
 						</div>
 					</section>
