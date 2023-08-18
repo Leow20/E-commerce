@@ -11,11 +11,13 @@ import {
 	getDoc,
 } from "@firebase/firestore";
 import { getDownloadURL, ref } from "firebase/storage";
+import Loading from "../components/Loading";
 
 export const UserContext = createContext({});
 
 function UserProvider({ children }) {
 	const [user, setUser] = useState("");
+	const [loading, setLoading] = useState(true);
 
 	const fetchUserInfoAndUpdateState = async (uid) => {
 		const q = query(collection(db, "users"), where("uid", "==", uid));
@@ -44,6 +46,7 @@ function UserProvider({ children }) {
 			}
 		}
 		setUser(user);
+		setLoading(false);
 	};
 
 	useEffect(() => {
@@ -56,17 +59,21 @@ function UserProvider({ children }) {
 		});
 	}, []);
 
-	return (
-		<UserContext.Provider
-			value={{
-				user,
-				fetchUserInfoAndUpdateState,
-				handleUploadImage,
-			}}
-		>
-			{children}
-		</UserContext.Provider>
-	);
+	if (!loading) {
+		return (
+			<UserContext.Provider
+				value={{
+					user,
+					fetchUserInfoAndUpdateState,
+					handleUploadImage,
+				}}
+			>
+				{children}
+			</UserContext.Provider>
+		);
+	} else {
+		return <Loading page={"modal"} />;
+	}
 }
 
 export default UserProvider;
