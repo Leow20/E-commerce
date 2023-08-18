@@ -2,15 +2,9 @@ import "./loading.css";
 
 import React from "react";
 
-const Loading = ({ page, animation }) => {
+const Loading = ({ page }) => {
 	return (
-		<div
-			className={
-				page === "modal"
-					? `loading-modal ${animation}`
-					: `loading-container ${animation}`
-			}
-		>
+		<div className={page === "modal" ? `loading-modal` : `loading-container`}>
 			<div className="loader"></div>
 		</div>
 	);

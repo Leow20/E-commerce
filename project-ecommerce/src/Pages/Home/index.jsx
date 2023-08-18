@@ -40,7 +40,6 @@ import { useContext, useEffect, useState } from "react";
 import { ProductContext } from "../../Contexts/products";
 import ProductContainer from "../../components/ProductContainer";
 import { Link } from "react-router-dom";
-import SlideUpModal from "../../components/SlideUpModal";
 import Loading from "../../components/Loading";
 
 const Home = () => {
@@ -66,10 +65,8 @@ const Home = () => {
 		if (products) {
 			setTimeout(() => {
 				setLoading(false);
-				setAnimation("close-loading");
 			}, 1000);
 		} else {
-			setAnimation("");
 			setLoading(true);
 		}
 	}, [ProductContext]);
@@ -183,7 +180,7 @@ const Home = () => {
 									className="container-arrival-home"
 									style={{ marginRight: "0" }}
 								>
-									<Loading page={"container"} animation={animation} />
+									<Loading page={"container"} />
 								</div>
 							)}
 						</div>
