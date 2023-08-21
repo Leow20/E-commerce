@@ -11,6 +11,23 @@
   background-color: #fff;
 }
 
+.tranding-product-home {
+  position: relative;
+  left: 90px;
+  bottom: 120px;
+  background-color: #ff8c4b;
+  color: white;
+  width: 53px;
+  height: 22px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
+}
+
 @media screen and (min-width: 820px) {
   .img-product-home {
     min-width: 284px;
@@ -29,5 +46,22 @@
   #imgHeartID {
     font-size: 24px;
     padding: 0;
+  }
+
+  .tranding-product-home {
+    position: relative;
+    left: 170px;
+    bottom: 260px;
+    background-color: #ff8c4b;
+    color: white;
+    width: 100px;
+    height: 30px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 500;
   }
 }
