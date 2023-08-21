@@ -28,6 +28,7 @@ import { auth, storage } from "../../../firebaseConnection";
 import { toast } from "react-toastify";
 
 //Context
+import MyOrders from "../../components/MyOrders";
 import { useContext } from "react";
 import { UserContext } from "../../Contexts/user";
 import MyReviews from "../../components/MyReviews";
@@ -39,6 +40,7 @@ const Profile = () => {
   const [translate, setTranslate] = useState("");
   const isMobile = useMediaQuery({ maxWidth: 820 });
   const [show, setShow] = useState("page-wrapper-modal-info");
+  const [orderCode, setOrderCode] = useState("");
 
   const navigate = useNavigate();
 
@@ -103,6 +105,11 @@ const Profile = () => {
     });
   };
 
+  useEffect(() => {
+    var orderData = localStorage.getItem("orderData");
+    setOrderCode(JSON.stringify(orderData));
+  }, [selectedTab]);
+
   return (
     <>
       {selectedTab !== "" && isMobile && (
@@ -112,13 +119,14 @@ const Profile = () => {
               <img src={arrowProfile} alt="icone seta" />
             </div>
 
-            <h1>{selectedTab}</h1>
+            <h1>{orderCode}</h1>
           </header>
           {selectedTab == "Personal Information" && <ProfileInfo />}
           {selectedTab == "My Wishlist" && <Wishlist />}
           {selectedTab == "Refer and Earn" && <ReferAndEarn />}
           {selectedTab == "My Reviews" && <MyReviews />}
           {selectedTab == "My Address Book" && <AddressBook />}
+          {selectedTab == "My Orders" && <MyOrders user={user} />}
         </div>
       )}
       <>
@@ -293,7 +301,9 @@ const Profile = () => {
                   </li>
                   <li>
                     <Link to="/profile/My Address Book">
-                      <button onClick={() => handleTabChange("My Address Book")}>
+                      <button
+                        onClick={() => handleTabChange("My Address Book")}
+                      >
                         <label
                           style={
                             selectedTab == "My Address Book" && !isMobile
@@ -360,6 +370,7 @@ const Profile = () => {
               {selectedTab == "Refer and Earn" && <ReferAndEarn />}
               {selectedTab == "My Reviews" && <MyReviews />}
               {selectedTab == "My Address Book" && <AddressBook />}
+              {selectedTab == "My Orders" && <MyOrders user={user} />}
             </div>
           </div>
         </div>
