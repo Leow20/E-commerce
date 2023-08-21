@@ -313,7 +313,7 @@
   line-height: 171.4%;
 }
 
-.box-btns-data .add-bag {
+.add-bag {
   display: flex;
   width: 272px;
   padding: 10px 0;
@@ -330,7 +330,7 @@
   background-color: #1b4b66;
 }
 
-.box-btns-data .add-bag span {
+.add-bag span {
   color: #fff;
   text-align: center;
   font-size: 14px;

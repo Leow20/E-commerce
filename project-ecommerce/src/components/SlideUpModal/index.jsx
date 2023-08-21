@@ -13,6 +13,7 @@ import arrow from "../../assets/HeaderModal/arrow-right-gray.svg";
 import { useMediaQuery } from "react-responsive";
 import Location from "../../assets/icons/location.svg";
 import Plus from "../../assets/icons/Plus.svg";
+import BagButton from "../BagButton";
 
 const SlideUpModal = ({
 	page,
@@ -150,7 +151,7 @@ const SlideUpModal = ({
 
 									<div className="content-text-stars-data">
 										<h2>Average Rating</h2>
-										<p>43 Ratings & 23 Reviews</p>
+										<p>{product.totalRating} Rating</p>
 									</div>
 								</div>
 								<button>
@@ -195,10 +196,7 @@ const SlideUpModal = ({
 								<Link to={`/product/${product.id}`}>
 									<img src={PlaceHolder} alt="" />
 								</Link>
-								<button>
-									<img src={Bag} alt="" />
-									Add to Bag
-								</button>
+								<BagButton product={product} />
 							</div>
 						</div>
 					)}
