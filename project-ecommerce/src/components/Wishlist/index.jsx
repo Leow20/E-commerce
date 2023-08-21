@@ -31,9 +31,6 @@ const Wishlist = () => {
   const isMobile = useMediaQuery({ maxWidth: 820 });
   const { user } = useContext(UserContext);
   const [wishlist, setWishlist] = useState([]);
-  const isMobile = useMediaQuery({ maxWidth: 820 });
-  const { user } = useContext(UserContext);
-  const [wishlist, setWishlist] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const truncateDescription = (description, maxWords) => {

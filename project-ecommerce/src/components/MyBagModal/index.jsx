@@ -121,7 +121,7 @@ const MyBagModal = ({ hover }) => {
                 <div className="mybag-container-product-header">
                   <div className="img-product-mybag-header">
                     {product.stars >= 4.5 ? (
-                      <h5 className="tranding-modal-bag">Tranding</h5>
+                      <h5 className="Trending-modal-bag">Trending</h5>
                     ) : null}
                     <img src={product.url} />
                   </div>

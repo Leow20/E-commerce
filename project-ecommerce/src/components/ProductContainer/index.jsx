@@ -40,7 +40,7 @@ const ProductContainer = ({ product }) => {
           >
             <img src={product.url} alt="Imagem Produto" />
             {product.stars >= 4.5 ? (
-              <h5 className="tranding-product-home">Tranding</h5>
+              <h5 className="Trending-product-home">Trending</h5>
             ) : null}
           </button>
           <div
@@ -80,7 +80,7 @@ const ProductContainer = ({ product }) => {
           <Link to={`/product/${product.id}`} key={product.id}>
             <img src={product.url} alt="Imagem Produto" />
             {product.stars >= 4.5 ? (
-              <h5 className="tranding-product-home">Tranding</h5>
+              <h5 className="Trending-product-home">Trending</h5>
             ) : null}
           </Link>
           <div

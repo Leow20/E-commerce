@@ -203,7 +203,7 @@
   }
 }
 
-.tranding-wishlist {
+.Trending-wishlist {
   position: absolute;
   background-color: #ff8c4b;
   color: white;
@@ -268,7 +268,6 @@
 }
 
 @media (width>=820px) {
-
   .box-price h3 {
     font-size: 16px;
   }

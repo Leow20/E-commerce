@@ -185,12 +185,12 @@ const MyBag = () => {
 
                   {bag.map((product, index) => (
                     <div
-                      className="product-pic-mybag tranding-web"
+                      className="product-pic-mybag Trending-web"
                       key={product.id}
                     >
                       <img src={product.url} />
                       {product.stars >= 4.5 ? (
-                        <h5 className="tranding-bag-web">Tranding</h5>
+                        <h5 className="Trending-bag-web">Trending</h5>
                       ) : null}
                       <div className="text-mybag">
                         <p>{product.name}</p>
@@ -339,7 +339,7 @@ const MyBag = () => {
                     {bag.map((product, index) => (
                       <div className="box-product" key={product.id}>
                         {product.stars >= 4.5 ? (
-                          <h5 className="mybag-tranding-mob">Tranding</h5>
+                          <h5 className="mybag-Trending-mob">Trending</h5>
                         ) : null}
                         <div className="box-aling">
                           <img src={product.url} />
