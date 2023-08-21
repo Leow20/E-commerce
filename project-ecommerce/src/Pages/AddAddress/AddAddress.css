@@ -1,0 +1,155 @@
+.header-add-address {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-add-address img {
+  justify-content: center;
+  align-items: center;
+  margin: 16px;
+  transform: rotate(180deg);
+}
+
+.header-add-address h1 {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  color: #1b4b66;
+}
+
+.info-add-address {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-add-address p {
+  margin: 8px auto 0 auto;
+  width: 90%;
+  color: #626262;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+.line-add-address {
+  margin: 8px auto 16px auto;
+  width: 90%;
+  border: none;
+  background: var(--seperator, rgba(0, 0, 0, 0.12));
+  height: 1px;
+}
+
+.info-add-address {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+/* .info-add-address select {
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  padding-left: 16px;
+  width: 90%;
+  height: 42px;
+} */
+
+.space-add-address {
+  margin-top: 68px;
+}
+
+.inputs-info-add-address {
+  background-color: #f1f1f1;
+  border: none;
+  border-radius: 4px;
+  margin-bottom: 16px;
+  padding-left: 16px;
+  width: 90%;
+  height: 42px;
+}
+
+.container-phone-add-address {
+  display: flex;
+  width: 90%;
+  justify-content: space-between;
+}
+
+.small-input-add-address {
+  width: 15%;
+  height: 42px;
+  background-color: #f1f1f1;
+  border: none;
+  padding-left: 16px;
+  border-radius: 4px;
+}
+
+.medium-input-add-address {
+  background-color: #f1f1f1;
+  border: none;
+  width: 82%;
+  height: 42px;
+  padding-left: 16px;
+  border-radius: 4px;
+}
+
+.div-buttons-add-address {
+  display: flex;
+  width: 90%;
+  justify-content: flex-start;
+}
+
+.div-buttons-add-address button {
+  padding: 7px 2%;
+  margin-right: 8px;
+  border-radius: 8px;
+  width: 65px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checkbox-add-address {
+  display: flex;
+  margin-top: 74px;
+  justify-content: center;
+}
+
+.checkbox-add-address input {
+  border: 1px solid black;
+  width: 18px;
+  height: 18px;
+  border-radius: 3px;
+}
+
+.aling-checkbox-add-address {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 90%;
+}
+
+.aling-checkbox-add-address p {
+  margin-left: 8px;
+}
+
+.button-save-add-address {
+  display: flex;
+  justify-content: center;
+  margin-top: 43px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.button-save-add-address div {
+  width: 100%;
+  max-width: 360px;
+}
+
+.selected-button {
+  background-color: #1b4b66;
+  color: white;
+}

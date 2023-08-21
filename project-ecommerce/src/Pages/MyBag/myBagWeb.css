@@ -11,7 +11,7 @@
   padding-top: 20px;
 }
 
-.windonw-web-mybag > h1 {
+.windonw-web-mybag>h1 {
   font-size: 34px;
   font-weight: 600;
   line-height: 44px;
@@ -91,6 +91,10 @@
   color: #171520;
 }
 
+.price-qty-mybag p:nth-child(3) {
+  max-width: 51.25px;
+}
+
 .text-mybag p:nth-child(1),
 .text-mybag p:nth-child(2),
 .text-mybag p:nth-child(3) {
@@ -116,6 +120,22 @@
   width: 75px;
   height: 80px;
   margin-right: 16px;
+}
+
+.Trending-bag-web {
+  position: absolute;
+  left: 50px;
+  background-color: #ff8c4b;
+  color: white;
+  width: 50px;
+  height: 15px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 500;
 }
 
 .text-mybag p {
@@ -221,7 +241,8 @@
 
 .summary-mybag {
   margin-left: 5%;
-  width: 411px;
+  max-width: 411px;
+  min-width: 200px;
 }
 
 .summary-mybag h4 {
@@ -244,6 +265,7 @@
   top: 40px;
   justify-content: center;
   gap: 32px;
+  margin-bottom: 61px;
 }
 
 .summary-btns-mybag button {
@@ -259,7 +281,7 @@
   background: rgba(0, 0, 0, 0.12);
 }
 
-.summary-btns-mybag button:first-child {
+.summary-btns-mybag a:first-child {
   background-color: #1b4b66;
   color: white;
 }
@@ -268,7 +290,8 @@
   color: #1b4b66;
 }
 
-.summary-btns-mybag button {
+.summary-btns-mybag button,
+.summary-btns-mybag a {
   display: flex;
   justify-content: center;
   align-items: center;

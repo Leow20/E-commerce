@@ -175,11 +175,10 @@
     font-weight: 500;
     line-height: 16px;
     text-decoration-line: line-through;
-
   }
 
   .box-price h5 {
-    color: #E21D1D;
+    color: #e21d1d;
     font-size: 8px;
     font-weight: 500;
     line-height: 16px;
@@ -202,6 +201,21 @@
     font-weight: 600;
     line-height: 24px;
   }
+}
+
+.Trending-wishlist {
+  position: absolute;
+  background-color: #ff8c4b;
+  color: white;
+  width: 63px;
+  padding: 4px 0;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
 }
 
 .wishlist-btn-empty-products {
@@ -244,6 +258,13 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+}
+
+.wishlist-loader {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (width>=820px) {

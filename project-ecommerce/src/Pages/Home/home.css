@@ -129,7 +129,7 @@
 .arrival-title-home span,
 .title-brand-home span,
 .title-makeup-home,
-.trending-title-home {
+.Trending-title-home {
   font-size: 14px;
   font-weight: 600;
   line-height: 16px;
@@ -167,6 +167,7 @@
   color: #171520;
   padding: 0 !important;
   padding-bottom: 2px;
+  text-align: left;
 }
 
 .arrival-content-home span:nth-child(2) {
@@ -176,6 +177,7 @@
   color: #626262;
   padding: 0 !important;
   padding-bottom: 2px;
+  text-align: left;
 }
 
 .arrival-content-home span:nth-child(3) {
@@ -401,11 +403,11 @@
   margin-top: 20px;
 }
 
-.trending-title-home {
+.Trending-title-home {
   padding: 20px;
 }
 
-.container-trending-home {
+.container-Trending-home {
   padding: 5px 0 0 10px;
 }
 
@@ -687,7 +689,7 @@
     height: 22px;
   }
 
-  .trending-title-home {
+  .Trending-title-home {
     display: none;
   }
 }

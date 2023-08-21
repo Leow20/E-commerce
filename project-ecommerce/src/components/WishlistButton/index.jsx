@@ -15,6 +15,7 @@ function WishlistButton({
 	button = true,
 	className = "img-product-home-button",
 	text = "",
+	onLoad,
 }) {
 	const { user } = useContext(UserContext);
 	const [wishlist, setWishlist] = useState([]);
@@ -50,6 +51,7 @@ function WishlistButton({
 		setWishlist(updatedWishlist);
 
 		await setDoc(doc(db, "wishlist", user.uid), { data: updatedWishlist });
+		onLoad();
 	};
 
 	useEffect(() => {

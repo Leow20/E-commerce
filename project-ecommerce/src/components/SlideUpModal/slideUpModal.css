@@ -5,6 +5,8 @@
   border-radius: 12px 12px 0 0;
   position: fixed;
   bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 2500;
   animation: slide-up-open forwards 0.3s ease-in-out;
 }
@@ -81,11 +83,11 @@
   border-radius: 50%;
 }
 
-input[type="radio"]:checked + .input-radio {
+input[type="radio"]:checked+.input-radio {
   border-color: #1b4b66;
 }
 
-input[type="radio"]:checked + .input-radio span {
+input[type="radio"]:checked+.input-radio span {
   background: #1b4b66;
 }
 
@@ -120,4 +122,332 @@ input[type="radio"]:checked + .input-radio span {
   align-items: center;
   gap: 16px;
   overflow-x: auto;
+}
+
+.container-product-details-modal {
+  width: 100%;
+  max-height: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  padding: 24px 16px 11px;
+}
+
+.box-product-details {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 23px;
+}
+
+.box-product-details img {
+  max-width: 75px;
+  max-height: 75px;
+  padding: 0 !important;
+}
+
+.box-text-products-details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.box-text-products-details h1 {
+  color: #171520;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+.box-text-products-details h2 {
+  color: #626262;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.box-stars-details {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.box-stars-data {
+  margin-bottom: 0px !important;
+}
+
+.box-stars-details button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+
+.box-stars-details button img {
+  max-width: 24px;
+  max-height: 24px;
+  padding: 0 !important;
+}
+
+.box-select-size {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.box-select-size-text {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+
+.box-select-size-text h1 {
+  color: #171520;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+.box-select-size-text h2 {
+  color: #626262;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.box-btns-select-size {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin-bottom: 24px;
+}
+
+.box-btns-select-size button {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid #626262;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: #171520;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 16px;
+  transition: all 0.4s;
+}
+
+.btn-active-size {
+  border: 2px solid #1b4b66 !important;
+  background-color: #d9eff1 !important;
+  transform: scale(1.1);
+}
+
+.box-btn-product-details {
+  padding-top: 11px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.box-btn-product-details a:nth-child(1) {
+  display: flex;
+  width: 44px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: #f4f4f4;
+}
+
+.box-btn-product-details button:nth-child(2) {
+  display: flex;
+  width: 272px;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: #1b4b66;
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.box-btn-product-details img {
+  max-width: 24px;
+  max-height: 24px;
+  padding: 0 !important;
+}
+
+.container-location-modal {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 23px;
+}
+
+.header-location-modal {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 6px 0 0 16px;
+}
+
+.header-location-modal h1 {
+  color: #626262;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+.header-location-modal button {
+  display: flex;
+  padding: 10px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border: none;
+  background-color: transparent;
+}
+
+.header-location-modal button img {
+  width: 24px;
+  height: 24px;
+}
+
+.header-location-modal button span {
+  color: #1B4B66;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.header-location-modal hr {
+  width: 97%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+.card-location-modal {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 16px;
+}
+
+.container-content-card-modal {
+  display: flex;
+  gap: 8px;
+}
+
+.box-content-ball {
+  width: 18px;
+  height: 18px;
+  border: 1px solid #171520;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box-content-ball .active {
+  width: 80%;
+  height: 80%;
+  display: block;
+  background-color: #1B4B66;
+  border-radius: 50%;
+}
+
+.content-location-modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+
+.content-location-modal span {
+  color: #626262;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.title-location-modal {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 4px;
+}
+
+.title-location-modal h2 {
+  color: #171520;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 16px;
+}
+
+.title-location-modal span {
+  width: 46px;
+  height: 22px;
+  border-radius: 4px;
+  background: #F1F1F1;
+  padding: 2px 6px;
+  color: #13101E;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+}
+
+.card-location-modal button {
+  height: max-content;
+  display: flex;
+  padding: 0 8px;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  color: #1B4B66;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+.btn-location-modal {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 16px;
+}
+
+.btn-location-modal button {
+  display: flex;
+  width: 100%;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border-radius: 8px;
+  background: #1B4B66;
+}
+
+.btn-location-modal button span {
+  color: #FFF;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
 }

@@ -1,0 +1,52 @@
+.container-address-book {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.image-address-book {
+  width: 239px;
+  height: 239px;
+  margin-top: 81px;
+}
+
+.title-address-book h1 {
+  color: #13101e;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px;
+  margin-top: 30px;
+}
+
+.text-address-book p {
+  width: 285px;
+  color: #13101e;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 18px;
+  margin-top: 16px;
+}
+
+.address-button {
+  border-radius: 8px;
+  background: #1b4b66;
+  width: 328px;
+  height: 44px;
+  margin-bottom: 7px;
+  padding: 10px 120px;
+  margin-top: 237px;
+  color: #ffffff;
+}
+
+.address-h1 {
+  font-size: 20px;
+  font-weight: 600;
+  padding: 20px 0 0 36px !important;
+  line-height: 26px;
+  color: #1b4b66;
+  display: block !important;
+}

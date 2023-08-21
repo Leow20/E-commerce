@@ -18,33 +18,31 @@ const Categories = () => {
       {!isMobile && <Header Page={"Categories"} />}
       <h1 className="title">Categories</h1>
       <div className="container-category">
-        <Link to="/skincare">
+        <Link to="/results/Skincare">
           <div className="sub-category">
             <img src={Skin} alt="Skincare" />
             <h2 className="color-title">Skincare</h2>
           </div>
         </Link>
-        {/* adcionar para a categoria fragrance */}
-        <Link to="">
+        <Link to="/results/Fragrance">
           <div className="sub-category">
             <img src={Frag} alt="Fragrance" />
             <h2 className="color-title-pink">Fragrance</h2>
           </div>
         </Link>
-        <Link to="/handbags">
+        <Link to="/results/Handbags">
           <div className="sub-category">
             <img src={Bags} alt="Handbags" />
             <h2 className="color-title">Handbags</h2>
           </div>
         </Link>
-        {/* adcionar para a categoria eyewear */}
-        <Link to="">
+        <Link to="/results/Eyewear">
           <div className="sub-category">
             <img src={Eye} alt="Eyewear" />
             <h2 className="color-title">Eyewear</h2>
           </div>
         </Link>
-        <Link to="/apparels">
+        <Link to="/results/apparels">
           <div className="sub-category">
             <img src={Apparels} alt="Apparels" />
             <h2 className="color-title">Apparels</h2>

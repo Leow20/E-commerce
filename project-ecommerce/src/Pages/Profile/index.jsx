@@ -22,13 +22,16 @@ import Footer from "../../components/Footer";
 import ProfileInfo from "../../components/ProfileInfo";
 import Wishlist from "../../components/Wishlist";
 import ReferAndEarn from "../../components/ReferAndEarn";
+import AddressBook from "../../components/AddressBook";
 import { signOut } from "firebase/auth";
 import { auth, storage } from "../../../firebaseConnection";
 import { toast } from "react-toastify";
 
 //Context
+import MyOrders from "../../components/MyOrders";
 import { useContext } from "react";
 import { UserContext } from "../../Contexts/user";
+import MyReviews from "../../components/MyReviews";
 
 const Profile = () => {
   const { user } = useContext(UserContext);
@@ -37,6 +40,7 @@ const Profile = () => {
   const [translate, setTranslate] = useState("");
   const isMobile = useMediaQuery({ maxWidth: 820 });
   const [show, setShow] = useState("page-wrapper-modal-info");
+  const [orderCode, setOrderCode] = useState("");
 
   const navigate = useNavigate();
 
@@ -59,7 +63,7 @@ const Profile = () => {
       case "My Reviews":
         setTranslate("translateY(240px)");
         break;
-      case "My Addres Book":
+      case "My Address Book":
         setTranslate("translateY(300px)");
         break;
       case "My Saved Cards":
@@ -101,6 +105,11 @@ const Profile = () => {
     });
   };
 
+  useEffect(() => {
+    var orderData = localStorage.getItem("orderData");
+    setOrderCode(JSON.stringify(orderData));
+  }, [selectedTab]);
+
   return (
     <>
       {selectedTab !== "" && isMobile && (
@@ -110,11 +119,14 @@ const Profile = () => {
               <img src={arrowProfile} alt="icone seta" />
             </div>
 
-            <h1>{selectedTab}</h1>
+            <h1>{orderCode}</h1>
           </header>
           {selectedTab == "Personal Information" && <ProfileInfo />}
           {selectedTab == "My Wishlist" && <Wishlist />}
           {selectedTab == "Refer and Earn" && <ReferAndEarn />}
+          {selectedTab == "My Reviews" && <MyReviews />}
+          {selectedTab == "My Address Book" && <AddressBook />}
+          {selectedTab == "My Orders" && <MyOrders user={user} />}
         </div>
       )}
       <>
@@ -288,20 +300,22 @@ const Profile = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/profile/My Addres Book">
-                      <button onClick={() => handleTabChange("My Addres Book")}>
+                    <Link to="/profile/My Address Book">
+                      <button
+                        onClick={() => handleTabChange("My Address Book")}
+                      >
                         <label
                           style={
-                            selectedTab == "My Addres Book" && !isMobile
+                            selectedTab == "My Address Book" && !isMobile
                               ? { color: "#1B4B66" }
                               : { color: "#13101E" }
                           }
                         >
-                          My Addres Book
+                          My Address Book
                         </label>
                         <img
                           src={
-                            selectedTab == "My Addres Book" && !isMobile
+                            selectedTab == "My Address Book" && !isMobile
                               ? greenArrow
                               : arrowProfile
                           }
@@ -354,6 +368,9 @@ const Profile = () => {
               {selectedTab == "Personal Information" && <ProfileInfo />}
               {selectedTab == "My Wishlist" && <Wishlist />}
               {selectedTab == "Refer and Earn" && <ReferAndEarn />}
+              {selectedTab == "My Reviews" && <MyReviews />}
+              {selectedTab == "My Address Book" && <AddressBook />}
+              {selectedTab == "My Orders" && <MyOrders user={user} />}
             </div>
           </div>
         </div>
